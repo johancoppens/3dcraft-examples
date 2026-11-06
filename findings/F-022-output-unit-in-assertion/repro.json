@@ -1,0 +1,9 @@
+[
+ ["variable.set", {"name": "length", "expr": "500 mm"}],
+ ["feature.block", {"size": ["length", "20 mm", "20 mm"], "name": "Bar"}],
+ ["material.preset", {"body": "Bar", "preset": "aluminium-brushed"}],
+ ["variable.measure", {"name": "bar_mass", "measure": "mass", "of": "Bar", "unit": "kg"}],
+ ["variable.output", {"name": "mass_per_metre", "expr": "bar_mass / length", "label": "Mass per metre", "unit": "kg/m"}],
+ ["assert.add", {"name": "Mass per metre, bound written as the output's unit", "measure": "value", "expr": "mass_per_metre", "min": "1 kg/m", "max": "1.2 kg/m"}],
+ ["assert.add", {"name": "Mass per metre, bound written as a quotient", "measure": "value", "expr": "mass_per_metre", "min": "1 kg / (1 m)", "max": "1.2 kg / (1 m)"}]
+]

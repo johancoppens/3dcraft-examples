@@ -1,0 +1,8 @@
+[
+ ["feature.block", {"size": ["30 mm", "30 mm", "10 mm"], "name": "Block"}],
+ ["sketch.create", {"name": "Pocket outline", "plane": "xy", "offset": "5 mm"}],
+ ["sketch.rect", {"sketch": "Pocket outline", "from": ["10 mm", "10 mm"], "to": ["20 mm", "20 mm"]}],
+ ["feature.extrude", {"sketch": "Pocket outline", "throughAll": true, "cut": "Block", "name": "Pocketed"}],
+ ["feature.chamfer", {"edges": [["F1:face(1)", "F3:side(e5)"], ["F1:face(1)", "F3:side(e6)"], ["F1:face(1)", "F3:side(e7)"], ["F1:face(1)", "F3:side(e8)"]], "distance": "1 mm", "name": "Chamfered mouth"}],
+ ["document.check", {}]
+]

@@ -1,0 +1,7 @@
+[
+ ["sketch.create", {"name": "Bowl section", "plane": "yz"}],
+ ["sketch.polyline", {"sketch": "Bowl section", "points": [[50, 0], [0, 0], [0, 80], [110, 80]]}],
+ ["sketch.spline", {"sketch": "Bowl section", "control": ["e1", [80, 0], [110, 36], "e4"]}],
+ ["feature.revolve", {"sketch": "Bowl section", "axis": "y", "name": "Solid form"}],
+ ["feature.shell", {"source": "Solid form", "thickness": "7 mm", "open": ["F2:side(e7)"], "name": "Bowl"}]
+]

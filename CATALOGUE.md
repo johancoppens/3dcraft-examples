@@ -45,11 +45,12 @@ techniques or its palette line only with the coordinator.
 ### 4. Turned walnut bowl · `turned-bowl` · woodturning, art
 - **Real thing:** a Ø 220 × 85 mm salad bowl turned from a walnut blank, wall 7 mm, with a foot ring and a
   rounded rim; blank size stated.
-- **Shows:** a spline profile with constraints, `feature.revolve`, a uniform wall (`feature.offsetProfile` or
-  `feature.shell`), fillets; capacity in millilitres as an output.
+- **Shows:** a spline profile with constraints, `feature.revolve`, a uniform wall (as built: the outside's
+  offset written as a formula curve, since `feature.shell` is slow here and `feature.offsetProfile` refuses
+  splines: F-028, F-029), fillets; capacity in millilitres as an output.
 - **Look:** walnut, oiled.
 - **Parameters:** diameter, height, wall thickness.
-- **Proves:** wall thickness (`measure.thickness`), capacity within a range, fits the stated blank.
+- **Proves:** the even wall (as built: by Steiner's formula, since `measure.thickness` proves nothing here: F-020), capacity within a range, fits the stated blank.
 
 ### 5. Hex key stand · `hex-key-stand` · 3D printing
 - **Real thing:** a desk stand for a metric hex key set to ISO 2936 (1.5 to 10 mm), printed in PLA without
@@ -308,7 +309,7 @@ techniques or its palette line only with the coordinator.
 Across the 21, every modelling command in scope is used at least once (`tools/examples.py coverage`). Where
 a family is carried: sketches and constraints (1–21), solids from primitives and extrusions (1, 2, 7, 12),
 revolve (1, 4, 14, 15, 20), loft (17, 19, 20), sweep (13, 14, 16, 20), developable and plate (8), unfold (8),
-fold (9), sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (4, 19, 20), draft (13),
+fold (9), sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (19, 20), draft (13),
 thread (1, 7, 15), pattern and mirror (3, 7, 11, 12, 14, 16, 17), booleans (most), text (3, 5), curves from
 formulas (17, 19), tables (1, 5, 19), conditional features (3), named sets (7), datums (11, 16), cut list
 (11), section and hydrostatic measures (2, 19, 21), clearance, thickness and draft checks (5, 7, 10, 12, 13),

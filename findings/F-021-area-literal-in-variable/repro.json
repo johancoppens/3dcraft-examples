@@ -1,0 +1,6 @@
+[
+ ["variable.set", {"name": "catalogue_area", "expr": "332 mm^2"}],
+ ["variable.set", {"name": "catalogue_area_as_meant", "expr": "332 * (1 mm)^2"}],
+ ["feature.block", {"size": ["20 mm", "20 mm", "20 mm"], "name": "Cube"}],
+ ["assert.add", {"name": "Bound written the same way", "measure": "area", "of": "Cube", "min": "332 mm^2"}]
+]

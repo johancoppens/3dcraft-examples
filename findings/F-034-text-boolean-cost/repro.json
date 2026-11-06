@@ -1,0 +1,7 @@
+[
+ ["feature.block", {"size": ["150 mm", "30 mm", "20 mm"], "name": "Plinth"}],
+ ["sketch.create", {"name": "Labels", "plane": "xy", "offset": "20 mm"}],
+ ["sketch.text", {"sketch": "Labels", "text": "1.5  2  2.5  3  4  5  6  8  10", "size": "6 mm", "at": ["75 mm", "10 mm"], "anchor": "middle", "align": "center"}],
+ ["feature.extrude", {"sketch": "Labels", "distance": "0.6 mm", "join": "Plinth", "name": "Embossed plinth"}],
+ ["document.check", {}]
+]

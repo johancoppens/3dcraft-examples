@@ -1,0 +1,72 @@
+{
+  "id": "t-slot-profile",
+  "title": "T-slot aluminium profile",
+  "summary": "sketch pattern, section properties",
+  "description": "A 30 x 30 mm B-type aluminium profile with four 8 mm T-slots and a core bore tapped M8 at both ends, cut to length, in clear anodised EN AW-6063.",
+  "domain": "Machine building",
+  "process": "Extrusion, sawing to length, tapping, clear anodising",
+  "tier": "simple",
+  "difficulty": {
+    "score": 4,
+    "rationale": "One formula-held sketch repeated by symmetry, a 32-edge fillet named by pattern instance, closed-form area and second moment including the fillet spandrels."
+  },
+  "standards": [
+    "EN 573-3",
+    "EN 755-2",
+    "EN 12020-2",
+    "ISO 7599",
+    "ISO 261"
+  ],
+  "materials": [
+    "EN AW-6063 T66, clear anodised"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        430,
+        -120,
+        80
+      ],
+      "target": [
+        215,
+        0,
+        -10
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 31
+    },
+    "look": {
+      "rotation": 220
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/t-slot-profile.step"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok (also deep), its own 5 assertions pass; section area 333.3533 mm2 and Ix 28 674.86 mm4, equal to this example's to about 13 digits, mass 0.900 kg/m; closed forms derived by itself; about 107 CLI calls. It missed that sketch.constrain has a symmetric constraint and held the mirrored points by expressions."
+  },
+  "stats": {
+    "steps": 50,
+    "variables": 27,
+    "parameters": 2,
+    "features": 6,
+    "assertions": 4,
+    "warnings": 0,
+    "build_s": 0.94,
+    "load_s": 0.13,
+    "file_bytes": 68996
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

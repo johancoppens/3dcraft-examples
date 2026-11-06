@@ -1,0 +1,11 @@
+[
+ ["feature.block", {"size": ["120 mm", "40 mm", "6 mm"], "name": "Plate"}],
+ ["body.appearance", {"body": "Plate", "color": "#e8d6b8", "metallic": 0, "roughness": 0.6}],
+ ["sketch.create", {"name": "Marks", "plane": "xy", "offset": "6 mm"}],
+ ["sketch.rect", {"sketch": "Marks", "from": ["9 mm", "10 mm"], "to": ["11 mm", "30 mm"]}],
+ ["sketch.pattern", {"sketch": "Marks", "entities": ["e5", "e6", "e7", "e8"], "count": 11, "step": ["10 mm", "0 mm"]}],
+ ["feature.extrude", {"sketch": "Marks", "distance": "0.4 mm", "reversed": true, "cut": "Plate", "name": "Engraved plate"}],
+ ["set.define", {"name": "Engraved faces", "kind": "face", "where": {"madeBy": "Engraved plate", "in": "Engraved plate", "not": {"name": "*F1:*"}}}],
+ ["select.query", {"kind": "face", "where": {"set": "Engraved faces"}, "limit": 3}],
+ ["face.appearance", {"faces": ["Engraved faces"], "body": "Engraved plate", "color": "#3a2416"}]
+]

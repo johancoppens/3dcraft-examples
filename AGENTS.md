@@ -84,6 +84,18 @@ log/ plan/              local only (gitignored): dev log, plans
   - Every measure on a complex body runs at every regeneration (the screw: 1 s of its 4.6 s). Measure what
     proves something.
   - Run `tools/examples.py check` early: `check-range` finds per-size kernel refusals the defaults hide.
+- **Lessons from the first reviews** (what reviewers found again and again):
+  - Standard values written from memory are often wrong (an ISO 2936 key length, an ISO 4762 socket band):
+    verify every value against a source and cite it.
+  - Every number in the README is the model's (`output.list`, `assert.list`), and every claim is one the
+    checks prove ("every length" when check-range tried 32 points is untrue).
+  - Look at the full-size preview for renderer artefacts: smears (F-013, `look.reflections`), stepped
+    shadow bands (F-026, F-043, `look.light`), blotches in cavities (F-046). Fix them with the framing keys
+    of §5 and say so in the README.
+  - The body is named after its last feature (F-042): name that feature for the part ("Stand", "Bowl").
+  - A prompt must give every size its Acceptance depends on (a spline's handles, a wall, a count).
+  - Real use, not only the drawing: will it be gripped, driven, hung, will it tip, does it fit the tool
+    that makes it (jaws, a quartz movement's torque, a slicer's walls)?
 - **Prefer 3DCraft's own means**: variables and formulas, tables, `sketch.curve` (curves from formulas),
   `feature.pattern`, `sketch.pattern`, conditional features (`when`), named sets, datums.
 

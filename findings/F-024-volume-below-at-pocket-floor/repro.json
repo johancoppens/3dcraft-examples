@@ -1,0 +1,9 @@
+[
+ ["feature.block", {"size": ["50 mm", "50 mm", "6 mm"], "name": "Plate"}],
+ ["sketch.create", {"name": "Pocket outline", "plane": "xy", "offset": "6 mm"}],
+ ["sketch.rect", {"sketch": "Pocket outline", "from": ["20 mm", "20 mm"], "to": ["30 mm", "30 mm"]}],
+ ["feature.extrude", {"sketch": "Pocket outline", "distance": "0.4 mm", "reversed": true, "cut": "Plate", "name": "Pocketed plate"}],
+ ["variable.measure", {"name": "below_floor", "measure": "volumeBelow", "of": "Pocketed plate", "plane": "xy", "offset": "5.6 mm"}],
+ ["variable.measure", {"name": "below_mid", "measure": "volumeBelow", "of": "Pocketed plate", "plane": "xy", "offset": "5 mm"}],
+ ["output.list", {}]
+]

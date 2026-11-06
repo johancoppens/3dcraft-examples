@@ -29,6 +29,33 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-017](#f-017) | Missing capability (minor) | No precious-metal presets; a preset recoloured keeps its base metal's density | probe for solitaire-ring | `body.material` |
 | [F-018](#f-018) | Agent friction | `document.inspect` on a freshly opened file reports assertions as pending; `info` and `assert.list` wait | socket-head-cap-screw | none |
 | [F-019](#f-019) | Missing capability | Measures and assertions are recomputed at every regeneration; no way to compute them on demand | socket-head-cap-screw | none |
+| [F-020](#f-020) | Bug | `measure.thickness` finds a wall but proves far less (0.235 of 1.7 mm; 0 of 7 mm on a bowl), slowly | t-slot-profile, turned-bowl | wall check not asserted |
+| [F-021](#f-021) | Agent friction | `variable.set` takes `332 mm^2` as (332 mm)² silently; `assert.add` refuses it | t-slot-profile | none |
+| [F-022](#f-022) | Agent friction | Assertion bounds cannot be written in an output's unit (`0.8 kg/m`) | t-slot-profile | output not asserted |
+| [F-023](#f-023) | Missing capability | No sketch corner round (fillet) that follows the variables | t-slot-profile | sharp cavity corners |
+| [F-024](#f-024) | Bug | `volumeBelow` at a plane that holds pocket floors is refused | wall-clock | plane moved |
+| [F-025](#f-025) | Missing capability | `face.appearance` takes only literal face names, not a query or a named set | wall-clock | stencil intersect |
+| [F-026](#f-026) | Bug | Contact shadows of a thin part a few mm above a face draw hard, stepped bands | wall-clock | cosmetic |
+| [F-027](#f-027) | Missing capability | A pattern cannot repeat a text with a value that changes per instance | wall-clock | 24 numeral steps |
+| [F-028](#f-028) | Performance | `feature.shell` of a revolved spline profile takes 3.6 to 4.7 s (the revolve 0.04 s) | turned-bowl | wall as an offset curve |
+| [F-029](#f-029) | Missing capability | `feature.offsetProfile` refuses splines | turned-bowl | offset written as a formula curve |
+| [F-030](#f-030) | Bug (proof weakness) | `measure.distance` across a parallel wall finds 7.000 mm but proves only 6.23 mm | turned-bowl | wall proven by Steiner's formula |
+| [F-031](#f-031) | Bug | `view.render` with `section` and the studio look draws flat grey | t-slot-profile (review) | no section pictures |
+| [F-032](#f-032) | Bug (minor) | `feature.thread` reports the M8 tap drill as 6.75 mm; ISO 2306 gives 6.8 mm | t-slot-profile (review) | none |
+| [F-033](#f-033) | Bug | Chamfering or rounding all edges of a pocket's mouth (or a step's riser) is refused | hex-key-stand | sharp socket mouths |
+| [F-034](#f-034) | Performance | Booleans with text are slow: about 24 ms per glyph joined, 1 s to intersect text with a stepped block | hex-key-stand | labels a separate body |
+| [F-035](#f-035) | Agent friction | A text cannot show a table's text column (`{hex_keys[1].size}`) | hex-key-stand | numbers formatted instead |
+| [F-036](#f-036) | Missing capability | An extrusion cannot end on the face under each of its profiles | hex-key-stand | one sketch per label height |
+| [F-037](#f-037) | Performance | A document with text embeds the whole font file (332 KB), even the bundled one | wall-clock, hex-key-stand | files of 460 KB |
+| [F-038](#f-038) | Missing capability (minor) | No serif font among the bundled ones | wall-clock (review) | mixed serifs in Roman numerals |
+| [F-039](#f-039) | Agent friction | `sketch.pattern` cannot skip its seed (instance 0) | wall-clock (review) | seed drawn off-axis |
+| [F-040](#f-040) | Missing capability | The wood pattern has evenly spaced rings with one wobble; no ring-width variation or latewood contrast | turned-bowl (review) | pattern tuned per example |
+| [F-041](#f-041) | Missing capability (minor) | A pattern's `origin` and `axis` are numbers, not expressions | turned-bowl (review) | pith fixed for the default size |
+| [F-042](#f-042) | Agent friction | A body cannot be named apart from its last feature | t-slot-profile, turned-bowl (reviews) | last feature named for the part |
+| [F-043](#f-043) | Bug | The studio key light's shadow draws stair-stepped, aliased bands on broad flat faces | hex-key-stand (review) | another light direction |
+| [F-044](#f-044) | Agent friction | The 3MF's material names are appearance strings, not the `body.material` name | hex-key-stand (review) | none |
+| [F-045](#f-045) | Missing capability | No 3MF export of several bodies as parts of one object (multi-colour prints) | hex-key-stand (review) | two build items |
+| [F-046](#f-046) | Bug | The CPU studio look's ambient occlusion draws blotchy patches in narrow cavities | t-slot-profile (review) | faint, left as it is |
 
 ## F-001
 
@@ -201,3 +228,199 @@ or the checks panel does. **Should:** measures on demand: computed when somethin
 checks panel open, `document.check`, `assert.list`, an export, `check-range`) and cached per body revision,
 so a regeneration that leaves a body unchanged does not measure it again. Today `when` on each assertion
 could switch them off by a variable, but then the document no longer proves itself when opened.
+
+## F-020
+
+**Bug (proof weakness).** On an extruded T-slot profile, `measure.thickness` finds the thinnest wall
+(1.70 mm) but proves only `atLeast` 0.235 mm, and 0 mm once a bore in it is countersunk; an assertion of
+the wall therefore stays not proven. Simple tubes and plates prove fine. Reproducer (35 steps, the profile
+without its corner chambers):
+[`findings/F-020-thickness-proof-on-profile/repro.json`](findings/F-020-thickness-proof-on-profile/repro.json). On the turned bowl's revolved spline wall
+it finds 7.000 mm but proves `atLeast` 0, and takes 5.6 s (50 s on a shelled bowl): reproducer
+[`findings/F-020-thickness-proof-on-profile/spline-wall-repro.json`](findings/F-020-thickness-proof-on-profile/spline-wall-repro.json).
+
+## F-021
+
+**Agent friction.** `variable.set {"expr": "332 mm^2"}` silently takes the text as (332 mm)² = 110224 mm²,
+while `assert.add` refuses the same text and explains it ("means (332 mm)^2 in expressions; write
+`332 * (1 mm)^2`"). **Should:** `variable.set` refuses or warns the same way. Reproducer:
+[`findings/F-021-area-literal-in-variable/repro.json`](findings/F-021-area-literal-in-variable/repro.json).
+
+## F-022
+
+**Agent friction.** An output measured in kg/m (`variable.measure` with `"unit": "kg/m"`) cannot be bounded
+in that unit: `min: "0.8 kg/m"` fails, `0.8 kg / (1 m)` works, and the result is shown as `mm^-1*kg`.
+Reproducer: [`findings/F-022-output-unit-in-assertion/repro.json`](findings/F-022-output-unit-in-assertion/repro.json).
+
+## F-023
+
+**Missing capability.** A sketch has no corner round (fillet) between two of its lines that follows the
+variables: every rounded corner of a profile needs its tangent points worked out by hand in `sketch.path`.
+The T-slot profile leaves its cavity corners sharp because of it. **Should:** a sketch fillet (a radius at a
+vertex, driven by an expression), as every sketcher has.
+
+## F-024
+
+**Bug.** `measure.below` / `volumeBelow` at a plane that holds the floors of engraved pockets is refused ("a
+face in the plane whose loops enclose no area"); a plane 0.6 mm lower works. Reproducer:
+[`findings/F-024-volume-below-at-pocket-floor/repro.json`](findings/F-024-volume-below-at-pocket-floor/repro.json).
+**Workaround in the example:** the plane halfway up the dial's round-over.
+
+## F-025
+
+**Missing capability.** The faces a cut makes take the target body's appearance, and `face.appearance` takes
+only literal face names (not a query or a named set), so an engraving of hundreds of faces (652 on the
+clock's dial) cannot be coloured as engraved; a feature whose body a later feature consumed is refused
+("has no body"). Reproducer:
+[`findings/F-025-colour-of-cut-faces/repro.json`](findings/F-025-colour-of-cut-faces/repro.json).
+**Should:** `face.appearance` with a query or a named set, and a way to give a cut's faces a colour of
+their own (a laser's charred engraving, a painted pocket). **Workaround in the example:** a dark stencil
+body is cut by the engravings and the dial intersected with it, so the pocket faces keep the dark colour.
+
+## F-026
+
+**Bug (rendering).** With `contactShadows` on, a thin part a few millimetres above a face (the clock's
+hands over the dial) casts its contact shadow as hard, stepped bands; with `contactShadows: false` it is
+soft. Reproducer (renders both):
+[`findings/F-026-contact-shadow-steps/repro.json`](findings/F-026-contact-shadow-steps/repro.json). Raising the key light to about 80° (`look.light`)
+hides the bands in a preview; that is a workaround, not a fix.
+
+## F-027
+
+**Missing capability.** A pattern cannot repeat a text whose value changes per instance (the numerals of a
+dial, a ruler's graduations, numbered parts), so each numeral is its own text and its own feature: 24 steps
+of the clock's 141. **Should:** a text whose content is an expression of the pattern's instance index, or a
+text pattern.
+
+## F-028
+
+**Performance.** `feature.shell` of a revolved spline profile with its top open takes 3.6 to 4.7 s, against
+0.04 s for the revolve alone; joining a foot ring to the shelled result adds 1.6 s. Reproducer:
+[`findings/F-028-shell-of-revolved-spline/repro.json`](findings/F-028-shell-of-revolved-spline/repro.json).
+**Workaround in the example:** the bowl's inside is the offset of its outside, written as a curve from
+formulas, and the whole section is revolved once.
+
+## F-029
+
+**Missing capability.** `feature.offsetProfile` refuses a profile with splines ("not supported yet"), so the
+even wall of a turned or drawn profile must be written out as a formula curve (the Bézier minus the wall
+times its unit normal). **Should:** the offset of splines (an exact offset is not a spline, a fitted one
+within the tolerance is what every modeller gives). Reproducer:
+[`findings/F-029-offset-of-spline/repro.json`](findings/F-029-offset-of-spline/repro.json).
+
+## F-030
+
+**Bug (proof weakness).** `measure.distance` between the inner and outer faces of a parallel (offset) wall
+finds 7.000 mm but proves only 6.23 to 6.78 mm, so a wall asserted to the micrometre stays not proven.
+Reproducer: [`findings/F-030-distance-proof-loose/repro.json`](findings/F-030-distance-proof-loose/repro.json).
+The bound also weakens with the size of the body: on the T-slot profile the same exact 2.6 mm gap is proven
+"at least 2.6 mm" at a length of 300 mm and only "at least 2.25 mm" at 3000 mm.
+
+## F-031
+
+**Bug (rendering).** `view.render` with `section` and the studio look (CPU renderer) draws the bodies flat
+grey, without their materials or the studio's shading, while the result still reports `look.mode: studio`.
+Reproduce: the T-slot profile, the gallery look, the same camera with and without `"section": {"plane":
+"zx", "cap": true}`.
+
+## F-032
+
+**Bug (minor).** `feature.thread` reports the tap drill of M8 as 6.75 mm (d − P); ISO 2306 (and every tap
+drill table) gives 6.8 mm for M8, as for most sizes it rounds d − P up to a drill that exists.
+
+## F-033
+
+**Bug.** `feature.chamfer` or `feature.fillet` on the four mouth edges of a square pocket is refused at the
+first edge ("does not end cleanly … neither all convex or all concave"); the short vertical edges where one
+step of a block rises from the next are refused for the same reason. A lead-in chamfer on a socket or a
+pocket is what every printed or machined part has. On the hex key stand a fillet of only the vertical riser
+edges builds, but the step rims' fillet is then refused where it meets it, with and without `chain`. Reproducer:
+[`findings/F-033-pocket-mouth-edges/repro.json`](findings/F-033-pocket-mouth-edges/repro.json).
+
+## F-034
+
+**Performance.** Booleans with text are slow: joining 14 extruded glyphs to a block costs about 0.33 s
+(about 24 ms a glyph: the stand opens in 0.42 s against 0.09 s without the join), and intersecting text
+prisms with a stepped block about 1 s. Reproducer:
+[`findings/F-034-text-boolean-cost/repro.json`](findings/F-034-text-boolean-cost/repro.json).
+**Workaround in the example:** the labels are a separate body (which a two-colour print wants anyway).
+
+## F-035
+
+**Agent friction.** `sketch.text` with `{hex_keys[1].size}` is refused ("holds a text there, not a number"):
+a text cannot show a table's text column, only numbers. Reproducer:
+[`findings/F-035-text-from-table-text/repro.json`](findings/F-035-text-from-table-text/repro.json).
+
+## F-036
+
+**Missing capability.** An extrusion of several profiles cannot end on the face under each profile (an
+`upTo` per profile, or "up to the next face"), so labels embossed on steps of nine heights need nine
+sketches and nine extrusions (27 of the hex key stand's 75 steps).
+
+## F-037
+
+**Performance (file size).** A `.3dcraft` with a `sketch.text` stores the whole font file as a blob
+(`blobs/bfb44de2….font`, 331 784 bytes), also when it is 3DCraft's own bundled Noto Sans: the wall clock is
+457 KB, of which 332 KB is the font for 12 numerals; the hex key stand 472 KB for nine labels. On the start
+screen and the web, every example with a word in it carries the font again. **Should:** a bundled font is
+referred to by its hash and not stored, and a font from elsewhere is stored as a subset of the glyphs used
+(its licence permitting).
+
+## F-038
+
+**Missing capability (minor).** The bundled fonts are a sans (Noto Sans, whose capital I has slab serifs
+while V and X have none), a mono and a single-stroke font; classic dial and engraving lettering, Roman
+numerals above all, wants a serif face. Since 3DCraft stays light, one small serif face (or reading a font
+file the user gives) would cover it.
+
+## F-039
+
+**Agent friction.** `sketch.pattern` can skip instances (`skip`) but not its seed, instance 0: a pattern
+that leaves gaps round a dial (60 minute ticks without the 12 hour positions) needs its seed drawn off-axis
+with trigonometric expressions, or two patterns.
+
+## F-040
+
+**Missing capability.** The procedural `wood` pattern draws its rings evenly spaced, with a single-scale
+wobble, and has no control for varying ring width or for the sharpness and contrast of the latewood line,
+so a turned bowl reads as zebrawood or a fingerprint rather than walnut unless its pith, axis and scale are
+tuned by hand per example. **Should:** ring-width variation (a second noise on the radius) and a latewood
+sharpness, so the presets read as their woods out of the box.
+
+## F-041
+
+**Missing capability (minor).** A pattern's `origin` and `axis` are plain numbers, so the pith cannot follow
+a parameter (a bowl's height or diameter): set for the default size, it drifts off at the ends of the range.
+**Should:** expressions, as body colours already take.
+
+## F-042
+
+**Agent friction.** A body has no name of its own: it shows as its last feature's name ("Countersunk thread
+entries", "Foot coves") in outputs, assertions and the window, so the last feature must be named for the
+part, or the part reads oddly. **Should:** a body name (`body.rename`, or `name` on `material.preset`).
+
+## F-043
+
+**Bug (rendering).** In the studio look the key light's shadow draws stair-stepped, aliased light and dark
+bands across broad flat faces (the treads of the hex key stand at 1600 × 1200). `reflections: false` leaves
+the picture pixel-identical; `shadows: false` or another `look.light` ([200, 70], [300, 60]) removes the
+bands. **Workaround in the example:** the preview's light direction.
+
+## F-044
+
+**Agent friction.** In a 3MF export the `basematerials` names are appearance strings ("#e8641e metallic 0
+roughness 0.7 subsurface 0.1") rather than the `body.material` name ("PLA"), and that string is what slicers
+show as the filament.
+
+## F-045
+
+**Missing capability.** `file.export` to 3MF writes every body as its own build item; there is no option to
+write several bodies as parts (components) of one object, which multi-colour and multi-material slicing
+wants (the hex key stand's labels and stand).
+
+## F-046
+
+**Bug (rendering).** The CPU renderer's studio look draws blotchy light and dark patches of ambient occlusion
+on the inner faces of narrow cavities (the T-slot profile's slots and bore near its end face), at
+`accumulate` 4 and still at 16; `"ao": false` removes them, `reflections`, contact shadows and the specular
+shadow do not. On this material `reflections: false` gives a byte-identical picture.

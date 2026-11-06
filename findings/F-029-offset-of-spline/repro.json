@@ -1,0 +1,6 @@
+[
+ ["sketch.create", {"name": "Bowl section", "plane": "yz"}],
+ ["sketch.polyline", {"sketch": "Bowl section", "points": [[50, 0], [0, 0], [0, 80], [110, 80]]}],
+ ["sketch.spline", {"sketch": "Bowl section", "control": ["e1", [80, 0], [110, 36], "e4"]}],
+ ["feature.offsetProfile", {"sketch": "Bowl section", "distance": "-7 mm", "name": "Inner wall"}]
+]

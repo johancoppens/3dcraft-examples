@@ -1,0 +1,7 @@
+[
+ ["table.set", {"name": "hex_keys", "columns": ["size", {"name": "across_flats", "unit": "mm"}], "rows": [["1.5", 1.5], ["2.5", 2.5]]}],
+ ["sketch.create", {"name": "Label", "plane": "xy"}],
+ ["sketch.text", {"sketch": "Label", "text": "{hex_keys[1].size}", "size": "6 mm"}],
+ ["feature.extrude", {"sketch": "Label", "distance": "1 mm", "name": "Raised label"}],
+ ["document.check", {}]
+]
