@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Side", "plane": "xy"}],
+ ["sketch.line", {"sketch": "Side", "from": [200, -150], "to": [200, 150]}],
+ ["sketch.create", {"name": "Quarter round", "plane": "xy", "offset": "300 mm"}],
+ ["sketch.arc", {"sketch": "Quarter round", "center": [0, 0], "start": [125, 0], "end": [0, 125]}],
+ ["feature.developable", {"a": "Side", "b": "Quarter round", "name": "Flat triangle and cone"}],
+ ["sketch.create", {"name": "Rectangle", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Rectangle", "from": [-200, -150], "to": [200, 150]}],
+ ["sketch.create", {"name": "Round", "plane": "xy", "offset": "300 mm"}],
+ ["sketch.circle", {"sketch": "Round", "center": [0, 0], "radius": 125}],
+ ["feature.developable", {"a": "Rectangle", "b": "Round", "name": "Square to round"}]
+]

@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "Corner foot", "plane": "xy"}],
+ ["sketch.arc", {"sketch": "Corner foot", "center": [195, 145], "start": [200, 145], "end": [195, 150]}],
+ ["sketch.create", {"name": "Corner head", "plane": "xy", "offset": "215 mm"}],
+ ["sketch.arc", {"sketch": "Corner head", "center": [0, 0], "start": [124, 0], "end": [0, 124]}],
+ ["feature.developable", {"a": "Corner foot", "b": "Corner head", "name": "Corner cone"}],
+ ["feature.plate", {"faces": ["F3:face(0)"], "thickness": "0.8 mm", "side": "mid", "name": "Plate mid"}],
+ ["feature.plate", {"faces": ["F3:face(0)"], "thickness": "0.8 mm", "side": "out", "name": "Plate out"}],
+ ["feature.plate", {"faces": ["F3:face(0)"], "thickness": "0.8 mm", "side": "in", "name": "Plate in"}]
+]

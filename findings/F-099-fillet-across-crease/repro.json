@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Hub section", "plane": "yz"}],
+ ["sketch.polyline", {"sketch": "Hub section", "closed": true, "points": [[0, 0], [19, 0], [19, 24], [0, 24]]}],
+ ["feature.revolve", {"sketch": "Hub section", "axis": "y", "name": "Hub"}],
+ ["sketch.create", {"name": "Spoke path", "plane": "yz"}],
+ ["sketch.line", {"sketch": "Spoke path", "from": [5, 14], "to": [60, 14]}],
+ ["sketch.create", {"name": "Lens section", "plane": "zx", "offset": 5}],
+ ["sketch.path", {"sketch": "Lens section", "start": [14, -10], "segments": [{"arc": [14, 10], "through": [19, 0]}, {"arc": "start", "through": [9, 0]}]}],
+ ["feature.sweep", {"sketch": "Lens section", "path": "Spoke path", "name": "Spoke"}],
+ ["feature.boolean", {"op": "union", "target": "Hub", "tool": "Spoke", "name": "Joined"}],
+ ["feature.fillet", {"edges": [["F6:copy(0)/F2:side(e6)", "F6:copy(1)/F5:side(e4,e3)"], ["F6:copy(0)/F2:side(e6)", "F6:copy(1)/F5:side(e6,e3)"]], "radius": "2 mm", "name": "Root fillet round a creased spoke"}]
+]

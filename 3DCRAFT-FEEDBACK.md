@@ -108,6 +108,13 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-096](#f-096) | Agent friction (minor) | `body.material` refuses a density-valued variable ("is a density, not a plain number") | solitaire-ring | written out in kg/m³ |
 | [F-097](#f-097) | Missing capability (cosmetic) | The studio look cannot draw a gem: no internal reflection or dispersion | solitaire-ring | stone half transmissive |
 | [F-098](#f-098) | Performance | An `overlap` or `clearance` assertion between a 58-face stone and a ring costs 2 to 3 s at every load | solitaire-ring | `distance` checks |
+| [F-099](#f-099) | Missing capability | Two root fillets meeting where a convex crease runs into them are refused | cast-handwheel | spokes without draft |
+| [F-100](#f-100) | Bug | A fillet crossing a revolved arc's face split off-centre (20° from the sketch plane) is refused | cast-handwheel | hub as a cone |
+| [F-101](#f-101) | Missing capability | `feature.draft` refuses the flat sides of a body swept along a bend | cast-handwheel | no `feature.draft` in the example |
+| [F-102](#f-102) | Bug (proof weakness) | `measure.draft` finds 0° on a face swept along an arc but proves only −21° (−67° in the model), reported as proven | cast-handwheel | none |
+| [F-103](#f-103) | Performance | Cutting a spot face across a boss filleted to a torus rim takes 0.6 s (everything before it 0.16 s) | cast-handwheel | handle on the rim's centre line |
+| [F-104](#f-104) | Agent friction | A `section` render on a named view keeps the half nearest the camera, so no cut shows without `flip` | cast-handwheel (review) | `flip: true` |
+| [F-105](#f-105) | Missing capability | `clearance` and `distance` refuse sheets ("a body that is a sheet, which has no inside") | square-to-round-transition (prompt test) | box checks |
 
 ## F-001
 
@@ -552,7 +559,9 @@ black oxide as bronze, clear anodising as champagne (the screw, the T-slot profi
 builder cannot tell this from a material error. Turning the environment (`look.rotation`, often 180)
 gives neutral metals. **Should:** a key light whose colour reads neutral on neutral materials, or the
 environment's default turned so it does; at least say it in the look's documentation. On the square-to-round transition no rotation renders both neutral:
-up-facing flat metal reads dark olive at 180 and 270, vertical metal yellow at 0, 90 and 270.
+up-facing flat metal reads dark olive at 180 and 270, vertical metal yellow at 0, 90 and 270. On the solitaire
+ring, near-white glossy faces (the stone's crown facets) pick up a lime-yellow tint at grazing angles in every
+variant tried.
 
 ## F-055
 
@@ -876,3 +885,51 @@ glass (the solitaire's compromise, transmission 0.5). A brilliant's look is tota
 **Performance.** An `overlap` or `clearance` assertion between a 58-face stone and the ring's gold costs 2 to 3 s
 at every load (0.84 s rises to 2.8 and 3.8 s), while a `distance` between named faces costs too little to
 measure. See F-019.
+
+## F-099
+
+**Missing capability.** Two root fillets that meet where a convex crease runs into them are refused: a spoke
+drafted both ways from its parting line has a crease along it, and the fillets round its roots at the hub and
+the rim cannot cross that crease. Reproducer:
+[`findings/F-099-fillet-across-crease/repro.json`](findings/F-099-fillet-across-crease/repro.json).
+**Workaround in the example:** the spokes are ovals parted at their widest line, without draft.
+
+## F-100
+
+**Bug.** A revolved arc becomes two faces split at the sketch plane, and a fillet crossing that split off
+its centre is refused: at 20° off the plane it fails, at 0° and 90° it works. Reproducer:
+[`findings/F-100-fillet-across-revolve-seam/repro.json`](findings/F-100-fillet-across-revolve-seam/repro.json).
+**Workaround in the example:** the hub is a drafted cone, not a barrel.
+
+## F-101
+
+**Missing capability.** `feature.draft` refuses the flat sides of a body swept along a bend (the drafted edges
+would become ellipses), so a curved spoke cannot be drafted for its pattern. Reproducer:
+[`findings/F-101-draft-swept-sides/repro.json`](findings/F-101-draft-swept-sides/repro.json).
+
+## F-102
+
+**Bug (proof weakness).** `measure.draft` finds 0° on a face swept along an arc but proves only −21° (−67° on the
+handwheel), and still reports the measure as proven. Reproducer:
+[`findings/F-102-draft-bound-on-swept-torus/repro.json`](findings/F-102-draft-bound-on-swept-torus/repro.json).
+See also F-067.
+
+## F-103
+
+**Performance.** Cutting a spot face (a revolve cut) across a boss filleted into a torus rim takes about 0.6 s,
+against 0.16 s for everything before it. Reproducer:
+[`findings/F-103-spot-face-cost/repro.json`](findings/F-103-spot-face-cost/repro.json).
+**Workaround in the example:** the handle sits on the rim's centre line, not on DIN 950's boss.
+
+## F-104
+
+**Agent friction.** `view.render` with a `section` on the plane `zx` and the view `front` keeps the half nearest
+the camera, so the picture shows the outside, not the cut, unless `flip: true` is given. **Should:** with a named
+view, keep by default the half whose cut faces the camera.
+
+## F-105
+
+**Missing capability.** `measure.clearance` and `measure.distance` refuse a sheet body ("a body that is a sheet,
+which has no inside"), so a flat pattern's clearance from a frame, or a sheet's distance to anything, must be
+checked through boxes. A distance between a sheet and a body (or two sheets) is well defined. **Should:**
+distance and clearance for sheets.

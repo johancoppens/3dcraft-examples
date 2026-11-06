@@ -1,0 +1,81 @@
+{
+  "id": "square-to-round-transition",
+  "title": "Square-to-round transition",
+  "summary": "developable, plate, flat pattern",
+  "description": "A four-piece transition from a 400 x 300 mm rectangular duct to a 250 mm round duct in 0.8 mm galvanised steel: flat triangles and developable cone corners with straight ends, one piece unfolded into the flat pattern cut four times, with a lapped collar, a P20 angle frame and a sealed spigot.",
+  "domain": "Sheet metal, HVAC",
+  "process": "Laser or plasma cut blanks, press-brake bump forming, four pieces seamed; galvanised steel",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "A developable sheet plus a ruled loft proven to be the same surface, a flapped unfold, quadrature and Steiner proofs, and five kernel limits worked around."
+  },
+  "standards": [
+    "EN 1505",
+    "EN 1506",
+    "EN 1507",
+    "ISO 273"
+  ],
+  "materials": [
+    "Hot-dip galvanised steel sheet, Z275",
+    "EPDM rubber (seal)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        700,
+        -1500,
+        900
+      ],
+      "target": [
+        40,
+        -170,
+        20
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 25
+    },
+    "look": {
+      "reflections": false,
+      "rotation": 150,
+      "light": [
+        300,
+        60
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/square-to-round-transition-flat-pattern.dxf",
+      "face": "F35:face(0)",
+      "feature": "Flat pattern",
+      "origin": "corner"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 26 assertions; flat pattern 58 832.87 mm2, piece 43 072.29 mm3, spigot 248.90 mm and length 300.000 mm equal to this example's; steel parts 2.737 kg (+0.6 %); 202 steps, about 230 commands. It measured the pattern's clearance by its box, since clearance and distance refuse sheets (F-105), and needed tolerance 1e-5 for the plate."
+  },
+  "stats": {
+    "steps": 162,
+    "variables": 44,
+    "parameters": 4,
+    "features": 65,
+    "assertions": 16,
+    "warnings": 0,
+    "build_s": 2.63,
+    "load_s": 1.96,
+    "load_cpu_s": 3.29,
+    "file_bytes": 122797
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

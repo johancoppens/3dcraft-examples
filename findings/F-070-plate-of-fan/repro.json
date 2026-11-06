@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "Low", "plane": "xy"}],
+ ["sketch.arc", {"sketch": "Low", "center": [75, 150], "start": ["75 + 125 * cos(-30 deg)", "150 + 125 * sin(-30 deg)"], "end": [200, 150]}],
+ ["sketch.create", {"name": "High", "plane": "xy", "offset": "300 mm"}],
+ ["sketch.arc", {"sketch": "High", "center": [0, 0], "start": ["125 * cos(-30 deg)", "125 * sin(-30 deg)"], "end": [0, 125]}],
+ ["feature.developable", {"a": "Low", "b": "High", "name": "Strip with an end fan"}],
+ ["feature.plate", {"faces": ["F3:face(0)"], "thickness": "0.8 mm", "side": "mid", "name": "Strip only"}],
+ ["feature.plate", {"faces": ["F3:face(0)", "F3:face(2)"], "thickness": "0.8 mm", "side": "mid", "name": "Strip and fan"}],
+ ["feature.plate", {"faces": ["F3:face(2)"], "thickness": "0.8 mm", "side": "mid", "name": "Fan only"}]
+]
