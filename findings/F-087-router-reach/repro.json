@@ -1,0 +1,15 @@
+[
+ ["variable.set", {"name": "tool_radius", "expr": "1 mm"}],
+ ["sketch.create", {"name": "L plate outline", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "L plate outline", "closed": true, "points": [[0, 0], ["40 mm", 0], ["40 mm", "10 mm"], ["10 mm", "10 mm"], ["10 mm", "30 mm"], [0, "30 mm"]]}],
+ ["feature.extrude", {"sketch": "L plate outline", "distance": "2 mm", "name": "L plate"}],
+ ["feature.offsetProfile", {"sketch": "L plate outline", "distance": "tool_radius", "name": "Tool path"}],
+ ["feature.extrude", {"sketch": "Tool path", "distance": "1 mm", "name": "Router reach"}],
+ ["variable.measure", {"name": "plate_volume", "measure": "volume", "of": "L plate"}],
+ ["variable.measure", {"name": "plate_area", "measure": "area", "of": "L plate"}],
+ ["variable.measure", {"name": "reach_volume", "measure": "volume", "of": "Router reach"}],
+ ["variable.output", {"name": "steiner", "expr": "1 mm * (plate_volume / (2 mm) + tool_radius * (plate_area - 2 * plate_volume / (2 mm)) / (2 mm) + pi * tool_radius^2)"}],
+ ["variable.output", {"name": "uncut_area", "expr": "(steiner - reach_volume) / (1 mm)"}],
+ ["output.list", {}],
+ ["feature.offsetProfile", {"sketch": "Tool path", "distance": "-tool_radius", "name": "Closed outline"}]
+]

@@ -1,0 +1,8 @@
+[
+ ["sketch.create", {"name": "Low", "plane": "xy"}],
+ ["sketch.arc", {"sketch": "Low", "center": [0, 0], "start": [200, 0], "end": [0, 200]}],
+ ["sketch.create", {"name": "High", "plane": "xy", "offset": "300 mm"}],
+ ["sketch.arc", {"sketch": "High", "center": [0, 0], "start": [125, 0], "end": [0, 125]}],
+ ["feature.developable", {"a": "Low", "b": "High", "name": "Quarter cone"}],
+ ["feature.unfold", {"faces": ["F3:face(0)"], "at": [0, -400, 0], "name": "Flat quarter cone"}]
+]

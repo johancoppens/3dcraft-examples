@@ -1,0 +1,6 @@
+[
+ ["variable.set", {"name": "pitch_angle", "expr": "20 deg"}],
+ ["feature.block", {"size": ["10 mm", "40 mm", "2 mm"], "position": ["-5 mm", "-20 mm", "-1 mm"], "name": "Plate"}],
+ ["feature.transform", {"source": "Plate", "angle": "pitch_angle", "axis": [1, 0, 0], "name": "Pitched plate"}],
+ ["assert.add", {"name": "Thickness across the pitched chord", "measure": "sectionExtent", "of": "Pitched plate", "plane": "yz", "axis": [0, "-sin(pitch_angle)", "cos(pitch_angle)"], "eq": "2 mm"}]
+]

@@ -1,0 +1,7 @@
+[
+ ["sketch.create", {"name": "Tabbed plate outline", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "Tabbed plate outline", "closed": true, "points": [[0, 0], ["20 mm", 0], ["20 mm", "-2 mm"], ["28 mm", "-2 mm"], ["28 mm", 0], ["50 mm", 0], ["50 mm", "30 mm"], [0, "30 mm"]]}],
+ ["feature.extrude", {"sketch": "Tabbed plate outline", "distance": "2 mm", "name": "Plate blank"}],
+ ["feature.chamfer", {"edges": [["Plate blank:side(e9)", "Plate blank:endCap"]], "distance": "0.3 mm", "chain": true, "name": "Plate"}],
+ ["select.query", {"kind": "face", "where": {"in": "Plate", "name": "*chamfer*"}}]
+]

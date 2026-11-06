@@ -131,7 +131,7 @@ Name the process; prove with assertions what can be proven:
 
 ### 4.4 Light
 Loading means opening the `.3dcraft` and regenerating it; the tool measures it (`stats.load_s`,
-`craft3d-cli info`). Budgets on the developer's laptop: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
+`craft3d-cli info`, the least of two openings, since other agents' work only adds time). Budgets on the developer's laptop: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
 file ≤ 1 MB, and CPU time (all threads, `stats.load_cpu_s`) at most 3 × the load budget: the web build is
 single-threaded, so the CPU time is roughly what it waits. For scale: the
 guide's chassis opens in 9 s and its fuel tank in 55 s, both far too slow for this gallery. Over budget,

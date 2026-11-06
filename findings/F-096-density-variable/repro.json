@@ -1,0 +1,6 @@
+[
+ ["variable.set", {"name": "diamond_density", "expr": "3.515 g / (1 cm)^3"}],
+ ["feature.block", {"size": ["10 mm", "10 mm", "10 mm"], "name": "Cube"}],
+ ["body.material", {"body": "Cube", "name": "Diamond", "density": "diamond_density"}],
+ ["document.check", {}]
+]

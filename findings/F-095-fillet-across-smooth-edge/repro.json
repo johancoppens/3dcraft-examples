@@ -1,0 +1,8 @@
+[
+ ["feature.block", {"size": ["40 mm", "20 mm", "10 mm"], "position": ["-20 mm", "-10 mm", "-10 mm"], "name": "Plate"}],
+ ["feature.fillet", {"edges": [["F1:face(1)", "F1:face(3)"]], "radius": "5 mm", "name": "Rounded edge"}],
+ ["feature.cylinder", {"radius": "3 mm", "height": "15 mm", "position": [0, 0, "-5 mm"], "name": "Post"}],
+ ["feature.boolean", {"op": "union", "target": "Rounded edge", "tool": "Post", "name": "Post on plate"}],
+ ["feature.fillet", {"edges": [["F1:face(1)", "F3:face(0)"]], "radius": "3 mm", "name": "Root fillet onto the round"}],
+ ["document.check", {}]
+]

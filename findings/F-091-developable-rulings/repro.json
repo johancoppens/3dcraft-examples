@@ -1,0 +1,12 @@
+[
+ ["document.setTolerance", {"linear": 0.0001}],
+ ["sketch.create", {"name": "Foot", "plane": "xy", "offset": "15 mm"}],
+ ["sketch.arc", {"sketch": "Foot", "center": [192, 142], "start": [198.9, 142], "end": [192, 148.9]}],
+ ["sketch.create", {"name": "Head", "plane": "xy", "offset": "200 mm"}],
+ ["sketch.arc", {"sketch": "Head", "center": [0, 0], "start": [124.75, 0], "end": [0, 124.75]}],
+ ["feature.developable", {"a": "Foot", "b": "Head", "name": "Corner by developable"}],
+ ["feature.loft", {"sections": ["Foot", "Head"], "ruled": true, "name": "Corner by ruled loft"}],
+ ["measure.developability", {"of": "Corner by ruled loft"}],
+ ["feature.plate", {"faces": ["F3:face(0)"], "thickness": "0.8 mm", "side": "out", "name": "Plate of the developable"}],
+ ["feature.plate", {"faces": ["F4:side(e4,e4)"], "thickness": "0.8 mm", "side": "in", "name": "Plate of the loft"}]
+]

@@ -1,0 +1,21 @@
+[
+ ["document.setTolerance", {"linear": 0.0001}],
+ ["datum.plane", {"through": [[199.4, 0, 0], [199.4, 145, 0], [125.05, 0, 215]], "name": "Flat plane"}],
+ ["sketch.create", {"name": "Flat", "plane": "Flat plane"}],
+ ["sketch.polyline", {"sketch": "Flat", "closed": true, "points": [["0 mm", "0 mm"], ["145 mm", "0 mm"], ["0 mm", "sqrt(74.35^2 + 215^2) * 1 mm"]]}],
+ ["feature.fill", {"sketch": "Flat", "name": "Flat sheet"}],
+ ["sketch.create", {"name": "Foot", "plane": "xy"}],
+ ["sketch.arc", {"sketch": "Foot", "center": [190, 145], "start": [199.4, 145], "end": [190, 154.4]}],
+ ["sketch.create", {"name": "Head", "plane": "xy", "offset": "215 mm"}],
+ ["sketch.arc", {"sketch": "Head", "center": [0, 0], "start": [125.05, 0], "end": [0, 125.05]}],
+ ["feature.developable", {"a": "Foot", "b": "Head", "name": "Corner"}],
+ ["feature.boolean", {"op": "sew", "target": "Flat sheet", "tool": "Corner", "name": "Sheet"}],
+ ["feature.plate", {"faces": ["F7:copy(0)/F3:startCap(e4,e5,e6)", "F7:copy(1)/F6:face(0)"], "thickness": "0.8 mm", "side": "out", "name": "Piece 1"}],
+ ["feature.mirror", {"source": "Piece 1", "normal": [1, 0, 0], "keep": true, "name": "Piece 2"}],
+ ["feature.mirror", {"source": "Piece 2", "normal": [0, 1, 0], "keep": true, "name": "Piece 3"}],
+ ["feature.mirror", {"source": "Piece 1", "normal": [0, 1, 0], "keep": true, "name": "Piece 4"}],
+ ["material.preset", {"body": "Piece 1", "preset": "steel"}],
+ ["material.preset", {"body": "Piece 2", "preset": "steel"}],
+ ["material.preset", {"body": "Piece 3", "preset": "steel"}],
+ ["material.preset", {"body": "Piece 4", "preset": "steel"}]
+]

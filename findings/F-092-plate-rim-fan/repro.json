@@ -1,0 +1,14 @@
+[
+ ["document.setTolerance", {"linear": 0.0001}],
+ ["sketch.create", {"name": "Foot", "plane": "xy", "offset": "15 mm"}],
+ ["sketch.arc", {"sketch": "Foot", "center": [245, 245], "start": [248.9, 245], "end": [245, 248.9]}],
+ ["sketch.create", {"name": "Head", "plane": "xy", "offset": "200 mm"}],
+ ["sketch.arc", {"sketch": "Head", "center": [0, 0], "start": [157.45, 0], "end": [0, 157.45]}],
+ ["feature.loft", {"sections": ["Foot", "Head"], "ruled": true, "name": "Corner, 3.9 mm foot"}],
+ ["feature.plate", {"faces": ["F3:side(e4,e4)"], "thickness": "0.8 mm", "side": "in", "name": "Plate in"}],
+ ["feature.plate", {"faces": ["F3:side(e4,e4)"], "thickness": "0.8 mm", "side": "out", "name": "Plate out"}],
+ ["sketch.create", {"name": "Wider foot", "plane": "xy", "offset": "15 mm"}],
+ ["sketch.arc", {"sketch": "Wider foot", "center": [242, 242], "start": [248.9, 242], "end": [242, 248.9]}],
+ ["feature.loft", {"sections": ["Wider foot", "Head"], "ruled": true, "name": "Corner, 6.9 mm foot"}],
+ ["feature.plate", {"faces": ["F7:side(e4,e4)"], "thickness": "0.8 mm", "side": "in", "name": "Plate in, wider foot"}]
+]

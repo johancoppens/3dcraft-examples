@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Plate outline", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Plate outline", "from": [0, 0], "to": ["60 mm", "30 mm"]}],
+ ["sketch.circle", {"sketch": "Plate outline", "center": ["15 mm", "15 mm"], "radius": "1.6 mm"}],
+ ["feature.extrude", {"sketch": "Plate outline", "distance": "2 mm", "name": "Sharp plate"}],
+ ["sketch.create", {"name": "Second outline", "plane": "xy", "offset": "10 mm"}],
+ ["sketch.rect", {"sketch": "Second outline", "from": [0, 0], "to": ["60 mm", "30 mm"]}],
+ ["sketch.circle", {"sketch": "Second outline", "center": ["15 mm", "15 mm"], "radius": "1.6 mm"}],
+ ["feature.extrude", {"sketch": "Second outline", "distance": "2 mm", "name": "Second blank"}],
+ ["feature.chamfer", {"edges": [["Second blank:side(e10)", "Second blank:startCap"], ["Second blank:side(e10)", "Second blank:endCap"]], "distance": "0.3 mm", "name": "Deburred plate"}],
+ ["cut.list", {}]
+]

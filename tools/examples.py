@@ -235,10 +235,14 @@ def build_into(eid, target, meta):
                 deflate_zip(target / export["path"])
     final = target / f"{slug(eid)}.3dcraft"
     building.replace(final)
-    result, load_s = run_cli(["info", final], cwd=target)
-    if result.returncode != 0:
-        raise CheckError(explain_failure(result, "craft3d-cli info failed"))
-    load_cpu_s = result.cpu_seconds
+    # The least of two openings: other work on the machine only ever adds time.
+    load_s = load_cpu_s = None
+    for _ in range(2):
+        result, seconds = run_cli(["info", final], cwd=target)
+        if result.returncode != 0:
+            raise CheckError(explain_failure(result, "craft3d-cli info failed"))
+        load_s = seconds if load_s is None else min(load_s, seconds)
+        load_cpu_s = result.cpu_seconds if load_cpu_s is None else min(load_cpu_s, result.cpu_seconds)
     doc = manifest(final)
     ids = Counter(step_id(s) for s in script)
     assertions = report.get("assertions", {})

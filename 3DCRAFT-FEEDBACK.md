@@ -95,6 +95,19 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-083](#f-083) | Missing capability | A wood pattern has one frame (axis, pith) per body: pattern copies cannot each have their grain | splayed-stool (review) | legs split into bodies |
 | [F-084](#f-084) | Agent friction (minor) | Where `material.preset` puts a wood's pith (from the body's box) is not reported | splayed-stool (review) | trial renders |
 | [F-085](#f-085) | Missing capability | A flat pattern's DXF from `feature.unfold` has the outline only: no tangent, ruling or bump lines on a layer | square-to-round-transition (review) | outline only |
+| [F-086](#f-086) | Missing capability | `cut.list` and `cut.export` refuse a plate whose edges are broken (a 0.3 mm chamfer) | fpv-drone-frame | DXF from the sketches |
+| [F-087](#f-087) | Missing capability | No measure of whether a round tool of radius r can cut a profile; an offset cannot be offset again | fpv-drone-frame | Steiner area check |
+| [F-088](#f-088) | Agent friction | A chamfer's `chain` stops at sharp corners; no "every edge of a face" | fpv-drone-frame | 22 edge pairs per plate |
+| [F-089](#f-089) | Bug | `feature.plate` joints `onto` are refused along a flat-to-cone tangent chain | square-to-round-transition | rims square, inside the laps |
+| [F-090](#f-090) | Missing capability | `feature.unfold` refuses a curved fold line; `feature.plate` cannot cross a fold | square-to-round-transition | straights as rings |
+| [F-091](#f-091) | Performance | `feature.developable` makes 184 rulings at any tolerance where a ruled loft of the same arcs makes 2 | square-to-round-transition | ruled loft, asserted developable |
+| [F-092](#f-092) | Bug | The plate of a corner rounded 5 mm is refused at some sizes ("the rim could not be traced … 2.52 off") | square-to-round-transition | 8 mm corners |
+| [F-093](#f-093) | Performance | `boxMax` of one lofted propeller takes 5.3 s (`sectionExtent` 0.03 s); joining blades to a hub adds 0.9 s | fpv-drone-frame | blades and hub two bodies |
+| [F-094](#f-094) | Agent friction | A measure's `axis` takes no expression | fpv-drone-frame | hidden turned copy |
+| [F-095](#f-095) | Bug | A fillet whose border would cross a smooth edge onto the next face is refused | solitaire-ring | prong roots left sharp |
+| [F-096](#f-096) | Agent friction (minor) | `body.material` refuses a density-valued variable ("is a density, not a plain number") | solitaire-ring | written out in kg/m³ |
+| [F-097](#f-097) | Missing capability (cosmetic) | The studio look cannot draw a gem: no internal reflection or dispersion | solitaire-ring | stone half transmissive |
+| [F-098](#f-098) | Performance | An `overlap` or `clearance` assertion between a 58-face stone and a ring costs 2 to 3 s at every load | solitaire-ring | `distance` checks |
 
 ## F-001
 
@@ -670,7 +683,11 @@ about 10 s ("offset could not be approximated"); at 1e-4 mm it works. Reproducer
 longest. Reproducer: [`findings/F-072-unfold-cost/repro.json`](findings/F-072-unfold-cost/repro.json).
 The load is 8.7 s of wall time but 27 s of CPU time, so the single-threaded web build would take about 27 s;
 plating a quarter and mirroring it saves nothing (8.2 s), and with a union it is 11.5 s.
-**Workaround in the example:** none; it carries a budget exception.
+A copy of a plated body (mirror, pattern) costs about as much CPU as the plate itself, about 2 s each, and
+giving the bodies a density adds the time of their exact mass properties at open (1.2 s wall): reproducer
+[`findings/F-072-unfold-cost/copy-and-mass-repro.json`](findings/F-072-unfold-cost/copy-and-mass-repro.json).
+**Workaround in the example:** a four-piece fitting (seams at the middles of the sides), one quarter pattern,
+and the plated pieces as ruled lofts (F-091): 2.0 s wall and 3.3 s CPU instead of 8.7 s and 27 s.
 
 ## F-073
 
@@ -763,3 +780,99 @@ result does not report where it put them, so an agent needs trial renders to see
 the transition): no tangent lines between its flat and curved regions, no rulings or bump lines for press-brake
 forming, no bend lines, on a layer of their own. A sheet-metal shop's pattern carries them. **Should:** the
 pattern's inner face boundaries and a chosen number of rulings per curved region, on marking layers.
+
+## F-086
+
+**Missing capability.** `cut.list` and `cut.export` refuse a plate whose edges are broken: a 0.3 mm chamfer
+round a carbon plate's outline or holes makes it "not a plate". Every CNC-cut plate has its edges broken.
+**Should:** a plate is a plate whatever its edge treatment; the cut outline is the plate's largest section.
+Reproducer: [`findings/F-086-cut-list-edge-break/repro.json`](findings/F-086-cut-list-edge-break/repro.json).
+
+## F-087
+
+**Missing capability.** There is no measure of whether a round tool of radius r can cut a profile (every
+inside corner at least r, no gap narrower than 2r), and an offset profile cannot be offset again (which would
+test it: offset out by r and back in). The drone frame proves it through Steiner's area formula of the outline
+grown by r. **Should:** a `toolReach` measure, or offsets of offsets. Reproducer:
+[`findings/F-087-router-reach/repro.json`](findings/F-087-router-reach/repro.json).
+
+## F-088
+
+**Agent friction.** A chamfer's `chain` stops at sharp corners, and there is no option for every edge of a
+face, so breaking the edges of a plate's outline takes 22 edge pairs per plate. **Should:** `edges` given as
+a face (all its boundary edges) or a named set. Reproducer:
+[`findings/F-088-chamfer-whole-outline/repro.json`](findings/F-088-chamfer-whole-outline/repro.json).
+
+## F-089
+
+**Bug.** On the square-to-round transition's plate, a joint `onto` the end planes is refused along the chain
+of edges where a flat triangle meets a cone tangentially; on the corner alone it works. Reproducer:
+[`findings/F-089-plate-onto-tangent/repro.json`](findings/F-089-plate-onto-tangent/repro.json).
+**Workaround in the example:** the plate's rims stay square to the sheet, inside the collar's and the
+spigot's laps.
+
+## F-090
+
+**Missing capability.** A sheet with a straight band at its end (a duct fitting's lap) has a curved fold line
+where the band meets a cone; `feature.unfold` refuses it ("images up to 0.98 mm apart"), and `feature.plate`
+cannot plate across a fold. **Should:** the unfold of a curved fold (the band then develops to a curved strip,
+as a sheet-metal layout does). Reproducer:
+[`findings/F-090-curved-fold/repro.json`](findings/F-090-curved-fold/repro.json).
+
+## F-091
+
+**Performance.** `feature.developable` between two arcs builds its surface with 184 rulings at any
+tolerance; `feature.loft` (ruled) between the same two arcs gives the same surface with 2, and plating it
+costs 0.73 s of CPU against 2.59 s. On the transition this took the load from 11.5 s to 3.3 s of CPU.
+**Should:** a developable described as exactly as the loft when its rulings form a cone or a cylinder.
+Reproducer: [`findings/F-091-developable-rulings/repro.json`](findings/F-091-developable-rulings/repro.json).
+
+## F-092
+
+**Bug.** The plate of a corner developable rounded to 5 mm is refused at some sizes of the transition (500 ×
+500 to Ø 315: "the rim could not be traced … still 2.52 off"); 8 mm passes everywhere. See also F-070 and
+F-071. Reproducer: [`findings/F-092-plate-rim-fan/repro.json`](findings/F-092-plate-rim-fan/repro.json).
+
+## F-093
+
+**Performance.** On one lofted propeller (three blades through six spline sections), `boxMax` takes 5.3 s
+while `sectionExtent` of the same body takes 0.03 s; joining the blades to their hub with `feature.boolean`
+costs 0.4 s of regeneration plus 0.5 s to measure the trimmed freeform faces. Reproducer:
+[`findings/F-093-loft-measure-cost/repro.json`](findings/F-093-loft-measure-cost/repro.json).
+**Workaround in the example:** blades and hub are two bodies (they overlap 7.4 mm³), and every check is a
+planar cut.
+
+## F-094
+
+**Agent friction.** A measure's `axis` (or direction) takes a fixed axis or vector, not an expression, so a
+blade angle that follows the pitch formula cannot be measured along it; the drone measures a hidden copy
+turned back by the angle. **Should:** directions as expressions, as positions already take. Reproducer:
+[`findings/F-094-measure-axis-expression/repro.json`](findings/F-094-measure-axis-expression/repro.json).
+
+## F-095
+
+**Bug.** A fillet whose rolling border would cross a smooth (tangent) edge onto the next face is refused: the
+solitaire's prong roots, where the prongs meet the shank near the smooth edge between two arcs of its oval
+section, take a fillet of d/5 at 1 ct but not from 1.4 ct. Reproducer (a post near a rounded edge, a 3 mm root
+fillet refused): [`findings/F-095-fillet-across-smooth-edge/repro.json`](findings/F-095-fillet-across-smooth-edge/repro.json).
+**Workaround in the example:** the prong roots are left sharp, rather than with a radius tuned to pass.
+
+## F-096
+
+**Agent friction (minor).** `body.material` refuses a variable holding a density ("is a density, not a plain
+number"), so a density defined once as a variable must be written out as `diamond_density * (1 m)^3 / (1 kg)`.
+Reproducer: [`findings/F-096-density-variable/repro.json`](findings/F-096-density-variable/repro.json).
+**Should:** a density accepted as a value with its unit.
+
+## F-097
+
+**Missing capability (cosmetic).** The studio look draws glass as one refraction of the picture behind it, with
+no internal reflection and no dispersion, so a cut diamond reads as a glass blob (fully clear) or as frosted
+glass (the solitaire's compromise, transmission 0.5). A brilliant's look is total internal reflection and fire.
+**Should:** a few bounces of internal reflection for high-ior bodies, and dispersion as an option.
+
+## F-098
+
+**Performance.** An `overlap` or `clearance` assertion between a 58-face stone and the ring's gold costs 2 to 3 s
+at every load (0.84 s rises to 2.8 and 3.8 s), while a `distance` between named faces costs too little to
+measure. See F-019.
