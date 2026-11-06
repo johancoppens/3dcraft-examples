@@ -1,0 +1,69 @@
+{
+  "id": "mailer-box",
+  "title": "Mailer box",
+  "summary": "die-cut blank, staged fold, crease DXF",
+  "description": "A FEFCO 0427 mailer of single-wall E-flute kraft board, 200 × 150 × 60 mm inside, folded from its die-cut blank: rolled end walls locked by tabs, dust flaps and a tuck-in lid.",
+  "domain": "Packaging",
+  "process": "Cut and crease on a die cutter or cutting plotter, folded by hand",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 7,
+    "rationale": "Eighteen thick-panel creases driven by a table-staged choreography of coupled formulas, a closed-form area of a 66-vertex blank, a hidden second fold for the closed proofs, collision limits to navigate."
+  },
+  "standards": [
+    "FEFCO Code, 12th edition (2022), style 0427"
+  ],
+  "materials": [
+    "Corrugated board, single wall, E flute (1.6 mm), kraft liners, 340 g/m²"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        540,
+        -360,
+        420
+      ],
+      "target": [
+        100,
+        85,
+        60
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 29
+    },
+    "look": {
+      "rotation": 60
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/mailer-box-blank.dxf",
+      "fold": "Mailer box"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 12 assertions, also at 22 fold amounts and nine sizes; inside, outside, clear spaces and 19 panels equal to this example's; blank area 0.1622 m2 (+0.56 %, within 1 %); 291 steps, about 340 commands. It showed the prompt's '45 deg' for the back wall's corners could not hold (now corrected)."
+  },
+  "stats": {
+    "steps": 98,
+    "variables": 47,
+    "parameters": 4,
+    "features": 4,
+    "assertions": 12,
+    "warnings": 0,
+    "build_s": 0.35,
+    "load_s": 0.1,
+    "file_bytes": 139594
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

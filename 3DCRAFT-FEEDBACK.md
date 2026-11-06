@@ -24,7 +24,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-012](#f-012) | Missing capability | No surface through a grid of points | probe for ventoux-relief | loft of row splines |
 | [F-013](#f-013) | Bug | Screen-space reflections smear a patch onto a threaded shank in the CPU renderer | socket-head-cap-screw | reflections off in the preview |
 | [F-014](#f-014) | Missing capability | A thread has no fit allowance, so a mating pair touches and cannot be shown clear | probe for moka-pot | one thread cosmetic |
-| [F-015](#f-015) | Missing capability | A folded panel cannot have a slit, and thick panels do not fold to 180° | probe for mailer-box | single walls, no locks |
+| [F-015](#f-015) | Missing capability | A folded panel cannot have a slit, and thick panels do not fold to 180° | probe for mailer-box | none in the end: rolled ends as two 90° creases, slots as holes |
 | [F-016](#f-016) | Agent friction | A number parameter cannot take a series of values (a step counts from 0 when `min` is a formula) | socket-head-cap-screw | a choice from a table, rows limited by `min`/`max` |
 | [F-017](#f-017) | Missing capability (minor) | No precious-metal presets; a preset recoloured keeps its base metal's density | probe for solitaire-ring | `body.material` |
 | [F-018](#f-018) | Agent friction | `document.inspect` on a freshly opened file reports assertions as pending; `info` and `assert.list` wait | socket-head-cap-screw | none |
@@ -67,6 +67,17 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-055](#f-055) | Agent friction (minor) | The `hole: true` face query returns a hole's bore only, not its countersink or drill-point cone | v-block-pair (review) | measure by `madeBy` |
 | [F-056](#f-056) | Missing capability (minor) | A modelled or cosmetic thread cannot run through a hole's whole length (its run-out must fit inside) | v-block-pair | thread 1 mm short |
 | [F-057](#f-057) | Agent friction | An output is refused as unknown when its proof bounds lie 1e-6 apart | v-block-pair (prompt test) | distance used instead |
+| [F-058](#f-058) | Missing capability (cosmetic) | Thick fold panels leave every folded corner open: a notch the board deep, light through the crease | mailer-box | visible notches |
+| [F-059](#f-059) | Missing capability | An assertion is measured only at the current parameter values | mailer-box | hidden closed copy |
+| [F-060](#f-060) | Agent friction | On a thick fold panel `startCap` is the far face and `endCap` the face on the sketch, the opposite of an extrusion | mailer-box | none |
+| [F-061](#f-061) | Missing capability | A fold's boundary takes straight lines only: rounded ears become chords, cut as facets | mailer-box (review) | chorded ears |
+| [F-062](#f-062) | Bug | The CPU studio look shows a flat face's triangulation diagonal as a dark line | mailer-box (review) | none |
+| [F-063](#f-063) | Agent friction | A fold's DXF names its layers `boundary` and `valley`; die makers and plotters expect CUT and CREASE | mailer-box (review) | none |
+| [F-064](#f-064) | Bug | A loft through closed splines gives two side faces the same name | headphone-stand | none |
+| [F-065](#f-065) | Bug | A fillet at the foot of a lofted column on a plane is refused from 12 to 14 mm | headphone-stand | 10 mm root fillet |
+| [F-066](#f-066) | Bug | Rounding a rod's end to a full ball is refused, and the error points at the refused radius | headphone-stand | ball as its own body |
+| [F-067](#f-067) | Bug (proof weakness) | A draft assertion passes on sampled faces (`proven: false`) without a warning, and reports radians | headphone-stand | none |
+| [F-068](#f-068) | Missing capability | No assertion that a body is in one piece (`shells` counts voids too) | headphone-stand | count of cut faces |
 
 ## F-001
 
@@ -159,7 +170,8 @@ curvature allows. Reproducer (44 steps):
 **Performance.** A closed `sketch.curve` from formulas is fitted within the document's tolerance; at the
 default 1e-6 mm each airfoil section of a 600 mm propeller became a spline of about 400 control points, and
 six sections lofted, patterned and joined regenerate in 40 s using 1.5 GB. At 0.001 mm it is 100 to 150
-points, 11.6 s and 0.56 GB. **Should:** a curve fitted to what it needs (curvature-adaptive, or a separate
+points, 11.6 s and 0.56 GB. On the headphone stand, elliptic formula sections had 35 to 86 control
+points each even at 0.001 mm, and lofted and cut they cost 2.0 s against 0.13 s for live splines. **Should:** a curve fitted to what it needs (curvature-adaptive, or a separate
 fitting tolerance), so a formula section does not cost hundreds of points at the topological tolerance.
 
 ## F-011
@@ -206,7 +218,9 @@ clearance; and interference that decides tangent flank contact.
 FEFCO 0427 mailer go through slits), and panels are not built when folded to 180° (its rolled double side
 walls). One fold amount cannot drive every crease of a box either, because the dust flaps pass through the
 walls at angles between flat and closed; this one is physics, not a bug, and the box folds in stages.
-**Should:** slits (cuts inside a panel) and 180° folds of thick panels.
+**Should:** slits (cuts inside a panel) and 180° folds of thick panels. The mailer box example got round both without a workaround in the model:
+a rolled end is two 90° creases with a narrow top panel between, and the locking tabs drop into slots that are
+holes in the base panel, which thick panels accept.
 
 ## F-016
 
@@ -422,6 +436,7 @@ part, or the part reads oddly. **Should:** a body name (`body.rename`, or `name`
 bands across broad flat faces (the treads of the hex key stand at 1600 × 1200). `reflections: false` leaves
 the picture pixel-identical; `shadows: false` or another `look.light` ([200, 70], [300, 60]) removes the
 bands. **Workaround in the example:** the preview's light direction.
+The jagged shadow line also crosses curved faces (a fillet on the headphone stand).
 
 ## F-044
 
@@ -525,3 +540,79 @@ refused as "not proven closely enough to be a value: found 108.642135 mm (at mos
 whose proof bounds lie a millionth of a millimetre apart, well inside the document's tolerance of the model's
 size, is unknown rather than a value. **Should:** an output takes the found value when its bounds lie within
 the document's tolerance (scaled to the model, as an assertion's `tol` does), and says how far it is proven.
+
+## F-058
+
+**Missing capability (cosmetic).** `feature.fold` with thick panels leaves every folded corner open: a notch
+the board's thickness deep runs along each crease, with a line of sight through it (a 45° ray through a
+folded corner meets nothing). Real board bends round the crease. **Should:** the crease bridged by a bent
+strip (a cylinder sector of the panel's thickness). Reproducer:
+[`findings/F-058-open-crease-corners/repro.json`](findings/F-058-open-crease-corners/repro.json).
+
+## F-059
+
+**Missing capability.** An assertion is measured at the current parameter values only. The mailer box is
+shown half open (Fold 0.71) but must be proven closed; a `when` makes the check inactive at the default
+rather than proving it at another value, so the example carries a hidden second fold at the closed angles.
+**Should:** an assertion measured at given values of some variables (`at: {"fold_amount": 1}`), as
+check-range already evaluates other points. Reproducer:
+[`findings/F-059-assert-at-other-values/repro.json`](findings/F-059-assert-at-other-values/repro.json).
+
+## F-060
+
+**Agent friction.** On a thick fold panel `startCap` names the far face and `endCap` the face on the sketch,
+the opposite of an extrusion's, and the documentation does not say so: the mailer box's first distance
+assertions measured 203.2 mm instead of the inside 200 mm. Reproducer:
+[`findings/F-060-panel-cap-sides/repro.json`](findings/F-060-panel-cap-sides/repro.json).
+
+## F-061
+
+**Missing capability.** The boundary of a `feature.fold` blank takes straight lines only, so the mailer's
+rounded tuck ears are chords, and the DXF for the die or the plotter then cuts facets instead of arcs.
+**Should:** arcs and splines in a fold's boundary (the creases stay straight).
+
+## F-062
+
+**Bug (rendering).** On the closed mailer box, the CPU studio look draws a dark diagonal line corner to
+corner across the flat lid, apparently the diagonal of the face's triangulation; it stays with
+`reflections: false` and with `ao: false`.
+
+## F-063
+
+**Agent friction.** `file.export` of a fold writes its DXF with the layers `boundary`, `valley`, `mountain`
+and `cut`; die makers and cutting-plotter software expect CUT and CREASE (and sometimes PERF), and there is
+no way to name or map the layers. **Should:** layer names given in the export (`"layers": {"boundary":
+"CUT", "valley": "CREASE"}`), or die-line names by default.
+
+## F-064
+
+**Bug.** `feature.loft` through closed splines gives two of its side faces the same name, so a fillet or a
+measure that names one of them is ambiguous. Reproducer:
+[`findings/F-064-loft-face-names/repro.json`](findings/F-064-loft-face-names/repro.json).
+
+## F-065
+
+**Bug.** A fillet where a lofted column meets a plane (the headphone stand's column on its base) is refused
+from 14 mm on a round column and 12 mm on an elliptic one ("the rolling ball along this edge could not be
+followed"), though the column is far wider than that and the base flat. Reproducer:
+[`findings/F-065-loft-root-fillet/repro.json`](findings/F-065-loft-root-fillet/repro.json). See also F-008.
+
+## F-066
+
+**Bug.** Rounding the end of a rod to a full ball is refused: with the radius equal to the rod's it is "too
+large"; with a radius between half and the full radius the refusal says that exactly the rod's radius gives
+a ball piece. Reproducers: [`findings/F-066-rod-end-round/`](findings/F-066-rod-end-round/).
+
+## F-067
+
+**Bug (proof weakness).** A `draft` assertion passes when its measure was taken on sampled faces only
+(`proven: false` in the detail) without the not-proven warning other measures give, and its message gives
+the angles in radians while the bound is written in degrees. Reproducer:
+[`findings/F-067-draft-proof/repro.json`](findings/F-067-draft-proof/repro.json).
+
+## F-068
+
+**Missing capability.** There is no assertion that a body is one piece: `shells` also counts voids, so a cut
+that leaves two loose pieces (the headphone stand's saddle cut at its widest, before it was fixed) passes
+every check. **Should:** a `pieces` (or `lumps`) measure. Reproducer:
+[`findings/F-068-one-piece/repro.json`](findings/F-068-one-piece/repro.json).
