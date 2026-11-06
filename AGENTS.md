@@ -43,7 +43,7 @@ log/ plan/              local only (gitignored): dev log, plans
 | `meta.json` | title, card summary, domain, tier, difficulty, standards, materials, preview framing, exports | hand; `stats` and `craft3d` written by the tool |
 | `README.md`, `prompt.md` | the example's page and its AI rebuild chat (§6) | hand |
 | `<id>.3dcraft` | the document built from `build.json`, opens directly | `tools/examples.py build` |
-| `exports/` | only what the process needs: 3MF for printing, DXF or SVG for laser, plasma, CNC and flat patterns, STEP for machining; listed in `meta.json` `exports` (`file.export` params) | `tools/examples.py build` |
+| `exports/` | only what the process needs: 3MF for printing, DXF or SVG for laser, plasma, CNC and flat patterns, STEP for machining; listed in `meta.json` `exports` (`file.export` params, plus `values` to export at other public parameter values) | `tools/examples.py build` |
 | `preview.png` | the picture (§5) | `tools/examples.py render` |
 | `make.py`, `data/` | only for the one example whose input comes from outside (§3) | hand |
 

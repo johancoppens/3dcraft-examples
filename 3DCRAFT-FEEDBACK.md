@@ -119,6 +119,8 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-107](#f-107) | Bug | Root fillets between a swept oval spoke and a torus rim are refused at tolerance 1e-4 mm and built at 1e-5 mm | cast-handwheel (review) | tolerance 1e-5 mm |
 | [F-108](#f-108) | Missing capability | `feature.thread` knows ISO metric threads only: no pipe threads (ISO 228-1 G, ISO 7-1 R, NPT) | hydraulic-cylinder | G 3/8 ports drilled, not threaded |
 | [F-109](#f-109) | Bug | A seat cut across a filleted prong head is refused as "zero thickness" at tolerance 1e-6 mm and built at 1e-7 mm | solitaire-ring (prompt test) | tolerance 1e-7 mm |
+| [F-110](#f-110) | Agent friction | `feature.boolean` takes one target and one tool, so subtracting four bodies takes four chained features | hydraulic-cylinder | steps |
+| [F-111](#f-111) | Missing capability | `measure.clearance` reports a cosmetically threaded stud in its cosmetically threaded hole as an overlap | hydraulic-cylinder | no interference check of screwed parts |
 
 ## F-001
 
@@ -568,7 +570,8 @@ gives neutral metals. **Should:** a key light whose colour reads neutral on neut
 environment's default turned so it does; at least say it in the look's documentation. On the square-to-round transition no rotation renders both neutral:
 up-facing flat metal reads dark olive at 180 and 270, vertical metal yellow at 0, 90 and 270. On the solitaire
 ring, near-white glossy faces (the stone's crown facets) pick up a lime-yellow tint at grazing angles in every
-variant tried.
+variant tried. On the hydraulic cylinder a chrome rod (roughness 0.06) streaks brown at every
+rotation, with reflections on or off, and bare up-facing steel reads brass or olive.
 
 ## F-055
 
@@ -980,3 +983,19 @@ invalid body: vertex 0 is 1.0076788542080009e-6 away from the end of edge 7" (no
 (the tester's script at 1.25 ct and 1e-6 mm, not minimal):
 [`findings/F-109-seat-cut-tolerance/repro.json`](findings/F-109-seat-cut-tolerance/repro.json), run with
 `craft3d-cli run --script`.
+
+## F-110
+
+**Agent friction.** `feature.boolean` takes one target and one tool. The hydraulic cylinder's oil (the
+chambers' solid, measured for their volumes) is a cylinder less piston, rod, head and cap: four chained
+subtracts, each a feature with a name; the cutaway's box needs two. **Should:** `tool` (and for a union
+`target`) as a list. Seen in the reviewer's count: about four of the example's 250 steps.
+
+## F-111
+
+**Missing capability.** `measure.clearance` (and an `overlap` assertion) reports a stud with a cosmetic thread
+inside a hole with the matching cosmetic thread as an overlap: the cylinder's M14 × 1.5 rod end in its rod
+clevis, and the tie rods in their tapped holes. A screwed assembly cannot be checked for interference without
+listing the threaded pairs as exceptions. **Should:** a thread fit (a cosmetic external thread in a cosmetic
+internal thread of the same size and pitch) counted as a fit, not an overlap, or an `except` list of such
+pairs.

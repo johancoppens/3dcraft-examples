@@ -216,9 +216,11 @@ def build_into(eid, target, meta):
             {k: report.get(k) for k in ("problems", "assertions")}, indent=1)[:3000])
     exports = meta.get("exports", [])
     if exports:
-        args = ["run", building]
+        # Exports at the defaults share one run; an export with "values" (public parameters, as param.set
+        # takes them) gets a run of its own, so its values never leak into another export.
+        runs = [["run", building]]
         for export in exports:
-            params = {k: v for k, v in export.items() if k != "command"}
+            params = {k: v for k, v in export.items() if k not in ("command", "values")}
             command = export.get("command", "file.export")
             if command not in EXPORT_COMMANDS:
                 raise CheckError(f"export command {command!r} must be one of {EXPORT_COMMANDS}")
@@ -226,10 +228,18 @@ def build_into(eid, target, meta):
             if not path.startswith("exports/"):
                 raise CheckError(f"export path {path!r} must start with exports/")
             (target / path).parent.mkdir(parents=True, exist_ok=True)
-            args += ["--cmd", command, "--params", json.dumps(params)]
-        result, _ = run_cli(args, cwd=target)
-        if result.returncode != 0:
-            raise CheckError(explain_failure(result, "exports failed"))
+            step = ["--cmd", command, "--params", json.dumps(params)]
+            if export.get("values"):
+                runs.append(["run", building, "--cmd", "param.set",
+                             "--params", json.dumps({"values": export["values"]})] + step)
+            else:
+                runs[0] += step
+        for args in runs:
+            if len(args) == 2:
+                continue
+            result, _ = run_cli(args, cwd=target)
+            if result.returncode != 0:
+                raise CheckError(explain_failure(result, "exports failed"))
         for export in exports:
             if export.get("path", "").endswith(".3mf"):
                 deflate_zip(target / export["path"])
