@@ -18,6 +18,7 @@ import argparse
 import json
 import os
 import re
+import resource
 import shutil
 import subprocess
 import sys
@@ -102,7 +103,11 @@ def run_cli(args, cwd, memory="3G", timeout=900):
     elif shutil.which("timeout"):
         command = ["timeout", str(timeout)] + command
     start = time.monotonic()
+    before = resource.getrusage(resource.RUSAGE_CHILDREN)
     result = subprocess.run(command, cwd=cwd, capture_output=True, text=True)
+    after = resource.getrusage(resource.RUSAGE_CHILDREN)
+    # CPU time of the run (all threads): what a single-threaded host such as the web build pays.
+    result.cpu_seconds = (after.ru_utime - before.ru_utime) + (after.ru_stime - before.ru_stime)
     return result, time.monotonic() - start
 
 
@@ -233,6 +238,7 @@ def build_into(eid, target, meta):
     result, load_s = run_cli(["info", final], cwd=target)
     if result.returncode != 0:
         raise CheckError(explain_failure(result, "craft3d-cli info failed"))
+    load_cpu_s = result.cpu_seconds
     doc = manifest(final)
     ids = Counter(step_id(s) for s in script)
     assertions = report.get("assertions", {})
@@ -245,6 +251,7 @@ def build_into(eid, target, meta):
         "warnings": len(assertions.get("unproven", [])),
         "build_s": round(seconds, 2),
         "load_s": round(load_s, 2),
+        "load_cpu_s": round(load_cpu_s, 2),
         "file_bytes": final.stat().st_size,
     }, doc, report
 
@@ -289,6 +296,10 @@ def lint(eid, meta, doc, stats, script):
         errors.append("build.json: no document.info (title, description, author, licence)")
     if stats["load_s"] > BUDGET_LOAD_S[tier] and not meta.get("budget_exception"):
         errors.append(f"loads in {stats['load_s']} s, budget {BUDGET_LOAD_S[tier]} s for {tier}")
+    cpu_budget = 3 * BUDGET_LOAD_S[tier]
+    if stats.get("load_cpu_s", 0) > cpu_budget and not meta.get("budget_exception"):
+        errors.append(f"loads in {stats['load_cpu_s']} s of CPU (the single-threaded web build's time), "
+                      f"budget {cpu_budget} s for {tier}")
     if stats["file_bytes"] > BUDGET_BYTES and not meta.get("budget_exception"):
         errors.append(f"{stats['file_bytes']} bytes, budget {BUDGET_BYTES}")
     if stats["steps"] > STEP_GUIDE[tier]:

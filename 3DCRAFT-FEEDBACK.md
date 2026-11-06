@@ -13,7 +13,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-001](#f-001) | Performance | The guide's fuel tank takes 55 s to open, the chassis 9 s | calibrating the load budget | start screen |
 | [F-002](#f-002) | Agent friction | An extrude with `cut`, `join` or `intersect` cannot name its extrusion | calibrating the name check | history names |
 | [F-003](#f-003) | Agent friction | `craft3d-cli --version` does not print the commit | setting up the pin | tooling |
-| [F-004](#f-004) | Performance | A modelled thread takes 3.5 s to regenerate, measures on it 1 s more | socket-head-cap-screw | load budget exceeded (4.8 s, 9 s on one core) |
+| [F-004](#f-004) | Performance | A modelled thread takes 3.5 s to regenerate, measures on it 1 s more; 27 s of CPU | socket-head-cap-screw | load budget exceeded (4.8 s wall, 27 s CPU) |
 | [F-005](#f-005) | Agent friction | `body.appearance` replaces the whole appearance; fields left out are dropped | socket-head-cap-screw | finish lost silently |
 | [F-006](#f-006) | Bug | A modelled thread on a tip chamfered 0.75 P deep is refused for M3 to M6 | socket-head-cap-screw | workaround used |
 | [F-007](#f-007) | Missing capability | Loft sections cannot lie on a cylinder | probe for ship-propeller | planar approximation |
@@ -92,6 +92,9 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-080](#f-080) | Performance (file size) | 3MF exports are stored (uncompressed) ZIPs with 17 significant digits per coordinate | headphone-stand (review) | the examples' tool deflates them |
 | [F-081](#f-081) | Agent friction | Mesh-export quality is relative to the model's size (0.33 mm on a 270 mm part at `normal`); no print preset | headphone-stand (review) | explicit `tolerance` |
 | [F-082](#f-082) | Missing capability (minor) | Section caps in `view.render` draw every body in one colour | headphone-stand (review) | none |
+| [F-083](#f-083) | Missing capability | A wood pattern has one frame (axis, pith) per body: pattern copies cannot each have their grain | splayed-stool (review) | legs split into bodies |
+| [F-084](#f-084) | Agent friction (minor) | Where `material.preset` puts a wood's pith (from the body's box) is not reported | splayed-stool (review) | trial renders |
+| [F-085](#f-085) | Missing capability | A flat pattern's DXF from `feature.unfold` has the outline only: no tangent, ruling or bump lines on a layer | square-to-round-transition (review) | outline only |
 
 ## F-001
 
@@ -128,6 +131,8 @@ The cosmetic thread draws nothing on the shank, so a screw meant to look real ne
 turn's faces, repeated); measures on it reuse what the faces already know. Reproduce:
 `tools/examples.py build socket-head-cap-screw` and time `craft3d-cli info` on the result.
 Over the screw's range it opens in 1.4 s (M3 × 6) to 7 to 8 s for the longest screws threaded to the head (M8 × 35: 26 turns, 8.2 s and 560 MB with other work running; M3 × 20: 7.2 s, 710 MB), and M8 × 30 takes 9.0 s on one core (`taskset -c 0`), which is what the single-threaded web build gets.
+Its CPU time is 27 s (`/usr/bin/time`: 26.8 s user at 4.8 s wall): the regeneration is spread over many
+threads, so the single-threaded web build would wait about that long.
 **Workaround in the example:** none; the example carries a budget exception.
 
 ## F-005
@@ -533,7 +538,8 @@ tints every glossy neutral body yellow or olive, metallic or dielectric: polishe
 black oxide as bronze, clear anodising as champagne (the screw, the T-slot profile, the V-block pair). A
 builder cannot tell this from a material error. Turning the environment (`look.rotation`, often 180)
 gives neutral metals. **Should:** a key light whose colour reads neutral on neutral materials, or the
-environment's default turned so it does; at least say it in the look's documentation.
+environment's default turned so it does; at least say it in the look's documentation. On the square-to-round transition no rotation renders both neutral:
+up-facing flat metal reads dark olive at 180 and 270, vertical metal yellow at 0, 90 and 270.
 
 ## F-055
 
@@ -662,6 +668,8 @@ about 10 s ("offset could not be approximated"); at 1e-4 mm it works. Reproducer
 **Performance.** `feature.unfold` takes about 0.7 s per quarter cone, the same at every tolerance; with
 `feature.plate` (about 2.5 s) the square-to-round transition opens in about 8 s, 27.6 s to regenerate at its
 longest. Reproducer: [`findings/F-072-unfold-cost/repro.json`](findings/F-072-unfold-cost/repro.json).
+The load is 8.7 s of wall time but 27 s of CPU time, so the single-threaded web build would take about 27 s;
+plating a quarter and mirroring it saves nothing (8.2 s), and with a union it is 11.5 s.
 **Workaround in the example:** none; it carries a budget exception.
 
 ## F-073
@@ -733,3 +741,24 @@ a `print` preset finer than a layer, as the default.
 **Missing capability (minor).** `view.render` with `section` caps every body's cut in one colour, so an
 insert in its pocket (the stand's steel disc) cannot be told from the part around it. **Should:** each cap in
 its body's colour.
+
+## F-083
+
+**Missing capability.** A solid texture (`pattern`) has one frame, axis and pith, per body. The copies a
+`feature.pattern` makes inside one body (the stool's four leaning legs) cannot each have their grain along
+their own axis, so they show bands across them that read as short grain, and their end faces (the through
+tenons) show long grain instead of end grain. **Should:** a grain frame that follows the feature or the
+pattern instance that made the faces.
+
+## F-084
+
+**Agent friction (minor).** `material.preset` fits a wood's pith and axis from the body's box, but the
+result does not report where it put them, so an agent needs trial renders to see the grain; the fitted
+`axis` and `origin` should come back in the result.
+
+## F-085
+
+**Missing capability.** The DXF of a flat pattern from `feature.unfold` holds the outline only (18 splines on
+the transition): no tangent lines between its flat and curved regions, no rulings or bump lines for press-brake
+forming, no bend lines, on a layer of their own. A sheet-metal shop's pattern carries them. **Should:** the
+pattern's inner face boundaries and a chosen number of rulings per curved region, on marking layers.
