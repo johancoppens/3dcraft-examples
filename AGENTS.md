@@ -92,6 +92,9 @@ log/ plan/              local only (gitignored): dev log, plans
   - Look at the full-size preview for renderer artefacts: smears (F-013, `look.reflections`), stepped
     shadow bands (F-026, F-043, `look.light`), blotches in cavities (F-046). Fix them with the framing keys
     of §5 and say so in the README.
+  - Under the Workshop environment at rotation 0 the warm key light makes polished steel read as brass and
+    black oxide as bronze (F-054): render the preview at `look.rotation` 0, 90, 180 and 270 and keep the
+    one where neutral metals read neutral (often 180).
   - The body is named after its last feature (F-042): name that feature for the part ("Stand", "Bowl").
   - A prompt must give every size its Acceptance depends on (a spline's handles, a wall, a count).
   - Real use, not only the drawing: will it be gripped, driven, hung, will it tip, does it fit the tool

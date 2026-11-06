@@ -63,6 +63,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-051](#f-051) | Agent friction (minor) | A flat pattern's DXF splits each straight edge into collinear lines at the bend zone | steel-bookend (review) | none |
 | [F-052](#f-052) | Missing capability | `feature.pattern` copies a hole but not its cosmetic thread; `feature.thread` takes one face | v-block-pair | 8 thread features |
 | [F-053](#f-053) | Missing capability | Projected views (SVG, DXF) have no dimensions, centre lines, title block or ISO 128 line weights | v-block-pair | views without dimensions |
+| [F-054](#f-054) | Agent friction | The Workshop environment's warm key light tints every glossy neutral body yellow at rotation 0 | screw, t-slot, v-block-pair | rotation per example |
+| [F-055](#f-055) | Agent friction (minor) | The `hole: true` face query returns a hole's bore only, not its countersink or drill-point cone | v-block-pair (review) | measure by `madeBy` |
+| [F-056](#f-056) | Missing capability (minor) | A modelled or cosmetic thread cannot run through a hole's whole length (its run-out must fit inside) | v-block-pair | thread 1 mm short |
+| [F-057](#f-057) | Agent friction | An output is refused as unknown when its proof bounds lie 1e-6 apart | v-block-pair (prompt test) | distance used instead |
 
 ## F-001
 
@@ -181,7 +185,8 @@ no effect on it. Reproduce: build `examples/01-socket-head-cap-screw`, then `vie
 {"eye": [48, -52, 30], "target": [-11, 0, -1], "up": [0, 0, 1], "fovY": 27}`, the gallery look
 (`studio`, `workshop`, `aces`, exposure 0.5, `rotation` 90, `accumulate` 4), 1000 × 750; compare
 `reflections` true and false around the thread's last turns. **Workaround in the example:** the preview is
-rendered with `reflections: false`.
+rendered with `reflections: false`. The same artefact draws a jagged ghost of the V-block
+pair's polished pin on the flat ground end face of a block.
 
 ## F-014
 
@@ -489,3 +494,34 @@ features. **Should:** a thread that follows its hole into patterns and mirrors, 
 only: no dimensions, centre lines or title block, and one stroke width for every layer, so not the thick
 visible and thin hidden lines of ISO 128. A workshop drawing still needs another program. **Should:** at
 least line weights per layer and centre lines on holes; dimensions from the model's variables later.
+
+## F-054
+
+**Agent friction (rendering).** In the studio look's Workshop environment at rotation 0, the warm key light
+tints every glossy neutral body yellow or olive, metallic or dielectric: polished steel reads as brass,
+black oxide as bronze, clear anodising as champagne (the screw, the T-slot profile, the V-block pair). A
+builder cannot tell this from a material error. Turning the environment (`look.rotation`, often 180)
+gives neutral metals. **Should:** a key light whose colour reads neutral on neutral materials, or the
+environment's default turned so it does; at least say it in the look's documentation.
+
+## F-055
+
+**Agent friction (minor).** The face query `{"hole": true}` returns a hole's bore cylinder only, not its
+countersink or its drill-point cone, so a "wall around the hole" check over that set silently skips the
+nearest faces (the V-block pair's countersink came 0.7 mm closer to a groove than its bore).
+
+## F-056
+
+**Missing capability (minor).** `feature.thread` needs its quarter-turn run-out to lie inside the cylinder,
+so a hole cannot be threaded through its whole length (a nut, a tapped plate, the V-block clamp's 10 mm
+crossbar): "the thread with its run-out reaches 10.9375 mm … the cylinder is 10 mm long". **Should:** a
+thread `through` that runs out of both ends. Reproduce: in `examples/07-v-block-pair`, set
+`clamp_thread_length` to `clamp_bar`.
+
+## F-057
+
+**Agent friction.** A `variable.measure` output of `boxMax` or `extent` on the V-block pair's screws was
+refused as "not proven closely enough to be a value: found 108.642135 mm (at most 108.642136 mm)": an output
+whose proof bounds lie a millionth of a millimetre apart, well inside the document's tolerance of the model's
+size, is unknown rather than a value. **Should:** an output takes the found value when its bounds lie within
+the document's tolerance (scaled to the model, as an assertion's `tol` does), and says how far it is proven.

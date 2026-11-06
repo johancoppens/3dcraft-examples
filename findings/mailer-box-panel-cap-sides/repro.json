@@ -1,0 +1,13 @@
+[
+ ["sketch.create", {"name": "Board", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "Board", "closed": true, "points": [[0, 0], [100, 0], [100, 40], [0, 40]]}],
+ ["sketch.line", {"sketch": "Board", "construction": true, "from": [50, 0], "to": [50, 40]}],
+ ["feature.fold", {"sketch": "Board", "name": "Panels", "fixed": [25, 20],
+   "creases": [{"line": "e11", "kind": "valley", "angle": "30 deg"}],
+   "panels": {"thickness": "3 mm", "clearance": "0.5 mm"}}],
+ ["measure.ray", {"from": [25, 20, 10], "direction": "-z", "of": "Panels"}],
+ ["sketch.create", {"name": "Plate sketch", "plane": "xy", "offset": "50 mm"}],
+ ["sketch.polyline", {"sketch": "Plate sketch", "closed": true, "points": [[0, 0], [50, 0], [50, 40], [0, 40]]}],
+ ["feature.extrude", {"sketch": "Plate sketch", "distance": "3 mm", "reversed": true, "name": "Plate"}],
+ ["measure.ray", {"from": [25, 20, 60], "direction": "-z", "of": "Plate"}]
+]

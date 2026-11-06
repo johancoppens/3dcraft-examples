@@ -1,0 +1,12 @@
+[
+ ["variable.set", {"name": "fold_amount", "expr": "0.5"}],
+ ["variable.publish", {"name": "fold_amount", "min": "0", "max": "1"}],
+ ["sketch.create", {"name": "Card", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "Card", "closed": true, "points": [[0, 0], [100, 0], [100, 40], [0, 40]]}],
+ ["sketch.line", {"sketch": "Card", "construction": true, "from": [50, 0], "to": [50, 40]}],
+ ["feature.fold", {"sketch": "Card", "name": "Lid", "fixed": [25, 20],
+   "creases": [{"line": "e11", "kind": "valley", "angle": "90 deg * fold_amount"}],
+   "panels": {"thickness": "3 mm", "clearance": "0.5 mm"}}],
+ ["assert.add", {"name": "Height when closed", "measure": "extent", "of": "Lid", "axis": "z", "eq": "53 mm", "when": "fold_amount == 1"}],
+ ["document.check", {}]
+]

@@ -1,0 +1,94 @@
+{
+  "id": "v-block-pair",
+  "title": "V-block pair with clamps",
+  "summary": "pattern, mirror, tapped holes, drawings",
+  "description": "A matched pair of hardened and ground 90° V-blocks, 45 × 40 × 35 mm, for shafts of 6 to 30 mm, with black-oxide U-clamps holding a ground test pin.",
+  "domain": "Toolmaking",
+  "process": "Milling, hardening, surface grinding; clamps cut from plate, black oxide",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 5,
+    "rationale": "A 40-segment constrained profile, 80 chamfered edges, revolve with mirror and booleans, three patterns, eight threads, four bodies, contact proofs needing careful edge naming."
+  },
+  "standards": [
+    "ISO 261",
+    "ISO 2306",
+    "ISO 3508"
+  ],
+  "materials": [
+    "Alloy steel, hardened 52–58 HRC, ground (blocks)",
+    "Steel, black oxide (clamps and screws)",
+    "Hardened steel, ground (test pin)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        265,
+        -170,
+        150
+      ],
+      "target": [
+        -6,
+        0,
+        38
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 30
+    },
+    "look": {
+      "rotation": 180,
+      "light": [
+        20,
+        70
+      ],
+      "reflections": false
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/v-block-pair.step"
+    },
+    {
+      "path": "exports/v-block-pair-end.svg",
+      "view": "right",
+      "hidden": "dashed",
+      "stroke": 0.25
+    },
+    {
+      "path": "exports/v-block-pair-side.svg",
+      "view": "front",
+      "hidden": "dashed",
+      "stroke": 0.25
+    },
+    {
+      "path": "exports/v-block-pair-top.svg",
+      "view": "top",
+      "stroke": 0.25
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 21 assertions, also at pin 6, 25, 30 mm and length 40, 70, 100 mm; section 1114.7925 mm2, pin centre 36.642 mm and the blocks' 0.7778 kg equal to this example's; pin on all four flanks, screws and hooks bearing, end-hole wall 2.3 mm; 93 steps, about 45 CLI calls. It threaded the crossbar 9 mm (F-056) and threaded the mirrored block separately (F-052)."
+  },
+  "stats": {
+    "steps": 116,
+    "variables": 57,
+    "parameters": 2,
+    "features": 30,
+    "assertions": 14,
+    "warnings": 0,
+    "build_s": 0.51,
+    "load_s": 0.31,
+    "file_bytes": 161633
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
