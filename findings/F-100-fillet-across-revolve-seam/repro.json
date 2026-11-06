@@ -1,0 +1,11 @@
+[
+ ["sketch.create", {"name": "Barrel hub section", "plane": "zx"}],
+ ["sketch.path", {"sketch": "Barrel hub section", "start": [0, 5], "segments": [{"line": [0, 17]}, {"arc": [24, 17], "center": [12, -20], "clockwise": true}, {"line": [24, 5]}, {"line": "start"}]}],
+ ["feature.revolve", {"sketch": "Barrel hub section", "axis": "x", "name": "Barrel hub"}],
+ ["sketch.create", {"name": "Spoke section", "plane": "yz", "offset": 8}],
+ ["sketch.circle", {"sketch": "Spoke section", "center": [0, 12], "radius": 6}],
+ ["feature.extrude", {"sketch": "Spoke section", "distance": "50 mm", "name": "Spoke"}],
+ ["feature.transform", {"source": "Spoke", "angle": "20 deg", "name": "Spoke turned 20 deg"}],
+ ["feature.boolean", {"op": "union", "target": "Barrel hub", "tool": "Spoke turned 20 deg", "name": "Joined"}],
+ ["feature.fillet", {"edges": [["F2:side(e6)", "F4:side(e2)"]], "chain": true, "radius": "2 mm", "name": "Root fillet"}]
+]

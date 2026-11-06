@@ -1,0 +1,58 @@
+{
+  "id": "cast-handwheel",
+  "title": "Cast handwheel",
+  "summary": "sweep, pattern, root fillets, size table",
+  "description": "A DIN 950 spoked handwheel in grey cast iron, 80 to 500 mm, with cranked oval spokes, a turned and polished rim, a keyed bore and a DIN 98 revolving handle on a boss at the standard's radius, painted machine green.",
+  "domain": "Machine building",
+  "process": "Sand casting, turning, keyway broaching, tapping",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "Two standard tables drive it through dependent choice ranges; a swept oval along a tangent-solved crank, a pattern, chain fillets with careful edge names, a conditional feature, a lug and seat ordered around kernel cost, closed-form and draft proofs; planar paths, no freeform surfacing."
+  },
+  "standards": [
+    "DIN 950:2018-02",
+    "DIN 6885-1",
+    "DIN 98",
+    "ISO 261",
+    "EN 1561"
+  ],
+  "materials": [
+    "Grey cast iron EN-GJL-200, machine-green enamel, rim turned and polished",
+    "Steel, zinc plated (handle)"
+  ],
+  "units": "mm",
+  "preview": {
+    "zoom": 1.35,
+    "look": {
+      "rotation": 90,
+      "reflections": false
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/cast-handwheel.step"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed with one gap: diameter 199.999 mm, depth 44.99996 mm, section area 715.87 mm² as the closed form, casting 1.990 kg and handle 0.241 kg as this example's; 9 of 10 checks pass, the spokes' upper-face draft not proven (F-102); root fillets named for three spokes only, so the five-spoke sizes kept two sharp spokes unnoticed (turn 3 now says so); about 130 steps."
+  },
+  "stats": {
+    "steps": 107,
+    "variables": 47,
+    "parameters": 2,
+    "features": 25,
+    "assertions": 10,
+    "warnings": 0,
+    "build_s": 1.2,
+    "load_s": 1.13,
+    "load_cpu_s": 5.24,
+    "file_bytes": 122353
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

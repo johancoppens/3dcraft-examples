@@ -1,0 +1,14 @@
+[
+ ["variable.set", {"name": "bend_radius", "expr": "20 mm"}],
+ ["variable.set", {"name": "bend_angle", "expr": "20 deg"}],
+ ["sketch.create", {"name": "Spoke path", "plane": "zx"}],
+ ["sketch.path", {"sketch": "Spoke path", "start": ["14 mm", "14 mm"], "segments": [
+   {"line": ["14 mm", "26 mm"]},
+   {"arc": ["14 mm + bend_radius * (1 - cos(bend_angle))", "26 mm + bend_radius * sin(bend_angle)"], "center": ["14 mm + bend_radius", "26 mm"], "clockwise": true},
+   {"line": ["14 mm + bend_radius * (1 - cos(bend_angle)) + 40 mm * sin(bend_angle)", "26 mm + bend_radius * sin(bend_angle) + 40 mm * cos(bend_angle)"]}]}],
+ ["sketch.create", {"name": "Spoke section", "plane": "yz", "offset": "14 mm"}],
+ ["sketch.rect", {"sketch": "Spoke section", "from": ["-11 mm", "8.5 mm"], "to": ["11 mm", "19.5 mm"]}],
+ ["feature.sweep", {"sketch": "Spoke section", "path": "Spoke path", "name": "Spoke"}],
+ ["datum.plane", {"from": "xy", "distance": "14 mm", "name": "Parting plane"}],
+ ["feature.draft", {"faces": ["F3:side(e6)", "F3:side(e8)"], "neutral": "Parting plane", "angle": "2 deg", "name": "Drafted spoke sides"}]
+]

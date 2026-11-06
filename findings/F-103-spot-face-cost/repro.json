@@ -1,0 +1,18 @@
+[
+ ["variable.set", {"name": "boss_barrel_radius", "expr": "44 mm"}],
+ ["sketch.create", {"name": "Rim section", "plane": "zx"}],
+ ["sketch.circle", {"sketch": "Rim section", "center": ["34 mm", "89 mm"], "radius": "11 mm"}],
+ ["feature.revolve", {"sketch": "Rim section", "axis": "x", "name": "Rim"}],
+ ["sketch.create", {"name": "Boss section", "plane": "zx"}],
+ ["sketch.path", {"sketch": "Boss section", "start": ["16.4 mm", "-80 mm"], "segments": [
+   {"line": ["16.4 mm", "-92 mm + boss_barrel_radius - sqrt(boss_barrel_radius^2 - (16.4 mm - 34 mm)^2)"]},
+   {"arc": ["51.6 mm", "-92 mm + boss_barrel_radius - sqrt(boss_barrel_radius^2 - (51.6 mm - 34 mm)^2)"], "center": ["34 mm", "-92 mm + boss_barrel_radius"]},
+   {"line": ["51.6 mm", "-80 mm"]},
+   {"line": "start"}]}],
+ ["feature.revolve", {"sketch": "Boss section", "axis": "e9", "name": "Handle boss"}],
+ ["feature.boolean", {"op": "union", "target": "Rim", "tool": "Handle boss", "name": "Rim and boss"}],
+ ["feature.fillet", {"edges": [["F4:side(e6)", "F2:side(e2)"]], "chain": true, "radius": "3.3 mm", "name": "Boss fillet"}],
+ ["sketch.create", {"name": "Spot face", "plane": "xy", "offset": "43.9 mm"}],
+ ["sketch.circle", {"sketch": "Spot face", "center": ["-80 mm", "0 mm"], "radius": "15.3 mm"}],
+ ["feature.extrude", {"sketch": "Spot face", "distance": "22 mm", "cut": "Boss fillet", "name": "Spot-faced boss"}]
+]
