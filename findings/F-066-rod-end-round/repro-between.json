@@ -1,0 +1,5 @@
+[
+ ["variable.set", {"name": "rod_radius", "expr": "5 mm"}],
+ ["feature.cylinder", {"radius": "rod_radius", "height": "30 mm", "name": "Rod"}],
+ ["feature.fillet", {"edges": [["F1:face(0)", "F1:face(2)"]], "radius": "0.6 * rod_radius", "name": "Domed end"}]
+]

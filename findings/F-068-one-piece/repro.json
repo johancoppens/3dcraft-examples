@@ -1,0 +1,7 @@
+[
+ ["feature.block", {"size": ["60 mm", "20 mm", "10 mm"], "name": "Bar"}],
+ ["feature.block", {"size": ["4 mm", "40 mm", "30 mm"], "position": ["28 mm", "-10 mm", "-10 mm"], "name": "Slot tool"}],
+ ["feature.boolean", {"op": "subtract", "target": "Bar", "tool": "Slot tool", "name": "Cut bar"}],
+ ["assert.add", {"name": "Volume", "measure": "volume", "of": "Cut bar", "eq": "56 mm * 20 mm * 10 mm"}],
+ ["document.inspect", {}]
+]

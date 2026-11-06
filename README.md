@@ -30,6 +30,7 @@ Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the li
 | <img src="examples/06-steel-bookend/preview.png" width="240" alt="Steel bookend"> | **[Steel bookend](examples/06-steel-bookend/)**<br>A bookend laser cut from 2 mm DC01 cold-rolled steel with an ogee-arch window, bent once on a press brake and powder coated deep teal. | Sheet metal | 3/10 |
 | <img src="examples/07-v-block-pair/preview.png" width="240" alt="V-block pair with clamps"> | **[V-block pair with clamps](examples/07-v-block-pair/)**<br>A matched pair of hardened and ground 90° V-blocks, 45 × 40 × 35 mm, for shafts of 6 to 30 mm, with black-oxide U-clamps holding a ground test pin. | Toolmaking | 5/10 |
 | <img src="examples/09-mailer-box/preview.png" width="240" alt="Mailer box"> | **[Mailer box](examples/09-mailer-box/)**<br>A FEFCO 0427 mailer of single-wall E-flute kraft board, 200 × 150 × 60 mm inside, folded from its die-cut blank: rolled end walls locked by tabs, dust flaps and a tuck-in lid. | Packaging | 7/10 |
+| <img src="examples/10-headphone-stand/preview.png" width="240" alt="Headphone stand"> | **[Headphone stand](examples/10-headphone-stand/)**<br>A one-piece headphone stand printed upright in PETG without supports: a slim lofted column flaring into a wide saddle curved like a headband, a swept cable hook, and a round base weighted by an embedded steel disc. | 3D printing, product design | 6/10 |
 <!-- gallery:end -->
 
 ## Rebuild and check

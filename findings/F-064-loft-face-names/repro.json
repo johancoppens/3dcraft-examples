@@ -1,0 +1,9 @@
+[
+ ["sketch.create", {"name": "Low", "plane": "xy"}],
+ ["sketch.spline", {"sketch": "Low", "through": [[15, 0], [10.6, 10.6], [0, 15], [-10.6, 10.6], [-15, 0], [-10.6, -10.6], [0, -15], [10.6, -10.6]], "closed": true}],
+ ["sketch.create", {"name": "High", "plane": "xy", "offset": "100 mm"}],
+ ["sketch.spline", {"sketch": "High", "through": [[11, 0], [7.8, 7.8], [0, 11], [-7.8, 7.8], [-11, 0], [-7.8, -7.8], [0, -11], [7.8, -7.8]], "closed": true}],
+ ["feature.loft", {"sections": ["Low", "High"], "name": "Column"}],
+ ["feature.extrude", {"sketch": "Low", "distance": "20 mm", "name": "Extruded"}],
+ ["document.inspect", {}]
+]

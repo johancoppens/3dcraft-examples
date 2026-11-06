@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "Low", "plane": "xy"}],
+ ["sketch.spline", {"sketch": "Low", "through": [[10, 0], [7.07, 7.07], [0, 10], [-7.07, 7.07], [-10, 0], [-7.07, -7.07], [0, -10], [7.07, -7.07]], "closed": true}],
+ ["sketch.create", {"name": "High", "plane": "xy", "offset": "30 mm"}],
+ ["sketch.spline", {"sketch": "High", "through": [[30, 0], [21.2, 21.2], [0, 30], [-21.2, 21.2], [-30, 0], [-21.2, -21.2], [0, -30], [21.2, -21.2]], "closed": true}],
+ ["feature.loft", {"sections": ["Low", "High"], "name": "Flared"}],
+ ["measure.draft", {"faces": {"kind": "face", "where": {"name": "F3:side*"}}, "direction": "z", "minDraft": 45}],
+ ["assert.add", {"name": "No overhang below 45 degrees", "measure": "draft", "faces": {"kind": "face", "where": {"name": "F3:side*"}}, "direction": "z", "minDraft": 45, "min": "-45 deg"}],
+ ["assert.list", {}]
+]

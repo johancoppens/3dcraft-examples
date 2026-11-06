@@ -1,0 +1,79 @@
+{
+  "id": "headphone-stand",
+  "title": "Headphone stand",
+  "summary": "loft, sweep, print checks, stability",
+  "description": "A one-piece headphone stand printed upright in PETG without supports: a slim lofted column flaring into a wide saddle curved like a headband, a swept cable hook, and a round base weighted by an embedded steel disc.",
+  "domain": "3D printing, product design",
+  "process": "FDM printing, PETG, pause to embed a steel disc",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "A ten-section loft driven by coupled formulas, fillets on lofted faces, a four-segment sweep, stability outputs and three kernel limits worked around."
+  },
+  "standards": [
+    "IEC 62368-1:2018, 8.6.2.2 static stability (10° tilt, borrowed)",
+    "2012 US Army anthropometric survey, head breadth (Gordon et al. 2014)"
+  ],
+  "materials": [
+    "PETG, sunflower yellow, satin",
+    "Steel disc Ø 100 × 8 mm, embedded"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -430,
+        -420,
+        330
+      ],
+      "target": [
+        0,
+        0,
+        118
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 30
+    },
+    "look": {
+      "light": [
+        225,
+        65
+      ],
+      "rotation": 45
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/headphone-stand.3mf",
+      "bodies": [
+        "Stand"
+      ],
+      "tolerance": 0.1,
+      "angle": 8
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 11 assertions, also at the four corners of the range; stand 609.2 g, disc 493.2 g, tilt 30.84 deg as modelled and 22.20 deg worst case, base volume 178 722.1 mm3, a 3MF of 43 880 triangles, all equal to this example's; 155 script steps plus about 25 runs; nothing refused."
+  },
+  "stats": {
+    "steps": 112,
+    "variables": 44,
+    "parameters": 2,
+    "features": 31,
+    "assertions": 9,
+    "warnings": 0,
+    "build_s": 1.46,
+    "load_s": 0.94,
+    "file_bytes": 119261
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

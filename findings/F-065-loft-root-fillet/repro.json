@@ -1,0 +1,10 @@
+[
+ ["feature.cylinder", {"radius": "70 mm", "height": "16 mm", "name": "Base"}],
+ ["sketch.create", {"name": "Low", "plane": "xy", "offset": "13 mm"}],
+ ["sketch.spline", {"sketch": "Low", "through": [[15, 0], [10.6066, 10.6066], [0, 15], [-10.6066, 10.6066], [-15, 0], [-10.6066, -10.6066], [0, -15], [10.6066, -10.6066]], "closed": true}],
+ ["sketch.create", {"name": "High", "plane": "xy", "offset": "160 mm"}],
+ ["sketch.spline", {"sketch": "High", "through": [[11, 0], [7.7782, 7.7782], [0, 11], [-7.7782, 7.7782], [-11, 0], [-7.7782, -7.7782], [0, -11], [7.7782, -7.7782]], "closed": true}],
+ ["feature.loft", {"sections": ["Low", "High"], "name": "Column"}],
+ ["feature.boolean", {"op": "union", "target": "Base", "tool": "Column", "name": "Joined"}],
+ ["feature.fillet", {"edges": [["F1:face(2)", "F4:side(e11,e11)"]], "radius": "14 mm", "name": "Root fillet"}]
+]
