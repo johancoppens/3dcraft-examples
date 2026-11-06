@@ -160,6 +160,21 @@ def step_params(step):
     return {}
 
 
+def deflate_zip(path):
+    """Rewrites a ZIP-based export (3MF) with deflate: 3DCraft stores it uncompressed (F-080). The entries,
+    their order, names and dates stay as they are, so the result is as deterministic as the export."""
+    with zipfile.ZipFile(path) as z:
+        entries = [(info, z.read(info.filename)) for info in z.infolist()]
+    temporary = path.with_suffix(path.suffix + ".deflating")
+    with zipfile.ZipFile(temporary, "w") as z:
+        for info, data in entries:
+            copy = zipfile.ZipInfo(info.filename, date_time=info.date_time)
+            copy.external_attr = info.external_attr
+            copy.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(copy, data, compresslevel=9)
+    temporary.replace(path)
+
+
 def manifest(path):
     with zipfile.ZipFile(path) as z:
         return json.loads(z.read("manifest.json"))
@@ -210,6 +225,9 @@ def build_into(eid, target, meta):
         result, _ = run_cli(args, cwd=target)
         if result.returncode != 0:
             raise CheckError(explain_failure(result, "exports failed"))
+        for export in exports:
+            if export.get("path", "").endswith(".3mf"):
+                deflate_zip(target / export["path"])
     final = target / f"{slug(eid)}.3dcraft"
     building.replace(final)
     result, load_s = run_cli(["info", final], cwd=target)

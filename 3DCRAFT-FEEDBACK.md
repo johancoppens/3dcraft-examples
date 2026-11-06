@@ -78,6 +78,20 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-066](#f-066) | Bug | Rounding a rod's end to a full ball is refused, and the error points at the refused radius | headphone-stand | ball as its own body |
 | [F-067](#f-067) | Bug (proof weakness) | A draft assertion passes on sampled faces (`proven: false`) without a warning, and reports radians | headphone-stand | none |
 | [F-068](#f-068) | Missing capability | No assertion that a body is in one piece (`shells` counts voids too) | headphone-stand | count of cut faces |
+| [F-069](#f-069) | Bug | `feature.developable` refuses a straight side facing one point of a curve (the square-to-round) | square-to-round-transition | corners and fills sewn |
+| [F-070](#f-070) | Bug | `feature.plate` refuses a developable fan (a cone running into a point): "freeform face has a pole" | square-to-round-transition | corners rounded 10 mm |
+| [F-071](#f-071) | Bug | The plate of a corner developable rounded to 5 mm is refused at the default tolerance after 10 s | square-to-round-transition | tolerance 1e-4 mm |
+| [F-072](#f-072) | Performance | `feature.unfold` takes 0.7 s per quarter cone at any tolerance; with the plate the example opens in 8 s | square-to-round-transition | budget exception |
+| [F-073](#f-073) | Agent friction | `feature.unfold` cuts its seam opposite the first face listed, undocumented; no way to name the seam | square-to-round-transition | faces ordered |
+| [F-074](#f-074) | Missing capability | A flat pattern's DXF writes every edge, straight ones too, as a 385-point spline (534 KB) | square-to-round-transition | none |
+| [F-075](#f-075) | Bug | A chamfer round the rim of a level cut through a leaning prism with rounded arrises is refused | splayed-stool | chamfered arrises |
+| [F-076](#f-076) | Performance | `volumeBelow` and `sectionExtent` take about 1 s per body with freeform faces, even far from the plane | splayed-stool | rounds left off the feet |
+| [F-077](#f-077) | Missing capability | `cut.list` lists plates and sheet metal only: no rough-stock sizes of solid-wood parts | splayed-stool | sizes in the README |
+| [F-078](#f-078) | Missing capability (minor) | `boxMax` and `extent` take bodies, not faces | splayed-stool | section 0.001 mm above the floor |
+| [F-079](#f-079) | Agent friction (minor) | `9.81 m/s^2` is refused ("s is the unit second only right after a number") | splayed-stool | `9.80665 N / (1 kg)` |
+| [F-080](#f-080) | Performance (file size) | 3MF exports are stored (uncompressed) ZIPs with 17 significant digits per coordinate | headphone-stand (review) | the examples' tool deflates them |
+| [F-081](#f-081) | Agent friction | Mesh-export quality is relative to the model's size (0.33 mm on a 270 mm part at `normal`); no print preset | headphone-stand (review) | explicit `tolerance` |
+| [F-082](#f-082) | Missing capability (minor) | Section caps in `view.render` draw every body in one colour | headphone-stand (review) | none |
 
 ## F-001
 
@@ -436,6 +450,8 @@ part, or the part reads oddly. **Should:** a body name (`body.rename`, or `name`
 bands across broad flat faces (the treads of the hex key stand at 1600 × 1200). `reflections: false` leaves
 the picture pixel-identical; `shadows: false` or another `look.light` ([200, 70], [300, 60]) removes the
 bands. **Workaround in the example:** the preview's light direction.
+On a saturated face the shadow renders desaturated (tan on the headphone stand's yellow base) rather than a
+darker yellow.
 The jagged shadow line also crosses curved faces (a fillet on the headphone stand).
 
 ## F-044
@@ -538,7 +554,9 @@ thread `through` that runs out of both ends. Reproduce: in `examples/07-v-block-
 **Agent friction.** A `variable.measure` output of `boxMax` or `extent` on the V-block pair's screws was
 refused as "not proven closely enough to be a value: found 108.642135 mm (at most 108.642136 mm)": an output
 whose proof bounds lie a millionth of a millimetre apart, well inside the document's tolerance of the model's
-size, is unknown rather than a value. **Should:** an output takes the found value when its bounds lie within
+size, is unknown rather than a value. The `extent` of an unfolded flat pattern cannot be an output either ("at least 0 mm"), on the
+square-to-round transition: [`findings/F-057-output-near-exact/repro.json`](findings/F-057-output-near-exact/repro.json).
+**Should:** an output takes the found value when its bounds lie within
 the document's tolerance (scaled to the model, as an assertion's `tol` does), and says how far it is proven.
 
 ## F-058
@@ -616,3 +634,102 @@ the angles in radians while the bound is written in degrees. Reproducer:
 that leaves two loose pieces (the headphone stand's saddle cut at its widest, before it was fixed) passes
 every check. **Should:** a `pieces` (or `lumps`) measure. Reproducer:
 [`findings/F-068-one-piece/repro.json`](findings/F-068-one-piece/repro.json).
+
+## F-069
+
+**Bug.** `feature.developable` between a straight side and a curve fails where the side faces one point of
+the curve ("still 995.98 off"): the natural square-to-round, rectangle and circle in one developable, is
+refused at its last corner. Reproducer:
+[`findings/F-069-developable-flat-triangle/repro.json`](findings/F-069-developable-flat-triangle/repro.json).
+**Workaround in the example:** four corner developables between two arcs and eight half-triangle fills,
+sewn.
+
+## F-070
+
+**Bug.** `feature.plate` refuses any developable fan, a cone that runs into a point ("freeform face has a
+pole"), though the offset of a cone is well defined away from its apex. Reproducer:
+[`findings/F-070-plate-of-fan/repro.json`](findings/F-070-plate-of-fan/repro.json). **Workaround in the
+example:** the corners rounded 10 mm inside (a real sheet cannot be bent to a point either).
+
+## F-071
+
+**Bug.** At the default tolerance (1e-6 mm) the plate of a corner developable rounded to 5 mm is refused after
+about 10 s ("offset could not be approximated"); at 1e-4 mm it works. Reproducer:
+[`findings/F-071-plate-narrow-cone/repro.json`](findings/F-071-plate-narrow-cone/repro.json).
+
+## F-072
+
+**Performance.** `feature.unfold` takes about 0.7 s per quarter cone, the same at every tolerance; with
+`feature.plate` (about 2.5 s) the square-to-round transition opens in about 8 s, 27.6 s to regenerate at its
+longest. Reproducer: [`findings/F-072-unfold-cost/repro.json`](findings/F-072-unfold-cost/repro.json).
+**Workaround in the example:** none; it carries a budget exception.
+
+## F-073
+
+**Agent friction.** `feature.unfold` cuts a closed sheet open along the seam opposite the first face listed;
+nothing documents it, and a seam cannot be named. **Should:** a `seam` parameter naming the edges to cut.
+Reproducer: [`findings/F-073-unfold-seam/repro.json`](findings/F-073-unfold-seam/repro.json).
+
+## F-074
+
+**Missing capability.** A flat pattern from `feature.unfold` goes to DXF with every edge, the straight ones
+included, as a 385-point cubic SPLINE: the transition's flat pattern is 534 KB, and CAM has to fit lines
+back. **Should:** straight edges as LINEs and circular ones as ARCs where they are, splines only where the
+edge is freeform. Reproducer:
+[`findings/F-074-flat-pattern-splines/repro.json`](findings/F-074-flat-pattern-splines/repro.json).
+
+## F-075
+
+**Bug.** On a leaning square prism with rounded arrises (the stool's legs), a chamfer round the rim of a
+level cut (the foot) is refused: "chain of freeform chamfers … not yet where one of the faces changes"; a
+round on the same rim works. Reproducer:
+[`findings/F-075-chamfer-slanted-rim/repro.json`](findings/F-075-chamfer-slanted-rim/repro.json).
+**Workaround in the example:** the arrises chamfered instead of rounded.
+
+## F-076
+
+**Performance.** `volumeBelow` and `sectionExtent` take about 1 s per body once it has freeform faces (a
+leg whose foot rim is rounded), even with the plane nowhere near those faces, while `volume` of the same
+body is fast: the stool's load went from 0.3 to 2.8 s. Reproducer:
+[`findings/F-076-volume-below-slow/repro.json`](findings/F-076-volume-below-slow/repro.json). See F-019.
+
+## F-077
+
+**Missing capability.** `cut.list` lists plates and sheet-metal parts only. Solid-wood parts (a round seat,
+splayed legs, stretchers) get no rough-stock sizes, and the bodies of a pattern count as one. **Should:**
+a cut list of every body with its bounding stock in the grain's direction and the count of copies.
+Reproducer: [`findings/F-077-cut-list-solid-wood/repro.json`](findings/F-077-cut-list-solid-wood/repro.json).
+
+## F-078
+
+**Missing capability (minor).** `boxMax`, `boxMin` and `extent` measure bodies only, not faces, so the
+footprint of a stool's feet cannot be measured from their contact faces; the stool measures a section
+0.001 mm above the floor instead. With rounded feet, `boxMax` of the legs was also "not proven closely
+enough" (F-057).
+
+## F-079
+
+**Agent friction (minor).** `9.81 m/s^2` is refused ("s is the unit second only right after a number");
+the stool writes `9.80665 N / (1 kg)`. **Should:** compound units after a number (m/s^2, kg/m, N·m), as
+outputs already show them.
+
+## F-080
+
+**Performance (file size).** `file.export` writes 3MF as a stored (uncompressed) ZIP with 17 significant
+digits per coordinate: the headphone stand's 18 124 triangles make 1.6 MB, 88 bytes a triangle; deflated, the
+same file is 340 KB, and 3MF consumers read deflate (the specification's own examples use it). **Should:**
+deflate, and coordinates to the precision the tolerance needs. **Workaround in this repository:**
+`tools/examples.py` rewrites every 3MF export with deflate (entries, order and dates unchanged).
+
+## F-081
+
+**Agent friction.** Mesh-export quality is relative: `normal` is a chordal tolerance of 1/1000 of the root of
+the bodies' area, 0.33 mm at 10° on the 270 mm headphone stand, coarser than a 0.2 mm print layer, so flats
+show across a printed curve. **Should:** for print formats (3MF, STL) an absolute tolerance in millimetres, or
+a `print` preset finer than a layer, as the default.
+
+## F-082
+
+**Missing capability (minor).** `view.render` with `section` caps every body's cut in one colour, so an
+insert in its pocket (the stand's steel disc) cannot be told from the part around it. **Should:** each cap in
+its body's colour.
