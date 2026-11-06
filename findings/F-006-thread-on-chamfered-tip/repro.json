@@ -1,0 +1,10 @@
+[
+ ["variable.set", {"name": "thread_d", "expr": "4 mm"}],
+ ["variable.set", {"name": "pitch", "expr": "0.7 mm"}],
+ ["variable.set", {"name": "shank_length", "expr": "20 mm"}],
+ ["variable.set", {"name": "tip_chamfer", "expr": "0.75 * pitch"}],
+ ["sketch.create", {"name": "Shank section", "plane": "yz"}],
+ ["sketch.polyline", {"sketch": "Shank section", "closed": true, "points": [[0, "-shank_length"], ["thread_d / 2 - tip_chamfer", "-shank_length"], ["thread_d / 2", "tip_chamfer - shank_length"], ["thread_d / 2", 0], [0, 0]]}],
+ ["feature.revolve", {"sketch": "Shank section", "axis": "y", "name": "Shank"}],
+ ["feature.thread", {"face": "F2:side(e8)", "start": "F2:side(e6)", "length": "15 mm", "modeled": true, "name": "M4 thread"}]
+]

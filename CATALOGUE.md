@@ -100,6 +100,14 @@ techniques or its palette line only with the coordinator.
 - **Parameters:** inside length, width, height; fold amount.
 - **Proves:** the folded inside size; the blank's size in closed form; no flaps colliding when closed.
 - **Risks:** folding with the board's thickness: feasibility probe first.
+- **Probe (2026-11-06):** works: one closed polyline blank, ten crease lines as construction lines,
+  `feature.fold` with `panels: {thickness: 1.5 mm, clearance: 0.5 mm}`; the sketch is the inside face, so
+  the inside size is the sketch's. Base corners chamfered and the side walls' creases offset by thickness +
+  clearance so the dust flaps fold inside; lid and tuck flap as trapezoids. No slit locks and no rolled
+  double walls (F-015): single side walls with dust flaps and a tuck-in lid. Fold in stages (walls, then
+  lid): one angle for all creases makes the flaps pass through the walls. `file.export` with `fold` writes
+  the DXF with layers `boundary`, `valley`, `mountain`, `cut`. `fold.check` says nothing useful here (no
+  interior vertices). 0.02 s. Starting point: `plan/probes/q9-mailer-staged.json` (local).
 
 ### 10. Headphone stand · `headphone-stand` · 3D printing, product design
 - **Real thing:** a one-piece stand printed in PETG upright without supports: a weighted round base, a slim
@@ -149,6 +157,15 @@ techniques or its palette line only with the coordinator.
 - **Proves:** the inner circumference; 57 facets; the stone's diameter from the carat; gold mass from 18 ct
   density.
 - **Risks:** many planar cuts on a small solid: feasibility probe first.
+- **Probe (2026-11-06):** works, 0.55 s: a cylinder blank; per facet group a `datum.plane` through three
+  ideal vertices, a large `sketch.rect` on it, an extrude outward as a cutter slab, `feature.pattern` × 8 at
+  45°, `feature.boolean` subtract (the 16-facet sets as two groups of 8), the table last: exactly 57
+  facets plus the girdle. Drive every vertex by formulas, never rounded numbers (rounded ones fall on the
+  edge of tolerance). Band: revolve with an inner arc; prongs: sweep of a circle along a two-line path,
+  transformed and patterned × 4, joined. Gold: `steel` preset recoloured (#e0b04a, metallic 1, roughness
+  0.15) plus `body.material` for 18 ct gold's density; diamond: `glass` with ior 2.42, transmission 1 and a
+  white absorption (the default is greenish) plus `body.material` 3510 kg/m³ (F-017). Starting points:
+  `plan/probes/q14-*.json` (local).
 
 ## Complex
 
@@ -182,6 +199,12 @@ techniques or its palette line only with the coordinator.
 - **Parameters:** diameter, pitch ratio.
 - **Proves:** expanded area ratio within 2 % of 0.55; four blades; the bronze mass in a range.
 - **Risks:** sections on cylinders, root fillets on freeform blades: feasibility probe first.
+- **Probe (2026-11-06):** works as six planar sections (`sketch.curve` on `yz` with `offset` r, turned by the
+  pitch angle) lofted, `feature.pattern` × 4, joined to a hub of about 0.2 R that contains the root section
+  wholly; set `document.setTolerance` linear 0.001 mm (F-010: 40 s at 1e-6, 11.6 s at 1e-3); root fillets
+  only up to about 1 mm (F-008); sections cannot lie on cylinders (F-007): say "expanded sections placed
+  tangent to the cylinder". Still over the load budget: fewer, simpler sections. Starting point:
+  `plan/probes/q17-propeller-tol.json` (local).
 
 ### 18. Electric guitar body · `guitar-body` · lutherie, CNC
 - **Real thing:** an original double-cutaway solid body, 45 mm thick, carved top, bolt-on neck pocket,
@@ -193,6 +216,11 @@ techniques or its palette line only with the coordinator.
 - **Parameters:** scale length, body thickness.
 - **Proves:** bridge position from the scale; pocket depths; inside corners ≥ the router's radius.
 - **Risks:** the carved top cut by pockets: feasibility probe first.
+- **Probe (2026-11-06):** works, 1.3 s: a periodic `sketch.spline` outline (17 points) extruded 45 mm; the
+  top a 5 × 5 `feature.surface.network`, applied with `feature.boolean` `op: intersect`; pockets as
+  rounded rectangles (`sketch.path`, r 6.35) on datum planes at their floor heights, extruded with `cut`.
+  A crown of 10 mm hardly shows in an iso view: plan a lower camera. Starting point:
+  `plan/probes/q18-guitar.json` (local).
 
 ### 19. RC yacht hull · `rc-yacht-hull` · naval design
 - **Real thing:** a radio-sailing yacht to the International One Metre class rules (hull length ≤ 1000 mm,
@@ -203,6 +231,12 @@ techniques or its palette line only with the coordinator.
 - **Look:** white gelcoat hull, carbon fin, dark lead bulb.
 - **Parameters:** bulb mass, fin depth.
 - **Proves:** the class limits; the waterline for 4 kg; the bulb mass from lead's density; upright stability.
+- **Probe (2026-11-06):** works: a table of offsets, one `sketch.spline` per station, `feature.loft`;
+  a `feature.transform` copy (`keep`) of the closed hull is the envelope that `measure.levelFor`,
+  `measure.floating` and `measure.below` need (a shelled body counts only its material); shell 1.5 mm with
+  the deck open; NACA 0009 fin as two `sketch.curve` halves; bulb revolved; levelFor and floating take well
+  under a second. Give the bow a section of at least 30 × 20 mm (F-009). Loads in 10.5 s at tolerance
+  0.001 mm: over budget, simplify. Starting point: `plan/probes/q19-yacht-b.json` (local).
 
 ### 20. Moka pot · `moka-pot` · product design, casting
 - **Real thing:** an original three-cup stovetop espresso maker in cast aluminium: boiler with safety valve,
@@ -213,6 +247,11 @@ techniques or its palette line only with the coordinator.
 - **Parameters:** cups (choice), handle angle.
 - **Proves:** boiler capacity below the valve for the cups; drafts on the castings; parts not overlapping.
 - **Risks:** load budget (many bodies): keep features few and large.
+- **Probe (2026-11-06):** the boiler and collector revolve and shell (shell before thread); a modelled
+  M68 × 2 thread works but costs about 3 s per threaded body, and a mating pair touches on its flanks and
+  cannot be shown clear (F-014). Model the boiler's external thread, keep the collector's internal thread
+  cosmetic, and prove "no overlap" for the other pairs only. Starting point: `plan/probes/q20-*.json`
+  (local).
 
 ### 21. Mont Ventoux relief · `ventoux-relief` · topography, art
 - **Real thing:** a relief of Mont Ventoux (1910 m) with the final climb of the 2026 Tour de France Femmes'
@@ -227,6 +266,16 @@ techniques or its palette line only with the coordinator.
 - **Proves:** summit height and the climb's height gain within the data's accuracy; layer count.
 - **Risks:** route data licence (OpenStreetMap is ODbL: attribution as a produced work); "a surface through
   a grid of points" may be a missing capability (log it).
+- **Probe (2026-11-06):** works and is light: one `sketch.spline` per grid row through plain numbers (F-011:
+  expressions are refused there, so `make.py` writes numbers and the vertical exaggeration is applied in
+  `make.py`, or by a scale of the solid if 3DCraft has one), `feature.loft` of the rows into a sheet,
+  `feature.boolean` subtract from a block; 60 × 40 grid opens in 1.1 s. Contours: `measure.section` at a
+  level; DXF per level from a copy intersected with a block above it, `file.export` with `faces` (one layer
+  per face). Data: the Tilezen/Mapzen skadi tile
+  `https://s3.amazonaws.com/elevation-tiles-prod/skadi/N44/N44E005.hgt.gz` (int16 hgt, gzip + struct in
+  the standard library; attribution per github.com/tilezen/joerd docs/attribution.md), or Copernicus DEM
+  GLO-30 (float COG, harder to decode). Route: OpenStreetMap (ODbL, "© OpenStreetMap contributors", a
+  produced work) or IGN BD TOPO (Licence Ouverte 2.0). Starting points: `plan/probes/q21-*.json` (local).
 
 ## Palette
 

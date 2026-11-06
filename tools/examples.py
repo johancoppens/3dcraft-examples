@@ -38,12 +38,12 @@ RENDER = {"width": 1600, "height": 1200, "view": "iso", "projection": "perspecti
 LOOK = {"mode": "studio", "environment": "workshop", "tonemap": "aces", "exposure": 0.5,
         "background": "plain", "accumulate": 8}
 PREVIEW_KEYS = {"view", "zoom", "camera", "projection", "box"}
-PREVIEW_LOOK_KEYS = {"light", "rotation"}
+PREVIEW_LOOK_KEYS = {"light", "rotation", "reflections"}
 
 TIERS = ("simple", "difficult", "complex")
 BUDGET_LOAD_S = {"simple": 1.0, "difficult": 2.0, "complex": 4.0}
 BUDGET_BYTES = 1_000_000
-STEP_GUIDE = {"simple": 40, "difficult": 100, "complex": 200}
+STEP_GUIDE = {"simple": 50, "difficult": 120, "complex": 250}
 REQUIRED_META = ("id", "title", "summary", "description", "domain", "process", "tier",
                  "difficulty", "standards", "materials")
 REQUIRED_FILES = ("build.json", "meta.json", "README.md", "prompt.md")
@@ -310,6 +310,10 @@ def cmd_render(ids):
                     look.update({k: v for k, v in value.items() if k in PREVIEW_LOOK_KEYS})
                 elif key in PREVIEW_KEYS:
                     params[key] = value
+            if "camera" in params:
+                # A camera is the whole framing: view, zoom and projection would contradict it.
+                for key in ("view", "zoom", "projection", "box"):
+                    params.pop(key, None)
             params["look"] = look
             params["path"] = str(directory / "preview.png")
             result, seconds = run_cli(["run", document, "--cmd", "view.render", "--params",

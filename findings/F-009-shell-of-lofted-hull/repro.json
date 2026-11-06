@@ -1,0 +1,673 @@
+[
+[
+"document.setTolerance",
+{
+"linear": 0.001
+}
+],
+[
+"variable.set",
+{
+"name": "deck",
+"expr": "45 mm"
+}
+],
+[
+"table.set",
+{
+"name": "off",
+"columns": [
+{
+"name": "x",
+"unit": "mm"
+},
+{
+"name": "b",
+"unit": "mm"
+},
+{
+"name": "d",
+"unit": "mm"
+}
+],
+"rows": [
+[
+15,
+8,
+6
+],
+[
+120,
+50,
+30
+],
+[
+280,
+80,
+48
+],
+[
+450,
+92,
+55
+],
+[
+600,
+88,
+50
+],
+[
+750,
+74,
+38
+],
+[
+880,
+56,
+24
+],
+[
+985,
+38,
+10
+]
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St1",
+"plane": "yz",
+"offset": "off[1].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St1",
+"from": [
+"-off[1].b",
+"deck"
+],
+"to": [
+"off[1].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St1",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[1].b",
+"0 mm"
+],
+[
+"0.7 * off[1].b",
+"-0.75 * off[1].d"
+],
+[
+"0 mm",
+"-off[1].d"
+],
+[
+"-0.7 * off[1].b",
+"-0.75 * off[1].d"
+],
+[
+"-0.97 * off[1].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St2",
+"plane": "yz",
+"offset": "off[2].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St2",
+"from": [
+"-off[2].b",
+"deck"
+],
+"to": [
+"off[2].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St2",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[2].b",
+"0 mm"
+],
+[
+"0.7 * off[2].b",
+"-0.75 * off[2].d"
+],
+[
+"0 mm",
+"-off[2].d"
+],
+[
+"-0.7 * off[2].b",
+"-0.75 * off[2].d"
+],
+[
+"-0.97 * off[2].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St3",
+"plane": "yz",
+"offset": "off[3].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St3",
+"from": [
+"-off[3].b",
+"deck"
+],
+"to": [
+"off[3].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St3",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[3].b",
+"0 mm"
+],
+[
+"0.7 * off[3].b",
+"-0.75 * off[3].d"
+],
+[
+"0 mm",
+"-off[3].d"
+],
+[
+"-0.7 * off[3].b",
+"-0.75 * off[3].d"
+],
+[
+"-0.97 * off[3].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St4",
+"plane": "yz",
+"offset": "off[4].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St4",
+"from": [
+"-off[4].b",
+"deck"
+],
+"to": [
+"off[4].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St4",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[4].b",
+"0 mm"
+],
+[
+"0.7 * off[4].b",
+"-0.75 * off[4].d"
+],
+[
+"0 mm",
+"-off[4].d"
+],
+[
+"-0.7 * off[4].b",
+"-0.75 * off[4].d"
+],
+[
+"-0.97 * off[4].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St5",
+"plane": "yz",
+"offset": "off[5].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St5",
+"from": [
+"-off[5].b",
+"deck"
+],
+"to": [
+"off[5].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St5",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[5].b",
+"0 mm"
+],
+[
+"0.7 * off[5].b",
+"-0.75 * off[5].d"
+],
+[
+"0 mm",
+"-off[5].d"
+],
+[
+"-0.7 * off[5].b",
+"-0.75 * off[5].d"
+],
+[
+"-0.97 * off[5].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St6",
+"plane": "yz",
+"offset": "off[6].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St6",
+"from": [
+"-off[6].b",
+"deck"
+],
+"to": [
+"off[6].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St6",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[6].b",
+"0 mm"
+],
+[
+"0.7 * off[6].b",
+"-0.75 * off[6].d"
+],
+[
+"0 mm",
+"-off[6].d"
+],
+[
+"-0.7 * off[6].b",
+"-0.75 * off[6].d"
+],
+[
+"-0.97 * off[6].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St7",
+"plane": "yz",
+"offset": "off[7].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St7",
+"from": [
+"-off[7].b",
+"deck"
+],
+"to": [
+"off[7].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St7",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[7].b",
+"0 mm"
+],
+[
+"0.7 * off[7].b",
+"-0.75 * off[7].d"
+],
+[
+"0 mm",
+"-off[7].d"
+],
+[
+"-0.7 * off[7].b",
+"-0.75 * off[7].d"
+],
+[
+"-0.97 * off[7].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "St8",
+"plane": "yz",
+"offset": "off[8].x"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "St8",
+"from": [
+"-off[8].b",
+"deck"
+],
+"to": [
+"off[8].b",
+"deck"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "St8",
+"live": true,
+"through": [
+"e2",
+[
+"0.97 * off[8].b",
+"0 mm"
+],
+[
+"0.7 * off[8].b",
+"-0.75 * off[8].d"
+],
+[
+"0 mm",
+"-off[8].d"
+],
+[
+"-0.7 * off[8].b",
+"-0.75 * off[8].d"
+],
+[
+"-0.97 * off[8].b",
+"0 mm"
+],
+"e1"
+]
+}
+],
+[
+"feature.loft",
+{
+"sections": [
+"St1",
+"St2",
+"St3",
+"St4",
+"St5",
+"St6",
+"St7",
+"St8"
+],
+"name": "Hull form"
+}
+],
+[
+"feature.transform",
+{
+"source": "Hull form",
+"keep": true,
+"name": "Hull"
+}
+],
+[
+"variable.set",
+{
+"name": "fc",
+"expr": "90 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "fdepth",
+"expr": "380 mm"
+}
+],
+[
+"sketch.create",
+{
+"name": "Fin section",
+"plane": "xy",
+"offset": "-20 mm"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "Fin section",
+"x": "420 mm + fc * t^2",
+"y": "0.45 * fc * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)",
+"t": [
+0,
+1
+]
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "Fin section",
+"x": "420 mm + fc * t^2",
+"y": "-0.45 * fc * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)",
+"t": [
+0,
+1
+],
+"start": "e1"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "Fin section",
+"from": "e2",
+"to": "e4"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Fin section",
+"distance": "-fdepth",
+"name": "Fin"
+}
+],
+[
+"sketch.create",
+{
+"name": "Bulb profile",
+"plane": "zx"
+}
+],
+[
+"sketch.line",
+{
+"sketch": "Bulb profile",
+"from": [
+"(-20 mm - fdepth)",
+"340 mm"
+],
+"to": [
+"(-20 mm - fdepth)",
+"600 mm"
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Bulb profile",
+"live": true,
+"through": [
+"e2",
+[
+"(-20 mm - fdepth) - 18 mm",
+"560 mm"
+],
+[
+"(-20 mm - fdepth) - 24 mm",
+"480 mm"
+],
+[
+"(-20 mm - fdepth) - 20 mm",
+"400 mm"
+],
+"e1"
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Bulb profile",
+"axis": "e3",
+"name": "Bulb"
+}
+],
+[
+"feature.shell",
+{
+"source": "Hull form",
+"thickness": "1.5 mm",
+"open": [
+"F9:side(e3,e3,e3,e3,e3,e3,e3,e3)"
+],
+"name": "Hull shell"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Hull shell",
+"tool": "Fin",
+"name": "Hull and fin"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Hull and fin",
+"tool": "Bulb",
+"name": "Yacht"
+}
+],
+[
+"document.check",
+{}
+]
+]

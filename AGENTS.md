@@ -54,6 +54,8 @@ log/ plan/              local only (gitignored): dev log, plans
   around: `craft3d-cli run examples/<id>/<id>.3dcraft --cmd document.inspect`. To learn a command:
   `craft3d-cli commands --filter <id>`. The user guide (`~/code/3dcraft/docs/guide/`) and the guide's
   examples (`~/code/3dcraft/docs/examples/*.json`) show the idioms; read them, never edit them.
+- **Never use the session's 3DCraft MCP tools** (`mcp__craft3d__*`): they drive the developer's own window.
+  Work through `craft3d-cli`; its commands are the same ones MCP runs.
 - **Memory and time.** The developer's laptop has crashed on runaway processes. `tools/examples.py` caps every
   run; by hand, always `systemd-run --user --scope -q -p MemoryMax=3G -p MemorySwapMax=0 timeout 900
   craft3d-cli …`. Exit 137 means the cap was hit: that is a finding, never a reason to raise the cap. One
@@ -63,6 +65,22 @@ log/ plan/              local only (gitignored): dev log, plans
   searching. Python that computes geometry 3DCraft should compute is a workaround: first log the missing
   capability (§7), and use it only when the example cannot exist otherwise, saying so in its README. A
   `make.py` runs offline from committed inputs, is deterministic, and writes steps into `build.json`.
+- **Lessons from the first example** (they cost time once; don't pay again):
+  - Face names come from the sketch's entity ids (`F2:side(e13)`): a point added to a profile renumbers its
+    lines. Read them from `document.inspect` (`faceNames`) after every change to a profile.
+  - A measure's face subject is a query: `{"kind": "face", "where": {"name": "*F6:side(e7)"}}` (a glob:
+    later features prefix the names, `F8:copy(0)/F7:copy(1)/F6:side(e7)`).
+  - A feature's body cannot be measured once a later feature has taken it: measure the final body, and
+    split it with planes (`volumeBelow`) or outputs (`variable.measure`) for closed-form checks.
+  - Units in `tol` are expressions: `0.01 mm^3` means (0.01 mm)³; write the plain number `0.01` (the
+    document's unit).
+  - `body.appearance` replaces the whole appearance (F-005): give every field, or set them all in
+    `material.preset`.
+  - Coatings (black oxide, paint, powder coat, anodising) render best as what they are, a dielectric layer
+    (`metallic` 0); a dark metallic body reflects dark and loses its form under ACES.
+  - Every measure on a complex body runs at every regeneration (the screw: 1 s of its 4.6 s). Measure what
+    proves something.
+  - Run `tools/examples.py check` early: `check-range` finds per-size kernel refusals the defaults hide.
 - **Prefer 3DCraft's own means**: variables and formulas, tables, `sketch.curve` (curves from formulas),
   `feature.pattern`, `sketch.pattern`, conditional features (`when`), named sets, datums.
 
@@ -112,7 +130,7 @@ grants an exception (`meta.json` `budget_exception` with the reason).
   would really turn. The tool proves the ranges with `craft3d-cli check-range`. No more: a configurator
   with many options is a Jig.
 - **A minimal history.** Every step contributes to the final model: no dead, suppressed, trial or undone
-  steps; one feature where one suffices. Guide: simple ≤ 40 steps, difficult ≤ 100, complex ≤ 200 (variables
+  steps; one feature where one suffices. Guide: simple ≤ 50 steps, difficult ≤ 120, complex ≤ 250 (variables
   and assertions included). Order: variables, then per part its sketches and features, materials,
   assertions, `document.info` (title, description, author `3DCraft examples`, licence `MIT`),
   `document.check`.
@@ -129,7 +147,8 @@ regeneration.
 `tools/examples.py render <id>`: 1600 × 1200, studio look, **Workshop** environment, **ACES** tone curve,
 **+0.5 stop**, plain background, CPU renderer, 8 frames accumulated: the developer's look, the same as
 3DCraft's start-screen thumbnails. `meta.json` `preview` may set only the framing (`view`, `zoom`,
-`camera`, `projection`, `box`, and `look.light`, `look.rotation`). It takes about a minute.
+`camera`, `projection`, `box`, and `look.light`, `look.rotation`; `look.reflections: false` only where
+the renderer's screen-space reflections smear a surface, F-013, said in the README). It takes about a minute.
 
 ## 6. README, meta.json and prompt
 

@@ -1,0 +1,183 @@
+[
+[
+"sketch.create",
+{
+"plane": "xy",
+"name": "BoilerP"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "BoilerP",
+"points": [
+[
+0,
+0
+],
+[
+40,
+0
+],
+[
+40,
+55
+],
+[
+34,
+55
+],
+[
+34,
+70
+],
+[
+0,
+70
+]
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "BoilerP",
+"axis": "y",
+"name": "BoilerSolid"
+}
+],
+[
+"feature.shell",
+{
+"source": "BoilerSolid",
+"thickness": "3 mm",
+"open": [
+"F2:side(e11)"
+],
+"name": "Boiler"
+}
+],
+[
+"sketch.create",
+{
+"plane": "xy",
+"name": "CollP"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "CollP",
+"points": [
+[
+0,
+72
+],
+[
+38,
+72
+],
+[
+38,
+120
+],
+[
+0,
+120
+]
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "CollP",
+"axis": "y",
+"name": "CollSolid"
+}
+],
+[
+"feature.shell",
+{
+"source": "CollSolid",
+"thickness": "3 mm",
+"open": [
+"F5:side(e7)"
+],
+"name": "CollShell"
+}
+],
+[
+"sketch.create",
+{
+"plane": "xy",
+"name": "SkirtP"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "SkirtP",
+"points": [
+[
+33,
+59.0
+],
+[
+39,
+59.0
+],
+[
+39,
+73
+],
+[
+33,
+73
+]
+],
+"closed": true
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "SkirtP",
+"axis": "y",
+"join": "CollShell",
+"name": "Collector"
+}
+],
+[
+"feature.thread",
+{
+"face": "F3:copy(0)/F2:side(e10)",
+"start": "F3:copy(0)/F2:side(e11)",
+"size": "M68",
+"pitch": "2 mm",
+"length": "12 mm",
+"modeled": true,
+"name": "BoilerThread"
+}
+],
+[
+"feature.thread",
+{
+"face": "F9:copy(1)/F8:side(e8)",
+"start": "F9:copy(1)/F8:side(e5)",
+"size": "M68",
+"pitch": "2 mm",
+"length": "11 mm",
+"modeled": true,
+"name": "CollThread"
+}
+],
+[
+"document.interference",
+{
+"details": false
+}
+]
+]

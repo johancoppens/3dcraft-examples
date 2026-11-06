@@ -1,0 +1,476 @@
+[
+[
+"document.setTolerance",
+{
+"linear": 0.001
+}
+],
+[
+"variable.set",
+{
+"name": "R",
+"expr": "300 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "PR",
+"expr": "0.8"
+}
+],
+[
+"variable.set",
+{
+"name": "P",
+"expr": "PR * 2 * R"
+}
+],
+[
+"table.set",
+{
+"name": "sec",
+"columns": [
+"rr",
+"cr",
+"tc",
+"fc"
+],
+"rows": [
+[
+0.1,
+0.4,
+0.4,
+0.03
+],
+[
+0.3,
+0.55,
+0.25,
+0.03
+],
+[
+0.5,
+0.68,
+0.09,
+0.025
+],
+[
+0.7,
+0.7,
+0.06,
+0.02
+],
+[
+0.85,
+0.58,
+0.05,
+0.015
+],
+[
+0.97,
+0.25,
+0.06,
+0.01
+]
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r1",
+"expr": "sec[1].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c1",
+"expr": "sec[1].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h1",
+"expr": "sec[1].tc * c1"
+}
+],
+[
+"variable.set",
+{
+"name": "f1",
+"expr": "sec[1].fc * c1"
+}
+],
+[
+"variable.set",
+{
+"name": "p1",
+"expr": "atan(P / (2 * pi * r1))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S1",
+"plane": "yz",
+"offset": "r1"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S1",
+"x": "(c1 / 2 * cos(t)) * cos(p1) - (h1 / 2 * sin(t) + f1 * sin(t)^2) * sin(p1)",
+"y": "(c1 / 2 * cos(t)) * sin(p1) + (h1 / 2 * sin(t) + f1 * sin(t)^2) * cos(p1)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r2",
+"expr": "sec[2].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c2",
+"expr": "sec[2].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h2",
+"expr": "sec[2].tc * c2"
+}
+],
+[
+"variable.set",
+{
+"name": "f2",
+"expr": "sec[2].fc * c2"
+}
+],
+[
+"variable.set",
+{
+"name": "p2",
+"expr": "atan(P / (2 * pi * r2))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S2",
+"plane": "yz",
+"offset": "r2"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S2",
+"x": "(c2 / 2 * cos(t)) * cos(p2) - (h2 / 2 * sin(t) + f2 * sin(t)^2) * sin(p2)",
+"y": "(c2 / 2 * cos(t)) * sin(p2) + (h2 / 2 * sin(t) + f2 * sin(t)^2) * cos(p2)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r3",
+"expr": "sec[3].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c3",
+"expr": "sec[3].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h3",
+"expr": "sec[3].tc * c3"
+}
+],
+[
+"variable.set",
+{
+"name": "f3",
+"expr": "sec[3].fc * c3"
+}
+],
+[
+"variable.set",
+{
+"name": "p3",
+"expr": "atan(P / (2 * pi * r3))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S3",
+"plane": "yz",
+"offset": "r3"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S3",
+"x": "(c3 / 2 * cos(t)) * cos(p3) - (h3 / 2 * sin(t) + f3 * sin(t)^2) * sin(p3)",
+"y": "(c3 / 2 * cos(t)) * sin(p3) + (h3 / 2 * sin(t) + f3 * sin(t)^2) * cos(p3)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r4",
+"expr": "sec[4].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c4",
+"expr": "sec[4].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h4",
+"expr": "sec[4].tc * c4"
+}
+],
+[
+"variable.set",
+{
+"name": "f4",
+"expr": "sec[4].fc * c4"
+}
+],
+[
+"variable.set",
+{
+"name": "p4",
+"expr": "atan(P / (2 * pi * r4))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S4",
+"plane": "yz",
+"offset": "r4"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S4",
+"x": "(c4 / 2 * cos(t)) * cos(p4) - (h4 / 2 * sin(t) + f4 * sin(t)^2) * sin(p4)",
+"y": "(c4 / 2 * cos(t)) * sin(p4) + (h4 / 2 * sin(t) + f4 * sin(t)^2) * cos(p4)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r5",
+"expr": "sec[5].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c5",
+"expr": "sec[5].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h5",
+"expr": "sec[5].tc * c5"
+}
+],
+[
+"variable.set",
+{
+"name": "f5",
+"expr": "sec[5].fc * c5"
+}
+],
+[
+"variable.set",
+{
+"name": "p5",
+"expr": "atan(P / (2 * pi * r5))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S5",
+"plane": "yz",
+"offset": "r5"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S5",
+"x": "(c5 / 2 * cos(t)) * cos(p5) - (h5 / 2 * sin(t) + f5 * sin(t)^2) * sin(p5)",
+"y": "(c5 / 2 * cos(t)) * sin(p5) + (h5 / 2 * sin(t) + f5 * sin(t)^2) * cos(p5)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "r6",
+"expr": "sec[6].rr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "c6",
+"expr": "sec[6].cr * R"
+}
+],
+[
+"variable.set",
+{
+"name": "h6",
+"expr": "sec[6].tc * c6"
+}
+],
+[
+"variable.set",
+{
+"name": "f6",
+"expr": "sec[6].fc * c6"
+}
+],
+[
+"variable.set",
+{
+"name": "p6",
+"expr": "atan(P / (2 * pi * r6))"
+}
+],
+[
+"sketch.create",
+{
+"name": "S6",
+"plane": "yz",
+"offset": "r6"
+}
+],
+[
+"sketch.curve",
+{
+"sketch": "S6",
+"x": "(c6 / 2 * cos(t)) * cos(p6) - (h6 / 2 * sin(t) + f6 * sin(t)^2) * sin(p6)",
+"y": "(c6 / 2 * cos(t)) * sin(p6) + (h6 / 2 * sin(t) + f6 * sin(t)^2) * cos(p6)",
+"t": [
+0,
+"2 * pi"
+]
+}
+],
+[
+"feature.loft",
+{
+"sections": [
+"S1",
+"S2",
+"S3",
+"S4",
+"S5",
+"S6"
+],
+"name": "Blade"
+}
+],
+[
+"feature.pattern",
+{
+"source": "Blade",
+"count": "4",
+"angle": "360 deg / 4",
+"axis": [
+0,
+0,
+1
+],
+"name": "Blades"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "0.2 * R",
+"height": "0.5 * R",
+"position": [
+0,
+0,
+"-0.25 * R"
+],
+"name": "Hub"
+}
+],
+[
+"feature.boolean",
+{
+"op": "union",
+"target": "Hub",
+"tool": "Blades",
+"name": "Propeller"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F10:copy(0)/F9:face(0)",
+"F10:copy(1)/F7:side(e2,e2,e2,e2,e2,e2)"
+]
+],
+"radius": "4 mm",
+"name": "Root fillet"
+}
+],
+[
+"document.check",
+{}
+]
+]
