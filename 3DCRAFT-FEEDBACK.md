@@ -59,6 +59,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-047](#f-047) | Missing capability | No measure of what an open vessel holds up to its rim | turned-bowl | capacity in closed form |
 | [F-048](#f-048) | Bug | A face colour set on a feature is lost when a later feature is switched off (`when`) | wall-clock (prompt test) | colour on a final feature |
 | [F-049](#f-049) | Missing capability (minor) | No distance measure projected onto a plane (clearance seen from the front) | wall-clock (prompt test) | hidden helper body |
+| [F-050](#f-050) | Bug (proof weakness) | `flatExtent` is not proven when the flat pattern holds a spline, even a hole inside it | steel-bookend | blank length proven through the area |
+| [F-051](#f-051) | Agent friction (minor) | A flat pattern's DXF splits each straight edge into collinear lines at the bend zone | steel-bookend (review) | none |
+| [F-052](#f-052) | Missing capability | `feature.pattern` copies a hole but not its cosmetic thread; `feature.thread` takes one face | v-block-pair | 8 thread features |
+| [F-053](#f-053) | Missing capability | Projected views (SVG, DXF) have no dimensions, centre lines, title block or ISO 128 line weights | v-block-pair | views without dimensions |
 
 ## F-001
 
@@ -337,7 +341,12 @@ drill table) gives 6.8 mm for M8, as for most sizes it rounds d − P up to a dr
 first edge ("does not end cleanly … neither all convex or all concave"); the short vertical edges where one
 step of a block rises from the next are refused for the same reason. A lead-in chamfer on a socket or a
 pocket is what every printed or machined part has. On the hex key stand a fillet of only the vertical riser
-edges builds, but the step rims' fillet is then refused where it meets it, with and without `chain`. Reproducer:
+edges builds, but the step rims' fillet is then refused where it meets it, with and without `chain`. On the V-block pair,
+chamfering every edge of an extrusion's end face is refused at the first edge that reaches a sharp inside
+corner, and the advice the error gives (chamfer the continuing edges) is wrong: they are already in the
+chamfer. Reproducer: [`findings/F-033-pocket-mouth-edges/end-face-chamfer-repro.json`](findings/F-033-pocket-mouth-edges/end-face-chamfer-repro.json).
+The example rounds those inside corners 0.5 mm (good practice on a hardened part), which lets the chamfer
+build. Reproducer:
 [`findings/F-033-pocket-mouth-edges/repro.json`](findings/F-033-pocket-mouth-edges/repro.json).
 
 ## F-034
@@ -449,3 +458,34 @@ final always-active feature (a zero transform) and colouring the faces there, on
 from the numerals seen from the front, a part's clearance in plan): only the 3D distance. The clock asserts
 a 3D bound that implies the projected one; its prompt test built a hidden copy of the hand moved onto the
 engraving's floor.
+
+## F-050
+
+**Bug (proof weakness).** On a sheet-metal part whose flat pattern holds a spline (a hole inside the
+pattern, or a spline in a `cutouts` sketch), `flatExtent` reports "found 303.29 mm, at least 0 mm" (not
+proven) on both axes; with a circle hole or arcs in the outline it is exact, and `sheetMetal.bends` gives the
+exact `flatSize`. A hole cannot change the outline's extent, and a spline's control hull bounds it anyway.
+Reproducer: [`findings/F-050-flat-extent-with-spline/repro.json`](findings/F-050-flat-extent-with-spline/repro.json).
+
+## F-051
+
+**Agent friction (minor).** The flat pattern written to DXF (`file.export` with `sheetMetal`) splits each
+straight side into three collinear LINEs, where the bend zone starts and ends (on the bookend's x = 0 edge:
+0 → 112.7, 0 → −5.13, −5.13 → −165.6). Laser and punch CAM joins them, but a cut path then has needless
+vertices and some software warns. **Should:** one line per straight edge of the outline; the bend lines on
+their own layer.
+
+## F-052
+
+**Missing capability.** `feature.pattern` (and `feature.mirror`) copy a hole but not the cosmetic thread on
+it, and `feature.thread` takes one face, so the V-block pair's eight identical M6 and M8 threads are eight
+features. **Should:** a thread that follows its hole into patterns and mirrors, or a thread on several faces
+(a named set) at once. Reproducer:
+[`findings/F-052-pattern-drops-thread/repro.json`](findings/F-052-pattern-drops-thread/repro.json).
+
+## F-053
+
+**Missing capability.** `file.export` of projected views (end, side, top as SVG or DXF) draws the outlines
+only: no dimensions, centre lines or title block, and one stroke width for every layer, so not the thick
+visible and thin hidden lines of ISO 128. A workshop drawing still needs another program. **Should:** at
+least line weights per layer and centre lines on holes; dimensions from the model's variables later.

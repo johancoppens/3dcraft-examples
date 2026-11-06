@@ -1,0 +1,74 @@
+{
+  "id": "steel-bookend",
+  "title": "Steel bookend",
+  "summary": "sheet metal, one bend, flat pattern",
+  "description": "A bookend laser cut from 2 mm DC01 cold-rolled steel with an ogee-arch window, bent once on a press brake and powder coated deep teal.",
+  "domain": "Sheet metal",
+  "process": "Fibre laser cutting, press-brake air bending, powder coating",
+  "tier": "simple",
+  "difficulty": {
+    "score": 3,
+    "rationale": "One sheet-metal feature with one bend and an outlined flange, Bezier control points as formulas, a closed-form area and the bend's process checks."
+  },
+  "standards": [
+    "EN 10130 (DC01)",
+    "EN 10131",
+    "DIN 6935"
+  ],
+  "materials": [
+    "Cold-rolled steel DC01, 2 mm, powder coated RAL 6004 blue green"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        340,
+        420,
+        230
+      ],
+      "target": [
+        55,
+        43,
+        70
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 34
+    },
+    "look": {
+      "light": [
+        150,
+        60
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/steel-bookend.dxf",
+      "sheetMetal": "Bookend"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 7 assertions, also at the four corners of the range; flat area 32 605.73 mm2 and volume 65 323.20 mm3 (+0.16 % on this example's, within the 1 % of the Acceptance: it read the arch's spring point a little differently), mass 512.8 g, r 2.56, K 0.3518, window 41.47 mm from the bend, bendable, DXF with the bend line; about 75 commands in 10 CLI calls; nothing refused."
+  },
+  "stats": {
+    "steps": 49,
+    "variables": 28,
+    "parameters": 2,
+    "features": 3,
+    "assertions": 7,
+    "warnings": 0,
+    "build_s": 0.12,
+    "load_s": 0.06,
+    "file_bytes": 46386
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

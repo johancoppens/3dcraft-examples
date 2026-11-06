@@ -27,6 +27,7 @@ Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the li
 | <img src="examples/03-wall-clock/preview.png" width="240" alt="Plywood wall clock"> | **[Plywood wall clock](examples/03-wall-clock/)**<br>A Ø 300 mm wall clock laser cut and engraved from 6 mm birch plywood for a quartz sweep movement, Roman or Arabic numerals, a laminated keyhole hanger and foot at the back and black hands set to the time. | Laser cutting, art | 4/10 |
 | <img src="examples/04-turned-bowl/preview.png" width="240" alt="Turned walnut bowl"> | **[Turned walnut bowl](examples/04-turned-bowl/)**<br>A face-grain serving bowl turned from a 10 × 4 inch walnut blank: an even 7 mm wall from a rounded rim to a foot ring with a dovetailed chuck recess, with its capacity in millilitres. | Woodturning | 4/10 |
 | <img src="examples/05-hex-key-stand/preview.png" width="240" alt="Hex key stand"> | **[Hex key stand](examples/05-hex-key-stand/)**<br>A stepped desk stand for a metric hex key set to ISO 2936, 1.5 to 10 mm, printed in PLA without supports, sizes embossed in black. | 3D printing | 4/10 |
+| <img src="examples/06-steel-bookend/preview.png" width="240" alt="Steel bookend"> | **[Steel bookend](examples/06-steel-bookend/)**<br>A bookend laser cut from 2 mm DC01 cold-rolled steel with an ogee-arch window, bent once on a press brake and powder coated deep teal. | Sheet metal | 3/10 |
 <!-- gallery:end -->
 
 ## Rebuild and check

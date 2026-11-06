@@ -1,0 +1,7 @@
+[
+ ["sketch.create", {"name": "Notched profile", "plane": "yz"}],
+ ["sketch.polyline", {"sketch": "Notched profile", "closed": true, "points": [["0 mm", "0 mm"], ["30 mm", "0 mm"], ["30 mm", "20 mm"], ["20 mm", "20 mm"], ["20 mm", "12 mm"], ["10 mm", "12 mm"], ["10 mm", "20 mm"], ["0 mm", "20 mm"]]}],
+ ["feature.extrude", {"sketch": "Notched profile", "distance": "40 mm", "name": "Bar"}],
+ ["feature.chamfer", {"edges": [["Bar:side(e9)", "Bar:startCap"], ["Bar:side(e10)", "Bar:startCap"], ["Bar:side(e11)", "Bar:startCap"], ["Bar:side(e12)", "Bar:startCap"], ["Bar:side(e13)", "Bar:startCap"], ["Bar:side(e14)", "Bar:startCap"], ["Bar:side(e15)", "Bar:startCap"], ["Bar:side(e16)", "Bar:startCap"]], "distance": "0.5 mm", "name": "Deburred end"}],
+ ["document.check", {}]
+]

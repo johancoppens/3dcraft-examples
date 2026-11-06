@@ -1,0 +1,9 @@
+[
+ ["feature.block", {"size": ["20 mm", "20 mm", "10 mm"], "name": "Plate"}],
+ ["feature.cylinder", {"radius": "2.5 mm", "height": "12 mm", "position": ["10 mm", "10 mm", "-1 mm"], "name": "Tap drill"}],
+ ["feature.boolean", {"op": "subtract", "target": "Plate", "tool": "Tap drill", "name": "Drilled plate"}],
+ ["feature.thread", {"face": "Drilled plate:copy(1)/Tap drill:face(0)", "start": "Plate:face(1)", "size": "M6", "length": "8 mm", "name": "Tapped plate"}],
+ ["feature.pattern", {"source": "Tapped plate", "count": 3, "step": ["30 mm", 0, 0], "name": "Three tapped plates"}],
+ ["select.query", {"kind": "face", "where": {"hole": true, "radius": "2.5 mm"}}],
+ ["document.inspect", {}]
+]
