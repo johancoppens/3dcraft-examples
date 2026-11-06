@@ -6,3 +6,5 @@ __pycache__/
 .scratch/
 examples/*/.*.building.3dcraft
 examples/*/data/raw/
+# temporary link for agents started before the folders were numbered
+examples/socket-head-cap-screw

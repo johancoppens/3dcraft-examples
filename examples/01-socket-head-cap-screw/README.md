@@ -117,7 +117,7 @@ and length.
 ```sh
 tools/examples.py build socket-head-cap-screw
 # or
-craft3d-cli run --new '{"units":"mm"}' --script examples/socket-head-cap-screw/build.json --out screw.3dcraft
+craft3d-cli run --new '{"units":"mm"}' --script examples/01-socket-head-cap-screw/build.json --out screw.3dcraft
 ```
 
 ## Difficulty

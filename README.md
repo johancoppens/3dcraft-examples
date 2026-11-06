@@ -6,7 +6,7 @@ CNC work, furniture, packaging, jewellery, architecture, boats and art. Every on
 standards of its trade), makeable (its process checks are part of the model), parametric (a few public
 parameters to play with) and light (it opens in seconds).
 
-Each example lives in its own folder under [`examples/`](examples/) with:
+Each example lives in its own numbered folder under [`examples/`](examples/), from simple to complex, with:
 
 - **`<id>.3dcraft`**: the model; open it in 3DCraft.
 - **`build.json`**: the 3DCraft commands that build it, step by step, ending with the checks that prove it.
@@ -22,7 +22,7 @@ Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the li
 <!-- gallery:start -->
 | | Example | Domain | Difficulty |
 |---|---|---|---|
-| <img src="examples/socket-head-cap-screw/preview.png" width="240" alt="Socket head cap screw"> | **[Socket head cap screw](examples/socket-head-cap-screw/)**<br>An ISO 4762 socket head cap screw, M3 to M12 in the standard's lengths, with a rolled thread, in black-oxide steel. | Machine building | 4/10 |
+| <img src="examples/01-socket-head-cap-screw/preview.png" width="240" alt="Socket head cap screw"> | **[Socket head cap screw](examples/01-socket-head-cap-screw/)**<br>An ISO 4762 socket head cap screw, M3 to M12 in the standard's lengths, with a rolled thread, in black-oxide steel. | Machine building | 4/10 |
 <!-- gallery:end -->
 
 ## Rebuild and check
@@ -32,7 +32,7 @@ You need `craft3d-cli` from 3DCraft (the commit in [`tools/pin.json`](tools/pin.
 ```sh
 tools/examples.py build socket-head-cap-screw     # build.json -> .3dcraft and exports
 tools/examples.py check                           # rebuild every example and check it
-craft3d-cli run --new '{"units":"mm"}' --script examples/socket-head-cap-screw/build.json --out screw.3dcraft
+craft3d-cli run --new '{"units":"mm"}' --script examples/01-socket-head-cap-screw/build.json --out screw.3dcraft
 ```
 
 ## For contributors and agents

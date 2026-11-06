@@ -33,11 +33,11 @@ AGENTS.md README.md CATALOGUE.md 3DCRAFT-FEEDBACK.md ATTRIBUTION.md LICENSE
 tools/examples.py       build, render, check, coverage, readme (python3, standard library only)
 tools/pin.json          the pinned 3DCraft commit and file format
 findings/<F-nnn>-<slug>/  minimal reproducers for 3DCRAFT-FEEDBACK.md
-examples/<id>/          one directory per example; id in kebab-case, no number (order comes from the score)
+examples/NN-<id>/       one directory per example: NN its place in CATALOGUE.md, <id> kebab-case
 log/ plan/              local only (gitignored): dev log, plans
 ```
 
-| File in `examples/<id>/` | What it is | Made by |
+| File in `examples/NN-<id>/` | What it is | Made by |
 |---|---|---|
 | `build.json` | **The source**: a JSON list of `[command, params]` steps run in a new document, ending with `document.check`. The same format as 3DCraft's own `docs/examples`, so the start screen can run it as is: no file paths, no `file.*` steps in it. | hand |
 | `meta.json` | title, card summary, domain, tier, difficulty, standards, materials, preview framing, exports | hand; `stats` and `craft3d` written by the tool |
@@ -51,7 +51,7 @@ log/ plan/              local only (gitignored): dev log, plans
 
 - **Build headless.** Edit `build.json`, then `tools/examples.py build <id>`: it runs the script, refuses to
   save when `document.check` is not ok, writes the exports, measures, and lints names and budgets. To look
-  around: `craft3d-cli run examples/<id>/<id>.3dcraft --cmd document.inspect`. To learn a command:
+  around: `craft3d-cli run examples/NN-<id>/<id>.3dcraft --cmd document.inspect`. To learn a command:
   `craft3d-cli commands --filter <id>`. The user guide (`~/code/3dcraft/docs/guide/`) and the guide's
   examples (`~/code/3dcraft/docs/examples/*.json`) show the idioms; read them, never edit them.
 - **Never use the session's 3DCraft MCP tools** (`mcp__craft3d__*`): they drive the developer's own window.
@@ -235,7 +235,9 @@ hand or with an agent.
 | 7–8 | freeform: lofts, sweeps along 3D paths, developables, surfaces; many coupled formulas; process checks across bodies; kernel limits to navigate |
 | 9–10 | class-A surfacing (G2), data-driven geometry, large coupled multi-body designs, expert domain knowledge |
 
-Tiers roughly: simple 1–3, difficult 4–6, complex 7–10. The gallery in `README.md` is ordered by score.
+Tiers roughly: simple 1–3, difficult 4–6, complex 7–10. The folders are numbered in CATALOGUE.md's order
+(simple → complex); if the scores end up far from that order, the coordinator renumbers once at the end. The
+id (and the file names) never carry the number, so the start screen's ids stay stable.
 
 **Done, for one example:** `tools/examples.py check <id>` passes · the preview is rendered at the pin and
 looked at · README, meta.json and prompt.md are complete and true · reviewer PASS, score in `meta.json` ·

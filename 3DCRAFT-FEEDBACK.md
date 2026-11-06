@@ -143,7 +143,7 @@ a B-spline surface's control points). A loft through one spline per row works we
 **Bug (rendering).** The CPU renderer's studio look draws a smeared, mirrored patch on the thread of the
 socket head cap screw next to its head, at 1000 × 750 and 1600 × 1200 (not visible at 480 × 360). With
 `look.reflections: false` the patch is gone and the rest of the picture is unchanged; `specularShadow` has
-no effect on it. Reproduce: build `examples/socket-head-cap-screw`, then `view.render` with `"camera":
+no effect on it. Reproduce: build `examples/01-socket-head-cap-screw`, then `view.render` with `"camera":
 {"eye": [48, -52, 30], "target": [-11, 0, -1], "up": [0, 0, 1], "fovY": 27}`, the gallery look
 (`studio`, `workshop`, `aces`, exposure 0.5, `rotation` 90, `accumulate` 4), 1000 × 750; compare
 `reflections` true and false around the thread's last turns. **Workaround in the example:** the preview is

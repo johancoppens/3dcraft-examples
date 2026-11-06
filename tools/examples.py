@@ -113,13 +113,24 @@ def explain_failure(result, what):
     return f"{what}: {reason}\n{tail}"
 
 
+def slug(folder):
+    """An example's id: its folder's name without the leading number (`01-socket-head-cap-screw`)."""
+    return re.sub(r"^[0-9]{2}-", "", folder)
+
+
 def example_ids(given):
-    if given:
-        for i in given:
-            if not (EXAMPLES / i / "build.json").is_file():
-                die(f"no example {i} (examples/{i}/build.json)")
-        return list(given)
-    return sorted(p.parent.name for p in EXAMPLES.glob("*/build.json"))
+    """The examples' folders, in their order; a given name may be the folder or the id."""
+    folders = sorted(p.parent.name for p in EXAMPLES.glob("*/build.json")
+                     if not p.parent.is_symlink())
+    if not given:
+        return folders
+    chosen = []
+    for name in given:
+        match = [f for f in folders if name in (f, slug(f))]
+        if not match:
+            die(f"no example {name} (examples/<NN>-{name}/build.json)")
+        chosen.append(match[0])
+    return chosen
 
 
 def read_json(path):
@@ -166,7 +177,7 @@ def build_into(eid, target, meta):
         raise CheckError("build.json must be a non-empty JSON list of steps")
     if step_id(script[-1]) != "document.check":
         raise CheckError("build.json must end with document.check")
-    building = target / f".{eid}.building.3dcraft"
+    building = target / f".{slug(eid)}.building.3dcraft"
     new = json.dumps({"units": meta.get("units", "mm")})
     result, seconds = run_cli(["run", "--new", new, "--script", source / "build.json",
                                "--out", building], cwd=target)
@@ -199,7 +210,7 @@ def build_into(eid, target, meta):
         result, _ = run_cli(args, cwd=target)
         if result.returncode != 0:
             raise CheckError(explain_failure(result, "exports failed"))
-    final = target / f"{eid}.3dcraft"
+    final = target / f"{slug(eid)}.3dcraft"
     building.replace(final)
     result, load_s = run_cli(["info", final], cwd=target)
     if result.returncode != 0:
@@ -226,8 +237,8 @@ def lint(eid, meta, doc, stats, script):
     for key in REQUIRED_META:
         if key not in meta or meta[key] in ("", None):
             errors.append(f"meta.json: missing {key}")
-    if meta.get("id") != eid:
-        errors.append(f"meta.json: id is {meta.get('id')!r}, not {eid!r}")
+    if meta.get("id") != slug(eid):
+        errors.append(f"meta.json: id is {meta.get('id')!r}, not {slug(eid)!r}")
     tier = meta.get("tier")
     if tier not in TIERS:
         errors.append(f"meta.json: tier must be one of {', '.join(TIERS)}")
@@ -302,7 +313,7 @@ def cmd_render(ids):
         directory = EXAMPLES / eid
         try:
             meta = read_json(directory / "meta.json")
-            document = directory / f"{eid}.3dcraft"
+            document = directory / f"{slug(eid)}.3dcraft"
             if not document.is_file():
                 raise CheckError(f"no {eid}.3dcraft: run build first")
             params = dict(RENDER)
@@ -337,7 +348,7 @@ def cmd_check(ids, quick):
         directory = EXAMPLES / eid
         problems, notes = [], []
         try:
-            for name in REQUIRED_FILES + (f"{eid}.3dcraft", "preview.png"):
+            for name in REQUIRED_FILES + (f"{slug(eid)}.3dcraft", "preview.png"):
                 if not (directory / name).is_file():
                     problems.append(f"missing {name}")
             meta = read_json(directory / "meta.json")
@@ -347,10 +358,10 @@ def cmd_check(ids, quick):
                 errors, warnings = lint(eid, meta, doc, stats, script)
                 problems += errors
                 notes += warnings
-                committed = directory / f"{eid}.3dcraft"
-                rebuilt = Path(scratch) / f"{eid}.3dcraft"
+                committed = directory / f"{slug(eid)}.3dcraft"
+                rebuilt = Path(scratch) / f"{slug(eid)}.3dcraft"
                 if committed.is_file() and committed.read_bytes() != rebuilt.read_bytes():
-                    problems.append(f"{eid}.3dcraft is stale: run build")
+                    problems.append(f"{slug(eid)}.3dcraft is stale: run build")
                 for params in meta.get("exports", []):
                     path = params.get("path", "")
                     mine, fresh = directory / path, Path(scratch) / path
@@ -418,14 +429,14 @@ def cmd_readme():
         except CheckError:
             continue
         score = (meta.get("difficulty") or {}).get("score")
-        rows.append((score if score is not None else 99, TIERS.index(meta.get("tier", "complex"))
-                     if meta.get("tier") in TIERS else 3, meta.get("title", eid), eid, meta))
-    rows.sort()
+        if score is None:
+            continue  # the gallery shows reviewed examples only
+        rows.append((eid, score, meta.get("title", eid), meta))
     lines = ["| | Example | Domain | Difficulty |", "|---|---|---|---|"]
-    for score, _, title, eid, meta in rows:
+    for eid, score, title, meta in rows:
         picture = (f'<img src="examples/{eid}/preview.png" width="240" alt="{title}">'
                    if (EXAMPLES / eid / "preview.png").is_file() else "")
-        shown = f"{score}/10" if score != 99 else "not scored yet"
+        shown = f"{score}/10" if score is not None else "not scored yet"
         lines.append(f"| {picture} | **[{title}](examples/{eid}/)**<br>{meta.get('description', '')}"
                      f" | {meta.get('domain', '')} | {shown} |")
     readme = ROOT / "README.md"
