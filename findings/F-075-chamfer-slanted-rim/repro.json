@@ -1,0 +1,9 @@
+[
+ ["feature.block", {"size": [38, 38, 300], "position": [-19, -19, -50], "name": "Leg stock"}],
+ ["feature.fillet", {"edges": [["F1:face(2)", "F1:face(5)"], ["F1:face(5)", "F1:face(3)"], ["F1:face(3)", "F1:face(4)"], ["F1:face(4)", "F1:face(2)"]], "radius": "3 mm", "name": "Rounded arrises"}],
+ ["feature.transform", {"source": "Rounded arrises", "angle": "10 deg", "axis": [0, 1, 0], "name": "Splayed leg"}],
+ ["feature.block", {"size": [200, 200, 200], "position": [-100, -100, 0], "name": "Above the floor"}],
+ ["feature.boolean", {"op": "intersect", "target": "Splayed leg", "tool": "Above the floor", "name": "Leg cut level"}],
+ ["feature.chamfer", {"edges": [["F5:copy(1)/F4:face(0)", "F5:copy(0)/F3:copy(0)/F1:face(2)"]], "distance": "2 mm", "chain": true, "name": "Foot chamfer"}],
+ ["document.check", {}]
+]

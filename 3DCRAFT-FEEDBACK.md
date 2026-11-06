@@ -748,7 +748,8 @@ its body's colour.
 `feature.pattern` makes inside one body (the stool's four leaning legs) cannot each have their grain along
 their own axis, so they show bands across them that read as short grain, and their end faces (the through
 tenons) show long grain instead of end grain. **Should:** a grain frame that follows the feature or the
-pattern instance that made the faces.
+pattern instance that made the faces. The prompt test of the stool found a partial way: `face.appearance` on a
+selection can give the faces of one lump their own pattern frame.
 
 ## F-084
 

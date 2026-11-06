@@ -1,0 +1,81 @@
+{
+  "id": "splayed-stool",
+  "title": "Splayed-leg stool",
+  "summary": "compound angles, wedged tenons, joinery",
+  "description": "An oak sitting stool, Ø 340 mm seat at 450 mm, on four legs splayed and raked 10°, tenoned through the seat and wedged with walnut, with two shouldered side stretchers; proven in closed form and against the stool stability test of IS 5416-2.",
+  "domain": "Woodworking",
+  "process": "Hand and machine joinery: mortise and tenon, wedged through-tenons, oil finish",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "Datum planes at compound angles from formulas, multi-body booleans with keepTool for shoulders and wedges, grain per diagonal pair, closed forms across bodies and a two-part stability test from a standard."
+  },
+  "standards": [
+    "IS 5416 (Part 2):1988, clause 7.5 (stool stability, after BS 4875-2)",
+    "BS EN 1729-1, size marks 5 and 6 (seat heights 430 and 460 mm)",
+    "NHLA rules, standard surfaced thicknesses of hardwood lumber"
+  ],
+  "materials": [
+    "White oak, oiled",
+    "Walnut (wedges)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        758,
+        -1313,
+        1095
+      ],
+      "target": [
+        0,
+        0,
+        200
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 23
+    },
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/splayed-stool-front.svg",
+      "view": "front",
+      "hidden": "dashed",
+      "stroke": 0.35
+    },
+    {
+      "path": "exports/splayed-stool-side.svg",
+      "view": "right",
+      "hidden": "dashed",
+      "stroke": 0.35
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 9 assertions, also at 650/12, 400/5 and 520/7.5; seat 2 633 378.9, legs and wedges 2 426 663.0 and stretchers 329 924.9 mm3, mortise wall 7.57 mm and 4.085 kg, all equal to this example's; about 160 commands. It gave each leg pair its own grain through face.appearance on a selection (see F-083)."
+  },
+  "stats": {
+    "steps": 119,
+    "variables": 42,
+    "parameters": 2,
+    "features": 39,
+    "assertions": 9,
+    "warnings": 0,
+    "build_s": 0.29,
+    "load_s": 0.13,
+    "load_cpu_s": 0.2,
+    "file_bytes": 82601
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

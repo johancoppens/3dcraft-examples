@@ -1,0 +1,11 @@
+[
+ ["feature.cylinder", {"radius": "170 mm", "height": "30 mm", "position": [0, 0, "420 mm"], "name": "Seat blank"}],
+ ["feature.fillet", {"edges": [["F1:face(0)", "F1:face(2)"]], "radius": "6 mm", "name": "Seat"}],
+ ["feature.block", {"size": [38, 38, 600], "position": [-19, -19, -60], "name": "Leg stock"}],
+ ["feature.transform", {"source": "Leg stock", "angle": "10 deg", "axis": [0, 1, 0], "translate": ["100 mm", 0, 0], "name": "Splayed leg stock"}],
+ ["feature.block", {"size": [800, 800, 420], "position": [-400, -400, 0], "name": "Floor to seat"}],
+ ["feature.boolean", {"op": "intersect", "target": "Splayed leg stock", "tool": "Floor to seat", "name": "Leg"}],
+ ["feature.pattern", {"source": "Leg", "count": 4, "angle": "90 deg", "name": "Legs"}],
+ ["feature.block", {"size": [200, 22, 32], "position": [-100, -11, 150], "name": "Stretcher"}],
+ ["cut.list", {"format": "csv"}]
+]
