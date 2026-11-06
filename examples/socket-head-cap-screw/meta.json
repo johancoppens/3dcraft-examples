@@ -1,0 +1,73 @@
+{
+  "id": "socket-head-cap-screw",
+  "title": "Socket head cap screw",
+  "summary": "revolve, hex punch, modelled thread, size table",
+  "description": "An ISO 4762 socket head cap screw, M3 to M12 in the standard's lengths, with a rolled thread, in black-oxide steel.",
+  "domain": "Machine building",
+  "process": "Cold heading, thread rolling, black oxide",
+  "tier": "simple",
+  "difficulty": {
+    "score": 4,
+    "rationale": "A punch built from a prism intersected with a cone, two coupled tables driving per-size choices, a closed form integrated over a hexagon, a modelled thread within the kernel's limits."
+  },
+  "standards": [
+    "ISO 4762:2004",
+    "ISO 261",
+    "ISO 68-1",
+    "ISO 4753"
+  ],
+  "materials": [
+    "Alloy steel, property class 12.9, black oxide"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        48,
+        -52,
+        30
+      ],
+      "target": [
+        -11,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 27
+    },
+    "look": {
+      "rotation": 90,
+      "reflections": false
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/socket-head-cap-screw.step"
+    }
+  ],
+  "budget_exception": "A modelled ISO thread is what makes the screw look real and costs most of its load time: 4.8 s at M8 x 30 on an idle machine, 9.0 s on one core (as on the web), 7 to 8 s for the longest screws threaded to the head (M8 x 35, M3 x 20) with other work running; a cosmetic thread costs 0.04 s but draws a smooth shank (F-004).",
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 9 assertions; volume 2163.3 mm3 (+0.12 %), mass 16.98 g, socket 6.06 mm across flats, head 13 x 8 mm, modelled M8 x 1.25 thread, Length limited to each size's lengths; 16 size and length points checked; about 120 CLI calls. It took the table values from memory (s max 6.095 instead of 6.14 at M8) and needed a larger tip chamfer at M3 (F-006)."
+  },
+  "stats": {
+    "steps": 49,
+    "variables": 21,
+    "parameters": 2,
+    "features": 12,
+    "assertions": 4,
+    "warnings": 0,
+    "build_s": 5.13,
+    "load_s": 4.78,
+    "file_bytes": 56781
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

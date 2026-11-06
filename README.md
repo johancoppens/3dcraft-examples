@@ -22,6 +22,7 @@ Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the li
 <!-- gallery:start -->
 | | Example | Domain | Difficulty |
 |---|---|---|---|
+| <img src="examples/socket-head-cap-screw/preview.png" width="240" alt="Socket head cap screw"> | **[Socket head cap screw](examples/socket-head-cap-screw/)**<br>An ISO 4762 socket head cap screw, M3 to M12 in the standard's lengths, with a rolled thread, in black-oxide steel. | Machine building | 4/10 |
 <!-- gallery:end -->
 
 ## Rebuild and check

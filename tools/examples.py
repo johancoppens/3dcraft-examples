@@ -95,7 +95,9 @@ def run_cli(args, cwd, memory="3G", timeout=900):
     """Runs craft3d-cli under a memory cap and a timeout; returns (result, seconds)."""
     command = [cli()] + [str(a) for a in args]
     if shutil.which("systemd-run") and not os.environ.get("CRAFT3D_NO_CAP"):
-        command = ["systemd-run", "--user", "--scope", "-q", "-p", f"MemoryMax={memory}",
+        # CRAFT3D_SLICE names a shared slice that caps parallel agents together (AGENTS.md §3).
+        slice_ = [f"--slice={os.environ['CRAFT3D_SLICE']}"] if os.environ.get("CRAFT3D_SLICE") else []
+        command = ["systemd-run", "--user", "--scope", "-q", *slice_, "-p", f"MemoryMax={memory}",
                    "-p", "MemorySwapMax=0", "timeout", str(timeout)] + command
     elif shutil.which("timeout"):
         command = ["timeout", str(timeout)] + command

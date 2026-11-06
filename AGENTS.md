@@ -58,7 +58,10 @@ log/ plan/              local only (gitignored): dev log, plans
   Work through `craft3d-cli`; its commands are the same ones MCP runs.
 - **Memory and time.** The developer's laptop has crashed on runaway processes. `tools/examples.py` caps every
   run; by hand, always `systemd-run --user --scope -q -p MemoryMax=3G -p MemorySwapMax=0 timeout 900
-  craft3d-cli …`. Exit 137 means the cap was hit: that is a finding, never a reason to raise the cap. One
+  craft3d-cli …`. Exit 137 means the cap was hit: that is a finding, never a reason to raise the cap. When several agents
+  work at once, the coordinator sets a shared slice (`systemctl --user set-property --runtime examples.slice
+  MemoryMax=10G MemorySwapMax=0`): then `export CRAFT3D_SLICE=examples.slice` (the tool adds it) and add
+  `--slice=examples.slice` to every `systemd-run` you type. One
   render or `check-range` at a time. No cargo builds are needed here; never build 3DCraft from this repo. A
   3DCraft window you start gets `--recovery-dir none`.
 - **Python.** Allowed for what does not belong in a CAD platform: fetching and converting outside data,

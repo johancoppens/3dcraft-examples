@@ -27,6 +27,8 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-015](#f-015) | Missing capability | A folded panel cannot have a slit, and thick panels do not fold to 180° | probe for mailer-box | single walls, no locks |
 | [F-016](#f-016) | Agent friction | A number parameter cannot take a series of values (a step counts from 0 when `min` is a formula) | socket-head-cap-screw | a choice from a table, rows limited by `min`/`max` |
 | [F-017](#f-017) | Missing capability (minor) | No precious-metal presets; a preset recoloured keeps its base metal's density | probe for solitaire-ring | `body.material` |
+| [F-018](#f-018) | Agent friction | `document.inspect` on a freshly opened file reports assertions as pending; `info` and `assert.list` wait | socket-head-cap-screw | none |
+| [F-019](#f-019) | Missing capability | Measures and assertions are recomputed at every regeneration; no way to compute them on demand | socket-head-cap-screw | none |
 
 ## F-001
 
@@ -62,7 +64,7 @@ The cosmetic thread draws nothing on the shank, so a screw meant to look real ne
 **Should:** a modelled thread of this size regenerates well under a second (its turns are congruent: one
 turn's faces, repeated); measures on it reuse what the faces already know. Reproduce:
 `tools/examples.py build socket-head-cap-screw` and time `craft3d-cli info` on the result.
-Over the screw's range it opens in 1.4 to 4.8 s (M3 × 30 peaks at 660 MB), and in 9.0 s on one core (`taskset -c 0`), which is what the single-threaded web build gets.
+Over the screw's range it opens in 1.4 s (M3 × 6) to 7 to 8 s for the longest screws threaded to the head (M8 × 35: 26 turns, 8.2 s and 560 MB with other work running; M3 × 20: 7.2 s, 710 MB), and M8 × 30 takes 9.0 s on one core (`taskset -c 0`), which is what the single-threaded web build gets.
 **Workaround in the example:** none; the example carries a budget exception.
 
 ## F-005
@@ -80,7 +82,8 @@ section, `feature.revolve`, `feature.thread` with `modeled: true`) is refused fo
 groove of the thread cannot be cut: boolean does not support this: two points closer together than the
 tolerance can tell apart (at the edge of tolerance)"; with the full screw M6 fails as "imprint lost". M8
 works. A chamfer to just below the minor diameter (0.663 P, ISO 4753) works for every size. A chamfered tip
-is how threaded ends are made, so any depth should work. Reproducer:
+is how threaded ends are made, so any depth should work. The prompt test of the screw (a different model, built from scratch) hit
+the same refusal at M3 with a chamfer 0.1 mm under the minor diameter, and got past it at 0.15 P. Reproducer:
 [`findings/F-006-thread-on-chamfered-tip/repro.json`](findings/F-006-thread-on-chamfered-tip/repro.json)
 (M4; set `thread_d` and `pitch` for the others). **Workaround in the example:** the ISO 4753 chamfer depth,
 which is also the standard's.
@@ -178,3 +181,23 @@ parameter with `values` from a table column would read better in the form.
 **Missing capability (minor).** The material presets have no gold, silver, brass, bronze or copper, and a
 preset recoloured keeps its base metal's density (gold made from `steel` weighs 7850 kg/m³), so the mass is
 wrong unless `body.material` is set as well.
+
+## F-018
+
+**Agent friction.** `craft3d-cli run FILE.3dcraft --cmd document.inspect` on a freshly opened file reports
+some assertions with `"status": "pending"` (measured in the background) and returns, while `craft3d-cli info
+FILE` and `--cmd assert.list` wait and report them passed. A one-shot check through `document.inspect` then
+reads an incomplete state, and a time taken around it is not the full load. **Should:** a one-shot
+`run` waits for pending measures before it prints, or `document.inspect` takes `"wait": true` as `param.set`
+does.
+
+## F-019
+
+**Missing capability (performance).** Assertions and outputs are measured after every regeneration. On the
+screw they cost 1.2 s of its 4.8 s load (A/B on the same build: 3.6 s without its 4 assertions and 3
+outputs, 4.8 s with them); the measures are volume, mass and a volume below a plane on a threaded body of
+146 faces. Someone who opens an example to look at it does not need them; a check, an export, a range check
+or the checks panel does. **Should:** measures on demand: computed when something asks for them (the
+checks panel open, `document.check`, `assert.list`, an export, `check-range`) and cached per body revision,
+so a regeneration that leaves a body unchanged does not measure it again. Today `when` on each assertion
+could switch them off by a variable, but then the document no longer proves itself when opened.
