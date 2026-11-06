@@ -1,0 +1,99 @@
+{
+  "id": "wall-clock",
+  "title": "Plywood wall clock",
+  "summary": "laser cut and engraved, text on a circle",
+  "description": "A Ø 300 mm wall clock laser cut and engraved from 6 mm birch plywood for a quartz sweep movement, Roman or Arabic numerals, a laminated keyhole hanger and foot at the back and black hands set to the time.",
+  "domain": "Laser cutting, art",
+  "process": "Laser cutting and raster engraving, glue-up",
+  "tier": "simple",
+  "difficulty": {
+    "score": 4,
+    "rationale": "Patterns round a centre, text on a curve, a choice switching conditional features, hand angles from time formulas through transforms, a coloured intersect stencil; no freeform."
+  },
+  "standards": [],
+  "materials": [
+    "Birch plywood, 6 mm",
+    "Steel hands, black lacquered"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        200,
+        -170,
+        480
+      ],
+      "target": [
+        0,
+        -6,
+        0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fovY": 36
+    },
+    "look": {
+      "light": [
+        100,
+        80
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/wall-clock-dial-cut.dxf",
+      "sketch": "Dial outline"
+    },
+    {
+      "command": "cut.export",
+      "path": "exports/wall-clock-hanger-cut.dxf",
+      "bodies": [
+        "Inner spacer",
+        "Outer spacer",
+        "Keyhole plate",
+        "Foot inner spacer",
+        "Foot middle spacer",
+        "Foot outer spacer"
+      ],
+      "copies": true
+    },
+    {
+      "path": "exports/wall-clock-engrave-ticks.svg",
+      "sketch": "Minute track",
+      "construction": true
+    },
+    {
+      "path": "exports/wall-clock-engrave-roman.svg",
+      "sketch": "Roman numerals",
+      "construction": true
+    },
+    {
+      "path": "exports/wall-clock-engrave-arabic.svg",
+      "sketch": "Arabic numerals",
+      "construction": true
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok with its own 15 assertions, also at three other points; dial volume 421 474 mm3 and the closed form 353 063.706 mm3, equal to this example's; hands within 0.05 deg; 178 steps, about 230 commands. It coloured the engravings by face names after a final always-active feature (a face colour is lost when a later feature is off, F-048) and measured the front-view clearance with a hidden copy of the hand (F-049)."
+  },
+  "stats": {
+    "steps": 149,
+    "variables": 41,
+    "parameters": 4,
+    "features": 32,
+    "assertions": 12,
+    "warnings": 0,
+    "build_s": 0.53,
+    "load_s": 0.32,
+    "file_bytes": 460387
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

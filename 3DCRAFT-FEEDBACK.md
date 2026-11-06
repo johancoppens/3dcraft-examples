@@ -57,6 +57,8 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-045](#f-045) | Missing capability | No 3MF export of several bodies as parts of one object (multi-colour prints) | hex-key-stand (review) | two build items |
 | [F-046](#f-046) | Bug | The CPU studio look's ambient occlusion draws blotchy patches in narrow cavities | t-slot-profile (review) | faint, left as it is |
 | [F-047](#f-047) | Missing capability | No measure of what an open vessel holds up to its rim | turned-bowl | capacity in closed form |
+| [F-048](#f-048) | Bug | A face colour set on a feature is lost when a later feature is switched off (`when`) | wall-clock (prompt test) | colour on a final feature |
+| [F-049](#f-049) | Missing capability (minor) | No distance measure projected onto a plane (clearance seen from the front) | wall-clock (prompt test) | hidden helper body |
 
 ## F-001
 
@@ -433,3 +435,17 @@ what an open vessel (a bowl, a cup, a hopper) holds up to its rim or up to a lev
 its capacity as the closed-form volume of its Bézier profile revolved; the prompt test of it built a hidden
 helper body. **Should:** a capacity measure for an open body: the volume between its inner faces and the
 plane of its rim (or a given level), as `volumeBelow` does for a closed one.
+
+## F-048
+
+**Bug.** A face colour (`face.appearance`) given on the faces of a feature is lost, and the body's colour
+drawn instead, when a feature after it is inactive (`when` false): the clock's engravings turned light again
+when the other numeral style's cut was switched off. The prompt test of the clock worked round it by adding a
+final always-active feature (a zero transform) and colouring the faces there, once per numeral style.
+
+## F-049
+
+**Missing capability (minor).** There is no distance measured in projection onto a plane (how far a hand is
+from the numerals seen from the front, a part's clearance in plan): only the 3D distance. The clock asserts
+a 3D bound that implies the projected one; its prompt test built a hidden copy of the hand moved onto the
+engraving's floor.

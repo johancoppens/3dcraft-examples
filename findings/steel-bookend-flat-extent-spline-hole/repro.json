@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Base", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Base", "from": [0, 0], "to": [100, 60]}],
+ ["sketch.create", {"name": "Wall", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "Wall", "closed": true, "points": [[0, 0], [100, 0], [100, -50], [0, -50]]}],
+ ["sketch.spline", {"sketch": "Wall", "through": [[30, -20], [50, -10], [70, -20], [50, -35]], "closed": true}],
+ ["feature.sheetMetal", {"sketch": "Base", "name": "Part", "thickness": "2 mm", "radius": "2 mm", "kFactor": 0.4, "flanges": [{"edge": "e5", "angle": "90 deg", "outline": "Wall"}]}],
+ ["sheetMetal.bends", {"feature": "Part"}],
+ ["assert.add", {"name": "Blank length", "measure": "flatExtent", "of": "Part", "axis": "y", "eq": "110 mm + pi / 2 * (2 mm + 0.4 * 2 mm)", "tol": "0.001"}],
+ ["assert.add", {"name": "Blank width", "measure": "flatExtent", "of": "Part", "axis": "x", "eq": "100 mm", "tol": "0.001"}],
+ ["assert.list", {}]
+]
