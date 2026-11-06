@@ -1,0 +1,50 @@
+{
+  "id": "turned-bowl",
+  "title": "Turned walnut bowl",
+  "summary": "spline profile, revolve, even wall",
+  "description": "A face-grain serving bowl turned from a 10 × 4 inch walnut blank: an even 7 mm wall from a rounded rim to a foot ring with a dovetailed chuck recess, with its capacity in millilitres.",
+  "domain": "Woodturning",
+  "process": "Bowl turning, oil finish",
+  "tier": "simple",
+  "difficulty": {
+    "score": 4,
+    "rationale": "One constrained spline revolved, its inside an exact offset written as a formula curve, two fillets, closed-form checks by Pappus and Steiner."
+  },
+  "standards": [],
+  "materials": [
+    "Black walnut (Juglans nigra), kiln dried, oiled"
+  ],
+  "units": "mm",
+  "preview": {
+    "zoom": 1.25,
+    "look": {
+      "rotation": 270
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/turned-bowl-section.svg",
+      "sketch": "Half section"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: deep document.check ok, its own 7 assertions pass at five parameter points; 453.735 cm3 of wood, 290.39 g, 1839.68 mL brimful and the foot ring 14 493.1773 mm3, equal to this example's; Steiner's wall check within 0.03 mm3; about 100 commands. It measured the capacity with a hidden helper body (F-047) and placed the pith a little differently."
+  },
+  "stats": {
+    "steps": 54,
+    "variables": 22,
+    "parameters": 3,
+    "features": 4,
+    "assertions": 5,
+    "warnings": 0,
+    "build_s": 0.63,
+    "load_s": 0.64,
+    "file_bytes": 49878
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

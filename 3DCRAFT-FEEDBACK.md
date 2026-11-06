@@ -56,6 +56,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-044](#f-044) | Agent friction | The 3MF's material names are appearance strings, not the `body.material` name | hex-key-stand (review) | none |
 | [F-045](#f-045) | Missing capability | No 3MF export of several bodies as parts of one object (multi-colour prints) | hex-key-stand (review) | two build items |
 | [F-046](#f-046) | Bug | The CPU studio look's ambient occlusion draws blotchy patches in narrow cavities | t-slot-profile (review) | faint, left as it is |
+| [F-047](#f-047) | Missing capability | No measure of what an open vessel holds up to its rim | turned-bowl | capacity in closed form |
 
 ## F-001
 
@@ -424,3 +425,11 @@ wants (the hex key stand's labels and stand).
 on the inner faces of narrow cavities (the T-slot profile's slots and bore near its end face), at
 `accumulate` 4 and still at 16; `"ao": false` removes them, `reflections`, contact shadows and the specular
 shadow do not. On this material `reflections: false` gives a byte-identical picture.
+
+## F-047
+
+**Missing capability.** `cavity` measures what closed shells inside a body enclose; there is no measure of
+what an open vessel (a bowl, a cup, a hopper) holds up to its rim or up to a level. The turned bowl writes
+its capacity as the closed-form volume of its Bézier profile revolved; the prompt test of it built a hidden
+helper body. **Should:** a capacity measure for an open body: the volume between its inner faces and the
+plane of its rim (or a given level), as `volumeBelow` does for a closed one.
