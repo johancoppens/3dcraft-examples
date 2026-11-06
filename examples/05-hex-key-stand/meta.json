@@ -1,0 +1,71 @@
+{
+  "id": "hex-key-stand",
+  "title": "Hex key stand",
+  "summary": "table-driven sockets, embossed text, print checks",
+  "description": "A stepped desk stand for a metric hex key set to ISO 2936, 1.5 to 10 mm, printed in PLA without supports, sizes embossed in black.",
+  "domain": "3D printing",
+  "process": "FDM printing, PLA, two colours",
+  "tier": "simple",
+  "difficulty": {
+    "score": 4,
+    "rationale": "A table drives every formula, nine hexagons and labels come from it, a 32-edge rim fillet needed careful edge naming; no freeform, no multi-body booleans."
+  },
+  "standards": [
+    "ISO 2936:2014"
+  ],
+  "materials": [
+    "PLA, orange (stand) and black (labels)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -80,
+        -135,
+        118
+      ],
+      "target": [
+        72,
+        16,
+        14
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 31
+    },
+    "look": {
+      "light": [
+        200,
+        70
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/hex-key-stand.3mf"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-06",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: document.check ok, its own 5 assertions pass; stand volume 126 544.836 mm3 and section 4344.4085 mm2, equal to this example's; mass 156.99 g; about 100 commands in 14 CLI calls. Its wall check was first not proven over the chamfered and filleted edges (F-020) and passed when restricted to the socket faces."
+  },
+  "stats": {
+    "steps": 75,
+    "variables": 14,
+    "parameters": 3,
+    "features": 34,
+    "assertions": 5,
+    "warnings": 0,
+    "build_s": 0.76,
+    "load_s": 0.42,
+    "file_bytes": 471362
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
