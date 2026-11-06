@@ -1,0 +1,84 @@
+{
+  "id": "hydraulic-cylinder",
+  "title": "Hydraulic cylinder",
+  "summary": "several bodies, cutaway, moving rod",
+  "description": "A double-acting ISO 6020-2 tie-rod cylinder, bore 40, rod 28, with clevises at both ends, a rod that moves with a parameter and a cutaway that shows the piston, the seals and the gland.",
+  "domain": "Hydraulics",
+  "process": "Turning, honing, hard chrome plating, painting",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Fourteen bodies coupled through 96 variables, a conditional cutaway through revolves, booleans and formula-count patterns, an oil solid giving closed-form chamber volumes, buckling checks and ISO 6020-2/8133 knowledge; no freeform, so not 9."
+  },
+  "standards": [
+    "ISO 6020-2:2015",
+    "ISO 3320",
+    "ISO 8133",
+    "ISO 1179-1:2013",
+    "ISO 228-1",
+    "ISO 273",
+    "ISO 8673",
+    "ISO 4032"
+  ],
+  "materials": [
+    "Steel, painted RAL 5010 gentian blue",
+    "Hard-chromed steel rod",
+    "Steel gland",
+    "Zinc-plated steel tie rods, nuts and pins",
+    "Polyurethane and NBR seals",
+    "Bronze-filled PTFE guide and wear rings"
+  ],
+  "units": "mm",
+  "preview": {
+    "view": "iso",
+    "zoom": 1.06,
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/hydraulic-cylinder.step",
+      "values": {
+        "cutaway": false
+      },
+      "bodies": [
+        "Cap",
+        "Tube",
+        "Head",
+        "Gland",
+        "Seals",
+        "Guide ring",
+        "Piston",
+        "Piston seal",
+        "Wear rings",
+        "Piston rod",
+        "Rod clevis",
+        "Clevis pins",
+        "Tie rods",
+        "Tie rod nuts"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed with one gap: oil 125.810 and 64.235 cm³ (closed form), pin to pin 510 mm, forces 20.106/10.254 kN, buckling 6.73, ports 258.05 mm, all as this example's; seven checks pass at all eight corners; moving mass 1.951 kg because it counted the pin (turn 6 now names the parts); 26 bodies; about 306 steps."
+  },
+  "stats": {
+    "steps": 248,
+    "variables": 96,
+    "parameters": 3,
+    "features": 85,
+    "assertions": 7,
+    "warnings": 0,
+    "build_s": 0.5,
+    "load_s": 0.48,
+    "load_cpu_s": 0.65,
+    "file_bytes": 255075
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
