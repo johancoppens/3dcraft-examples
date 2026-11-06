@@ -1,0 +1,93 @@
+{
+  "id": "fpv-drone-frame",
+  "title": "5-inch FPV drone frame",
+  "summary": "carbon plates, lofted props, router check",
+  "description": "A true-X freestyle quadcopter frame for 5 to 5.3 inch props, CNC routed from 2 mm and 5 mm carbon fibre sheet, with purple anodised standoffs, a 30.5 mm stack, a cage for a 19 mm camera and real 5.1 x 4.3 x 3 props lofted at their pitch.",
+  "domain": "CNC, RC",
+  "process": "CNC routing of carbon fibre sheet",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "Lofted freeform props through table-driven sections on formula datum planes with washout, Steiner router proofs over four parts, a 45 deg datum layout, multi-body clearance and a centrifugal-stress check, kernel limits navigated."
+  },
+  "standards": [
+    "30.5 x 30.5 mm M3 flight controller mounting",
+    "16 and 19 mm M3 motor bolt circles",
+    "19 mm micro FPV camera",
+    "ISO 273 (clearance holes)",
+    "HQProp BMS 5.1x4.3x3 (props)"
+  ],
+  "materials": [
+    "Carbon fibre (CFRP) sheet, 2 mm and 5 mm",
+    "Aluminium standoffs, purple anodised",
+    "Polycarbonate props, 1.2 g/cm3"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        300,
+        -260,
+        210
+      ],
+      "target": [
+        5,
+        0,
+        14
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 34
+    },
+    "look": {
+      "rotation": 90,
+      "light": [
+        200,
+        70
+      ],
+      "reflections": false
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/fpv-drone-frame-arm.dxf",
+      "sketch": "Arm outline"
+    },
+    {
+      "path": "exports/fpv-drone-frame-bottom-plate.dxf",
+      "sketch": "Bottom plate outline"
+    },
+    {
+      "path": "exports/fpv-drone-frame-top-plate.dxf",
+      "sketch": "Top plate outline"
+    },
+    {
+      "path": "exports/fpv-drone-frame-camera-plate.dxf",
+      "sketch": "Camera plate outline"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: deep document.check ok with its own 32 assertions, check-range 11 points; wheelbase 225.62 mm, frame 104.71 g, props 4.13 g each, clearance 3.717 mm, root stress 47.8 MPa, all as this example's; Steiner router checks exact; about 400 commands. It read the camera plate's relief notch and pivot a little differently (its first notch was narrower than the bit, which the Steiner check caught)."
+  },
+  "stats": {
+    "steps": 240,
+    "variables": 85,
+    "parameters": 2,
+    "features": 60,
+    "assertions": 18,
+    "warnings": 0,
+    "build_s": 2.32,
+    "load_s": 2.32,
+    "load_cpu_s": 7.45,
+    "file_bytes": 287512
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

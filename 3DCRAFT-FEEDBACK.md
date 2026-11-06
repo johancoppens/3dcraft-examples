@@ -115,6 +115,8 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-103](#f-103) | Performance | Cutting a spot face across a boss filleted to a torus rim takes 0.6 s (everything before it 0.16 s) | cast-handwheel | handle on the rim's centre line |
 | [F-104](#f-104) | Agent friction | A `section` render on a named view keeps the half nearest the camera, so no cut shows without `flip` | cast-handwheel (review) | `flip: true` |
 | [F-105](#f-105) | Missing capability | `clearance` and `distance` refuse sheets ("a body that is a sheet, which has no inside") | square-to-round-transition (prompt test) | box checks |
+| [F-106](#f-106) | Missing capability (minor) | No volt, ampere, rpm or minute units | fpv-drone-frame | `1750 / (60 s)`, a plain 25.2 |
+| [F-107](#f-107) | Bug | Root fillets between a swept oval spoke and a torus rim are refused at tolerance 1e-4 mm and built at 1e-5 mm | cast-handwheel (review) | tolerance 1e-5 mm |
 
 ## F-001
 
@@ -933,3 +935,17 @@ view, keep by default the half whose cut faces the camera.
 which has no inside"), so a flat pattern's clearance from a frame, or a sheet's distance to anything, must be
 checked through boxes. A distance between a sheet and a body (or two sheets) is well defined. **Should:**
 distance and clearance for sheets.
+
+## F-106
+
+**Missing capability (minor).** Expressions have no volt, ampere, watt, rpm or minute units, so a motor's
+1750 KV is written `1750 / (60 s)` and a battery's 25.2 V as a plain number, and the root-stress formula
+cannot check its own dimensions. **Should:** the electrical units and rpm (with min and h), as the mechanical
+ones already exist.
+
+## F-107
+
+**Bug.** On the cast handwheel the root fillets between a swept oval spoke and the torus rim are refused at a
+document tolerance of 1e-4 mm and built at 1e-5 mm (and at the default 1e-6 mm, which loads slower). A looser
+tolerance should never refuse a fillet that a tighter one builds. Reproduce: in
+`examples/13-cast-handwheel`, change `document.setTolerance` to 1e-4 mm.
