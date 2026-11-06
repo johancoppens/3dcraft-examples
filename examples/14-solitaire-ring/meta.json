@@ -1,0 +1,81 @@
+{
+  "id": "solitaire-ring",
+  "title": "Solitaire ring",
+  "summary": "57 facets, prong basket, ring sizes",
+  "description": "An 18 ct yellow-gold solitaire in ISO 8653 ring sizes 44 to 72: a comfort-fit court shank and a four-prong basket head holding a round brilliant of 0.25 to 2 ct, cut to Tolkowsky's proportions and sized from its weight.",
+  "domain": "Jewellery",
+  "process": "Lost-wax casting in 18 ct yellow gold, prongs seated and the stone set by hand, polished",
+  "tier": "difficult",
+  "difficulty": {
+    "score": 6,
+    "rationale": "Datum planes through formula points, pattern and mirror of the facet cutters, sequenced booleans, a swept U-wire, fillets on persistent names (one conditional), a closed-form volume solved by a cube root, and expert gemology and setting knowledge."
+  },
+  "standards": [
+    "ISO 8653:2016 (ring size: inner circumference in mm)",
+    "Tolkowsky, Diamond Design (1919): table 53 %, crown angle 34.5°, pavilion angle 40.75°",
+    "Metric carat, 0.2 g (4th CGPM, 1907)",
+    "GIA girdle thickness at the bezel positions"
+  ],
+  "materials": [
+    "18 ct yellow gold (750, equal silver and copper), 15.4 g/cm³",
+    "Diamond, 3.515 g/cm³"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        19,
+        -33,
+        48
+      ],
+      "target": [
+        0.8,
+        0,
+        4.8
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 25
+    },
+    "look": {
+      "rotation": 180,
+      "light": [
+        90,
+        60
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/solitaire-ring-gold.3mf",
+      "bodies": [
+        "Ring"
+      ],
+      "tolerance": 0.02
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: stone 57 facets, 6.437 × 4.006 mm, 56.90 mm³, 0.2 g; shank 83.53 mm³ below the axis; prongs 1.095 mm, gallery 0.8 mm; culet 0.684 mm over the shank; gold 3.056 g, all as this example's; nine checks pass over the carat range; its seat cut was refused at 1.25 ct until tolerance 1e-7 mm (F-109); about 160 steps."
+  },
+  "stats": {
+    "steps": 120,
+    "variables": 45,
+    "parameters": 2,
+    "features": 47,
+    "assertions": 8,
+    "warnings": 0,
+    "build_s": 1.72,
+    "load_s": 1.55,
+    "load_cpu_s": 3.36,
+    "file_bytes": 87211
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

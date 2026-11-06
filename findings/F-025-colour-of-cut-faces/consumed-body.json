@@ -1,0 +1,6 @@
+[
+ ["feature.block", {"name": "Blank", "size": ["40 mm", "40 mm", "20 mm"]}],
+ ["feature.cylinder", {"name": "Drill", "radius": "5 mm", "height": "30 mm", "position": ["20 mm", "20 mm", "-5 mm"]}],
+ ["feature.boolean", {"op": "subtract", "target": "Blank", "tool": "Drill", "name": "Drilled blank"}],
+ ["face.appearance", {"body": "Blank", "faces": ["F1:face(1)"], "color": "#003a60", "metallic": 0}]
+]

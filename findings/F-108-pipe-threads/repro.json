@@ -1,0 +1,8 @@
+[
+ ["feature.block", {"name": "Port block", "size": ["40 mm", "40 mm", "30 mm"]}],
+ ["sketch.create", {"name": "Port", "plane": "xy", "offset": "30 mm"}],
+ ["sketch.circle", {"sketch": "Port", "center": ["20 mm", "20 mm"], "radius": "14.95 mm / 2"}],
+ ["feature.extrude", {"sketch": "Port", "distance": "16 mm", "reversed": true, "cut": "Port block", "name": "Ported block"}],
+ ["feature.thread", {"face": "F3:side(e2)", "start": "F1:face(1)", "size": "G3/8", "length": "12 mm", "name": "G 3/8 by its designation"}],
+ ["feature.thread", {"face": "F3:side(e2)", "start": "F1:face(1)", "size": "16.662 mm", "pitch": "1.337 mm", "length": "12 mm", "name": "G 3/8 by its diameter and pitch"}]
+]

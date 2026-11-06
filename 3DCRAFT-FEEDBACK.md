@@ -117,6 +117,8 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-105](#f-105) | Missing capability | `clearance` and `distance` refuse sheets ("a body that is a sheet, which has no inside") | square-to-round-transition (prompt test) | box checks |
 | [F-106](#f-106) | Missing capability (minor) | No volt, ampere, rpm or minute units | fpv-drone-frame | `1750 / (60 s)`, a plain 25.2 |
 | [F-107](#f-107) | Bug | Root fillets between a swept oval spoke and a torus rim are refused at tolerance 1e-4 mm and built at 1e-5 mm | cast-handwheel (review) | tolerance 1e-5 mm |
+| [F-108](#f-108) | Missing capability | `feature.thread` knows ISO metric threads only: no pipe threads (ISO 228-1 G, ISO 7-1 R, NPT) | hydraulic-cylinder | G 3/8 ports drilled, not threaded |
+| [F-109](#f-109) | Bug | A seat cut across a filleted prong head is refused as "zero thickness" at tolerance 1e-6 mm and built at 1e-7 mm | solitaire-ring (prompt test) | tolerance 1e-7 mm |
 
 ## F-001
 
@@ -338,8 +340,11 @@ face in the plane whose loops enclose no area"); a plane 0.6 mm lower works. Rep
 **Missing capability.** The faces a cut makes take the target body's appearance, and `face.appearance` takes
 only literal face names (not a query or a named set), so an engraving of hundreds of faces (652 on the
 clock's dial) cannot be coloured as engraved; a feature whose body a later feature consumed is refused
-("has no body"). Reproducer:
-[`findings/F-025-colour-of-cut-faces/repro.json`](findings/F-025-colour-of-cut-faces/repro.json).
+("has no body"). Reproducers:
+[`findings/F-025-colour-of-cut-faces/repro.json`](findings/F-025-colour-of-cut-faces/repro.json), and for
+the consumed body [`consumed-body.json`](findings/F-025-colour-of-cut-faces/consumed-body.json) (the
+hydraulic cylinder paints only the outside of its parts: 26 to 37 names per part, each list right after its
+feature, before a later feature takes the body).
 **Should:** `face.appearance` with a query or a named set, and a way to give a cut's faces a colour of
 their own (a laser's charred engraving, a painted pocket). **Workaround in the example:** a dark stencil
 body is cut by the engravings and the dial intersected with it, so the pocket faces keep the dark colour.
@@ -949,3 +954,29 @@ ones already exist.
 document tolerance of 1e-4 mm and built at 1e-5 mm (and at the default 1e-6 mm, which loads slower). A looser
 tolerance should never refuse a fillet that a tighter one builds. Reproduce: in
 `examples/13-cast-handwheel`, change `document.setTolerance` to 1e-4 mm.
+
+## F-108
+
+**Missing capability.** `feature.thread` knows ISO metric threads only. A hydraulic port's G 3/8 (ISO 228-1,
+55° Whitworth form, 19 threads per inch) is refused by its designation ("unknown variable `G3`; size is an
+ISO metric size … or a length"), and given as 16.662 mm with pitch 1.337 mm it is taken for a 60° metric
+thread whose tap drill (15.325 mm) is larger than G 3/8's minor diameter (14.950 mm), so the port's hole is
+refused. Pipe threads (ISO 228-1 G, ISO 7-1 R/Rp tapered, NPT) and the other inch and trapezoidal forms are
+everyday in hydraulics, plumbing and pneumatics. Reproducer:
+[`findings/F-108-pipe-threads/repro.json`](findings/F-108-pipe-threads/repro.json). **Should:** thread forms
+as data (profile angle, pitch or TPI, taper), with the common standards' designations. **In the example:** the
+ports are drilled to the minor diameter and say so.
+
+## F-109
+
+**Bug.** In the solitaire ring's prompt test (Sonnet's own model of the ring, 161 steps), the stone's seat cut
+across the four prongs, whose roots are filleted into the gallery, is refused at 1.25 ct: "the result would
+have zero thickness at (2.84, -2.06, 13.83): two of its parts touch there along an edge or in a point, at
+F47:copy(0)/F40:side(e2,e3) and F47:fillet(0), and no solid can be that thin". It is refused at document
+tolerances 1e-6, 1e-5 and 1e-4 mm and at 0.999 times the fillet radius, and built at 1e-7 mm and at 1.001
+times the radius, so the parts do not touch: as in [F-107](#f-107), a looser tolerance refuses what a tighter
+one builds. The same tester's first cutters, cylinders, were refused at 1.05 ct with "boolean produced an
+invalid body: vertex 0 is 1.0076788542080009e-6 away from the end of edge 7" (no reproducer kept). Reproducer
+(the tester's script at 1.25 ct and 1e-6 mm, not minimal):
+[`findings/F-109-seat-cut-tolerance/repro.json`](findings/F-109-seat-cut-tolerance/repro.json), run with
+`craft3d-cli run --script`.
