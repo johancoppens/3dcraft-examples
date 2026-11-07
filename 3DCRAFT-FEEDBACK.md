@@ -140,6 +140,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-128](#f-128) | Performance | `measure.floating` with wholly submerged appendages takes 2.7 s against 0.6 s for the hull alone | rc-yacht-hull | envelope floated under net weight |
 | [F-129](#f-129) | Performance | A 3 mm fillet on a small part joined to a hull makes `levelFor` and floating 2 to 3 times slower | rc-yacht-hull | bumper unrounded in the envelope |
 | [F-130](#f-130) | Bug, performance | `document.interference` cannot check `feature.plate`'s own joints on a lofted hull ("unknown … at the edge of tolerance"), in 31 s | rc-yacht-hull (review) | laminate joints unchecked |
+| [F-131](#f-131) | Agent friction (minor) | The error for a non-integer exponent of `^` does not point to `pow(x, y)` | guitar-body (prompt test) | `exp(x * ln(2))` written instead |
 
 ## F-001
 
@@ -1198,3 +1199,10 @@ and cannot check the joints `feature.plate` made itself: hull and deck (joint `u
 come back "unknown … at the edge of tolerance", although `feature.plate`'s documentation says interference
 will tell. Plates that meet by construction should be known to touch, not to overlap. Reproduce: in
 `examples/19-rc-yacht-hull`, run `document.interference`.
+
+## F-131
+
+**Agent friction (minor).** `2^(-22/12)` (the fret rule) is refused with "the exponent of `^` must be an integer
+literal without a unit, as in `x ^ 2` or `x ^ -1`". `pow(x, y)` takes any exponent and the user guide says so,
+but the error does not, so the guitar's prompt tester wrote `exp(x * ln(2))`. **Should:** the error names
+`pow(x, y)`.

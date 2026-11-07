@@ -1,0 +1,74 @@
+{
+  "id": "guitar-body",
+  "title": "Electric guitar body",
+  "summary": "freeform carve, routed pockets, scale formulas",
+  "description": "An original double-cutaway solid body in red alder with a carved top, a bolt-on neck pocket, two humbucker routes, a rear control cavity and a string-through bridge placed by the scale length, finished in candy-apple red.",
+  "domain": "Lutherie",
+  "process": "CNC routing, carving with a ball-nose cutter, roundover, paint and clear coat",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "A freeform spline outline, a Gordon network of 24 B-spline curves with knot formulas from tables, and pockets and angled drills tied to the scale length, built around kernel limits F-120 to F-122."
+  },
+  "standards": [
+    "Equal-tempered fret positions, L (1 - 2^(-n/12))",
+    "Fender-pattern bolt-on neck pocket and four-bolt neck plate"
+  ],
+  "materials": [
+    "Red alder, 450 kg/m³, candy-apple red over a metallic base, clear coat"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        300,
+        -480,
+        320
+      ],
+      "target": [
+        -15,
+        215,
+        10
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 27
+    },
+    "look": {
+      "rotation": 270,
+      "light": [
+        180,
+        26
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/guitar-body.step"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: saddle 128.31 mm, heel arc 198.943 mm, pocket 29.125/15.875 mm, routes 21.000 mm and 67.489 mm apart, wall 6.000 mm, 18 corners of 1/4 in, jack clearance 2.42 mm, all as this example's; mass 1.859 kg (+1.7 %); 17 checks pass over the range; one edge-of-tolerance pocket refusal on a plateau flat to 0.6 µm; about 164 steps."
+  },
+  "stats": {
+    "steps": 211,
+    "variables": 83,
+    "parameters": 2,
+    "features": 57,
+    "assertions": 13,
+    "warnings": 0,
+    "build_s": 2.29,
+    "load_s": 2.29,
+    "load_cpu_s": 7.53,
+    "file_bytes": 486281
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
