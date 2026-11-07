@@ -132,6 +132,9 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-120](#f-120) | Bug | `measure.continuity` of a fillet's edge on an extruded closed-spline wall reports no continuity (exhausted, 8 s) | guitar-body | roundover not proven on the sides |
 | [F-121](#f-121) | Missing capability | `measure.continuity` refuses a fillet's edge on a freeform (network) face | guitar-body | carved top's roundover not proven |
 | [F-122](#f-122) | Bug (proof), performance | `boxMax` of a body with a freeform top is not proven closely enough to be a value, and costs seconds | guitar-body | depths measured to the top face |
+| [F-123](#f-123) | Missing capability | `measure.ray` (material along a line) cannot be an assertion or an output | guitar-body (review) | wood under each pot hole not asserted |
+| [F-124](#f-124) | Bug | An 11-section loft has an edge 1.0 mm off its own face, so every cut and boolean on it is refused | ship-propeller | root section placed to avoid it |
+| [F-125](#f-125) | Performance | `feature.pattern` × 4 at 90° of disjoint lofted blades costs 1 s where × 2 at 180° costs 0.04 s | ship-propeller | load budget |
 
 ## F-001
 
@@ -212,6 +215,10 @@ somewhere along it, or a face turns too sharply under it"), and on blunter roots
 even at 1 mm: "the fillet face along this edge could not be approximated within the tolerance". A real
 blade has a root fillet of several millimetres. Reproducer (53 steps, regenerates in about 40 s):
 [`findings/F-008-fillet-at-blade-roots/repro.json`](findings/F-008-fillet-at-blade-roots/repro.json).
+A smaller case from the ship propeller (8 steps, 0.1 s): a rolling-ball fillet between an elliptic lofted fin
+and a Ø 100 cylinder builds at 3 mm and is refused at 5 mm, once the radius exceeds the fin's edge curvature,
+although the ball rolls on the fin's convex side:
+[`findings/F-008-fillet-at-blade-roots/fin-on-cylinder.json`](findings/F-008-fillet-at-blade-roots/fin-on-cylinder.json).
 
 ## F-009
 
@@ -237,6 +244,8 @@ fitting tolerance), so a formula section does not cost hundreds of points at the
 or a lines plan from a table cannot then follow a variable (a vertical exaggeration, a scale): the numbers
 are baked in by whoever writes the script. **Should:** through-points as expressions, evaluated at
 regeneration, like the ends.
+The ship propeller found the same for closed control-point splines, and that an expression is capped at 4096
+bytes, which a section written as formulas of a table runs into.
 
 ## F-012
 
@@ -827,7 +836,10 @@ Reproducer: [`findings/F-086-cut-list-edge-break/repro.json`](findings/F-086-cut
 **Missing capability.** There is no measure of whether a round tool of radius r can cut a profile (every
 inside corner at least r, no gap narrower than 2r), and an offset profile cannot be offset again (which would
 test it: offset out by r and back in). The drone frame proves it through Steiner's area formula of the outline
-grown by r. **Should:** a `toolReach` measure, or offsets of offsets. Reproducer:
+grown by r. On the guitar body the query side shows too: a face filter cannot tell a concave from a convex
+partial cylinder (`hole: false` returns both), and a sharp inside edge is no face at all, so "no inside corner
+below the router's radius" cannot be counted directly. **Should:** a `toolReach` measure, or offsets of
+offsets, and a `concave` face filter. Reproducer:
 [`findings/F-087-router-reach/repro.json`](findings/F-087-router-reach/repro.json).
 
 ## F-088
@@ -875,6 +887,8 @@ F-071. Reproducer: [`findings/F-092-plate-rim-fan/repro.json`](findings/F-092-pl
 while `sectionExtent` of the same body takes 0.03 s; joining the blades to their hub with `feature.boolean`
 costs 0.4 s of regeneration plus 0.5 s to measure the trimmed freeform faces. Reproducer:
 [`findings/F-093-loft-measure-cost/repro.json`](findings/F-093-loft-measure-cost/repro.json).
+On the B4-55 propeller (11 sections) measuring the joined propeller's volume is about 4 of its 9 s of CPU,
+and lofts through sharp-edged sections took 111 s (398 s of CPU) to load.
 **Workaround in the example:** blades and hub are two bodies (they overlap 7.4 mm³), and every check is a
 planar cut.
 
@@ -1102,3 +1116,27 @@ guitar (see [F-093](#f-093)). On the guitar an `area` assertion of one flat face
 and 5 s of CPU, while the body's area and volume were free (no minimal reproducer: on a small body it costs
 what the body's area does). Reproducer:
 [`findings/F-122-boxmax-freeform/repro.json`](findings/F-122-boxmax-freeform/repro.json).
+
+## F-123
+
+**Missing capability.** `measure.ray` lists the faces a line meets, entering and leaving the material, but it is
+not a measure of `assert.add` or `variable.measure`. The material along a given line (the wood under each of
+the guitar's pot holes on the carved slope, a wall's thickness at one place, the depth of a blind hole) cannot
+be checked or reported; `measure.thickness` gives a body's least thickness, not the thickness at a point.
+**Should:** a `ray` measure (the length of material, or the distance to the first face, along a line from a
+point) usable in assertions and outputs.
+
+## F-124
+
+**Bug.** An 11-section loft (a B4-55 propeller blade at P/D 0.7, its root section at 0.8 of the hub radius)
+has an edge 1.016 mm away from its own face, so every cut and boolean on the blade is refused ("boolean
+produced an invalid body: edge 1 is 1.0161979469882407e0 away from the surface of face 0"), here in a
+`measure.section`. The builder met the same refusal in unions of a root trimmed by a cylinder. A loft
+should never produce an edge off its face; when it cannot be built within tolerance it should say so.
+Reproducer: [`findings/F-124-loft-edge-off-face/repro.json`](findings/F-124-loft-edge-off-face/repro.json).
+
+## F-125
+
+**Performance.** `feature.pattern` × 4 at 90° of a lofted blade (disjoint copies) adds 1.06 s (2.4 s of CPU)
+to the propeller's regeneration, where × 2 at 180° adds 0.04 s. Reproducer:
+[`findings/F-125-pattern-of-lofts/repro.json`](findings/F-125-pattern-of-lofts/repro.json).

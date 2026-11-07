@@ -1,0 +1,1650 @@
+[
+ [
+  "document.setTolerance",
+  {
+   "linear": 0.05
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "diameter",
+   "expr": "600 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pitch_ratio",
+   "expr": "0.7"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "area_ratio",
+   "expr": "0.55"
+  }
+ ],
+ [
+  "table.set",
+  {
+   "name": "b_series",
+   "columns": [
+    "station",
+    "radius_ratio",
+    "chord_factor",
+    "leading_ratio",
+    "thickest_ratio",
+    "thickness_a",
+    "thickness_b",
+    "v1_te",
+    "v1_t95",
+    "v1_t80",
+    "v1_t60",
+    "v1_t40",
+    "v1_l40",
+    "v1_l60",
+    "v1_l80",
+    "v1_l95",
+    "v1_le",
+    "v2_t95",
+    "v2_t80",
+    "v2_t40",
+    "v2_l40",
+    "v2_l80",
+    "v2_l95",
+    "fill_trailing",
+    "fill_leading"
+   ],
+   "rows": [
+    [
+     "0.2R",
+     0.2,
+     1.662,
+     0.617,
+     0.35,
+     0.0526,
+     0.004,
+     0.2826,
+     0.263,
+     0.1967,
+     0.1207,
+     0.0592,
+     0.0304,
+     0.0804,
+     0.1685,
+     0.2821,
+     0.356,
+     0.064,
+     0.306,
+     0.7984,
+     0.8875,
+     0.4777,
+     0.156,
+     0.6305,
+     0.7252
+    ],
+    [
+     "0.3R",
+     0.3,
+     1.882,
+     0.613,
+     0.35,
+     0.0464,
+     0.0035,
+     0.2306,
+     0.204,
+     0.1333,
+     0.0623,
+     0.0202,
+     0.0148,
+     0.0503,
+     0.1191,
+     0.2186,
+     0.2923,
+     0.08,
+     0.336,
+     0.8265,
+     0.892,
+     0.513,
+     0.189,
+     0.6534,
+     0.7409
+    ],
+    [
+     "0.4R",
+     0.4,
+     2.05,
+     0.601,
+     0.351,
+     0.0402,
+     0.003,
+     0.1467,
+     0.12,
+     0.063,
+     0.0214,
+     0.0044,
+     0.0033,
+     0.0189,
+     0.0637,
+     0.1467,
+     0.2181,
+     0.0905,
+     0.35,
+     0.8415,
+     0.8933,
+     0.522,
+     0.1935,
+     0.6648,
+     0.7438
+    ],
+    [
+     "0.5R",
+     0.5,
+     2.152,
+     0.586,
+     0.355,
+     0.034,
+     0.0025,
+     0.0522,
+     0.042,
+     0.019,
+     0.004,
+     0,
+     0,
+     0.0034,
+     0.0211,
+     0.0778,
+     0.1278,
+     0.095,
+     0.3569,
+     0.8456,
+     0.888,
+     0.5039,
+     0.175,
+     0.6689,
+     0.7349
+    ],
+    [
+     "0.6R",
+     0.6,
+     2.187,
+     0.561,
+     0.389,
+     0.0278,
+     0.002,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0.0006,
+     0.0169,
+     0.0382,
+     0.0965,
+     0.3585,
+     0.8426,
+     0.879,
+     0.462,
+     0.1485,
+     0.6673,
+     0.7169
+    ],
+    [
+     "0.7R",
+     0.7,
+     2.144,
+     0.524,
+     0.443,
+     0.0216,
+     0.0015,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0.0975,
+     0.36,
+     0.84,
+     0.866,
+     0.414,
+     0.124,
+     0.6667,
+     0.6952
+    ],
+    [
+     "0.8R",
+     0.8,
+     1.97,
+     0.463,
+     0.479,
+     0.0154,
+     0.001,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0.0975,
+     0.36,
+     0.84,
+     0.852,
+     0.3765,
+     0.105,
+     0.6667,
+     0.6765
+    ],
+    [
+     "0.9R",
+     0.9,
+     1.582,
+     0.351,
+     0.5,
+     0.0092,
+     0.0005,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0.0975,
+     0.36,
+     0.84,
+     0.84,
+     0.36,
+     0.0975,
+     0.6667,
+     0.6667
+    ],
+    [
+     "1.0R",
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.003,
+     0.0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0.0975,
+     0.36,
+     0.84,
+     0.84,
+     0.36,
+     0.0975,
+     0.6667,
+     0.6667
+    ]
+   ]
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "blade_count",
+   "expr": "4"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "rake_angle",
+   "expr": "15 deg"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "prop_radius",
+   "expr": "diameter / 2"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "pitch",
+   "expr": "pitch_ratio * diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "hub_radius",
+   "expr": "diameter / 12"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "chord_scale",
+   "expr": "diameter * area_ratio / blade_count"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "edge_thickness",
+   "expr": "b_series[9].thickness_a * diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_section_radius",
+   "expr": "0.8 * hub_radius"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_section_ratio",
+   "expr": "0.975"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_chord_factor",
+   "expr": "b_series[8].chord_factor * sqrt((1 - tip_section_ratio) / (1 - b_series[8].radius_ratio))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_thickness",
+   "expr": "((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * (1 - tip_section_ratio) + b_series[9].thickness_a * (tip_section_ratio - b_series[8].radius_ratio)) / (1 - b_series[8].radius_ratio) * diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "tip_chord",
+   "expr": "4 * edge_thickness"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_chord",
+   "expr": "b_series[1].chord_factor * chord_scale"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_thickness",
+   "expr": "(b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_pitch_angle",
+   "expr": "atan(pitch / (2 * pi * root_section_radius))"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_fit_width",
+   "expr": "sqrt(hub_radius^2 - root_section_radius^2) - 2 mm"
+  }
+ ],
+ [
+  "variable.set",
+  {
+   "name": "root_scale",
+   "expr": "min(1, root_fit_width / max((b_series[1].leading_ratio * root_chord + edge_thickness) * cos(root_pitch_angle), ((1 - b_series[1].leading_ratio) * root_chord + edge_thickness) * cos(root_pitch_angle) + root_thickness * sin(root_pitch_angle)))"
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Root section plane",
+   "through": [
+    [
+     "root_section_radius",
+     "0 mm",
+     "-root_section_radius * tan(rake_angle)"
+    ],
+    [
+     "root_section_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * root_section_radius)))",
+     "-root_section_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * root_section_radius)))"
+    ],
+    [
+     "root_section_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * root_section_radius)))",
+     "-root_section_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * root_section_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Root section",
+   "plane": "Root section plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Root section",
+   "through": [
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord + edge_thickness / 2",
+     "b_series[1].v1_te * (root_scale * root_thickness - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "b_series[1].v1_te * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.95 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "(b_series[1].v1_t95 + b_series[1].v2_t95) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.8 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "(b_series[1].v1_t80 + b_series[1].v2_t80) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.4 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "(b_series[1].v1_t40 + b_series[1].v2_t40) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "(0 + 1) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.4 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "(b_series[1].v1_l40 + b_series[1].v2_l40) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.8 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "(b_series[1].v1_l80 + b_series[1].v2_l80) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.95 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "(b_series[1].v1_l95 + b_series[1].v2_l95) * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "b_series[1].v1_le * (root_scale * root_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * root_scale * root_chord - edge_thickness / 2",
+     "b_series[1].v1_le * (root_scale * root_thickness - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "b_series[1].v1_le * (root_scale * root_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.95 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "b_series[1].v1_l95 * (root_scale * root_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.6 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "b_series[1].v1_l60 * (root_scale * root_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0 * b_series[1].thickest_ratio) * root_scale * root_chord",
+     "0 mm"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.6 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "b_series[1].v1_t60 * (root_scale * root_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.95 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "b_series[1].v1_t95 * (root_scale * root_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * root_scale * root_chord",
+     "b_series[1].v1_te * (root_scale * root_thickness - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.2 R plane",
+   "through": [
+    [
+     "b_series[1].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[1].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[1].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[1].radius_ratio * prop_radius)))",
+     "-b_series[1].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[1].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[1].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[1].radius_ratio * prop_radius)))",
+     "-b_series[1].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[1].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.2 R",
+   "plane": "Section 0.2 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.2 R",
+   "through": [
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[1].v1_te * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_te * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.95 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_t95 + b_series[1].v2_t95) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.8 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_t80 + b_series[1].v2_t80) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.4 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_t40 + b_series[1].v2_t40) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.4 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_l40 + b_series[1].v2_l40) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.8 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_l80 + b_series[1].v2_l80) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.95 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "(b_series[1].v1_l95 + b_series[1].v2_l95) * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_le * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[1].v1_le * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 1 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_le * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.95 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_l95 * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0.6 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_l60 * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio - 0 * b_series[1].thickest_ratio) * b_series[1].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.6 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_t60 * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 0.95 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_t95 * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[1].thickest_ratio - b_series[1].leading_ratio + 1 * (1 - b_series[1].thickest_ratio)) * b_series[1].chord_factor * chord_scale",
+     "b_series[1].v1_te * ((b_series[1].thickness_a - b_series[1].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.3 R plane",
+   "through": [
+    [
+     "b_series[2].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[2].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[2].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[2].radius_ratio * prop_radius)))",
+     "-b_series[2].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[2].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[2].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[2].radius_ratio * prop_radius)))",
+     "-b_series[2].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[2].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.3 R",
+   "plane": "Section 0.3 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.3 R",
+   "through": [
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 1 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[2].v1_te * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 1 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_te * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 0.95 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_t95 + b_series[2].v2_t95) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 0.8 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_t80 + b_series[2].v2_t80) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 0.4 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_t40 + b_series[2].v2_t40) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0.4 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_l40 + b_series[2].v2_l40) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0.8 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_l80 + b_series[2].v2_l80) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0.95 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "(b_series[2].v1_l95 + b_series[2].v2_l95) * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 1 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_le * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 1 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[2].v1_le * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 1 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_le * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0.95 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_l95 * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0.6 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_l60 * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio - 0 * b_series[2].thickest_ratio) * b_series[2].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 0.6 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_t60 * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 0.95 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_t95 * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[2].thickest_ratio - b_series[2].leading_ratio + 1 * (1 - b_series[2].thickest_ratio)) * b_series[2].chord_factor * chord_scale",
+     "b_series[2].v1_te * ((b_series[2].thickness_a - b_series[2].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.4 R plane",
+   "through": [
+    [
+     "b_series[3].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[3].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[3].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[3].radius_ratio * prop_radius)))",
+     "-b_series[3].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[3].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[3].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[3].radius_ratio * prop_radius)))",
+     "-b_series[3].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[3].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.4 R",
+   "plane": "Section 0.4 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.4 R",
+   "through": [
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 1 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[3].v1_te * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 1 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_te * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 0.95 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_t95 + b_series[3].v2_t95) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 0.8 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_t80 + b_series[3].v2_t80) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 0.4 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_t40 + b_series[3].v2_t40) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0.4 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_l40 + b_series[3].v2_l40) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0.8 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_l80 + b_series[3].v2_l80) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0.95 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "(b_series[3].v1_l95 + b_series[3].v2_l95) * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 1 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_le * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 1 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[3].v1_le * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 1 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_le * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0.95 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_l95 * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0.6 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_l60 * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio - 0 * b_series[3].thickest_ratio) * b_series[3].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 0.6 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_t60 * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 0.95 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_t95 * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[3].thickest_ratio - b_series[3].leading_ratio + 1 * (1 - b_series[3].thickest_ratio)) * b_series[3].chord_factor * chord_scale",
+     "b_series[3].v1_te * ((b_series[3].thickness_a - b_series[3].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.5 R plane",
+   "through": [
+    [
+     "b_series[4].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[4].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[4].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[4].radius_ratio * prop_radius)))",
+     "-b_series[4].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[4].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[4].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[4].radius_ratio * prop_radius)))",
+     "-b_series[4].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[4].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.5 R",
+   "plane": "Section 0.5 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.5 R",
+   "through": [
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 1 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[4].v1_te * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 1 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_te * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 0.95 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_t95 + b_series[4].v2_t95) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 0.8 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_t80 + b_series[4].v2_t80) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 0.4 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_t40 + b_series[4].v2_t40) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0.4 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_l40 + b_series[4].v2_l40) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0.8 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_l80 + b_series[4].v2_l80) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0.95 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "(b_series[4].v1_l95 + b_series[4].v2_l95) * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 1 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_le * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 1 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[4].v1_le * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 1 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_le * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0.95 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_l95 * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0.6 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_l60 * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio - 0 * b_series[4].thickest_ratio) * b_series[4].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 0.6 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_t60 * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 0.95 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_t95 * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[4].thickest_ratio - b_series[4].leading_ratio + 1 * (1 - b_series[4].thickest_ratio)) * b_series[4].chord_factor * chord_scale",
+     "b_series[4].v1_te * ((b_series[4].thickness_a - b_series[4].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.6 R plane",
+   "through": [
+    [
+     "b_series[5].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[5].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[5].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[5].radius_ratio * prop_radius)))",
+     "-b_series[5].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[5].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[5].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[5].radius_ratio * prop_radius)))",
+     "-b_series[5].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[5].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.6 R",
+   "plane": "Section 0.6 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.6 R",
+   "through": [
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 1 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[5].v1_te * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 1 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_te * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 0.95 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_t95 + b_series[5].v2_t95) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 0.8 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_t80 + b_series[5].v2_t80) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 0.4 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_t40 + b_series[5].v2_t40) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0.4 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_l40 + b_series[5].v2_l40) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0.8 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_l80 + b_series[5].v2_l80) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0.95 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "(b_series[5].v1_l95 + b_series[5].v2_l95) * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 1 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_le * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 1 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[5].v1_le * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 1 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_le * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0.95 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_l95 * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0.6 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_l60 * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio - 0 * b_series[5].thickest_ratio) * b_series[5].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 0.6 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_t60 * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 0.95 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_t95 * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[5].thickest_ratio - b_series[5].leading_ratio + 1 * (1 - b_series[5].thickest_ratio)) * b_series[5].chord_factor * chord_scale",
+     "b_series[5].v1_te * ((b_series[5].thickness_a - b_series[5].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.7 R plane",
+   "through": [
+    [
+     "b_series[6].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[6].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[6].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[6].radius_ratio * prop_radius)))",
+     "-b_series[6].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[6].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[6].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[6].radius_ratio * prop_radius)))",
+     "-b_series[6].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[6].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.7 R",
+   "plane": "Section 0.7 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.7 R",
+   "through": [
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 1 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[6].v1_te * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 1 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_te * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 0.95 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_t95 + b_series[6].v2_t95) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 0.8 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_t80 + b_series[6].v2_t80) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 0.4 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_t40 + b_series[6].v2_t40) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0.4 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_l40 + b_series[6].v2_l40) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0.8 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_l80 + b_series[6].v2_l80) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0.95 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "(b_series[6].v1_l95 + b_series[6].v2_l95) * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 1 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_le * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 1 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[6].v1_le * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 1 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_le * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0.95 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_l95 * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0.6 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_l60 * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio - 0 * b_series[6].thickest_ratio) * b_series[6].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 0.6 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_t60 * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 0.95 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_t95 * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[6].thickest_ratio - b_series[6].leading_ratio + 1 * (1 - b_series[6].thickest_ratio)) * b_series[6].chord_factor * chord_scale",
+     "b_series[6].v1_te * ((b_series[6].thickness_a - b_series[6].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.8 R plane",
+   "through": [
+    [
+     "b_series[7].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[7].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[7].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[7].radius_ratio * prop_radius)))",
+     "-b_series[7].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[7].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[7].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[7].radius_ratio * prop_radius)))",
+     "-b_series[7].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[7].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.8 R",
+   "plane": "Section 0.8 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.8 R",
+   "through": [
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 1 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[7].v1_te * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 1 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_te * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 0.95 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_t95 + b_series[7].v2_t95) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 0.8 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_t80 + b_series[7].v2_t80) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 0.4 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_t40 + b_series[7].v2_t40) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0.4 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_l40 + b_series[7].v2_l40) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0.8 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_l80 + b_series[7].v2_l80) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0.95 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "(b_series[7].v1_l95 + b_series[7].v2_l95) * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 1 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_le * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 1 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[7].v1_le * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 1 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_le * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0.95 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_l95 * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0.6 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_l60 * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio - 0 * b_series[7].thickest_ratio) * b_series[7].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 0.6 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_t60 * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 0.95 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_t95 * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[7].thickest_ratio - b_series[7].leading_ratio + 1 * (1 - b_series[7].thickest_ratio)) * b_series[7].chord_factor * chord_scale",
+     "b_series[7].v1_te * ((b_series[7].thickness_a - b_series[7].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.9 R plane",
+   "through": [
+    [
+     "b_series[8].radius_ratio * prop_radius",
+     "0 mm",
+     "-b_series[8].radius_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "b_series[8].radius_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * b_series[8].radius_ratio * prop_radius)))",
+     "-b_series[8].radius_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * b_series[8].radius_ratio * prop_radius)))"
+    ],
+    [
+     "b_series[8].radius_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * b_series[8].radius_ratio * prop_radius)))",
+     "-b_series[8].radius_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * b_series[8].radius_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.9 R",
+   "plane": "Section 0.9 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.9 R",
+   "through": [
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[8].v1_te * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_te * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.95 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_t95 + b_series[8].v2_t95) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.8 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_t80 + b_series[8].v2_t80) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.4 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_t40 + b_series[8].v2_t40) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "(0 + 1) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.4 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_l40 + b_series[8].v2_l40) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.8 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_l80 + b_series[8].v2_l80) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.95 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "(b_series[8].v1_l95 + b_series[8].v2_l95) * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_le * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[8].v1_le * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_le * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.95 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_l95 * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.6 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_l60 * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0 * b_series[8].thickest_ratio) * b_series[8].chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.6 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_t60 * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.95 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_t95 * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * b_series[8].chord_factor * chord_scale",
+     "b_series[8].v1_te * ((b_series[8].thickness_a - b_series[8].thickness_b * blade_count) * diameter - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Section 0.975 R plane",
+   "through": [
+    [
+     "tip_section_ratio * prop_radius",
+     "0 mm",
+     "-tip_section_ratio * prop_radius * tan(rake_angle)"
+    ],
+    [
+     "tip_section_ratio * prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * tip_section_ratio * prop_radius)))",
+     "-tip_section_ratio * prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * tip_section_ratio * prop_radius)))"
+    ],
+    [
+     "tip_section_ratio * prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * tip_section_ratio * prop_radius)))",
+     "-tip_section_ratio * prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * tip_section_ratio * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Section 0.975 R",
+   "plane": "Section 0.975 R plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Section 0.975 R",
+   "through": [
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale + edge_thickness / 2",
+     "b_series[8].v1_te * (tip_thickness - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_te * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.95 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_t95 + b_series[8].v2_t95) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.8 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_t80 + b_series[8].v2_t80) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.4 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_t40 + b_series[8].v2_t40) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "(0 + 1) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.4 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_l40 + b_series[8].v2_l40) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.8 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_l80 + b_series[8].v2_l80) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.95 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "(b_series[8].v1_l95 + b_series[8].v2_l95) * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_le * (tip_thickness - edge_thickness) + edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale - edge_thickness / 2",
+     "b_series[8].v1_le * (tip_thickness - edge_thickness) + edge_thickness / 2"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 1 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_le * (tip_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.95 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_l95 * (tip_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0.6 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_l60 * (tip_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio - 0 * b_series[8].thickest_ratio) * tip_chord_factor * chord_scale",
+     "0 mm"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.6 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_t60 * (tip_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 0.95 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_t95 * (tip_thickness - edge_thickness)"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio + 1 * (1 - b_series[8].thickest_ratio)) * tip_chord_factor * chord_scale",
+     "b_series[8].v1_te * (tip_thickness - edge_thickness)"
+    ]
+   ],
+   "closed": true,
+   "live": true
+  }
+ ],
+ [
+  "datum.plane",
+  {
+   "name": "Tip plane",
+   "through": [
+    [
+     "prop_radius",
+     "0 mm",
+     "-prop_radius * tan(rake_angle)"
+    ],
+    [
+     "prop_radius",
+     "-1 mm * cos(atan(pitch / (2 * pi * prop_radius)))",
+     "-prop_radius * tan(rake_angle) - 1 mm * sin(atan(pitch / (2 * pi * prop_radius)))"
+    ],
+    [
+     "prop_radius",
+     "-1 mm * sin(atan(pitch / (2 * pi * prop_radius)))",
+     "-prop_radius * tan(rake_angle) + 1 mm * cos(atan(pitch / (2 * pi * prop_radius)))"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Tip",
+   "plane": "Tip plane"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Tip",
+   "closed": true,
+   "live": true,
+   "through": [
+    [
+     "tip_chord - b_series[8].leading_ratio * tip_chord + edge_thickness / 2",
+     "edge_thickness / 2"
+    ],
+    [
+     "tip_chord - b_series[8].leading_ratio * tip_chord",
+     "edge_thickness"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio) * tip_chord",
+     "edge_thickness"
+    ],
+    [
+     "-b_series[8].leading_ratio * tip_chord",
+     "edge_thickness"
+    ],
+    [
+     "-b_series[8].leading_ratio * tip_chord - edge_thickness / 2",
+     "edge_thickness / 2"
+    ],
+    [
+     "-b_series[8].leading_ratio * tip_chord",
+     "0 mm"
+    ],
+    [
+     "(b_series[8].thickest_ratio - b_series[8].leading_ratio) * tip_chord",
+     "0 mm"
+    ],
+    [
+     "tip_chord - b_series[8].leading_ratio * tip_chord",
+     "0 mm"
+    ]
+   ]
+  }
+ ],
+ [
+  "feature.loft",
+  {
+   "sections": [
+    "Root section",
+    "Section 0.2 R",
+    "Section 0.3 R",
+    "Section 0.4 R",
+    "Section 0.5 R",
+    "Section 0.6 R",
+    "Section 0.7 R",
+    "Section 0.8 R",
+    "Section 0.9 R",
+    "Section 0.975 R",
+    "Tip"
+   ],
+   "name": "Blade"
+  }
+ ],
+ [
+  "measure.section",
+  {
+   "of": "Blade",
+   "plane": "yz",
+   "offset": "0.7 * prop_radius",
+   "torsion": false
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]

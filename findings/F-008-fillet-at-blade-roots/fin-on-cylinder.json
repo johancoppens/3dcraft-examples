@@ -1,0 +1,183 @@
+[
+ [
+  "feature.cylinder",
+  {
+   "radius": "50 mm",
+   "height": "200 mm",
+   "position": [
+    0,
+    0,
+    "-100 mm"
+   ],
+   "name": "Hub"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Root",
+   "plane": "yz",
+   "offset": "20 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Root",
+   "closed": true,
+   "live": true,
+   "through": [
+    [
+     "40 mm * cos(0 deg)",
+     "12 mm * sin(0 deg)"
+    ],
+    [
+     "40 mm * cos(30 deg)",
+     "12 mm * sin(30 deg)"
+    ],
+    [
+     "40 mm * cos(60 deg)",
+     "12 mm * sin(60 deg)"
+    ],
+    [
+     "40 mm * cos(90 deg)",
+     "12 mm * sin(90 deg)"
+    ],
+    [
+     "40 mm * cos(120 deg)",
+     "12 mm * sin(120 deg)"
+    ],
+    [
+     "40 mm * cos(150 deg)",
+     "12 mm * sin(150 deg)"
+    ],
+    [
+     "40 mm * cos(180 deg)",
+     "12 mm * sin(180 deg)"
+    ],
+    [
+     "40 mm * cos(210 deg)",
+     "12 mm * sin(210 deg)"
+    ],
+    [
+     "40 mm * cos(240 deg)",
+     "12 mm * sin(240 deg)"
+    ],
+    [
+     "40 mm * cos(270 deg)",
+     "12 mm * sin(270 deg)"
+    ],
+    [
+     "40 mm * cos(300 deg)",
+     "12 mm * sin(300 deg)"
+    ],
+    [
+     "40 mm * cos(330 deg)",
+     "12 mm * sin(330 deg)"
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Tip",
+   "plane": "yz",
+   "offset": "200 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Tip",
+   "closed": true,
+   "live": true,
+   "through": [
+    [
+     "30 mm * cos(0 deg)",
+     "6 mm * sin(0 deg)"
+    ],
+    [
+     "30 mm * cos(30 deg)",
+     "6 mm * sin(30 deg)"
+    ],
+    [
+     "30 mm * cos(60 deg)",
+     "6 mm * sin(60 deg)"
+    ],
+    [
+     "30 mm * cos(90 deg)",
+     "6 mm * sin(90 deg)"
+    ],
+    [
+     "30 mm * cos(120 deg)",
+     "6 mm * sin(120 deg)"
+    ],
+    [
+     "30 mm * cos(150 deg)",
+     "6 mm * sin(150 deg)"
+    ],
+    [
+     "30 mm * cos(180 deg)",
+     "6 mm * sin(180 deg)"
+    ],
+    [
+     "30 mm * cos(210 deg)",
+     "6 mm * sin(210 deg)"
+    ],
+    [
+     "30 mm * cos(240 deg)",
+     "6 mm * sin(240 deg)"
+    ],
+    [
+     "30 mm * cos(270 deg)",
+     "6 mm * sin(270 deg)"
+    ],
+    [
+     "30 mm * cos(300 deg)",
+     "6 mm * sin(300 deg)"
+    ],
+    [
+     "30 mm * cos(330 deg)",
+     "6 mm * sin(330 deg)"
+    ]
+   ]
+  }
+ ],
+ [
+  "feature.loft",
+  {
+   "sections": [
+    "Root",
+    "Tip"
+   ],
+   "name": "Fin"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "union",
+   "target": "Hub",
+   "tool": "Fin",
+   "name": "Joined"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "edges": [
+    [
+     "Hub:face(0)",
+     "Fin:side(e13,e13)"
+    ]
+   ],
+   "radius": "5 mm",
+   "name": "Root fillet"
+  }
+ ],
+ [
+  "document.check",
+  {}
+ ]
+]
