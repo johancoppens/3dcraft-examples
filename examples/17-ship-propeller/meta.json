@@ -1,0 +1,76 @@
+{
+  "id": "ship-propeller",
+  "title": "Ship propeller",
+  "summary": "series tables, lofted blades, pattern",
+  "description": "A four-blade Wageningen B4-55 ship propeller, Ø 600 mm, pitch ratio 0.8, 15° rake, its blades from the series' published tables, in polished nickel-aluminium bronze.",
+  "domain": "Marine",
+  "process": "Sand casting in nickel-aluminium bronze, blades ground and polished, bore taper machined, keyway slotted",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Eleven lofted sections whose points are formulas over a published series' table, planes turned to the pitch angle, many coupled formulas and several kernel limits worked round; one loft and one pattern, no G2 surfacing."
+  },
+  "standards": [
+    "Wageningen B-series (Oosterveld and van Oossanen 1975)",
+    "ISO 4566 (1:10 taper)",
+    "DIN 6885-1",
+    "EN 1982 (CC333G)"
+  ],
+  "materials": [
+    "Nickel-aluminium bronze CuAl10Fe5Ni5-C (EN 1982, CC333G), polished"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        185,
+        -1050,
+        406
+      ],
+      "target": [
+        0,
+        0,
+        -40
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 30
+    },
+    "look": {
+      "rotation": 90,
+      "reflections": false
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/ship-propeller.step",
+      "bodies": [
+        "Propeller"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed at the defaults with gaps: area ratio 0.5492, 0.7 R section 1226 mm², four blades to Ø 600, boss draft 2.000°, mass 19.08 kg (−0.8 %), hub cuts exact; it left the root section unscaled (thickness not counted; turn 3 now gives the reach), hub 155.3 mm; its blade-hub union was refused at several range points (F-124); about 314 steps."
+  },
+  "stats": {
+    "steps": 141,
+    "variables": 55,
+    "parameters": 3,
+    "features": 35,
+    "assertions": 10,
+    "warnings": 0,
+    "build_s": 3.16,
+    "load_s": 3.16,
+    "load_cpu_s": 9.46,
+    "file_bytes": 258217
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
