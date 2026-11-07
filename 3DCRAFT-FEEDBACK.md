@@ -161,6 +161,14 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-149](#f-149) | Bug | A weld bead made against a coped tube cannot be joined to it or checked against it ("at the edge of tolerance") | welded-truss (builder, prompt test) | welds as bodies of their own; one overlap check refused |
 | [F-150](#f-150) | Missing capability | A flat pattern from `feature.unfold` cannot be aligned with an axis; it lies along its first edge | welded-truss (review) | coping template exported at 44 degrees |
 | [F-151](#f-151) | Agent friction (minor) | `param.set` returns `assertions` as a summary object, `assert.list` as a list under the same key | welded-truss (review) | none |
+| [F-152](#f-152) | Performance | A boolean on a body whose rail is rounded by a chained fillet costs 2 to 12 s, even when it cuts nothing | skateboard-deck | five ply bodies instead of seven (13.8 s to open) |
+| [F-153](#f-153) | Bug | A straight spline whose control points are unevenly spaced is refused as crossing itself or having a cusp | skateboard-deck | evenly spaced points |
+| [F-154](#f-154) | Performance | Plating the back skin of a plate takes 1.9 s against 0.14 s for the first plate | skateboard-deck | plies as sweeps, not offsets of offsets |
+| [F-155](#f-155) | Agent friction | An over-size fillet on a thin pair of faces is refused about chain continuation, not with the largest radius that fits | skateboard-deck | radius found by trial |
+| [F-156](#f-156) | Missing capability | The stretch `measure.developability` reports cannot be an output or an assertion | skateboard-deck | stretch quoted, not asserted |
+| [F-157](#f-157) | Bug | `document.interference` cannot decide stacked bodies whose faces are coaxial cylinders and tori from concentric sweeps | skateboard-deck (review) | closed mould proven by distances instead |
+| [F-158](#f-158) | Missing capability | Chamfers along the rims of swept freeform faces are refused where a neighbouring face changes | skateboard-deck (prompt test) | the tester cut the rims with swept strips |
+| [F-159](#f-159) | Missing capability (minor) | A sweep that makes a spindle torus gives a freeform face, not a torus | skateboard-deck (prompt test) | README says freeform |
 
 ## F-001
 
@@ -265,6 +273,7 @@ six sections lofted, patterned and joined regenerate in 40 s using 1.5 GB. At 0.
 points, 11.6 s and 0.56 GB. On the headphone stand, elliptic formula sections had 35 to 86 control
 points each even at 0.001 mm, and lofted and cut they cost 2.0 s against 0.13 s for live splines. **Should:** a curve fitted to what it needs (curvature-adaptive, or a separate
 fitting tolerance), so a formula section does not cost hundreds of points at the topological tolerance.
+On the skateboard deck, `sketch.curve` profiles fitted 180 control points at 1e-6 in, and plating their network took 6.5 s.
 
 ## F-011
 
@@ -360,6 +369,7 @@ without its corner chambers):
 [`findings/F-020-thickness-proof-on-profile/repro.json`](findings/F-020-thickness-proof-on-profile/repro.json). On the turned bowl's revolved spline wall
 it finds 7.000 mm but proves `atLeast` 0, and takes 5.6 s (50 s on a shelled bowl): reproducer
 [`findings/F-020-thickness-proof-on-profile/spline-wall-repro.json`](findings/F-020-thickness-proof-on-profile/spline-wall-repro.json).
+On the skateboard deck's plies, a `thickness` assertion reads about 4e-6 in at the rail walls (prompt test); distances between a ply's own concentric faces prove it instead.
 
 ## F-021
 
@@ -726,6 +736,7 @@ a ball piece. Reproducers: [`findings/F-066-rod-end-round/`](findings/F-066-rod-
 (`proven: false` in the detail) without the not-proven warning other measures give, and its message gives
 the angles in radians while the bound is written in degrees. Reproducer:
 [`findings/F-067-draft-proof/repro.json`](findings/F-067-draft-proof/repro.json).
+Likewise a `curvature` assertion built on `measure.developability`'s sampled grid (33 x 33 points) reports passed, not notProven (skateboard deck).
 
 ## F-068
 
@@ -848,6 +859,7 @@ their own axis, so they show bands across them that read as short grain, and the
 tenons) show long grain instead of end grain. **Should:** a grain frame that follows the feature or the
 pattern instance that made the faces. The prompt test of the stool found a partial way: `face.appearance` on a
 selection can give the faces of one lump their own pattern frame.
+Nor can grain follow a bent body: the skateboard deck's plies show the solid texture's growth rings as nested U-shaped contours on every kick, where real veneer runs straight on round the bend; the example takes the pith far to the side so the grain reads straight.
 
 ## F-084
 
@@ -1274,6 +1286,7 @@ unit error's list. Reproducer:
 converge: the walk from the start of a projection did not settle"; whether it fails flips with the fourth
 decimal of the data and with the vertical exaggeration. The Mont Ventoux relief could not draw its road. Reproducer:
 [`findings/F-135-trim-projection/repro.json`](findings/F-135-trim-projection/repro.json).
+The skateboard deck met it on a network of line-and-arc chains: trimming along z does not converge, and projecting to closest points instead is refused at a C0 knot line, with advice to project along a direction. Reproducer: [`findings/F-135-trim-over-arc-network/repro.json`](findings/F-135-trim-over-arc-network/repro.json).
 
 ## F-136
 
@@ -1308,6 +1321,7 @@ extrusion of a face. Reproducer:
 **Bug.** `feature.plate` of a trimmed patch of the terrain is refused: "along F9:startEdge(e8,e8): the joint
 reaches past the faces' surfaces continued beyond their borders". Reproducer:
 [`findings/F-140-plate-of-trim/repro.json`](findings/F-140-plate-of-trim/repro.json).
+The skateboard deck's top, a network trimmed by the deck's outline, is refused the same way ("the joint reaches past the faces' surfaces"). Reproducer: [`findings/F-140-plate-of-trimmed-deck-top/repro.json`](findings/F-140-plate-of-trimmed-deck-top/repro.json).
 
 ## F-141
 
@@ -1370,3 +1384,35 @@ direction that follows a parameter (a handle's lean) cannot be written.
 ## F-151
 
 **Agent friction.** The result of `param.set` carries `assertions` as a summary object (counts), while `assert.list` returns `assertions` as a list of the assertions; a script that reads both by the same key breaks. **Should:** one shape for one key (for example `assertionSummary` in `param.set`).
+
+## F-152
+
+**Performance.** After a chained `feature.fillet` rounds the rail of a swept deck (the slow faces are the round's spline pieces where the vertical outline arcs meet the kicks), any `feature.boolean` on that body costs 2.3 s in the minimal case against 0.09 s without the round (`without-boolean.json` beside the reproducer), and 6 to 12 s on the real deck, even with a box round the whole deck that cuts nothing. Splitting the rounded deck into its seven plies therefore costs 12.6 s, and the honest seven-ply model (`deck-plies.json`) opens in 13.8 s. The F-132 family. **Workaround in the example:** five bodies, each outer pair of long-grain plies one body (`workaround-five-bodies.json` was the prototype). Reproducer: [`findings/F-152-boolean-after-rail-round/repro.json`](findings/F-152-boolean-after-rail-round/repro.json)
+
+## F-153
+
+**Bug.** A `sketch.spline` through collinear points that are unevenly spaced is refused as "crosses or touches itself, or has a cusp"; the same line with evenly spaced points passes (`evenly-spaced.json` beside the reproducer). A straight spline is degenerate but valid, and its spacing should not decide. Reproducer: [`findings/F-153-straight-spline-uneven-points/repro.json`](findings/F-153-straight-spline-uneven-points/repro.json)
+
+## F-154
+
+**Performance.** `feature.plate` of a uniform B-spline network sheet takes 0.14 s; plating the back skin of that plate (the next ply of a laminate, an offset of an offset) takes 1.9 s, and each thin-slab cut of it 0.7 s. **Workaround in the example:** each ply is its own sweep between exact radii. Reproducer: [`findings/F-154-plate-of-plate/repro.json`](findings/F-154-plate-of-plate/repro.json)
+
+## F-155
+
+**Agent friction.** A chained `feature.fillet` on the rail of a thin swept pair (1/8 in) that is too large for it (0.092 in at the deck's 70 degree nose edge; it reaches about 1.43 r down the edge) is refused with an error about continuing the chain, not with the largest radius that fits, which the command's documentation promises for over-size rounds. The refusal itself is right (the geometry does not fit: `builds-at-0.09-in.json` beside the reproducer builds). Reproducer: [`findings/F-155-fillet-thin-face-pair/repro.json`](findings/F-155-fillet-thin-face-pair/repro.json)
+
+## F-156
+
+**Missing capability.** `measure.developability` reports how far a face must stretch to lie flat (0.0113 in on the deck's bends), but `variable.measure` has no such measure, so the stretch cannot be an output or bound by an assertion; only the Gaussian curvature can. Reproducer: [`findings/F-156-stretch-output/repro.json`](findings/F-156-stretch-output/repro.json)
+
+## F-157
+
+**Bug.** On the skateboard deck, five plies and two mould halves made by sweeps of concentric arcs along one path (exact coaxial cylinders in the flats and kicks), `document.interference` answers "unknown" for 6 of 21 pairs: every ply-to-ply contact and both deck-to-mould contacts ("an imprinted curve ... at the edge of tolerance", "tangent or nearly coincident over too large an area", "go through each other by between half and twice the tolerance"). Touching faces that are the same cylinder are the easiest case of contact. The F-130 family, here on analytic surfaces. Reproduce: in `examples/26-skateboard-deck`, `document.interference`. **Workaround in the example:** the closed mould's gap is proven by `measure.distance`.
+
+## F-158
+
+**Missing capability.** The skateboard deck's prompt tester chamfered the rim of a mould half's swept face (cylinders and freeform bends) and was refused: chained, "a chain of freeform chamfers is built where both faces go on across the vertex, both edges convex or both concave, and not yet where one of the faces changes"; one edge, "it cannot stop where the edge goes on smoothly into the next edge"; all together, "chamfers of freeform edges that meet in a vertex are not built yet". A chamfer round the rim of a moulded face is ordinary. No reproducer kept; the example chamfers its blocks before cutting them.
+
+## F-159
+
+**Missing capability (minor).** A 16.25 in arc swept round a 3 in bend (the skateboard deck's concave through its kicks) is a spindle torus (minor radius larger than the major one); 3DCraft keeps the sweep's flats as exact cylinders but the bends as freeform faces. Their curvature matches the torus's closed form, but measures, offsets and booleans lose the analytic surface. **Should:** the torus type for spindle tori too, where the face used is one sheet of it.

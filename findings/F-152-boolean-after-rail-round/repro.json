@@ -1,0 +1,19 @@
+[
+ ["variable.set", {"name": "kick", "expr": "20 deg"}],
+ ["variable.set", {"name": "bend", "expr": "75 mm"}],
+ ["variable.set", {"name": "flat", "expr": "250 mm"}],
+ ["variable.set", {"name": "half", "expr": "400 mm"}],
+ ["variable.set", {"name": "rise", "expr": "bend * (1 - cos(kick)) + (half - flat - bend * sin(kick)) * tan(kick)"}],
+ ["sketch.create", {"name": "Centre line", "plane": "zx"}],
+ ["sketch.path", {"sketch": "Centre line", "start": ["rise", "-half"], "segments": [{"line": ["bend * (1 - cos(kick))", "-flat - bend * sin(kick)"]}, {"arc": ["0 mm", "-flat"], "center": ["bend", "-flat"], "clockwise": true}, {"line": ["0 mm", "flat"]}, {"arc": ["bend * (1 - cos(kick))", "flat + bend * sin(kick)"], "center": ["bend", "flat"], "clockwise": true}, {"line": ["rise", "half"]}]}],
+ ["datum.plane", {"through": [["-half", "0 mm", "rise"], ["-half", "1 mm", "rise"], ["-half + sin(kick) * 1 mm", "0 mm", "rise + cos(kick) * 1 mm"]], "name": "End plane"}],
+ ["sketch.create", {"name": "Section", "plane": "End plane"}],
+ ["sketch.rect", {"sketch": "Section", "from": ["-130 mm", "-11 mm"], "to": ["130 mm", "0 mm"]}],
+ ["feature.sweep", {"sketch": "Section", "path": "Centre line", "name": "Blank"}],
+ ["sketch.create", {"name": "Outline", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Outline", "start": ["-300 mm", "-100 mm"], "segments": [{"line": ["300 mm", "-100 mm"]}, {"arc": ["300 mm", "100 mm"], "center": ["300 mm", "0 mm"]}, {"line": ["-300 mm", "100 mm"]}, {"arc": "start", "center": ["-300 mm", "0 mm"]}]}],
+ ["feature.extrude", {"sketch": "Outline", "distance": "200 mm", "symmetric": true, "intersect": "Blank", "name": "Deck"}],
+ ["feature.fillet", {"edges": [["F7:copy(0)/F4:side(e5,e8)", "F7:copy(1)/F6:side(e3)"]], "radius": "3 mm", "chain": true, "name": "Rounded deck"}],
+ ["feature.block", {"size": ["1000 mm", "400 mm", "400 mm"], "position": ["-500 mm", "-200 mm", "-200 mm"], "name": "Box"}],
+ ["feature.boolean", {"op": "intersect", "target": "Box", "tool": "Rounded deck", "name": "Kept"}]
+]

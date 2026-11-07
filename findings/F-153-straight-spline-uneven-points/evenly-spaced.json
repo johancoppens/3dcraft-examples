@@ -1,0 +1,11 @@
+[
+ ["sketch.create", {"name": "Left", "plane": "zx", "offset": "-50 mm"}],
+ ["sketch.spline", {"sketch": "Left", "control": [[0, 0], [0, 10], [0, 20], [0, 180], [0, 190], [0, 200]]}],
+ ["sketch.create", {"name": "Right", "plane": "zx", "offset": "50 mm"}],
+ ["sketch.spline", {"sketch": "Right", "control": [[0, 0], [0, 10], [0, 20], [0, 180], [0, 190], [0, 200]]}],
+ ["sketch.create", {"name": "Start", "plane": "yz"}],
+ ["sketch.line", {"sketch": "Start", "from": [-50, 0], "to": [50, 0]}],
+ ["sketch.create", {"name": "End", "plane": "yz", "offset": "200 mm"}],
+ ["sketch.line", {"sketch": "End", "from": [-50, 0], "to": [50, 0]}],
+ ["feature.surface.network", {"u": ["Left", "Right"], "v": ["Start", "End"], "name": "Sheet"}]
+]

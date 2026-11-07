@@ -1,0 +1,76 @@
+{
+  "id": "skateboard-deck",
+  "title": "Skateboard deck and press mould",
+  "summary": "laminate, exact sweeps, press mould",
+  "description": "An original 8.0 x 31.75 in street deck of seven 1/16 in hard-maple plies with a dyed core, radial concave and 20 degree kicks, cut and drilled from the pressed stack, with the two MDF halves of its press mould.",
+  "domain": "Woodworking",
+  "process": "Veneer lamination in a press mould, template cutting and drilling, router round-over; CNC-milled MDF mould",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "Concentric arc sweeps along a line-and-arc path on a perpendicular datum plane, five laminated bodies cut with keepTool booleans, rail rounds at the kernel's limit, two mould halves from offset sweeps, and closed-form checks of a torus curvature, a section integral and the milling radius, on real deck-making knowledge."
+  },
+  "standards": [],
+  "materials": [
+    "Hard maple veneer, 1/16 in, 12 % moisture (centre core dyed blue)",
+    "MDF (mould)"
+  ],
+  "units": "in",
+  "preview": {
+    "camera": {
+      "eye": [
+        -9,
+        -34,
+        29
+      ],
+      "target": [
+        0,
+        4.5,
+        0.3
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 38
+    },
+    "look": {
+      "rotation": 90
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/skateboard-deck-mould.step",
+      "bodies": [
+        "Upper mould, closed",
+        "Lower mould"
+      ]
+    },
+    {
+      "path": "exports/skateboard-deck-template.dxf",
+      "sketch": "Deck outline"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: mass 1.2635 kg, volume 109.27 in³, kick 20°, core section and bend curvature as this example's; five bodies 2/1/1/1/2 plies, mould 7/16 in apart; 37 assertions pass at the parameter corners. Milling radius 2.763 in against 2.729: turn 4 left the mould's position open, so turns 1, 2 and 4 now give the origin, centre line and blocks. About 198 steps."
+  },
+  "stats": {
+    "steps": 143,
+    "variables": 45,
+    "parameters": 4,
+    "features": 32,
+    "assertions": 20,
+    "warnings": 0,
+    "build_s": 1.42,
+    "load_s": 1.42,
+    "load_cpu_s": 3.72,
+    "file_bytes": 133424
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

@@ -1,0 +1,5 @@
+[
+ ["feature.sphere", {"radius": "50 mm", "name": "Dome"}],
+ ["measure.developability", {"of": "Dome"}],
+ ["variable.measure", {"name": "dome_stretch", "measure": "stretch", "of": "Dome", "label": "Stretch a flat sheet needs"}]
+]
