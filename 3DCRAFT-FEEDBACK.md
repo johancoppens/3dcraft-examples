@@ -1143,6 +1143,14 @@ produced an invalid body: edge 1 is 1.0161979469882407e0 away from the surface o
 `measure.section`. The builder met the same refusal in unions of a root trimmed by a cylinder. A loft
 should never produce an edge off its face; when it cannot be built within tolerance it should say so.
 Reproducer: [`findings/F-124-loft-edge-off-face/repro.json`](findings/F-124-loft-edge-off-face/repro.json).
+The reviewer found the same at the default propeller's tip: a `measure.section` of the blade at 295 or 296 mm
+(0.983 to 0.987 R) is refused ("edge 2 is 0.914 mm away from the surface of face 0") where 294 and 297 mm
+pass (`craft3d-cli run examples/17-ship-propeller/ship-propeller.3dcraft --cmd measure.section --params
+'{"of":"One blade","plane":"yz","offset":"295 mm","torsion":false}'`); and one extra, larger section near
+the hub (a flared root) raised the load from 3.1 to 7.3 s (9.5 to 20 s of CPU) and its cut at the hub was
+refused with an edge 0.71 mm off its face. Flat sections cannot follow the cylinder ([F-007](#f-007)), so the
+propeller's root narrows by 14 % at the hub: with these refusals and [F-008](#f-008) a gallery propeller
+cannot have a castable root.
 
 ## F-125
 
