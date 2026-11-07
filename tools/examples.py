@@ -445,6 +445,17 @@ def cmd_check(ids, quick):
     return failed
 
 
+def measure_command(measure):
+    """The measure.* command an assertion's or output's measure kind stands for (volumeBelow is
+    measure.below, floatingGM is measure.floating, sectionArea is measure.section, ...)."""
+    for prefix, command in (("floating", "measure.floating"), ("section", "measure.section"),
+                            ("volumeBelow", "measure.below"), ("centroidBelow", "measure.below"),
+                            ("symmetric", "measure.symmetry")):
+        if measure.startswith(prefix):
+            return command
+    return f"measure.{measure}"
+
+
 def cmd_coverage():
     result, _ = run_cli(["commands"], cwd=ROOT)
     if result.returncode != 0:
@@ -460,7 +471,7 @@ def cmd_coverage():
         ids = {step_id(s) for s in script}
         ids |= {e.get("command", "file.export") for e in meta.get("exports", [])}
         # A measure used by an assertion or an output counts as its measure command.
-        ids |= {f"measure.{step_params(s).get('measure')}" for s in script
+        ids |= {measure_command(step_params(s).get("measure")) for s in script
                 if step_id(s) in ("assert.add", "variable.measure")
                 and isinstance(step_params(s), dict) and step_params(s).get("measure")}
         for c in ids:
