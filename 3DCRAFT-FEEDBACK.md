@@ -233,6 +233,9 @@ refused by `feature.shell` 1.5 mm: "the offset of the freeform face would fold o
 0.0571289 mm". A 30 × 20 mm bow section shells fine. The bound looks far smaller than the section's
 curvature allows. Reproducer (44 steps):
 [`findings/F-009-shell-of-lofted-hull/repro.json`](findings/F-009-shell-of-lofted-hull/repro.json).
+The RC yacht's prompt tester met the same family: `feature.thicken` of the lofted deck's cambered face is
+refused at 8 mm ("the freeform face has a pole or a border or corner drawn into a point, where its normal and
+so its offset are not defined") and built at 7 mm (no reproducer kept).
 
 ## F-010
 

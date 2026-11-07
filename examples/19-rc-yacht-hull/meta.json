@@ -1,0 +1,87 @@
+{
+  "id": "rc-yacht-hull",
+  "title": "RC yacht hull",
+  "summary": "lofted hull, NACA foils, flotation",
+  "description": "An International One Metre radio-sailing yacht to the IOM Class Rules 2026: a glass hull lofted from a table of stations with a painted deck, a tapered carbon fin, a lead bulb sized by its mass and a carbon rudder, floated at the class's 4 kg in fresh water.",
+  "domain": "Naval design",
+  "process": "Glass/epoxy hull and deck laid up in female moulds off a milled plug, carbon/epoxy fin and rudder moulded, lead bulb cast",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "A lofted hull from a table of offsets with a faired bumper section, plated with joints, NACA sections from formulas, and a mass and hydrostatics budget coupled across seven bodies with class-rule knowledge."
+  },
+  "standards": [
+    "IOM Class Rules 2026 (Release 2)",
+    "Equipment Rules of Sailing 2025-2028",
+    "NACA four-digit sections (Abbott and von Doenhoff, eq. 6.2)"
+  ],
+  "materials": [
+    "Glass fibre and epoxy laminate, white gelcoat; deck painted grey-blue",
+    "Carbon fibre and epoxy",
+    "Lead",
+    "Elastomer"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -560,
+        -900,
+        430
+      ],
+      "target": [
+        500,
+        0,
+        -150
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 30
+    },
+    "look": {
+      "rotation": 180,
+      "light": [
+        60,
+        84
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/rc-yacht-hull.step",
+      "bodies": [
+        "Hull",
+        "Deck",
+        "Transom",
+        "Bow bumper",
+        "Fin",
+        "Bulb",
+        "Rudder"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: bulb 2300.0007 g, waterline +0.50 mm, draft 415.5 mm, hull depth 54.50 mm, waterline length 994.4 mm, beam 157.8 mm, GM 201.5 mm, keel 2467.7 g, corrector 306.4 g; 14 checks pass; deck thicken refused at 8 mm (pole), interference of hull and bumper unknown (F-130); about 250 steps."
+  },
+  "stats": {
+    "steps": 221,
+    "variables": 72,
+    "parameters": 2,
+    "features": 39,
+    "assertions": 13,
+    "warnings": 0,
+    "build_s": 2.82,
+    "load_s": 2.75,
+    "load_cpu_s": 8.21,
+    "file_bytes": 146182
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
