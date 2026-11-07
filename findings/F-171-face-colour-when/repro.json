@@ -1,0 +1,8 @@
+[
+ ["variable.set", {"name": "count", "expr": "1"}],
+ ["feature.block", {"size": ["20 mm", "20 mm", "3 mm"], "name": "First"}],
+ ["feature.block", {"size": ["20 mm", "20 mm", "3 mm"], "position": [0, 0, "3 mm"], "name": "Second", "when": "count >= 2"}],
+ ["face.appearance", {"faces": ["First:face(1)"], "color": "#f4f3ee", "metallic": 0, "roughness": 0.75}],
+ ["face.appearance", {"faces": ["Second:face(1)"], "color": "#f4f3ee", "metallic": 0, "roughness": 0.75}],
+ ["document.check", {}]
+]

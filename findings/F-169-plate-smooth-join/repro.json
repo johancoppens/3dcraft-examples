@@ -1,0 +1,17 @@
+[
+ ["document.setTolerance", {"linear": 0.001}],
+ ["sketch.create", {"name": "Tail end", "plane": "yz", "offset": "0 mm"}],
+ ["sketch.spline", {"sketch": "Tail end", "through": [[20, 60], [0, 80], [-20, 60], [0, 40]], "closed": true}],
+ ["sketch.create", {"name": "Middle", "plane": "yz", "offset": "60 mm"}],
+ ["sketch.spline", {"sketch": "Middle", "through": [[40, 70], [0, 110], [-40, 70], [0, 30]], "closed": true}],
+ ["sketch.create", {"name": "Head end", "plane": "yz", "offset": "140 mm"}],
+ ["sketch.spline", {"sketch": "Head end", "through": [[30, 75], [0, 100], [-30, 75], [0, 45]], "closed": true}],
+ ["feature.loft", {"sections": ["Tail end", "Middle", "Head end"], "name": "Figure"}],
+ ["sketch.create", {"name": "Cutting plane", "plane": "zx", "offset": "39 mm"}],
+ ["sketch.rect", {"sketch": "Cutting plane", "from": [-50, -50], "to": [250, 250]}],
+ ["feature.fill", {"sketch": "Cutting plane", "name": "Cutting sheet"}],
+ ["feature.boolean", {"op": "intersect", "target": "Cutting sheet", "tool": "Figure", "keepTool": true, "name": "Section"}],
+ ["document.edges", {"feature": "Section"}],
+ ["feature.plate", {"faces": ["Section:copy(0)/Cutting sheet:startCap()"], "thickness": "3 mm", "side": "mid", "name": "Layer"}],
+ ["document.check", {}]
+]

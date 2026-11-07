@@ -353,7 +353,7 @@ turns out to block the honest version, the builder stops and reports instead of 
   be told apart.
 - **Parameters:** length, board (choice from a table of real boards and their thicknesses).
 - **Proves:** every layer is one flat plate of the board's thickness; the layer count; every layer but the
-  middle pair carries its neighbour's mark, within the layer; the boards' total area; the figure stands
+  middle pair has its place marked on its inner neighbour, within that layer; the boards' total area; the figure stands
   (its centre of mass over its feet).
 - **Risks:** a straight-walled layer from a section is a known gap (F-139: a face cannot be extruded or
   become a profile): find an honest, general way first, or report; tens of freeform slices against the load
@@ -408,11 +408,13 @@ turns out to block the honest version, the builder stops and reports instead of 
 
 ## Coverage
 
-Across the 21, every modelling command in scope is used at least once (`tools/examples.py coverage`). Where
-a family is carried: sketches and constraints (1–21), solids from primitives and extrusions (1, 2, 7, 12),
-revolve (1, 4, 14, 15, 20), loft (17, 19, 20), sweep (13, 14, 16, 20), developable and plate (8), unfold (8),
-fold (9), sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (20), plate (19), draft (20; 13 could not: F-101),
-thread (1, 7, 15), pattern and mirror (3, 7, 11, 12, 14, 16, 17), booleans (most), text (3, 5), curves from
-formulas (17, 19), tables (1, 5, 19), conditional features (3), named sets (7), datums (11, 16), cut list
-(11), section and hydrostatic measures (2, 19, 21), clearance, thickness and draft checks (5, 7, 10, 12, 13),
-exports to STEP, 3MF, DXF and SVG (1, 3, 5, 6, 8, 9, 12, 21).
+Across the 26, 70 of the 88 commands in scope are used (`tools/examples.py coverage` lists the rest: direct
+face edits, some surfaces and datums, `body.split` and a few measures). Where a family is carried: sketches and
+constraints (1–26), solids from primitives and extrusions (1, 2, 7, 12, 22), revolve (1, 4, 14, 15, 20),
+loft (17, 19, 20, 25), sweep (13, 14, 16, 20, 25, 26), developable and plate (8), unfold (8, 24), fold (9),
+sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (20, 23), plate (19, 25), draft (20, 23;
+13 could not: F-101), thread (1, 7, 15), pattern and mirror (3, 7, 11, 12, 14, 16, 17, 22, 24, 25), booleans
+(most), text (3, 5), curves from formulas (17, 19), tables (1, 5, 19, 24, 25), conditional features (3, 22,
+25), named sets (7, 23), datums (11, 16, 24, 26), document units (26), cut list (11, 22, 25), interference
+(22), section and hydrostatic measures (2, 19, 21), clearance, thickness and draft checks (5, 7, 10, 12, 13,
+23), exports to STEP, 3MF, DXF and SVG (1, 3, 5, 6, 8, 9, 12, 21–26).

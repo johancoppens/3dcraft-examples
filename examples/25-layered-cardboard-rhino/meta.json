@@ -1,0 +1,381 @@
+{
+  "id": "layered-cardboard-rhino",
+  "title": "Layered cardboard rhino",
+  "summary": "freeform figure, straight-walled laser layers, engraved marks",
+  "description": "An original stylised rhinoceros, 300 mm from rump to lip, laser-cut from white-faced corrugated board in 30 straight-walled layers of its sections; each layer but the middle pair goes onto its neighbour's engraved outline.",
+  "domain": "Laser cutting, art",
+  "process": "CO2 laser cutting and vector engraving, glued with PVA",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "A table-driven lines plan built as live-spline lofts plus a swept tail, 30 conditional and mirrored plate bodies, marks from a shifted boolean and their mirror, tolerance limits handled with clearance formulas, and process proofs across bodies."
+  },
+  "standards": [
+    "Ball & Doggett Claycote flute range, technical specification sheet (07.25): B flute SKU 142648, E/B flute SKU 149373"
+  ],
+  "materials": [
+    "Claycote B flute corrugated board, 3 mm, 569 g/m2, white clay coat both faces",
+    "Claycote E/B twin flute corrugated board, 4.5 mm, 826 g/m2, white clay coat both faces",
+    "PVA glue"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        400,
+        520,
+        180
+      ],
+      "target": [
+        152,
+        8,
+        70
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 26
+    },
+    "look": {
+      "rotation": 90
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/layers/rhino-left-01-cut.dxf",
+      "face": "Left layer 1:copy(0)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-01-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-02-cut.dxf",
+      "face": "Left layer 2:copy(0)/Cutting sheets:copy(1)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-02-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(1)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-03-cut.dxf",
+      "face": "Left layer 3:copy(0)/Cutting sheets:copy(2)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-03-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(2)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-04-cut.dxf",
+      "face": "Left layer 4:copy(0)/Cutting sheets:copy(3)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-04-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(3)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-05-cut.dxf",
+      "face": "Left layer 5:copy(0)/Cutting sheets:copy(4)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-05-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(4)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-06-cut.dxf",
+      "face": "Left layer 6:copy(0)/Cutting sheets:copy(5)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-06-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(5)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-07-cut.dxf",
+      "face": "Left layer 7:copy(0)/Cutting sheets:copy(6)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-07-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(6)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-08-cut.dxf",
+      "face": "Left layer 8:copy(0)/Cutting sheets:copy(7)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-08-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(7)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-09-cut.dxf",
+      "face": "Left layer 9:copy(0)/Cutting sheets:copy(8)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-09-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(8)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-10-cut.dxf",
+      "face": "Left layer 10:copy(0)/Cutting sheets:copy(9)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-10-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(9)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-11-cut.dxf",
+      "face": "Left layer 11:copy(0)/Cutting sheets:copy(10)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-11-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(10)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-12-cut.dxf",
+      "face": "Left layer 12:copy(0)/Cutting sheets:copy(11)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-12-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(11)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-13-cut.dxf",
+      "face": "Left layer 13:copy(0)/Cutting sheets:copy(12)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-13-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(12)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-14-cut.dxf",
+      "face": "Left layer 14:copy(0)/Cutting sheets:copy(13)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-14-engrave.dxf",
+      "face": "Left marks:copy(0)/Cutting sheets:copy(13)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-left-15-cut.dxf",
+      "face": "Left layer 15:copy(0)/Cutting sheets:copy(14)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-01-cut.dxf",
+      "face": "Right layer 1:copy(0)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-01-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-02-cut.dxf",
+      "face": "Right layer 2:copy(0)/Cutting sheets:copy(1)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-02-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(1)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-03-cut.dxf",
+      "face": "Right layer 3:copy(0)/Cutting sheets:copy(2)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-03-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(2)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-04-cut.dxf",
+      "face": "Right layer 4:copy(0)/Cutting sheets:copy(3)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-04-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(3)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-05-cut.dxf",
+      "face": "Right layer 5:copy(0)/Cutting sheets:copy(4)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-05-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(4)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-06-cut.dxf",
+      "face": "Right layer 6:copy(0)/Cutting sheets:copy(5)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-06-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(5)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-07-cut.dxf",
+      "face": "Right layer 7:copy(0)/Cutting sheets:copy(6)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-07-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(6)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-08-cut.dxf",
+      "face": "Right layer 8:copy(0)/Cutting sheets:copy(7)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-08-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(7)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-09-cut.dxf",
+      "face": "Right layer 9:copy(0)/Cutting sheets:copy(8)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-09-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(8)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-10-cut.dxf",
+      "face": "Right layer 10:copy(0)/Cutting sheets:copy(9)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-10-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(9)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-11-cut.dxf",
+      "face": "Right layer 11:copy(0)/Cutting sheets:copy(10)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-11-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(10)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-12-cut.dxf",
+      "face": "Right layer 12:copy(0)/Cutting sheets:copy(11)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-12-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(11)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-13-cut.dxf",
+      "face": "Right layer 13:copy(0)/Cutting sheets:copy(12)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-13-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(12)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-14-cut.dxf",
+      "face": "Right layer 14:copy(0)/Cutting sheets:copy(13)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-14-engrave.dxf",
+      "face": "Right marks:copy(0)/Cutting sheets:copy(13)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "path": "exports/layers/rhino-right-15-cut.dxf",
+      "face": "Right layer 15:copy(0)/Cutting sheets:copy(14)/Cutting sheet:startCap()",
+      "origin": "model"
+    },
+    {
+      "command": "cut.export",
+      "path": "exports/rhino-parts.dxf",
+      "bodies": [
+        "Left layer 1",
+        "Left layer 2",
+        "Left layer 3",
+        "Left layer 4",
+        "Left layer 5",
+        "Left layer 6",
+        "Left layer 7",
+        "Left layer 8",
+        "Left layer 9",
+        "Left layer 10",
+        "Left layer 11",
+        "Left layer 12",
+        "Left layer 13",
+        "Left layer 14",
+        "Left layer 15"
+      ],
+      "width": "1240 mm",
+      "gap": "5 mm"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed but for one check the turns worded ambiguously: 15 straight-walled layers a side (10 on E/B), board area and mass within 0.5 % of this example's, centre of mass between the feet, cut and engrave DXFs per layer on one origin, checks at all 22 lengths and boards. It read the 90 % mark coverage per layer (about 85 % where a leg begins); turns 4 and 5 now say 'together'. About 389 steps."
+  },
+  "stats": {
+    "steps": 201,
+    "variables": 11,
+    "parameters": 2,
+    "features": 95,
+    "assertions": 11,
+    "warnings": 0,
+    "build_s": 3.38,
+    "load_s": 3.38,
+    "load_cpu_s": 8.28,
+    "file_bytes": 383759
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

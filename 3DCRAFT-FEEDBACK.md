@@ -178,6 +178,11 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-166](#f-166) | Missing capability | No undercut check along a pull direction: a region shadowed by other material passes every draft check | snap-fit-enclosure (review) | hidden columns and overlap assertions stand in for it (about 27 steps) |
 | [F-167](#f-167) | Missing capability (minor) | No polycarbonate or clear-plastic material preset | snap-fit-enclosure (review) | lid is the ABS preset with transmission and a material of its own |
 | [F-168](#f-168) | Agent friction (minor) | `view.render` with an orthographic camera reports `projection: perspective` and `view: iso` in its result | snap-fit-enclosure (review) | none |
+| [F-169](#f-169) | Bug | `feature.plate` refuses a section face whose outline has a smooth join: "the edge across a corner could not be traced" | layered-cardboard-rhino | tolerance 0.005 mm and cutting planes kept off seams |
+| [F-170](#f-170) | Missing capability | `cut.export` refuses a kerf on spline outlines, and no command offsets a spline outline | layered-cardboard-rhino | no kerf compensation; marks not inset |
+| [F-171](#f-171) | Missing capability | `face.appearance` refuses faces of a feature switched off by `when`, and takes no `when` or expression itself | layered-cardboard-rhino | length range ends at the default |
+| [F-172](#f-172) | Performance | `measure.symmetry` of two flat plates takes 7 to 14 s; of a 30-layer stack it runs out of 3 GB | layered-cardboard-rhino (builder, review) | symmetry by construction, not measured |
+| [F-173](#f-173) | Missing capability | `feature.thicken` refuses a sheet: "offsetting, shelling or thickening a sheet is not built yet" | layered-cardboard-rhino (prompt test) | feature.plate used instead |
 
 ## F-001
 
@@ -1191,6 +1196,7 @@ guitar (see [F-093](#f-093)). On the guitar an `area` assertion of one flat face
 and 5 s of CPU, while the body's area and volume were free (no minimal reproducer: on a small body it costs
 what the body's area does). Reproducer:
 [`findings/F-122-boxmax-freeform/repro.json`](findings/F-122-boxmax-freeform/repro.json).
+`boxMin` of a layered rhino's flat layer, and the whole figure's extent, are "not proven closely enough" too (prompt test); the tester counted sole faces and used `sectionExtent` instead.
 
 ## F-123
 
@@ -1315,6 +1321,7 @@ relief's load; its 16 pin holes alone cost about 6 s of CPU. Reproducer:
 (at the edge of tolerance)") when the slab's face passes near a saddle of the terrain, at tolerances 1e-6,
 1e-4 and 1e-3 alike; the relief's contour interval stops at 200 m because 250 m meets it. Reproducer:
 [`findings/F-137-slab-near-saddle/repro.json`](findings/F-137-slab-near-saddle/repro.json).
+The layered rhino met it where a cutting plane grazes a leg's cap edge or neighbouring sections' outlines coincide: booleans refuse edges between half and twice the tolerance apart, so the model lifts its marks 0.05 mm and keeps the cutting planes off the limbs' sides and centre planes by two clearance assertions.
 
 ## F-138
 
@@ -1330,6 +1337,7 @@ gets none of its outline and a face cannot be extruded ("has nothing to extrude"
 cannot be made from a section. **Should:** a sketch from a face's outline (or `sketch.project`), or an
 extrusion of a face. Reproducer:
 [`findings/F-139-layer-from-section/repro.json`](findings/F-139-layer-from-section/repro.json).
+**Found since:** an honest route exists. The layered cardboard rhino intersects a sheet with the figure to get each section face and plates it with `feature.plate` (`side: mid`, square rims): the result is the prism a laser cuts (volume = thickness x face area to 1e-10), and `cut.list` takes it as a plate. A sketch from a face's outline would still be the simpler way.
 
 ## F-140
 
@@ -1354,6 +1362,7 @@ islands of 1.75 × 2.79 mm), so an `area` filter on faces cannot tell an island 
 laser-cut stack gets pieces that fall through the bed. Nor can a part's DXF carry a second outline in its
 frame (the next layer's outline to engrave, registration marks). **Should:** a minimum region size (or
 width) in the export, regions as separate entities, and an engrave layer from another face's outline.
+The layered rhino needed 58 separate face DXFs for its cut and engrave layers. `file.export` of one face cannot name its DXF layer, so cut and engrave both land on `outline`; with `faces` it can name layers but refuses `origin`.
 
 ## F-143
 
@@ -1467,3 +1476,24 @@ direction that follows a parameter (a handle's lean) cannot be written.
 ## F-168
 
 **Agent friction (minor).** A `view.render` given an orthographic `camera` draws an orthographic picture but its result still says `"projection":"perspective","view":"iso"`, so an agent checking what it rendered is misled.
+
+## F-169
+
+**Bug.** `feature.plate` of a section face (a sheet intersected with a lofted figure) whose outline has a smooth (tangent) join where it crosses the closed loft's seam is refused at tolerance 1e-3 mm, "the edge across a corner could not be traced"; it builds at 1e-6 mm. A tangent join is not a corner to trace. Compare F-092. Reproducer: [`findings/F-169-plate-smooth-join/repro.json`](findings/F-169-plate-smooth-join/repro.json)
+The rhino's prompt tester met it again in its own model at 230 mm: "the rim could not be traced within a quarter of the tolerance in 4096 points: the spline through them is still 3.072e-7 off", and five layers then failed as dependents.
+
+## F-170
+
+**Missing capability.** `cut.export` with a `kerf` refuses a part whose outline holds splines, and no command offsets a spline outline (compare F-029 for `feature.offsetProfile`), so a laser file of an organic shape cannot be kerf-compensated, and an alignment mark cannot be inset from its neighbour's outline. **Impact:** the layered rhino's files carry no kerf, and its marks lie exactly on the neighbour's outline (a visible hairline). Reproducer: [`findings/F-170-kerf-on-splines/repro.json`](findings/F-170-kerf-on-splines/repro.json)
+
+## F-171
+
+**Missing capability.** `face.appearance` refuses a face of a feature that is switched off at the current values, takes no `when` of its own, and its colour takes no expression; so a model whose bodies come and go with a parameter (the rhino's layers, more of them at larger sizes) cannot colour the faces of the bodies that appear. Related: F-048. **Impact:** the rhino's length range stops at its default, where every layer exists. Reproducer: [`findings/F-171-face-colour-when/repro.json`](findings/F-171-face-colour-when/repro.json)
+
+## F-172
+
+**Performance.** `measure.symmetry` of the rhino's two outermost layers (two 3 mm plates, 2688 samples) takes about 7 s, of the two layer-12 plates about 14 s, and of the whole 30-layer stack it (and a face count with the `thickness` filter) was killed at the 3 GB cap. The symmetry of two mirrored plates should be cheap. **Impact:** the stack's symmetry rests on `feature.mirror` and a volume equality. Reproducer (the full build plus the measure): [`findings/F-172-symmetry-of-plates/repro.json`](findings/F-172-symmetry-of-plates/repro.json)
+
+## F-173
+
+**Missing capability.** `feature.thicken` of a flat sheet (a `feature.fill` intersected with a solid: a section to give a board's thickness) is refused: "the body is a sheet: offsetting, shelling or thickening a sheet is not built yet". The layered rhino's prompt tester met it; `feature.plate` with `side: mid` does it, as the example does (F-139). Thickening a sheet is the first thing a user reaches for.

@@ -1,0 +1,7 @@
+[
+ ["sketch.create", {"name": "Outline", "plane": "xy"}],
+ ["sketch.spline", {"sketch": "Outline", "through": [[0, 0], [60, -10], [100, 20], [70, 50], [20, 40]], "closed": true}],
+ ["feature.extrude", {"sketch": "Outline", "distance": "3 mm", "name": "Part"}],
+ ["cut.list", {}],
+ ["cut.export", {"path": "part.dxf", "kerf": "0.1 mm"}]
+]
