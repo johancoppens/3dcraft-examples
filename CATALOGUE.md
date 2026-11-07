@@ -342,18 +342,19 @@ turns out to block the honest version, the builder stops and reports instead of 
 
 ### 25. Layered cardboard rhino · `layered-cardboard-rhino` · laser cutting, art
 - **Real thing:** an original stylised standing rhinoceros about 300 mm long, built from layers of
-  cardboard laser-cut to its sections, stacked side by side (parallel to its plane of symmetry), glued, and
-  aligned on two wooden dowels through every layer; each layer engraved with its number.
+  cardboard laser-cut to its sections, stacked side by side (parallel to its plane of symmetry) and glued;
+  each layer engraved with its number and with the silhouette of the smaller layer glued onto it, so the
+  stack lines up without dowels.
 - **Shows:** the animal as one freeform body (revolves, lofts, sweeps; half of it mirrored), cut into flat,
   straight-walled layers of the board's thickness as a laser cuts them; the layers as plates (`cut.list`)
-  and their DXF with cut and engrave apart (`cut.export`); the dowel holes proven through
-  (`measure.through`); `measure.symmetry` of the figure.
+  and their DXF with cut and engrave apart (`cut.export`); each neighbour's silhouette as an engraved
+  alignment mark; `measure.symmetry` of the figure.
 - **Look:** white-faced board with kraft-brown cut edges, or a natural grey board if faces and edges cannot
   be told apart.
 - **Parameters:** length, board (choice from a table of real boards and their thicknesses).
-- **Proves:** every layer is one flat plate of the board's thickness; the layer count; both dowel holes go
-  through every layer with material round them; the boards' total area; the figure stands (its centre of
-  mass over its feet).
+- **Proves:** every layer is one flat plate of the board's thickness; the layer count; every layer but the
+  middle pair carries its neighbour's mark, within the layer; the boards' total area; the figure stands
+  (its centre of mass over its feet).
 - **Risks:** a straight-walled layer from a section is a known gap (F-139: a face cannot be extruded or
   become a profile): find an honest, general way first, or report; tens of freeform slices against the load
   budget.
