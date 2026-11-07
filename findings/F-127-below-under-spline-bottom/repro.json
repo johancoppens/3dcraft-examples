@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "Bow section", "plane": "yz"}],
+ ["sketch.line", {"sketch": "Bow section", "from": ["-10 mm", "75 mm"], "to": ["10 mm", "75 mm"]}],
+ ["sketch.spline", {"sketch": "Bow section", "control": ["e2", ["12 mm", "30 mm"], ["9 mm", "-6 mm"], ["0 mm", "-12 mm"], ["-9 mm", "-6 mm"], ["-12 mm", "30 mm"], "e1"]}],
+ ["feature.extrude", {"sketch": "Bow section", "distance": "10 mm", "name": "Bumper"}],
+ ["document.measure", {"feature": "Bumper"}],
+ ["measure.below", {"of": "Bumper", "offset": "-9.9 mm"}],
+ ["measure.below", {"of": "Bumper", "offset": "-10.1 mm"}],
+ ["measure.levelFor", {"of": "Bumper", "volume": "100 * (1 mm)^3"}]
+]

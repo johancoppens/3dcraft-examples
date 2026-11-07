@@ -135,6 +135,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-123](#f-123) | Missing capability | `measure.ray` (material along a line) cannot be an assertion or an output | guitar-body (review) | wood under each pot hole not asserted |
 | [F-124](#f-124) | Bug | An 11-section loft has an edge 1.0 mm off its own face, so every cut and boolean on it is refused | ship-propeller | root section placed to avoid it |
 | [F-125](#f-125) | Performance | `feature.pattern` × 4 at 90° of disjoint lofted blades costs 1 s where × 2 at 180° costs 0.04 s | ship-propeller | load budget |
+| [F-126](#f-126) | Performance | `feature.shell` of a lofted hull takes 18 to 29 s; `feature.plate` of its faces 0.2 s | rc-yacht-hull | laminate plated, not shelled |
+| [F-127](#f-127) | Bug | `measure.below` and `levelFor` refuse a plane between a spline body's lowest point and its control net | rc-yacht-hull | bumper not floated alone |
+| [F-128](#f-128) | Performance | `measure.floating` with wholly submerged appendages takes 2.7 s against 0.6 s for the hull alone | rc-yacht-hull | envelope floated under net weight |
+| [F-129](#f-129) | Performance | A 3 mm fillet on a small part joined to a hull makes `levelFor` and floating 2 to 3 times slower | rc-yacht-hull | bumper unrounded in the envelope |
 
 ## F-001
 
@@ -618,6 +622,9 @@ refused as "not proven closely enough to be a value: found 108.642135 mm (at mos
 whose proof bounds lie a millionth of a millimetre apart, well inside the document's tolerance of the model's
 size, is unknown rather than a value. The `extent` of an unfolded flat pattern cannot be an output either ("at least 0 mm"), on the
 square-to-round transition: [`findings/F-057-output-near-exact/repro.json`](findings/F-057-output-near-exact/repro.json).
+The RC yacht's bulb, a revolved formula curve, gives no `boxMin` or `extent` output either (found
+-20.985 mm, at least -21.014 mm):
+[`revolved-curve.json`](findings/F-057-output-near-exact/revolved-curve.json).
 **Should:** an output takes the found value when its bounds lie within
 the document's tolerance (scaled to the model, as an assertion's `tol` does), and says how far it is proven.
 
@@ -1060,6 +1067,8 @@ boolean that cuts this fillet refused it: … at the edge of tolerance"). Reprod
 does not support this: a rational freeform face as the end of an extrusion"), such as a handrail swept along a
 helix: the spiral staircase's balusters cannot run up to the rail. **Should:** `upTo` on any face. Reproducer:
 [`findings/F-115-extrude-up-to-swept-face/repro.json`](findings/F-115-extrude-up-to-swept-face/repro.json).
+The same for a revolved face of a formula curve (an RC yacht's fin down to its bulb):
+[`revolved-face.json`](findings/F-115-extrude-up-to-swept-face/revolved-face.json).
 
 ## F-116
 
@@ -1140,3 +1149,33 @@ Reproducer: [`findings/F-124-loft-edge-off-face/repro.json`](findings/F-124-loft
 **Performance.** `feature.pattern` × 4 at 90° of a lofted blade (disjoint copies) adds 1.06 s (2.4 s of CPU)
 to the propeller's regeneration, where × 2 at 180° adds 0.04 s. Reproducer:
 [`findings/F-125-pattern-of-lofts/repro.json`](findings/F-125-pattern-of-lofts/repro.json).
+
+## F-126
+
+**Performance.** `feature.shell` of a hull lofted through seven stations takes 18 to 29 s (measured on a busy
+machine), where `feature.plate` lays the same 0.6 mm laminate behind its faces in 0.2 s. A lofted hull is the
+ordinary case for a shell (see also [F-009](#f-009) and [F-028](#f-028)). Reproducer:
+[`findings/F-126-shell-of-lofted-hull/repro.json`](findings/F-126-shell-of-lofted-hull/repro.json).
+
+## F-127
+
+**Bug.** `measure.below` and `measure.levelFor` refuse a plane that passes between a spline body's lowest point
+and its control net: "nothing of body 0 was found below the plane at offset -10.1, yet it may reach 1.9 below
+it: not measured". Nothing below is an answer (zero volume), once the surface itself is shown to stay above
+the plane. Reproducer:
+[`findings/F-127-below-under-spline-bottom/repro.json`](findings/F-127-below-under-spline-bottom/repro.json).
+
+## F-128
+
+**Performance.** `measure.floating` of an RC yacht's hull with its fin and bulb takes 2.7 s, against 0.6 s for the
+hull alone, though the appendages lie wholly below the water (their buoyancy is their volume). The model floats
+the hull's envelope under the boat's weight less the appendages' buoyancy, which is exact. Also seen: a one-off
+`measure.floating` does not take outputs as its `centerOfGravity`, and an `overlap` assertion between the
+touching bumper and deck errors at the edge of tolerance (no reproducers). Reproducer:
+[`findings/F-128-floating-with-appendages/repro.json`](findings/F-128-floating-with-appendages/repro.json).
+
+## F-129
+
+**Performance.** A 3 mm fillet on the yacht's 10 mm bow bumper, joined into the hull's envelope, makes
+`levelFor` and `measure.floating` of the envelope two to three times slower. Reproducer:
+[`findings/F-129-blend-slows-hydrostatics/repro.json`](findings/F-129-blend-slows-hydrostatics/repro.json).

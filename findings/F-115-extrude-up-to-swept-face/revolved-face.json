@@ -1,0 +1,16 @@
+[
+ ["sketch.create", {"name": "Bulb profile", "plane": "xy"}],
+ ["sketch.curve", {"sketch": "Bulb profile", "x": "240 mm * t^2", "y": "210 mm * (0.2969 * t - 0.126 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1]}],
+ ["sketch.line", {"sketch": "Bulb profile", "from": "e2", "to": ["240 mm", "0 mm"]}],
+ ["sketch.line", {"sketch": "Bulb profile", "from": "e4", "to": "e1"}],
+ ["feature.revolve", {"sketch": "Bulb profile", "axis": "e6", "name": "Bulb"}],
+ ["sketch.create", {"name": "Fin section", "plane": "xy", "offset": "100 mm"}],
+ ["sketch.rect", {"sketch": "Fin section", "from": ["50 mm", "-3 mm"], "to": ["120 mm", "3 mm"]}],
+ ["feature.extrude", {"sketch": "Fin section", "upTo": "F2:side(e3)", "reversed": true, "name": "Fin down to the bulb"}],
+ ["sketch.create", {"name": "Foil section", "plane": "xy", "offset": "100 mm"}],
+ ["sketch.curve", {"sketch": "Foil section", "x": "50 mm + 75 mm * t^2", "y": "26.25 mm * (0.2969 * t - 0.126 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1]}],
+ ["sketch.curve", {"sketch": "Foil section", "x": "50 mm + 75 mm * t^2", "y": "-26.25 mm * (0.2969 * t - 0.126 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1], "start": "e1"}],
+ ["sketch.line", {"sketch": "Foil section", "from": "e2", "to": "e4"}],
+ ["feature.extrude", {"sketch": "Foil section", "distance": "100 mm", "reversed": true, "name": "Foil into the bulb"}],
+ ["feature.boolean", {"op": "subtract", "target": "Foil into the bulb", "tool": "Bulb", "keepTool": true, "name": "Foil ending on the bulb"}]
+]

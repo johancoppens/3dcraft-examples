@@ -1,0 +1,11 @@
+[
+ ["document.setTolerance", {"linear": 0.02}],
+ ["sketch.create", {"name": "Bulb profile", "plane": "xy"}],
+ ["sketch.curve", {"sketch": "Bulb profile", "x": "240 mm * t^2", "y": "210 mm * (0.2969 * t - 0.126 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1]}],
+ ["sketch.line", {"sketch": "Bulb profile", "from": "e2", "to": ["240 mm", "0 mm"]}],
+ ["sketch.line", {"sketch": "Bulb profile", "from": "e4", "to": "e1"}],
+ ["feature.revolve", {"sketch": "Bulb profile", "axis": "e6", "name": "Bulb"}],
+ ["variable.measure", {"name": "bulb_bottom", "measure": "boxMin", "of": "Bulb", "axis": "z"}],
+ ["variable.measure", {"name": "bulb_height", "measure": "extent", "of": "Bulb", "axis": "z"}],
+ ["output.list", {}]
+]
