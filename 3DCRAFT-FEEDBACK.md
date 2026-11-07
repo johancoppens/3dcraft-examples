@@ -150,6 +150,11 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-138](#f-138) | Performance (file size) | A live spline point costs about 670 bytes in the `.3dcraft` (pretty-printed JSON in an uncompressed ZIP) | ventoux-relief | grid capped at 37 × 29 |
 | [F-139](#f-139) | Missing capability | A flat face cannot become a sketch's profile or be extruded | ventoux-relief | layers are slices, not flat sheets |
 | [F-140](#f-140) | Bug | `feature.plate` of a trimmed patch is refused: "the joint reaches past the faces' surfaces" | ventoux-relief | no road drawn |
+| [F-141](#f-141) | Bug (names) | A boolean that cuts one face into pieces gives every piece the same persistent name | ventoux-relief (review) | the 16 pin tops cannot be told apart |
+| [F-142](#f-142) | Missing capability | A DXF of flat faces cannot leave out regions below a size, nor carry an engrave or registration layer | ventoux-relief (review) | laser pieces listed by hand |
+| [F-143](#f-143) | Missing capability | No non-uniform scale of a body (a stretch along one axis about a plane) | ventoux-relief (review) | exaggeration in 1073 live points |
+| [F-144](#f-144) | Missing capability (cosmetic) | Procedural marble draws smooth closed vein loops, granite blotches; no fine speckle | ventoux-relief (review) | marble dropped |
+| [F-145](#f-145) | Performance | `document.inspect` of the relief's laser product takes 10 s (45 s CPU) against 4.4 s for the same regeneration by `param.set` | ventoux-relief (review) | slow inspection |
 
 ## F-001
 
@@ -1294,3 +1299,38 @@ extrusion of a face. Reproducer:
 **Bug.** `feature.plate` of a trimmed patch of the terrain is refused: "along F9:startEdge(e8,e8): the joint
 reaches past the faces' surfaces continued beyond their borders". Reproducer:
 [`findings/F-140-plate-of-trim/repro.json`](findings/F-140-plate-of-trim/repro.json).
+
+## F-141
+
+**Bug (names).** When a boolean cuts one face into several pieces, every piece keeps the same persistent name:
+the Mont Ventoux relief's 16 pin holes cut the terrain's top, and all 16 pin tops are named
+`F42:copy(1)/F38:side(e35,…)`, so no single one can be referenced (one pin's top, one region's colour).
+Pieces of one face need names of their own, stable under edits (for example by the cutting tool's copy).
+Reproduce: in `examples/21-ventoux-relief`, `document.inspect` and look at the pins' top faces.
+
+## F-142
+
+**Missing capability.** `file.export` of a named set of flat faces to DXF cannot leave out regions below a
+minimum size: one flat face holds several separate regions (the relief's 700 m layer: the main region and
+islands of 1.75 × 2.79 mm), so an `area` filter on faces cannot tell an island from the main region, and a
+laser-cut stack gets pieces that fall through the bed. Nor can a part's DXF carry a second outline in its
+frame (the next layer's outline to engrave, registration marks). **Should:** a minimum region size (or
+width) in the export, regions as separate entities, and an engrave layer from another face's outline.
+
+## F-143
+
+**Missing capability.** There is no non-uniform scale of a body (a stretch along one axis about a plane). A
+relief's vertical exaggeration would be one transform; the Mont Ventoux relief writes it into 1073 live
+spline points instead (see [F-138](#f-138) for what that costs in the file).
+
+## F-144
+
+**Missing capability (cosmetic).** The procedural marble draws smooth, evenly spaced closed vein loops, which on
+a map object read as contour lines, and granite's `spot` and `scale` give blotches rather than a sparse fine
+speckle (as "marble" or "granite" PLA looks). The relief dropped the marble.
+
+## F-145
+
+**Performance.** `document.inspect` of the Mont Ventoux relief in its laser-cut product takes 10 s wall and 45 s
+of CPU, against 4.4 s and 6.3 s for the same regeneration through `param.set`. Reproduce: in
+`examples/21-ventoux-relief`, `param.set` the product to the layers, then `document.inspect`.
