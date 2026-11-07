@@ -1,0 +1,118 @@
+[
+ [
+  "sketch.create",
+  {
+   "name": "Outline",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Outline",
+   "closed": true,
+   "through": [
+    [
+     0,
+     0
+    ],
+    [
+     80,
+     10
+    ],
+    [
+     140,
+     50
+    ],
+    [
+     165,
+     120
+    ],
+    [
+     140,
+     240
+    ],
+    [
+     145,
+     330
+    ],
+    [
+     100,
+     420
+    ],
+    [
+     0,
+     380
+    ],
+    [
+     -100,
+     440
+    ],
+    [
+     -150,
+     330
+    ],
+    [
+     -140,
+     240
+    ],
+    [
+     -165,
+     120
+    ],
+    [
+     -140,
+     50
+    ],
+    [
+     -80,
+     10
+    ]
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Outline",
+   "distance": "45 mm",
+   "name": "Slab"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "edges": [
+    [
+     "F2:side(e17)",
+     "F2:startCap(e17)"
+    ],
+    [
+     "F2:piece(1)/F2:side(e17)",
+     "F2:startCap(e17)"
+    ]
+   ],
+   "radius": "6.35 mm",
+   "chain": true,
+   "name": "Roundover"
+  }
+ ],
+ [
+  "measure.continuity",
+  {
+   "edge": "F3:between[F3:copy(0)/F2:startCap(e17),F3:fillet(0,1)]"
+  }
+ ],
+ [
+  "measure.continuity",
+  {
+   "edge": "F3:between[F3:copy(0)/F2:side(e17),F3:fillet(0,1)]"
+  }
+ ],
+ [
+  "measure.continuity",
+  {
+   "edge": "F3:between[F3:copy(0)/F2:piece(1)/F2:side(e17),F3:fillet(0,0)]"
+  }
+ ]
+]

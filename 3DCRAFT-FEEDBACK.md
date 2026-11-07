@@ -128,6 +128,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-116](#f-116) | Performance | Joining a helical swept rail to 42 balusters takes 7.5 s | spiral-staircase | balusters stop 0.5 mm under the rail |
 | [F-117](#f-117) | Performance, proof weakness | `boxMax` of a helical swept tube takes 63 s (250 s CPU) and is not proven; distances to it are loose | spiral-staircase | rail's clearances not asserted |
 | [F-118](#f-118) | Bug | A top view of 14 stacked rings is refused ("too many overlapping triangles"); projected views draw hidden bodies | spiral-staircase | no plan or elevation drawing |
+| [F-119](#f-119) | Missing capability | No measure of the angle between two planar faces, edges or directions | spiral-staircase (review) | tread angle and going asserted on formulas only |
+| [F-120](#f-120) | Bug | `measure.continuity` of a fillet's edge on an extruded closed-spline wall reports no continuity (exhausted, 8 s) | guitar-body | roundover not proven on the sides |
+| [F-121](#f-121) | Missing capability | `measure.continuity` refuses a fillet's edge on a freeform (network) face | guitar-body | carved top's roundover not proven |
+| [F-122](#f-122) | Bug (proof), performance | `boxMax` of a body with a freeform top is not proven closely enough to be a value, and costs seconds | guitar-body | depths measured to the top face |
 
 ## F-001
 
@@ -238,7 +242,9 @@ regeneration, like the ends.
 
 **Missing capability (minor).** There is no command that makes a surface through a grid of points (or from
 a B-spline surface's control points). A loft through one spline per row works well (a 60 × 40 grid opens in
-1.1 s), so this is about convenience and fidelity across the rows, not a blocker.
+1.1 s), so this is about convenience and fidelity across the rows, not a blocker. The guitar body's carved top, a
+sheet from a grid of control points, took 24 curve sketches and 15 knot formulas to make an exact Gordon
+network (`feature.surface.network`).
 
 ## F-013
 
@@ -494,6 +500,8 @@ bands. **Workaround in the example:** the preview's light direction.
 On a saturated face the shadow renders desaturated (tan on the headphone stand's yellow base) rather than a
 darker yellow.
 The jagged shadow line also crosses curved faces (a fillet on the headphone stand).
+On a tall model of thin bars (the spiral staircase's balusters) the ground shadow on a plain background
+draws as faint streaks.
 
 ## F-044
 
@@ -1061,3 +1069,36 @@ overlapping triangles to decide what is hidden; use a coarser `tolerance` or a s
 also draw hidden bodies (the staircase's headroom gauges) and take no `bodies` to leave them out, so the
 staircase ships no plan or elevation drawing. Reproducer:
 [`findings/F-118-plan-view-stacked-rings/repro.json`](findings/F-118-plan-view-stacked-rings/repro.json).
+
+## F-119
+
+**Missing capability.** No `measure.*`, `variable.measure` or `assert.add` measure gives the angle between
+two planar faces, two straight edges, or a face and an axis (`jointAngle` is for assemblies). The spiral
+staircase's tread angle, and with it the going at the walking line, can be asserted only on the formulas
+that made them, not proven from the geometry; the same holds for a bend angle, a mitre or a splay. **Should:**
+an `angle` measure between two subjects (faces, edges, datum planes and axes).
+
+## F-120
+
+**Bug.** `measure.continuity` of the edge between a roundover (`feature.fillet`, 6.35 mm) and the side wall of
+an extruded closed `sketch.spline` outline reports no continuity at all: every bound found 0 and
+`within: false`, `exhausted: true` after 4096 pieces, about 8 s per edge, where the same fillet's edge on the
+flat face proves G1. Reproducer:
+[`findings/F-120-continuity-spline-wall/repro.json`](findings/F-120-continuity-spline-wall/repro.json).
+
+## F-121
+
+**Missing capability.** `measure.continuity` refuses the edge between a fillet and a freeform face made by
+`feature.surface.network` ("the edge is neither a parameter line of the other spline face nor a curve
+recovered on it"), so a carved top's roundover cannot be proven tangent. Reproducer:
+[`findings/F-121-continuity-freeform-fillet/repro.json`](findings/F-121-continuity-freeform-fillet/repro.json).
+
+## F-122
+
+**Bug (proof) and performance.** `boxMax` of a body whose top is a freeform network face is "not proven
+closely enough to be a value" (the reproducer: found 44.999999 mm, at most 45.0107 mm; the guitar body: found
+44.990, at most 45.200 mm), and costs 1.5 s on a small body and about 2.4 s wall and 9 s of CPU on the
+guitar (see [F-093](#f-093)). On the guitar an `area` assertion of one flat face also cost about 0.45 s wall
+and 5 s of CPU, while the body's area and volume were free (no minimal reproducer: on a small body it costs
+what the body's area does). Reproducer:
+[`findings/F-122-boxmax-freeform/repro.json`](findings/F-122-boxmax-freeform/repro.json).

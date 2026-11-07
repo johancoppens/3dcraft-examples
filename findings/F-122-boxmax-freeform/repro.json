@@ -1,0 +1,329 @@
+[
+ [
+  "sketch.create",
+  {
+   "name": "Outline",
+   "plane": "xy"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Outline",
+   "closed": true,
+   "through": [
+    [
+     0,
+     0
+    ],
+    [
+     80,
+     10
+    ],
+    [
+     140,
+     50
+    ],
+    [
+     165,
+     120
+    ],
+    [
+     140,
+     240
+    ],
+    [
+     145,
+     330
+    ],
+    [
+     100,
+     420
+    ],
+    [
+     0,
+     380
+    ],
+    [
+     -100,
+     440
+    ],
+    [
+     -150,
+     330
+    ],
+    [
+     -140,
+     240
+    ],
+    [
+     -165,
+     120
+    ],
+    [
+     -140,
+     50
+    ],
+    [
+     -80,
+     10
+    ]
+   ]
+  }
+ ],
+ [
+  "feature.extrude",
+  {
+   "sketch": "Outline",
+   "distance": "50 mm",
+   "name": "Blank"
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Across 1",
+   "plane": "zx",
+   "offset": "-50 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Across 1",
+   "through": [
+    [
+     35,
+     -200
+    ],
+    [
+     40,
+     -100
+    ],
+    [
+     45,
+     0
+    ],
+    [
+     40,
+     100
+    ],
+    [
+     35,
+     200
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Across 2",
+   "plane": "zx",
+   "offset": "200 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Across 2",
+   "through": [
+    [
+     35,
+     -200
+    ],
+    [
+     42,
+     -100
+    ],
+    [
+     45,
+     0
+    ],
+    [
+     42,
+     100
+    ],
+    [
+     35,
+     200
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Across 3",
+   "plane": "zx",
+   "offset": "500 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Across 3",
+   "through": [
+    [
+     35,
+     -200
+    ],
+    [
+     40,
+     -100
+    ],
+    [
+     45,
+     0
+    ],
+    [
+     40,
+     100
+    ],
+    [
+     35,
+     200
+    ]
+   ]
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Along 1",
+   "plane": "yz",
+   "offset": "-200 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Along 1",
+   "through": [
+    [
+     -50,
+     35
+    ],
+    [
+     200,
+     35
+    ],
+    [
+     500,
+     35
+    ]
+   ],
+   "degree": 2
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Along 2",
+   "plane": "yz",
+   "offset": "0 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Along 2",
+   "through": [
+    [
+     -50,
+     45
+    ],
+    [
+     200,
+     45
+    ],
+    [
+     500,
+     45
+    ]
+   ],
+   "degree": 2
+  }
+ ],
+ [
+  "sketch.create",
+  {
+   "name": "Along 3",
+   "plane": "yz",
+   "offset": "200 mm"
+  }
+ ],
+ [
+  "sketch.spline",
+  {
+   "sketch": "Along 3",
+   "through": [
+    [
+     -50,
+     35
+    ],
+    [
+     200,
+     35
+    ],
+    [
+     500,
+     35
+    ]
+   ],
+   "degree": 2
+  }
+ ],
+ [
+  "feature.surface.network",
+  {
+   "u": [
+    "Across 1",
+    "Across 2",
+    "Across 3"
+   ],
+   "v": [
+    "Along 1",
+    "Along 2",
+    "Along 3"
+   ],
+   "name": "Top surface"
+  }
+ ],
+ [
+  "feature.boolean",
+  {
+   "op": "intersect",
+   "target": "Blank",
+   "tool": "Top surface",
+   "name": "Carved"
+  }
+ ],
+ [
+  "feature.fillet",
+  {
+   "edges": [
+    [
+     "F2:side(e17)",
+     "F9:side(e3,e5,e6,e8)"
+    ],
+    [
+     "F2:piece(1)/F2:side(e17)",
+     "F9:side(e3,e5,e6,e8)"
+    ]
+   ],
+   "radius": "3 mm",
+   "chain": true,
+   "name": "Top roundover"
+  }
+ ],
+ [
+  "variable.measure",
+  {
+   "name": "top_height",
+   "measure": "boxMax",
+   "of": "Top roundover",
+   "axis": "z"
+  }
+ ]
+]
