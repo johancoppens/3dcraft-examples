@@ -1,0 +1,9 @@
+[
+ ["feature.cylinder", {"radius": "57.15 mm", "height": "600 mm", "position": ["-300 mm", 0, 0], "axis": [1, 0, 0], "name": "Chord"}],
+ ["feature.cylinder", {"radius": "30.15 mm", "height": "300 mm", "position": [0, 0, 0], "axis": ["cos(50 deg)", 0, "sin(50 deg)"], "name": "Diagonal"}],
+ ["feature.boolean", {"op": "union", "target": "Chord", "tool": "Diagonal", "name": "Joint"}],
+ ["feature.chamfer", {"edges": [["Joint:copy(0)/Chord:face(0)", "Joint:copy(1)/Diagonal:face(0)"]], "distance": "10 mm", "name": "Weld"}],
+ ["file.export", {"path": "one-welded-joint.step"}],
+ ["feature.pattern", {"source": "Weld", "count": 12, "step": ["700 mm", 0, 0], "name": "Twelve welded joints"}],
+ ["document.check", {}]
+]

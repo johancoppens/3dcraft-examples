@@ -156,6 +156,11 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-144](#f-144) | Missing capability (cosmetic) | Procedural marble draws smooth closed vein loops, granite blotches; no fine speckle | ventoux-relief (review) | marble dropped |
 | [F-145](#f-145) | Performance | `document.inspect` of the relief's laser product takes 10 s (45 s CPU) against 4.4 s for the same regeneration by `param.set` | ventoux-relief (review) | slow inspection |
 | [F-146](#f-146) | Agent friction (minor) | `assert.edit` resets the fields left out; a draft assertion's `direction` takes no expression | moka-pot (prompt test) | assertions rewritten whole |
+| [F-147](#f-147) | Bug | A 2 mm round on the rim of a disc of radius 92 mm or more is refused at tolerance 0.001 mm | welded-truss | cap plates revolved with their rounds |
+| [F-148](#f-148) | Performance (file size) | A chamfer round a tube-to-tube saddle exports as 20 147 STEP entities (2.0 MB); 12 pattern copies cost 18 s of CPU | welded-truss | STEP of the members without welds |
+| [F-149](#f-149) | Bug | A weld bead made against a coped tube cannot be joined to it or checked against it ("at the edge of tolerance") | welded-truss (builder, prompt test) | welds as bodies of their own; one overlap check refused |
+| [F-150](#f-150) | Missing capability | A flat pattern from `feature.unfold` cannot be aligned with an axis; it lies along its first edge | welded-truss (review) | coping template exported at 44 degrees |
+| [F-151](#f-151) | Agent friction (minor) | `param.set` returns `assertions` as a summary object, `assert.list` as a list under the same key | welded-truss (review) | none |
 
 ## F-001
 
@@ -404,6 +409,7 @@ hands over the dial) casts its contact shadow as hard, stepped bands; with `cont
 soft. Reproducer (renders both):
 [`findings/F-026-contact-shadow-steps/repro.json`](findings/F-026-contact-shadow-steps/repro.json). Raising the key light to about 80° (`look.light`)
 hides the bands in a preview; that is a workaround, not a fix.
+On the welded truss, a weld-bead body touching a tube draws saw-toothed contact-shadow patches on the tube just above it, and the end plate's shadow on the chord is stepped (preview light [330, 55] avoids both).
 
 ## F-027
 
@@ -768,6 +774,7 @@ and the plated pieces as ruled lofts (F-091): 2.0 s wall and 3.3 s CPU instead o
 **Agent friction.** `feature.unfold` cuts a closed sheet open along the seam opposite the first face listed;
 nothing documents it, and a seam cannot be named. **Should:** a `seam` parameter naming the edges to cut.
 Reproducer: [`findings/F-073-unfold-seam/repro.json`](findings/F-073-unfold-seam/repro.json).
+The welded truss's single-face unfold of a coped tube cuts the band open along an arbitrary generator, not one a fabricator would choose (the heel's or the flank's).
 
 ## F-074
 
@@ -854,6 +861,7 @@ result does not report where it put them, so an agent needs trial renders to see
 the transition): no tangent lines between its flat and curved regions, no rulings or bump lines for press-brake
 forming, no bend lines, on a layer of their own. A sheet-metal shop's pattern carries them. **Should:** the
 pattern's inner face boundaries and a chosen number of rulings per curved region, on marking layers.
+A coping template (the welded truss) needs its crown and flank lines (the quarter marks that line it up on the tube); the unfolded pattern has none.
 
 ## F-086
 
@@ -1342,3 +1350,23 @@ of CPU, against 4.4 s and 6.3 s for the same regeneration through `param.set`. R
 repeating `measure`, `of` and `faces`; an edit should change only what it names. A `draft` assertion's
 `direction` must be plain numbers or an axis ("`direction` must be x, y, z, -x, -y, -z or [x, y, z]"), so a
 direction that follows a parameter (a handle's lean) cannot be written.
+
+## F-147
+
+**Bug.** At `document.setTolerance` 0.001 mm, `feature.fillet` of 2 mm on the rim of a `feature.cylinder` of radius 92 mm or more (8 mm thick) is refused; it builds at radius 91 mm, with a 3 mm round, or at tolerance 5e-4 mm. The welded truss's prompt tester met it at radius 93 and 100 mm and heights 8, 20 and 40 mm: "the boolean that cuts this fillet refused it: boolean does not support this: a piece of a face lies within tolerance of a face it is not coincident with ... smaller radii tried fail the same way". A round on a plain disc should not depend on its diameter. **Workaround in the example:** the cap plates are revolved from a profile with the 2 mm arcs drawn in. Reproducer: [`findings/F-147-disc-rim-round/repro.json`](findings/F-147-disc-rim-round/repro.json)
+
+## F-148
+
+**Performance.** A `feature.chamfer` along the saddle where a 60.3 mm tube meets a 114.3 mm tube (the weld bead's shape) exports to STEP as 20 147 entities, 2.0 MB, at the default tolerance, and a `feature.pattern` of 12 such joints costs 18 s of CPU. The saddle is one intersection curve of two cylinders; its chamfer should be a handful of surfaces. Related: F-125. **Impact:** the truss's STEP holds the members without the weld beads (with them it would add 4.9 MB). Reproducer: [`findings/F-148-saddle-chamfer-cost/repro.json`](findings/F-148-saddle-chamfer-cost/repro.json)
+
+## F-149
+
+**Bug.** A weld bead made from a coped tube and its chord (the union chamfered along the saddle, less the union) cannot be united with the coped tube: the boolean is refused "at the edge of tolerance", at 1e-3 mm and at 1e-6 mm, although bead and tube share the same cylinder/cylinder intersection, made twice the same way. The truss's prompt tester met it as `document.interference`: "whether `Diagonals` and `WeldsTopFall` overlap cannot be told: boolean does not support this: an imprinted curve that does not fit the edges it should coincide with (at the edge of tolerance)", for three of its four weld bodies. **Workaround in the example:** the welds stay bodies of their own, as a weldment's drawing lists them. Reproducer (22 steps): [`findings/F-149-bead-union-with-coped-tube/repro.json`](findings/F-149-bead-union-with-coped-tube/repro.json)
+
+## F-150
+
+**Missing capability.** `feature.unfold` lays a pattern down with the first face's first vertex at `at` and that vertex's first edge along +x turned by `angle`, so a coped tube's band (the welded truss's coping template) lies at 44 degrees and spans 591 x 584 mm instead of 189 x 675 mm; the angle that would square it changes with every parameter (the prompt tester's fixed 40.57 degrees is right only at the defaults). Neither `feature.unfold` nor `file.export` can align an edge or the developed axis with x. **Should:** an `align` naming an edge (or the band's axis) to lie along x. See also F-073 (where the seam goes) and F-085 (no marking lines).
+
+## F-151
+
+**Agent friction.** The result of `param.set` carries `assertions` as a summary object (counts), while `assert.list` returns `assertions` as a list of the assertions; a script that reads both by the same key breaks. **Should:** one shape for one key (for example `assertionSummary` in `param.set`).

@@ -1,0 +1,101 @@
+{
+  "id": "welded-truss",
+  "title": "Welded tube truss",
+  "summary": "coped tubes, weld beads, coping template",
+  "description": "An original 6 m Warren truss of EN 10219-2 circular hollow sections in S355J2H, with gap K-joints to EN 1993-1-8, coped diagonals fillet-welded all round and end plates, in red-oxide primer.",
+  "domain": "Steel construction, welding",
+  "process": "Tube profile cutting, MAG welding (ISO 4063 process 135), red-oxide shop primer",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "Simple cylinders, but the diagonals' angle solved in closed form from coupled formulas, weld beads made by a chamfer on a union, a coped tube unfolded to a 1:1 template, EN 1993-1-8 checks across several bodies, and three kernel limits worked around."
+  },
+  "standards": [
+    "EN 1993-1-8:2005",
+    "EN 1993-1-1:2005",
+    "EN 10219-1:2006",
+    "EN 10219-2:2006",
+    "EN 10025-2:2019",
+    "EN 1090-2:2018",
+    "EN 1011-2:2001",
+    "ISO 5817:2023",
+    "ISO 2553:2019",
+    "ISO 4063:2009"
+  ],
+  "materials": [
+    "Cold-formed hollow sections S355J2H (EN 10219-1)",
+    "Plate S355J2 (EN 10025-2)",
+    "Red-oxide shop primer"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -1500,
+        -1750,
+        1050
+      ],
+      "target": [
+        1350,
+        0,
+        260
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 35
+    },
+    "look": {
+      "rotation": 90,
+      "light": [
+        330,
+        55
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/welded-truss-members.step",
+      "bodies": [
+        "Top chord",
+        "Bottom chord",
+        "Diagonals",
+        "End plates",
+        "Cap plates"
+      ]
+    },
+    {
+      "path": "exports/welded-truss-coping-template.dxf",
+      "face": "Coping template:face(0)",
+      "feature": "Coping template",
+      "origin": "corner"
+    },
+    {
+      "path": "exports/welded-truss-end-plate.dxf",
+      "sketch": "End plate outline"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: diagonals at 50.93°, 28.0 mm gaps, 7.93 mm eccentricity, chords 6228.6 and 5297.6 mm, 247.55 kg of members and 2.243 kg of weld, as this example's; its 36 assertions pass at the other section pairs. It read the diagonal's cut length as the square-cut 674.6 mm, which exposed the README's 647.8 mm as the mitred length only; turn 5 now asks for both. About 216 steps."
+  },
+  "stats": {
+    "steps": 186,
+    "variables": 64,
+    "parameters": 4,
+    "features": 45,
+    "assertions": 24,
+    "warnings": 0,
+    "build_s": 1.29,
+    "load_s": 1.2,
+    "load_cpu_s": 5.81,
+    "file_bytes": 97507
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

@@ -1,0 +1,6 @@
+[
+ ["document.setTolerance", {"linear": 0.001}],
+ ["feature.cylinder", {"radius": "100 mm", "height": "8 mm", "name": "Disc"}],
+ ["feature.fillet", {"edges": [["Disc:face(0)", "Disc:face(2)"]], "radius": "2 mm", "name": "Rounded rim"}],
+ ["document.check", {}]
+]
