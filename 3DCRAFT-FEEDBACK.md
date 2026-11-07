@@ -141,6 +141,9 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-129](#f-129) | Performance | A 3 mm fillet on a small part joined to a hull makes `levelFor` and floating 2 to 3 times slower | rc-yacht-hull | bumper unrounded in the envelope |
 | [F-130](#f-130) | Bug, performance | `document.interference` cannot check `feature.plate`'s own joints on a lofted hull ("unknown … at the edge of tolerance"), in 31 s | rc-yacht-hull (review) | laminate joints unchecked |
 | [F-131](#f-131) | Agent friction (minor) | The error for a non-integer exponent of `^` does not point to `pow(x, y)` | guitar-body (prompt test) | `exp(x * ln(2))` written instead |
+| [F-132](#f-132) | Performance | Subtracting a core from a drafted blank whose rim has a chained round takes 1.4 s against 0.08 s without it | moka-pot | collector's rim left sharp |
+| [F-133](#f-133) | Bug | `datum.plane` from a face name finds the face before a later draft, while `feature.fillet` follows the same name to the drafted body | moka-pot | boss drafted about its own base |
+| [F-134](#f-134) | Agent friction | Feature names work in face names in params but not in query globs; `mL` works but is not in the unit table | moka-pot | references renumber on every inserted step |
 
 ## F-001
 
@@ -968,6 +971,9 @@ would become ellipses), so a curved spoke cannot be drafted for its pattern. Rep
 handwheel), and still reports the measure as proven. Reproducer:
 [`findings/F-102-draft-bound-on-swept-torus/repro.json`](findings/F-102-draft-bound-on-swept-torus/repro.json).
 See also F-067.
+The moka pot shows it on a drafted prism's rounded corners: `measure.draft` finds 1.5° on the balls where three
+rounds meet but proves only −6.0°, so a draft assertion over a whole cast body with its rounds is not proven:
+[`fillet-corners.json`](findings/F-102-draft-bound-on-swept-torus/fillet-corners.json).
 
 ## F-103
 
@@ -1213,3 +1219,29 @@ will tell. Plates that meet by construction should be known to touch, not to ove
 literal without a unit, as in `x ^ 2` or `x ^ -1`". `pow(x, y)` takes any exponent and the user guide says so,
 but the error does not, so the guitar's prompt tester wrote `exp(x * ln(2))`. **Should:** the error names
 `pow(x, y)`.
+
+## F-132
+
+**Performance.** Subtracting a drafted core from a drafted twelve-sided blank whose rim was rounded with a
+chained fillet takes about 1.4 s, against about 0.08 s for the whole script without the round. A cast part's
+rounded rim is the ordinary case. Reproducers:
+[`findings/F-132-boolean-after-rim-round/repro.json`](findings/F-132-boolean-after-rim-round/repro.json) and,
+for comparison, `without-rim-round.json` beside it.
+
+## F-133
+
+**Bug.** After `feature.draft` has taken a block, `datum.plane` `from` the face's original name (`F1:face(5)`)
+lies on the face as it was before the draft (normal [1, 0, 0]), while `feature.fillet` follows the same name
+to the drafted face; only the drafted name (`F2:copy(0)/F1:face(5)`) gives the drafted plane. One name should
+mean one face: the latest, as the fillet reads it, or a refusal that names the drafted face. Reproducer:
+[`findings/F-133-datum-from-earlier-face/repro.json`](findings/F-133-datum-from-earlier-face/repro.json).
+
+## F-134
+
+**Agent friction.** Face names carry sequential feature ids (`F12:side(e3)`), so inserting one step renumbers
+every later reference. A feature's name works in its place in a feature's params (`"Base plate:face(1)"`,
+undocumented) but not in a query's name glob (`*Base plate:face(2)` finds nothing where `*F1:face(2)` finds
+the face). Separately, `ml`/`mL` works as a unit but is missing from the reference's unit table and from the
+unit error's list. Reproducer:
+[`findings/F-134-feature-names-in-face-names/repro.json`](findings/F-134-feature-names-in-face-names/repro.json).
+**Should:** feature names everywhere a face name is taken, documented, and the unit table complete.

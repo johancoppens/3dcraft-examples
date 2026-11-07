@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Plan", "plane": "xy"}],
+ ["sketch.line", {"sketch": "Plan", "from": ["30 mm", "-30 mm * tan(15 deg)"], "to": ["30 mm", "30 mm * tan(15 deg)"]}],
+ ["sketch.pattern", {"sketch": "Plan", "entities": ["e3"], "count": 12, "angle": "30 deg", "center": [0, 0], "chain": ["e1", "e2"]}],
+ ["feature.extrude", {"sketch": "Plan", "distance": "60 mm", "name": "Prism"}],
+ ["feature.draft", {"faces": ["F2:side(e3)", "F2:side(e3[1])", "F2:side(e3[2])", "F2:side(e3[3])", "F2:side(e3[4])", "F2:side(e3[5])", "F2:side(e3[6])", "F2:side(e3[7])", "F2:side(e3[8])", "F2:side(e3[9])", "F2:side(e3[10])", "F2:side(e3[11])"], "neutral": "F2:endCap(e3[*])", "angle": "1.5 deg", "name": "Drafted"}],
+ ["feature.fillet", {"edges": [["F2:side(e3)", "F2:side(e3[1])"], ["F2:side(e3[1])", "F2:side(e3[2])"], ["F2:side(e3[2])", "F2:side(e3[3])"], ["F2:side(e3[3])", "F2:side(e3[4])"], ["F2:side(e3[4])", "F2:side(e3[5])"], ["F2:side(e3[5])", "F2:side(e3[6])"], ["F2:side(e3[6])", "F2:side(e3[7])"], ["F2:side(e3[7])", "F2:side(e3[8])"], ["F2:side(e3[8])", "F2:side(e3[9])"], ["F2:side(e3[9])", "F2:side(e3[10])"], ["F2:side(e3[10])", "F2:side(e3[11])"], ["F2:side(e3[11])", "F2:side(e3)"], ["F2:side(e3)", "F2:startCap(e3[*])"], ["F2:side(e3[1])", "F2:startCap(e3[*])"], ["F2:side(e3[2])", "F2:startCap(e3[*])"], ["F2:side(e3[3])", "F2:startCap(e3[*])"], ["F2:side(e3[4])", "F2:startCap(e3[*])"], ["F2:side(e3[5])", "F2:startCap(e3[*])"], ["F2:side(e3[6])", "F2:startCap(e3[*])"], ["F2:side(e3[7])", "F2:startCap(e3[*])"], ["F2:side(e3[8])", "F2:startCap(e3[*])"], ["F2:side(e3[9])", "F2:startCap(e3[*])"], ["F2:side(e3[10])", "F2:startCap(e3[*])"], ["F2:side(e3[11])", "F2:startCap(e3[*])"]], "radius": "3 mm", "name": "Rounded"}],
+ ["measure.draft", {"faces": {"kind": "face", "where": {"in": "Rounded", "name": "F4:filletCorner(*)"}}, "direction": "-z", "minDraft": 1}],
+ ["assert.add", {"name": "Every side face and round releases downward", "measure": "draft", "faces": {"kind": "face", "where": {"in": "Rounded", "not": {"normal": {"along": "z"}}}}, "direction": "-z", "minDraft": 1, "min": "1 deg"}],
+ ["assert.add", {"name": "The planes alone release downward", "measure": "draft", "faces": {"kind": "face", "where": {"in": "Rounded", "surface": "plane", "not": {"normal": {"along": "z"}}}}, "direction": "-z", "minDraft": 1, "min": "1 deg"}],
+ ["assert.list", {}]
+]

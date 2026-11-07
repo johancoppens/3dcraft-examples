@@ -1,0 +1,7 @@
+[
+ ["feature.block", {"size": ["40 mm", "40 mm", "30 mm"], "position": ["-20 mm", "-20 mm", "0 mm"], "name": "Block"}],
+ ["feature.draft", {"faces": ["F1:face(2)", "F1:face(3)", "F1:face(4)", "F1:face(5)"], "neutral": "F1:face(0)", "angle": "10 deg", "name": "Drafted"}],
+ ["datum.plane", {"from": "F1:face(5)", "distance": "0 mm", "name": "From the original name"}],
+ ["datum.plane", {"from": "F2:copy(0)/F1:face(5)", "distance": "0 mm", "name": "From the drafted name"}],
+ ["feature.fillet", {"edges": [["F1:face(5)", "F1:face(1)"]], "radius": "1 mm", "name": "Fillet follows the same name to the drafted body"}]
+]

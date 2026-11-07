@@ -1,0 +1,10 @@
+[
+ ["feature.block", {"size": ["20 mm", "20 mm", "10 mm"], "name": "Base plate"}],
+ ["feature.block", {"size": ["5 mm", "5 mm", "5 mm"], "position": ["5 mm", "5 mm", "10 mm"], "name": "Boss block"}],
+ ["feature.boolean", {"op": "union", "target": "Base plate", "tool": "Boss block", "name": "Joined"}],
+ ["feature.fillet", {"edges": [["Base plate:face(1)", "Base plate:face(2)"]], "radius": "2 mm", "name": "Rounded by the feature's name"}],
+ ["assert.add", {"name": "Front face found by the feature's name", "measure": "count", "of": {"kind": "face", "where": {"name": "*Base plate:face(2)"}}, "eq": 1}],
+ ["assert.add", {"name": "Front face found by the feature's id", "measure": "count", "of": {"kind": "face", "where": {"name": "*F1:face(2)"}}, "eq": 1}],
+ ["variable.set", {"name": "serving", "expr": "50 ml"}],
+ ["assert.list", {}]
+]
