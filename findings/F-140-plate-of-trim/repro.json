@@ -1,0 +1,20 @@
+[
+ ["sketch.create", {"name": "Row 0", "plane": "yz", "offset": "0 mm"}],
+ ["sketch.spline", {"sketch": "Row 0", "through": [[0, 10.0], [10, 10.0], [20, 10.0], [30, 10.0], [40, 10.0], [50, 10.0]]}],
+ ["sketch.create", {"name": "Row 1", "plane": "yz", "offset": "10 mm"}],
+ ["sketch.spline", {"sketch": "Row 1", "through": [[0, 13.133], [10, 12.396], [20, 10.533], [30, 8.418], [40, 7.048], [50, 7.066]]}],
+ ["sketch.create", {"name": "Row 2", "plane": "yz", "offset": "20 mm"}],
+ ["sketch.spline", {"sketch": "Row 2", "through": [[0, 13.895], [10, 12.979], [20, 10.662], [30, 8.033], [40, 6.33], [50, 6.352]]}],
+ ["sketch.create", {"name": "Row 3", "plane": "yz", "offset": "30 mm"}],
+ ["sketch.spline", {"sketch": "Row 3", "through": [[0, 11.71], [10, 11.308], [20, 10.291], [30, 9.137], [40, 8.389], [50, 8.399]]}],
+ ["sketch.create", {"name": "Row 4", "plane": "yz", "offset": "40 mm"}],
+ ["sketch.spline", {"sketch": "Row 4", "through": [[0, 8.23], [10, 8.646], [20, 9.699], [30, 10.894], [40, 11.668], [50, 11.658]]}],
+ ["sketch.create", {"name": "Row 5", "plane": "yz", "offset": "50 mm"}],
+ ["sketch.spline", {"sketch": "Row 5", "through": [[0, 6.09], [10, 7.009], [20, 9.335], [30, 11.974], [40, 13.684], [50, 13.662]]}],
+ ["feature.loft", {"sections": ["Row 0", "Row 1", "Row 2", "Row 3", "Row 4", "Row 5"], "name": "Terrain"}],
+ ["sketch.create", {"name": "Patch", "plane": "xy"}],
+ ["sketch.polyline", {"sketch": "Patch", "points": [[12, 12], [38, 15], [36, 30], [14, 27]], "closed": true}],
+ ["feature.surface.trim", {"face": "F7:side(e7,e7,e7,e7,e7,e7)", "outer": "Patch", "along": [0, 0, 1], "name": "Decal"}],
+ ["feature.plate", {"faces": ["F9:face(0)"], "thickness": "0.3 mm", "side": "out", "name": "Painted decal"}],
+ ["document.check", {}]
+]

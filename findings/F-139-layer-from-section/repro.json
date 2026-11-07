@@ -1,0 +1,9 @@
+[
+ ["feature.sphere", {"radius": "40 mm", "position": [0, 0, "-10 mm"], "name": "Hill"}],
+ ["feature.block", {"size": ["100 mm", "100 mm", "50 mm"], "position": ["-50 mm", "-50 mm", "10 mm"], "name": "Above 10 mm"}],
+ ["feature.boolean", {"op": "intersect", "target": "Above 10 mm", "tool": "Hill", "keepTool": true, "name": "Hill above 10 mm"}],
+ ["document.inspect", {}],
+ ["sketch.create", {"name": "Contour at 10 mm", "face": "F3:copy(0)/F2:face(0)"}],
+ ["feature.extrude", {"sketch": "Contour at 10 mm", "distance": "3 mm", "name": "Layer sheet"}],
+ ["document.check", {}]
+]

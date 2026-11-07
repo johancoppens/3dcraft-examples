@@ -20,7 +20,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-008](#f-008) | Bug | Fillets at propeller blade roots fail above 1 mm, and at 1 mm on blunt sections | probe for ship-propeller | root fillet ≤ 1 mm |
 | [F-009](#f-009) | Bug (suspected) | Shelling a lofted hull with a small bow section: "what fits is below 0.0571 mm" | probe for rc-yacht-hull | larger bow section |
 | [F-010](#f-010) | Performance | Curves from formulas fit about 400 control points at the default tolerance: 40 s for six sections | probe for ship-propeller | tolerance 0.001 mm |
-| [F-011](#f-011) | Missing capability | A spline's inner through-points must be plain numbers, not expressions | probe for ventoux-relief | data written as numbers |
+| [F-011](#f-011) | Agent friction (was filed as a missing capability) | Expressions in `sketch.spline` `through` points are refused with an error that does not mention `live: true`, which takes them | probe for ventoux-relief | numbers baked in |
 | [F-012](#f-012) | Missing capability | No surface through a grid of points | probe for ventoux-relief | loft of row splines |
 | [F-013](#f-013) | Bug | Screen-space reflections smear a patch onto a threaded shank in the CPU renderer | socket-head-cap-screw | reflections off in the preview |
 | [F-014](#f-014) | Missing capability | A thread has no fit allowance, so a mating pair touches and cannot be shown clear | probe for moka-pot | one thread cosmetic |
@@ -144,6 +144,12 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-132](#f-132) | Performance | Subtracting a core from a drafted blank whose rim has a chained round takes 1.4 s against 0.08 s without it | moka-pot | collector's rim left sharp |
 | [F-133](#f-133) | Bug | `datum.plane` from a face name finds the face before a later draft, while `feature.fillet` follows the same name to the drafted body | moka-pot | boss drafted about its own base |
 | [F-134](#f-134) | Agent friction | Feature names work in face names in params but not in query globs; `mL` works but is not in the unit table | moka-pot | references renumber on every inserted step |
+| [F-135](#f-135) | Bug | `feature.surface.trim` along z of an 8-point loop over a lofted terrain does not converge, flipping with the data's 4th decimal | ventoux-relief | no road drawn |
+| [F-136](#f-136) | Performance | A road band intersected with a lofted terrain adds 4.8 s and 56 s of CPU to the load | ventoux-relief | no road drawn |
+| [F-137](#f-137) | Bug | A slab intersected with a terrain is refused ("a piece of a face too thin") when its face passes near a saddle, at any tolerance | ventoux-relief | contour interval capped at 200 m |
+| [F-138](#f-138) | Performance (file size) | A live spline point costs about 670 bytes in the `.3dcraft` (pretty-printed JSON in an uncompressed ZIP) | ventoux-relief | grid capped at 37 × 29 |
+| [F-139](#f-139) | Missing capability | A flat face cannot become a sketch's profile or be extruded | ventoux-relief | layers are slices, not flat sheets |
+| [F-140](#f-140) | Bug | `feature.plate` of a trimmed patch is refused: "the joint reaches past the faces' surfaces" | ventoux-relief | no road drawn |
 
 ## F-001
 
@@ -251,13 +257,13 @@ fitting tolerance), so a formula section does not cost hundreds of points at the
 
 ## F-011
 
-**Missing capability.** `sketch.spline` through points: the points between the ends must be plain numbers
-("a point the spline passes through between its ends is fitted, not held: give it as numbers"). A terrain
-or a lines plan from a table cannot then follow a variable (a vertical exaggeration, a scale): the numbers
-are baked in by whoever writes the script. **Should:** through-points as expressions, evaluated at
-regeneration, like the ends.
-The ship propeller found the same for closed control-point splines, and that an expression is capped at 4096
-bytes, which a section written as formulas of a table runs into.
+**Agent friction** (first filed here as a missing capability, which it is not). `sketch.spline` with `through`
+points refuses an expression in a point between the ends: "a point the spline passes through between its ends
+is fitted, not held: give it as numbers, or give `control` points". `live: true` takes such points (they are
+the spline's own points, refitted at every regeneration), and the Mont Ventoux relief uses it for its vertical
+exaggeration, but the error does not point to it, so the probe and two builders baked numbers in. **Should:**
+the error names `live: true`. Also seen: an expression is capped at 4096 bytes, which a section written as
+formulas of a table (the ship propeller) runs into, and closed control-point splines refuse expressions.
 
 ## F-012
 
@@ -609,7 +615,9 @@ ring, near-white glossy faces (the stone's crown facets) pick up a lime-yellow t
 variant tried. On the hydraulic cylinder a chrome rod (roughness 0.06) streaks brown at every
 rotation, with reflections on or off, and bare up-facing steel reads brass or olive. On the RC yacht the
 clearcoated carbon preset reads bronze, gold or white in any view from below, at all four rotations (it
-mirrors the floor).
+mirrors the floor). On the moka pot, flat satin-aluminium faces in the gallery look (Workshop, ACES,
++0.5) saturate to a uniform near-white brighter than the plain background, so the metal reads as white
+plastic; even at #8a8f95 the iso view reads white, and only a lower camera gives the facets metallic contrast.
 
 ## F-055
 
@@ -1245,3 +1253,44 @@ the face). Separately, `ml`/`mL` works as a unit but is missing from the referen
 unit error's list. Reproducer:
 [`findings/F-134-feature-names-in-face-names/repro.json`](findings/F-134-feature-names-in-face-names/repro.json).
 **Should:** feature names everywhere a face name is taken, documented, and the unit table complete.
+
+## F-135
+
+**Bug.** `feature.surface.trim` projecting an 8-point loop along z onto a lofted terrain fails: "outer[0]: did not
+converge: the walk from the start of a projection did not settle"; whether it fails flips with the fourth
+decimal of the data and with the vertical exaggeration. The Mont Ventoux relief could not draw its road. Reproducer:
+[`findings/F-135-trim-projection/repro.json`](findings/F-135-trim-projection/repro.json).
+
+## F-136
+
+**Performance.** A band along the road, intersected with the lofted terrain, adds 4.8 s and 56 s of CPU to the
+relief's load; its 16 pin holes alone cost about 6 s of CPU. Reproducer:
+[`findings/F-136-route-band-cost/repro.json`](findings/F-136-route-band-cost/repro.json).
+
+## F-137
+
+**Bug.** A slab intersected with the terrain is refused ("a piece of a face too thin to find a point inside it
+(at the edge of tolerance)") when the slab's face passes near a saddle of the terrain, at tolerances 1e-6,
+1e-4 and 1e-3 alike; the relief's contour interval stops at 200 m because 250 m meets it. Reproducer:
+[`findings/F-137-slab-near-saddle/repro.json`](findings/F-137-slab-near-saddle/repro.json).
+
+## F-138
+
+**Performance (file size).** A live spline point costs about 670 bytes in the `.3dcraft` (pretty-printed JSON
+in an uncompressed ZIP; see also F-080 for 3MF), so the relief's 1 MB budget holds a 37 × 29 grid and no
+finer. Reproducer:
+[`findings/F-138-live-spline-file-size/repro.json`](findings/F-138-live-spline-file-size/repro.json).
+
+## F-139
+
+**Missing capability.** A contour's region is there as a flat face (the slab's cut), but a sketch on that face
+gets none of its outline and a face cannot be extruded ("has nothing to extrude"), so a laser-cut layer
+cannot be made from a section. **Should:** a sketch from a face's outline (or `sketch.project`), or an
+extrusion of a face. Reproducer:
+[`findings/F-139-layer-from-section/repro.json`](findings/F-139-layer-from-section/repro.json).
+
+## F-140
+
+**Bug.** `feature.plate` of a trimmed patch of the terrain is refused: "along F9:startEdge(e8,e8): the joint
+reaches past the faces' surfaces continued beyond their borders". Reproducer:
+[`findings/F-140-plate-of-trim/repro.json`](findings/F-140-plate-of-trim/repro.json).
