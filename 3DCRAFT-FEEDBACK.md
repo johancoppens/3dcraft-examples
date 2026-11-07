@@ -139,6 +139,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-127](#f-127) | Bug | `measure.below` and `levelFor` refuse a plane between a spline body's lowest point and its control net | rc-yacht-hull | bumper not floated alone |
 | [F-128](#f-128) | Performance | `measure.floating` with wholly submerged appendages takes 2.7 s against 0.6 s for the hull alone | rc-yacht-hull | envelope floated under net weight |
 | [F-129](#f-129) | Performance | A 3 mm fillet on a small part joined to a hull makes `levelFor` and floating 2 to 3 times slower | rc-yacht-hull | bumper unrounded in the envelope |
+| [F-130](#f-130) | Bug, performance | `document.interference` cannot check `feature.plate`'s own joints on a lofted hull ("unknown … at the edge of tolerance"), in 31 s | rc-yacht-hull (review) | laminate joints unchecked |
 
 ## F-001
 
@@ -599,7 +600,9 @@ environment's default turned so it does; at least say it in the look's documenta
 up-facing flat metal reads dark olive at 180 and 270, vertical metal yellow at 0, 90 and 270. On the solitaire
 ring, near-white glossy faces (the stone's crown facets) pick up a lime-yellow tint at grazing angles in every
 variant tried. On the hydraulic cylinder a chrome rod (roughness 0.06) streaks brown at every
-rotation, with reflections on or off, and bare up-facing steel reads brass or olive.
+rotation, with reflections on or off, and bare up-facing steel reads brass or olive. On the RC yacht the
+clearcoated carbon preset reads bronze, gold or white in any view from below, at all four rotations (it
+mirrors the floor).
 
 ## F-055
 
@@ -1187,3 +1190,11 @@ touching bumper and deck errors at the edge of tolerance (no reproducers). Repro
 **Performance.** A 3 mm fillet on the yacht's 10 mm bow bumper, joined into the hull's envelope, makes
 `levelFor` and `measure.floating` of the envelope two to three times slower. Reproducer:
 [`findings/F-129-blend-slows-hydrostatics/repro.json`](findings/F-129-blend-slows-hydrostatics/repro.json).
+
+## F-130
+
+**Bug and performance.** On the RC yacht, `document.interference` of its eight bodies takes 31 s (188 s of CPU)
+and cannot check the joints `feature.plate` made itself: hull and deck (joint `under`) and deck and transom
+come back "unknown … at the edge of tolerance", although `feature.plate`'s documentation says interference
+will tell. Plates that meet by construction should be known to touch, not to overlap. Reproduce: in
+`examples/19-rc-yacht-hull`, run `document.interference`.

@@ -228,7 +228,8 @@ techniques or its palette line only with the coordinator.
   draft ≤ 420 mm, total mass ≥ 4000 g): a lofted hull, a fin of a symmetric NACA section, a lead bulb, a
   rudder.
 - **Shows:** a hull lofted through stations from a table of offsets; the fin's section from a formula;
-  `measure.levelFor` (waterline for the mass), `measure.floating`, `measure.below`; the hull shelled.
+  `measure.levelFor` (waterline for the mass), `measure.floating`, `measure.below`; the hull plated
+  (`feature.plate`; a shell takes 18 to 29 s, F-126).
 - **Look:** white gelcoat hull, carbon fin, dark lead bulb.
 - **Parameters:** bulb mass, fin depth.
 - **Proves:** the class limits; the waterline for 4 kg; the bulb mass from lead's density; upright stability.
@@ -309,7 +310,7 @@ techniques or its palette line only with the coordinator.
 Across the 21, every modelling command in scope is used at least once (`tools/examples.py coverage`). Where
 a family is carried: sketches and constraints (1–21), solids from primitives and extrusions (1, 2, 7, 12),
 revolve (1, 4, 14, 15, 20), loft (17, 19, 20), sweep (13, 14, 16, 20), developable and plate (8), unfold (8),
-fold (9), sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (19, 20), draft (20; 13 could not: F-101),
+fold (9), sheet metal (6), surfaces (18, 21), fillet and chamfer (most), shell (20), plate (19), draft (20; 13 could not: F-101),
 thread (1, 7, 15), pattern and mirror (3, 7, 11, 12, 14, 16, 17), booleans (most), text (3, 5), curves from
 formulas (17, 19), tables (1, 5, 19), conditional features (3), named sets (7), datums (11, 16), cut list
 (11), section and hydrostatic measures (2, 19, 21), clearance, thickness and draft checks (5, 7, 10, 12, 13),
