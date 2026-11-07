@@ -103,7 +103,7 @@ random points.
 
 ## Files
 
-- `hex-key-stand.3dcraft`: the model (opens in 0.42 s).
+- `hex-key-stand.3dcraft`: the model (opens in 0.41 s).
 - `build.json`: the 75 steps that build it.
 - `exports/hex-key-stand.3mf`: the stand and its labels, in their colours and in the print orientation.
 

@@ -1,0 +1,239 @@
+{
+  "id": "ventoux-relief",
+  "title": "Mont Ventoux relief",
+  "summary": "terrain from data, live splines, two-colour print",
+  "description": "Mont Ventoux and the Bédoin climb of the Tour de France Femmes 2026 (stage 7) at 1:70 000: a relief printed in forest green and limestone white with brass kilometre pins and the summit tower on a walnut base, or laser-cut contour layers.",
+  "domain": "Topography, art",
+  "process": "FDM printing, laser cutting, woodworking",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Data-driven lofted terrain from live splines, GIS preparation outside 3DCraft, 44 conditional features for two products, booleans across several bodies, and kernel limits worked around (F-135 to F-140)."
+  },
+  "standards": [
+    "Lambert-93 (EPSG:2154)",
+    "SRTMGL1 (heights above the EGM96 geoid)"
+  ],
+  "materials": [
+    "PLA Matte, Dark Green and Bone White (Bambu Lab)",
+    "Brass CW508L rod",
+    "Walnut",
+    "Resin, painted (tower)",
+    "Cast acrylic, white and pale grey (laser-cut layers)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -135,
+        -280,
+        135
+      ],
+      "target": [
+        95,
+        62,
+        8
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 32
+    },
+    "look": {
+      "rotation": 270
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/ventoux-relief.3mf",
+      "bodies": [
+        "Forested slopes",
+        "Bald summit"
+      ],
+      "tolerance": 0.2
+    },
+    {
+      "path": "exports/ventoux-tower.3mf",
+      "bodies": [
+        "Summit tower"
+      ],
+      "tolerance": 0.01
+    },
+    {
+      "path": "exports/layers/ventoux-layer-01.dxf",
+      "face": "F73:copy(1)/F38:side(e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6)",
+      "feature": "Contour layer 1",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-02.dxf",
+      "face": "F74:copy(0)/F57:face(0)",
+      "feature": "Contour layer 2",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-03.dxf",
+      "face": "F75:copy(0)/F58:face(0)",
+      "feature": "Contour layer 3",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-04.dxf",
+      "face": "F76:copy(0)/F57:face(0)",
+      "feature": "Contour layer 4",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-05.dxf",
+      "face": "F77:copy(0)/F58:face(0)",
+      "feature": "Contour layer 5",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-06.dxf",
+      "face": "F78:copy(0)/F57:face(0)",
+      "feature": "Contour layer 6",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-07.dxf",
+      "face": "F79:copy(0)/F58:face(0)",
+      "feature": "Contour layer 7",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-08.dxf",
+      "face": "F80:copy(0)/F57:face(0)",
+      "feature": "Contour layer 8",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-09.dxf",
+      "face": "F81:copy(0)/F58:face(0)",
+      "feature": "Contour layer 9",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-10.dxf",
+      "face": "F82:copy(0)/F57:face(0)",
+      "feature": "Contour layer 10",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-11.dxf",
+      "face": "F83:copy(0)/F58:face(0)",
+      "feature": "Contour layer 11",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-12.dxf",
+      "face": "F84:copy(0)/F57:face(0)",
+      "feature": "Contour layer 12",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-13.dxf",
+      "face": "F85:copy(0)/F58:face(0)",
+      "feature": "Contour layer 13",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-14.dxf",
+      "face": "F86:copy(0)/F57:face(0)",
+      "feature": "Contour layer 14",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-15.dxf",
+      "face": "F87:copy(0)/F58:face(0)",
+      "feature": "Contour layer 15",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-16.dxf",
+      "face": "F88:copy(0)/F57:face(0)",
+      "feature": "Contour layer 16",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    },
+    {
+      "path": "exports/layers/ventoux-layer-17.dxf",
+      "face": "F89:copy(0)/F58:face(0)",
+      "feature": "Contour layer 17",
+      "origin": "model",
+      "values": {
+        "product": 2
+      }
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: terrain 776 585.5 mm³ (+0.032 %), summit 1910 m, start about 540 m, as this example's; 16 pins exactly 2 mm above the ground at three exaggerations; two-colour split; 17/11/9 layers at 100/150/200 m with the stock sheet setting the exaggeration; about 594 steps from a script over the data files."
+  },
+  "stats": {
+    "steps": 250,
+    "variables": 35,
+    "parameters": 3,
+    "features": 97,
+    "assertions": 6,
+    "warnings": 0,
+    "build_s": 2.87,
+    "load_s": 2.87,
+    "load_cpu_s": 10.66,
+    "file_bytes": 888240
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

@@ -195,7 +195,7 @@ unfold, quadrature and Steiner proofs, and five kernel limits worked around.
   the tolerance. A ruled `feature.loft` between the same two arcs is the same surface, since its rulings
   also join the points of equal angle; it is exact with two rulings, and *Plated sheet is the same
   developable* proves it. Plating it costs a quarter of the CPU (0.73 s against 2.59 s), and so does each
-  mirrored copy. The model opens in 2.0 s wall and 3.3 s of CPU, against 3.2 s and 11.5 s with the
+  mirrored copy. The model opens in 1.9 s wall and 3.2 s of CPU, against 3.2 s and 11.5 s with the
   developable plated. The developable stays where it is shown and checked: the pattern's sheet.
   Reproducer: [F-091](../../3DCRAFT-FEEDBACK.md#f-091).
 - **Curved folds.** `feature.unfold` refuses the corner's flap with the piece ("its two images in the

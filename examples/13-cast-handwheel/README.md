@@ -42,7 +42,7 @@ the weights the makers publish.
   the casting grey cast iron's density, `material.preset` the handle steel.
 - **A tolerance for the load budget.** `document.setTolerance` sets 0.00005 mm: at the default
   0.000001 mm the model opened in 1.6 s with 7.4 s of CPU time, over the 6 s budget (measured side by side
-  on a busy machine); at 0.00005 mm it opens in 1.13 s with 5.24 s (`meta.json`), 13 % under it; at
+  on a busy machine); at 0.00005 mm it opens in 0.94 s with 4.67 s (`meta.json`), 22 % under it; at
   0.0001 mm the root fillets at the rim are refused ([F-107](../../3DCRAFT-FEEDBACK.md#f-107)).
 - **Checks.** `extent`, `boxMax`, `distance` and `count` against the standards, `sectionArea` against a closed
   form, `measure.draft` for the draft, `variable.measure` for the masses (below).

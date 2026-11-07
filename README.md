@@ -16,8 +16,9 @@ Each example lives in its own numbered folder under [`examples/`](examples/), fr
 
 ## Gallery
 
-Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the list of what is planned is in
-[`CATALOGUE.md`](CATALOGUE.md).
+From simple to complex, each with the difficulty an independent reviewer scored out of 10. Every example
+was checked by a reviewer of its trade and rebuilt from its `prompt.md` alone by a second AI model. The
+briefs they were built from are in [`CATALOGUE.md`](CATALOGUE.md).
 
 <!-- gallery:start -->
 | | Example | Domain | Difficulty |
@@ -42,6 +43,7 @@ Ordered by difficulty (scored out of 10 by a reviewer). Work in progress: the li
 | <img src="examples/18-guitar-body/preview.png" width="240" alt="Electric guitar body"> | **[Electric guitar body](examples/18-guitar-body/)**<br>An original double-cutaway solid body in red alder with a carved top, a bolt-on neck pocket, two humbucker routes, a rear control cavity and a string-through bridge placed by the scale length, finished in candy-apple red. | Lutherie | 7/10 |
 | <img src="examples/19-rc-yacht-hull/preview.png" width="240" alt="RC yacht hull"> | **[RC yacht hull](examples/19-rc-yacht-hull/)**<br>An International One Metre radio-sailing yacht to the IOM Class Rules 2026: a glass hull lofted from a table of stations with a painted deck, a tapered carbon fin, a lead bulb sized by its mass and a carbon rudder, floated at the class's 4 kg in fresh water. | Naval design | 8/10 |
 | <img src="examples/20-moka-pot/preview.png" width="240" alt="Moka pot"> | **[Moka pot](examples/20-moka-pot/)**<br>An original twelve-sided stovetop espresso maker in cast aluminium for 3, 4 or 6 cups, sized by its physics: the safety valve sits where the water for the cups ends, the funnel holds the coffee for that water, the lid opens on a working hinge, and the pot stands on a 10° slope full or empty. | Product design | 8/10 |
+| <img src="examples/21-ventoux-relief/preview.png" width="240" alt="Mont Ventoux relief"> | **[Mont Ventoux relief](examples/21-ventoux-relief/)**<br>Mont Ventoux and the Bédoin climb of the Tour de France Femmes 2026 (stage 7) at 1:70 000: a relief printed in forest green and limestone white with brass kilometre pins and the summit tower on a walnut base, or laser-cut contour layers. | Topography, art | 8/10 |
 <!-- gallery:end -->
 
 ## Rebuild and check

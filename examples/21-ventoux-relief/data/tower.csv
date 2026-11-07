@@ -1,0 +1,9 @@
+# The summit tower of Mont Ventoux and its antenna, written by make.py fetch on 2026-11-07.
+# Source: IGN BD TOPO, batiment (nature 'Tour, donjon') and construction_ponctuelle (nature 'Antenne'), Lambert-93.
+# key,value
+centre_e,882111.48
+centre_n,6344265.62
+footprint_m2,162.3
+ground_m,1893.5
+height_m,44.8
+mast_top_m,1975.5

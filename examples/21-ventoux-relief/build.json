@@ -1,0 +1,7188 @@
+[
+[
+"document.setTolerance",
+{
+"linear": 0.001
+}
+],
+[
+"variable.set",
+{
+"name": "vertical_exaggeration",
+"expr": "2.1"
+}
+],
+[
+"variable.set",
+{
+"name": "contour_interval",
+"expr": "100 m"
+}
+],
+[
+"variable.set",
+{
+"name": "product",
+"expr": "1"
+}
+],
+[
+"variable.publish",
+{
+"name": "vertical_exaggeration",
+"label": "Vertical exaggeration",
+"description": "How many times taller than the map's scale the printed relief's heights are drawn (the laser-cut layers take theirs from the sheet thickness)",
+"group": "Relief",
+"order": 1,
+"kind": "number",
+"min": "1",
+"max": "3",
+"step": "0.1"
+}
+],
+[
+"variable.publish",
+{
+"name": "contour_interval",
+"label": "Contour interval",
+"description": "Height between the laser-cut contour layers, one 3 mm sheet each, counted from sea level",
+"group": "Relief",
+"order": 2,
+"kind": "number",
+"min": "100 m",
+"max": "200 m",
+"step": "50 m",
+"unit": "m"
+}
+],
+[
+"variable.publish",
+{
+"name": "product",
+"label": "Product",
+"description": "A relief 3D-printed in two colours with brass kilometre pins, or a stack of laser-cut contour layers",
+"group": "Relief",
+"order": 3,
+"kind": "choice",
+"choices": [
+"Printed relief",
+"Laser-cut layers"
+]
+}
+],
+[
+"variable.set",
+{
+"name": "map_scale",
+"expr": "70000"
+}
+],
+[
+"variable.set",
+{
+"name": "sheet_thickness",
+"expr": "3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "vertical_scale",
+"expr": "if(product == 2, sheet_thickness / contour_interval, vertical_exaggeration / map_scale)"
+}
+],
+[
+"variable.set",
+{
+"name": "node_pitch",
+"expr": "350 m / map_scale"
+}
+],
+[
+"variable.set",
+{
+"name": "relief_width",
+"expr": "36 * node_pitch"
+}
+],
+[
+"variable.set",
+{
+"name": "relief_depth",
+"expr": "28 * node_pitch"
+}
+],
+[
+"variable.set",
+{
+"name": "summit_elevation",
+"expr": "1910 m"
+}
+],
+[
+"variable.set",
+{
+"name": "blank_height",
+"expr": "summit_elevation * vertical_scale + 10 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "forest_edge_elevation",
+"expr": "1419.1 m"
+}
+],
+[
+"variable.set",
+{
+"name": "data_mean_elevation",
+"expr": "1026.9 m"
+}
+],
+[
+"variable.set",
+{
+"name": "climb_start_altitude",
+"expr": "544.4 m"
+}
+],
+[
+"variable.set",
+{
+"name": "srtm_accuracy",
+"expr": "16 m"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_diameter",
+"expr": "1.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "start_pin_diameter",
+"expr": "2.5 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_hole_clearance",
+"expr": "0.1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "pin_protrusion",
+"expr": "2 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "hole_floor",
+"expr": "3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "landmark_scale",
+"expr": "10"
+}
+],
+[
+"variable.set",
+{
+"name": "tower_height",
+"expr": "44.8 m"
+}
+],
+[
+"variable.set",
+{
+"name": "tower_diameter",
+"expr": "sqrt(162.3 * 4 / pi) * 1 m"
+}
+],
+[
+"variable.set",
+{
+"name": "tower_ground",
+"expr": "1893.5 m"
+}
+],
+[
+"variable.set",
+{
+"name": "mast_top",
+"expr": "1975.5 m"
+}
+],
+[
+"variable.set",
+{
+"name": "mast_diameter",
+"expr": "0.6 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "tower_roof",
+"expr": "tower_ground * vertical_scale + landmark_scale * tower_height / map_scale"
+}
+],
+[
+"variable.set",
+{
+"name": "mast_length",
+"expr": "landmark_scale * (mast_top - tower_ground - tower_height) / map_scale"
+}
+],
+[
+"variable.set",
+{
+"name": "base_border",
+"expr": "15 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "base_thickness",
+"expr": "22 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "base_corner_radius",
+"expr": "8 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "base_round_over",
+"expr": "3 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "bottom_edge_break",
+"expr": "1 mm"
+}
+],
+[
+"variable.set",
+{
+"name": "stack_base_level",
+"expr": "floor(338 m / contour_interval) * contour_interval"
+}
+],
+[
+"variable.set",
+{
+"name": "contour_layer_count",
+"expr": "floor((summit_elevation - stack_base_level) / contour_interval) + 1"
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 1",
+"plane": "yz",
+"offset": "0 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 1",
+"points": [
+[
+"0 mm",
+"338 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"731 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 1",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"347 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"344 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"347 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"359 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"362 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"350 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"360 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"386 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"423 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"461 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"526 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"567 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"623 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"679 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"763 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"842 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"846 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"838 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"946 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"854 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"744 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"648 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"506 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"514 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"588 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"742 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"786 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 2",
+"plane": "yz",
+"offset": "1 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 2",
+"points": [
+[
+"0 mm",
+"345 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"882 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 2",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"359 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"357 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"360 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"366 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"372 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"367 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"377 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"401 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"435 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"481 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"537 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"575 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"667 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"724 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"782 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"853 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"935 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"920 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"923 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"931 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"792 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"708 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"573 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"511 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"589 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"758 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"909 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 3",
+"plane": "yz",
+"offset": "2 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 3",
+"points": [
+[
+"0 mm",
+"355 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"986 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 3",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"368 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"371 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"376 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"378 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"385 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"387 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"396 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"415 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"460 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"515 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"573 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"624 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"686 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"757 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"834 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"888 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"970 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1013 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"945 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1003 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"878 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"791 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"637 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"532 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"573 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"709 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"943 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 4",
+"plane": "yz",
+"offset": "3 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 4",
+"points": [
+[
+"0 mm",
+"367 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1053 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 4",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"379 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"385 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"386 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"391 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"402 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"410 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"417 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"435 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"487 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"547 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"599 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"677 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"720 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"771 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"842 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"953 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1039 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1086 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1068 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1028 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"978 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"825 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"742 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"594 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"554 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"676 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"901 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 5",
+"plane": "yz",
+"offset": "4 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 5",
+"points": [
+[
+"0 mm",
+"382 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1079 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 5",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"391 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"395 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"403 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"413 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"417 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"431 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"448 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"468 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"533 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"594 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"638 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"696 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"756 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"820 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"888 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"969 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1093 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1163 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1193 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1083 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1082 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"874 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"839 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"672 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"586 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"633 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"869 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 6",
+"plane": "yz",
+"offset": "5 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 6",
+"points": [
+[
+"0 mm",
+"403 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1062 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 6",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"412 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"409 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"428 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"441 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"428 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"456 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"476 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"513 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"565 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"607 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"663 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"724 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"782 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"847 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"906 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"993 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1120 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1241 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1276 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1182 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1105 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"956 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"917 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"766 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"647 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"615 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"815 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 7",
+"plane": "yz",
+"offset": "6 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 7",
+"points": [
+[
+"0 mm",
+"424 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1040 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 7",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"434 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"437 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"436 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"463 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"461 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"486 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"509 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"551 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"600 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"659 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"714 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"767 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"825 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"892 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"956 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1039 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1141 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1280 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1364 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1279 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1160 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1112 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1010 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"830 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"688 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"629 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"796 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 8",
+"plane": "yz",
+"offset": "7 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 8",
+"points": [
+[
+"0 mm",
+"447 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1029 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 8",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"457 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"449 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"457 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"482 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"505 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"530 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"561 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"579 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"639 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"695 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"746 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"806 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"852 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"923 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"987 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1097 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1211 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1305 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1394 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1380 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1266 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1195 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1031 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"929 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"759 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"704 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"798 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 9",
+"plane": "yz",
+"offset": "8 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 9",
+"points": [
+[
+"0 mm",
+"469 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1034 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 9",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"478 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"461 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"495 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"514 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"542 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"572 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"605 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"641 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"679 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"722 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"785 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"826 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"896 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"945 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1034 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1125 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1216 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1330 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1419 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1446 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1356 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1218 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1071 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1050 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"903 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"818 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"829 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 10",
+"plane": "yz",
+"offset": "9 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 10",
+"points": [
+[
+"0 mm",
+"492 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1054 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 10",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"509 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"492 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"526 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"566 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"590 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"622 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"643 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"683 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"734 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"761 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"810 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"864 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"929 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"983 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1064 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1160 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1274 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1378 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1477 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1533 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1452 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1308 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1183 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1136 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"993 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"951 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"898 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 11",
+"plane": "yz",
+"offset": "10 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 11",
+"points": [
+[
+"0 mm",
+"514 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1005 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 11",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"537 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"550 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"578 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"618 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"645 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"671 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"696 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"724 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"772 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"797 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"842 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"891 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"957 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1032 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1101 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1202 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1311 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1406 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1509 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1616 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1543 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1409 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1284 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1179 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1076 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1024 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1035 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 12",
+"plane": "yz",
+"offset": "11 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 12",
+"points": [
+[
+"0 mm",
+"531 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1017 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 12",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"561 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"597 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"623 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"658 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"697 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"726 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"732 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"753 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"799 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"838 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"880 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"944 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1000 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1056 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1136 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1223 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1312 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1421 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1525 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1648 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1666 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1512 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1394 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1247 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1193 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1093 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1136 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 13",
+"plane": "yz",
+"offset": "12 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 13",
+"points": [
+[
+"0 mm",
+"557 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1016 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 13",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"589 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"621 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"659 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"692 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"727 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"761 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"777 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"797 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"843 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"890 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"915 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"963 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1029 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1099 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1175 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1242 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1356 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1457 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1555 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1659 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1723 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1577 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1411 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1328 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1313 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1170 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1188 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 14",
+"plane": "yz",
+"offset": "13 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 14",
+"points": [
+[
+"0 mm",
+"601 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1020 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 14",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"651 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"667 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"695 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"735 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"752 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"790 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"814 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"837 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"865 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"913 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"957 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1017 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1065 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1138 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1214 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1295 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1377 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1481 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1581 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1682 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1764 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1616 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1456 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1401 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1357 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1253 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1187 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 15",
+"plane": "yz",
+"offset": "14 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 15",
+"points": [
+[
+"0 mm",
+"614 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"1005 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 15",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"686 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"705 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"716 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"755 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"785 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"819 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"850 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"881 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"920 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"961 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1000 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1043 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1100 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1179 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1249 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1327 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1412 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1509 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1619 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1701 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1781 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1644 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1477 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1405 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1382 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1294 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1177 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 16",
+"plane": "yz",
+"offset": "15 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 16",
+"points": [
+[
+"0 mm",
+"686 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"856 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 16",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"648 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"718 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"753 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"785 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"815 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"847 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"889 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"915 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"948 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1001 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1042 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1086 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1141 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1198 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1267 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1361 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1420 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1513 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1613 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1716 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1798 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1674 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1504 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1398 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1345 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1229 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1032 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 17",
+"plane": "yz",
+"offset": "16 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 17",
+"points": [
+[
+"0 mm",
+"714 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"839 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 17",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"740 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"707 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"779 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"813 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"854 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"874 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"925 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"959 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"991 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1022 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1070 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1118 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1172 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1225 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1306 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1372 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1464 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1534 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1644 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1752 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1803 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1697 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1529 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1426 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1378 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1279 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1052 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 18",
+"plane": "yz",
+"offset": "17 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 18",
+"points": [
+[
+"0 mm",
+"739 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"811 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 18",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"768 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"759 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"826 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"874 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"913 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"902 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"941 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"988 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1034 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1072 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1102 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1153 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1203 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1250 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1321 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1406 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1477 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1561 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1663 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1771 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1816 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1692 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1569 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1451 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1388 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1287 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1035 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 19",
+"plane": "yz",
+"offset": "18 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 19",
+"points": [
+[
+"0 mm",
+"781 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"858 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 19",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"802 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"796 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"866 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"898 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"942 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"938 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"982 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1017 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1059 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1097 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1142 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1204 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1236 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1304 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1317 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1402 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1478 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1566 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1661 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1776 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1910 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1780 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1605 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1451 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1388 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1295 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1064 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 20",
+"plane": "yz",
+"offset": "19 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 20",
+"points": [
+[
+"0 mm",
+"814 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"890 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 20",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"831 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"855 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"876 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"944 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"967 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"972 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1026 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1043 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1095 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1125 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1161 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1223 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1273 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1331 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1372 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1423 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1475 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1539 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1630 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1727 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1821 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1740 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1583 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1408 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1341 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1207 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"1035 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 21",
+"plane": "yz",
+"offset": "20 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 21",
+"points": [
+[
+"0 mm",
+"863 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"784 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 21",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"896 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"866 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"914 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"939 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"971 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"991 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1013 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1054 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1099 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1151 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1194 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1179 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1253 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1335 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1400 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1443 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1506 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1603 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1695 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1793 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1778 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1567 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1434 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1330 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1155 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"1020 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"871 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 22",
+"plane": "yz",
+"offset": "21 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 22",
+"points": [
+[
+"0 mm",
+"859 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"616 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 22",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"901 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"884 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"918 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"945 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"961 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1004 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1032 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1074 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1127 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1172 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1212 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1251 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1255 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1302 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1366 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1439 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1515 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1601 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1695 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1774 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1710 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1510 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1270 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"1211 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1186 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"990 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"771 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 23",
+"plane": "yz",
+"offset": "22 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 23",
+"points": [
+[
+"0 mm",
+"875 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"588 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 23",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"904 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"929 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"936 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"974 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1005 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1012 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1062 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1100 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1142 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1203 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1240 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1285 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1277 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1346 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1404 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1460 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1497 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1592 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1684 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1675 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1534 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1382 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"1095 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"999 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"1031 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"983 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"773 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 24",
+"plane": "yz",
+"offset": "23 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 24",
+"points": [
+[
+"0 mm",
+"911 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"563 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 24",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"937 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"966 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"934 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1018 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1048 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1045 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1104 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1152 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1157 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1198 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1265 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1312 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1308 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1372 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1423 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1510 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1574 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1607 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1712 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1561 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1352 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1211 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"958 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"839 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"868 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"885 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"748 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 25",
+"plane": "yz",
+"offset": "24 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 25",
+"points": [
+[
+"0 mm",
+"937 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"555 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 25",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"956 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1001 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"986 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1017 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1083 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1081 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1102 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1153 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1180 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1241 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1251 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1344 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1371 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1367 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1429 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1521 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1602 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1663 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1633 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1485 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1283 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"1010 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"887 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"736 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"771 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"866 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"717 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 26",
+"plane": "yz",
+"offset": "25 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 26",
+"points": [
+[
+"0 mm",
+"940 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"542 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 26",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"972 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1018 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1014 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1002 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1081 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1101 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1119 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1144 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1200 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1254 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1278 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1336 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1398 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1390 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1448 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1520 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1586 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1645 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1502 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1342 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1159 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"961 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"798 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"675 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"698 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"796 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"680 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 27",
+"plane": "yz",
+"offset": "26 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 27",
+"points": [
+[
+"0 mm",
+"967 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"488 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 27",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1000 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1020 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1035 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"994 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1021 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1098 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1133 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1165 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1221 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1257 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1320 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1330 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1399 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1438 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1471 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1516 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1597 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1585 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1399 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1228 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"1013 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"860 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"727 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"608 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"585 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"674 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"626 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 28",
+"plane": "yz",
+"offset": "27 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 28",
+"points": [
+[
+"0 mm",
+"997 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"459 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 28",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1019 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1041 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1054 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1028 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1081 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1051 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1085 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1129 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1189 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1263 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1311 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1354 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1384 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1416 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1485 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1549 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1608 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1540 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1372 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1190 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"944 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"827 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"709 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"618 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"536 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"565 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"524 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 29",
+"plane": "yz",
+"offset": "28 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 29",
+"points": [
+[
+"0 mm",
+"1017 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"485 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 29",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1031 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1067 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1063 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1070 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1121 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1107 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1153 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1149 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1221 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1215 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1317 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1366 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1402 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1446 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1477 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1552 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1611 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1495 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1321 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1069 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"842 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"749 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"763 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"668 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"572 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"498 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"496 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 30",
+"plane": "yz",
+"offset": "29 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 30",
+"points": [
+[
+"0 mm",
+"1033 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"536 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 30",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1053 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1072 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1073 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1077 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1121 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1133 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1170 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1210 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1199 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1229 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1291 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1323 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1358 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1407 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1479 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1534 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1595 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1447 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1258 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1033 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"846 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"701 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"649 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"643 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"586 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"514 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"480 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 31",
+"plane": "yz",
+"offset": "30 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 31",
+"points": [
+[
+"0 mm",
+"1053 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"591 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 31",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1083 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1087 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1107 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1126 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1105 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1155 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1184 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1220 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1253 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1224 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1297 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1336 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1370 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1439 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1478 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1540 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1539 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1370 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1203 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"1023 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"872 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"697 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"597 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"656 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"698 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"548 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"473 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 32",
+"plane": "yz",
+"offset": "31 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 32",
+"points": [
+[
+"0 mm",
+"1082 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"567 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 32",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1096 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1100 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1128 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1162 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1151 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1162 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1192 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1222 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1261 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1246 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1289 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1336 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1380 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1423 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1483 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1562 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1492 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1324 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1157 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"990 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"831 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"701 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"592 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"595 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"672 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"489 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"543 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 33",
+"plane": "yz",
+"offset": "32 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 33",
+"points": [
+[
+"0 mm",
+"1075 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"617 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 33",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1103 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1113 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1132 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1173 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1180 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1156 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1181 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1217 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1260 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1267 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1301 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1345 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1393 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1454 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1495 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1523 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1517 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1371 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1151 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"954 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"806 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"677 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"598 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"577 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"534 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"490 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"670 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 34",
+"plane": "yz",
+"offset": "33 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 34",
+"points": [
+[
+"0 mm",
+"1085 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"650 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 34",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1114 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1126 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1135 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1176 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1203 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1201 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1204 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1230 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1248 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1276 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1317 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1352 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1374 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1379 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1379 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1379 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1429 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1319 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1111 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"916 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"779 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"659 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"689 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"681 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"511 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"540 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"685 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 35",
+"plane": "yz",
+"offset": "34 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 35",
+"points": [
+[
+"0 mm",
+"1089 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"689 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 35",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1103 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1121 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1138 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1168 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1195 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1214 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1230 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1236 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1266 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1299 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1290 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1268 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1243 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1234 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1237 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1267 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1324 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1240 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1058 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"892 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"771 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"653 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"603 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"575 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"487 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"553 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"613 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 36",
+"plane": "yz",
+"offset": "35 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 36",
+"points": [
+[
+"0 mm",
+"1071 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"704 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 36",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1102 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1122 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1138 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1161 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1184 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1201 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1219 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1241 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1241 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1225 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1176 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1143 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1132 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1177 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1252 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1312 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1341 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1241 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1067 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"878 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"744 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"660 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"603 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"521 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"505 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"639 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"602 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"sketch.create",
+{
+"name": "Terrain column 37",
+"plane": "yz",
+"offset": "36 * node_pitch"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Terrain column 37",
+"points": [
+[
+"0 mm",
+"1070 m * vertical_scale"
+],
+[
+"0 mm",
+"0 mm"
+],
+[
+"relief_depth",
+"0 mm"
+],
+[
+"relief_depth",
+"744 m * vertical_scale"
+]
+]
+}
+],
+[
+"sketch.spline",
+{
+"sketch": "Terrain column 37",
+"live": true,
+"through": [
+"e1",
+[
+"1 * node_pitch",
+"1089 m * vertical_scale"
+],
+[
+"2 * node_pitch",
+"1104 m * vertical_scale"
+],
+[
+"3 * node_pitch",
+"1122 m * vertical_scale"
+],
+[
+"4 * node_pitch",
+"1137 m * vertical_scale"
+],
+[
+"5 * node_pitch",
+"1152 m * vertical_scale"
+],
+[
+"6 * node_pitch",
+"1165 m * vertical_scale"
+],
+[
+"7 * node_pitch",
+"1177 m * vertical_scale"
+],
+[
+"8 * node_pitch",
+"1172 m * vertical_scale"
+],
+[
+"9 * node_pitch",
+"1133 m * vertical_scale"
+],
+[
+"10 * node_pitch",
+"1095 m * vertical_scale"
+],
+[
+"11 * node_pitch",
+"1073 m * vertical_scale"
+],
+[
+"12 * node_pitch",
+"1095 m * vertical_scale"
+],
+[
+"13 * node_pitch",
+"1153 m * vertical_scale"
+],
+[
+"14 * node_pitch",
+"1209 m * vertical_scale"
+],
+[
+"15 * node_pitch",
+"1266 m * vertical_scale"
+],
+[
+"16 * node_pitch",
+"1343 m * vertical_scale"
+],
+[
+"17 * node_pitch",
+"1368 m * vertical_scale"
+],
+[
+"18 * node_pitch",
+"1286 m * vertical_scale"
+],
+[
+"19 * node_pitch",
+"1128 m * vertical_scale"
+],
+[
+"20 * node_pitch",
+"986 m * vertical_scale"
+],
+[
+"21 * node_pitch",
+"794 m * vertical_scale"
+],
+[
+"22 * node_pitch",
+"650 m * vertical_scale"
+],
+[
+"23 * node_pitch",
+"583 m * vertical_scale"
+],
+[
+"24 * node_pitch",
+"523 m * vertical_scale"
+],
+[
+"25 * node_pitch",
+"526 m * vertical_scale"
+],
+[
+"26 * node_pitch",
+"650 m * vertical_scale"
+],
+[
+"27 * node_pitch",
+"628 m * vertical_scale"
+],
+"e4"
+]
+}
+],
+[
+"feature.loft",
+{
+"sections": [
+"Terrain column 1",
+"Terrain column 2",
+"Terrain column 3",
+"Terrain column 4",
+"Terrain column 5",
+"Terrain column 6",
+"Terrain column 7",
+"Terrain column 8",
+"Terrain column 9",
+"Terrain column 10",
+"Terrain column 11",
+"Terrain column 12",
+"Terrain column 13",
+"Terrain column 14",
+"Terrain column 15",
+"Terrain column 16",
+"Terrain column 17",
+"Terrain column 18",
+"Terrain column 19",
+"Terrain column 20",
+"Terrain column 21",
+"Terrain column 22",
+"Terrain column 23",
+"Terrain column 24",
+"Terrain column 25",
+"Terrain column 26",
+"Terrain column 27",
+"Terrain column 28",
+"Terrain column 29",
+"Terrain column 30",
+"Terrain column 31",
+"Terrain column 32",
+"Terrain column 33",
+"Terrain column 34",
+"Terrain column 35",
+"Terrain column 36",
+"Terrain column 37"
+],
+"name": "Terrain"
+}
+],
+[
+"sketch.create",
+{
+"name": "Kilometre marks",
+"plane": "xy",
+"offset": "hole_floor"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"3449.7 m / map_scale",
+"614.7 m / map_scale"
+],
+"radius": "start_pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"4068.5 m / map_scale",
+"1215.3 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"4647.4 m / map_scale",
+"1861.2 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"5539.7 m / map_scale",
+"1913.4 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"6452.1 m / map_scale",
+"2076.2 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"7160.4 m / map_scale",
+"2467.9 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"7950 m / map_scale",
+"3025.3 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"8831.5 m / map_scale",
+"3324.5 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"9618.1 m / map_scale",
+"3870.6 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"9428.2 m / map_scale",
+"4590.7 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"9211.8 m / map_scale",
+"4964.5 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"9182.5 m / map_scale",
+"5645.6 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"8470.4 m / map_scale",
+"5870.5 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"7996.4 m / map_scale",
+"6448.9 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"7323.4 m / map_scale",
+"6910.1 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"sketch.circle",
+{
+"sketch": "Kilometre marks",
+"center": [
+"6751.7 m / map_scale",
+"7427.2 m / map_scale"
+],
+"radius": "pin_diameter / 2"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Kilometre marks",
+"distance": "blank_height",
+"name": "Pin blanks",
+"when": "product == 1"
+}
+],
+[
+"feature.transform",
+{
+"source": "Terrain",
+"translate": [
+0,
+0,
+"pin_protrusion"
+],
+"keep": true,
+"name": "Terrain at the pins' tops",
+"when": "product == 1"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Pin blanks",
+"tool": "Terrain at the pins' tops",
+"name": "Kilometre pins",
+"when": "product == 1"
+}
+],
+[
+"feature.offsetProfile",
+{
+"sketch": "Kilometre marks",
+"distance": "pin_hole_clearance",
+"name": "Hole outlines"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 mm",
+"relief_depth + 2 mm",
+"forest_edge_elevation * vertical_scale + 1 mm"
+],
+"position": [
+"-1 mm",
+"-1 mm",
+"-1 mm"
+],
+"name": "Forest blank",
+"when": "product == 1"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 mm",
+"relief_depth + 2 mm",
+"blank_height - forest_edge_elevation * vertical_scale"
+],
+"position": [
+"-1 mm",
+"-1 mm",
+"forest_edge_elevation * vertical_scale"
+],
+"name": "Summit blank",
+"when": "product == 1"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Hole outlines",
+"distance": "blank_height",
+"cut": "Forest blank",
+"name": "Forest blank drilled",
+"when": "product == 1"
+}
+],
+[
+"feature.extrude",
+{
+"sketch": "Hole outlines",
+"distance": "blank_height",
+"cut": "Summit blank",
+"name": "Summit blank drilled",
+"when": "product == 1"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Forest blank drilled",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Forest drilled",
+"when": "product == 1"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Summit blank drilled",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Bald summit",
+"when": "product == 1"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F50:copy(1)/F38:side(e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6)",
+"F50:copy(1)/F38:side(e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5,e5)"
+],
+[
+"F50:copy(1)/F38:side(e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6)",
+"F50:copy(1)/F38:side(e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7,e7)"
+],
+[
+"F50:copy(1)/F38:side(e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6)",
+"F50:copy(1)/F38:startCap(e5,e6,e7,e35)"
+],
+[
+"F50:copy(1)/F38:side(e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6,e6)",
+"F50:copy(1)/F38:endCap(e5,e6,e7,e35)"
+]
+],
+"distance": "bottom_edge_break",
+"name": "Forested slopes",
+"when": "product == 1"
+}
+],
+[
+"sketch.create",
+{
+"name": "Tower section",
+"plane": "zx",
+"offset": "7365.7 m / map_scale"
+}
+],
+[
+"sketch.polyline",
+{
+"sketch": "Tower section",
+"closed": true,
+"points": [
+[
+"tower_ground * vertical_scale - 3 mm",
+"6279.1 m / map_scale"
+],
+[
+"tower_ground * vertical_scale - 3 mm",
+"6279.1 m / map_scale + landmark_scale * tower_diameter / map_scale / 2"
+],
+[
+"tower_roof",
+"6279.1 m / map_scale + landmark_scale * tower_diameter / map_scale / 2"
+],
+[
+"tower_roof",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + 1 * mast_length / 5",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + 2 * mast_length / 5",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + 3 * mast_length / 5",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + 4 * mast_length / 5",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + 5 * mast_length / 5",
+"6279.1 m / map_scale + mast_diameter / 2"
+],
+[
+"tower_roof + mast_length",
+"6279.1 m / map_scale"
+]
+]
+}
+],
+[
+"feature.revolve",
+{
+"sketch": "Tower section",
+"axis": "e20",
+"name": "Tower blank"
+}
+],
+[
+"feature.boolean",
+{
+"op": "subtract",
+"target": "Tower blank",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Summit tower"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 mm",
+"relief_depth + 2 mm",
+"(stack_base_level + contour_interval) * vertical_scale + 1 mm"
+],
+"position": [
+"-1 mm",
+"-1 mm",
+"-1 mm"
+],
+"name": "Layer 1 slab",
+"when": "product == 2"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 mm",
+"relief_depth + 2 mm",
+"sheet_thickness"
+],
+"position": [
+"-1 mm",
+"-1 mm",
+"(stack_base_level + 1 * contour_interval) * vertical_scale"
+],
+"name": "Layer 2 slab",
+"when": "product == 2 && 2 <= contour_layer_count"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 mm",
+"relief_depth + 2 mm",
+"sheet_thickness"
+],
+"position": [
+"-1 mm",
+"-1 mm",
+"(stack_base_level + 2 * contour_interval) * vertical_scale"
+],
+"name": "Layer 3 slab",
+"when": "product == 2 && 3 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"2 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 4 slab",
+"when": "product == 2 && 4 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"2 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 5 slab",
+"when": "product == 2 && 5 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"4 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 6 slab",
+"when": "product == 2 && 6 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"4 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 7 slab",
+"when": "product == 2 && 7 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"6 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 8 slab",
+"when": "product == 2 && 8 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"6 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 9 slab",
+"when": "product == 2 && 9 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"8 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 10 slab",
+"when": "product == 2 && 10 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"8 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 11 slab",
+"when": "product == 2 && 11 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"10 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 12 slab",
+"when": "product == 2 && 12 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"10 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 13 slab",
+"when": "product == 2 && 13 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"12 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 14 slab",
+"when": "product == 2 && 14 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"12 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 15 slab",
+"when": "product == 2 && 15 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 2 slab",
+"translate": [
+0,
+0,
+"14 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 16 slab",
+"when": "product == 2 && 16 <= contour_layer_count"
+}
+],
+[
+"feature.transform",
+{
+"source": "Layer 3 slab",
+"translate": [
+0,
+0,
+"14 * sheet_thickness"
+],
+"keep": true,
+"name": "Layer 17 slab",
+"when": "product == 2 && 17 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 1 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 1",
+"when": "product == 2"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 2 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 2",
+"when": "product == 2 && 2 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 3 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 3",
+"when": "product == 2 && 3 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 4 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 4",
+"when": "product == 2 && 4 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 5 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 5",
+"when": "product == 2 && 5 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 6 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 6",
+"when": "product == 2 && 6 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 7 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 7",
+"when": "product == 2 && 7 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 8 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 8",
+"when": "product == 2 && 8 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 9 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 9",
+"when": "product == 2 && 9 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 10 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 10",
+"when": "product == 2 && 10 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 11 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 11",
+"when": "product == 2 && 11 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 12 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 12",
+"when": "product == 2 && 12 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 13 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 13",
+"when": "product == 2 && 13 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 14 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 14",
+"when": "product == 2 && 14 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 15 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 15",
+"when": "product == 2 && 15 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 16 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 16",
+"when": "product == 2 && 16 <= contour_layer_count"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Layer 17 slab",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Contour layer 17",
+"when": "product == 2 && 17 <= contour_layer_count"
+}
+],
+[
+"feature.block",
+{
+"size": [
+"relief_width + 2 * base_border",
+"relief_depth + 2 * base_border",
+"base_thickness"
+],
+"position": [
+"-base_border",
+"-base_border",
+"-base_thickness"
+],
+"name": "Base blank"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F90:face(2)",
+"F90:face(4)"
+],
+[
+"F90:face(2)",
+"F90:face(5)"
+],
+[
+"F90:face(3)",
+"F90:face(4)"
+],
+[
+"F90:face(3)",
+"F90:face(5)"
+]
+],
+"radius": "base_corner_radius",
+"name": "Base corners"
+}
+],
+[
+"feature.fillet",
+{
+"edges": [
+[
+"F90:face(1)",
+"F90:face(2)"
+]
+],
+"chain": true,
+"radius": "base_round_over",
+"name": "Base round-over"
+}
+],
+[
+"feature.chamfer",
+{
+"edges": [
+[
+"F90:face(0)",
+"F90:face(2)"
+]
+],
+"chain": true,
+"distance": "bottom_edge_break",
+"name": "Walnut base"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "0.05 mm",
+"height": "blank_height",
+"position": [
+"18 * node_pitch",
+"21 * node_pitch",
+"-1 mm"
+],
+"name": "Summit probe blank"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Summit probe blank",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Summit probe"
+}
+],
+[
+"feature.cylinder",
+{
+"radius": "0.05 mm",
+"height": "blank_height",
+"position": [
+"3449.7 m / map_scale",
+"614.7 m / map_scale",
+"-1 mm"
+],
+"name": "Start probe blank"
+}
+],
+[
+"feature.boolean",
+{
+"op": "intersect",
+"target": "Start probe blank",
+"tool": "Terrain",
+"keepTool": true,
+"name": "Start probe"
+}
+],
+[
+"feature.visible",
+{
+"feature": [
+"Terrain",
+"Summit probe",
+"Start probe"
+],
+"visible": false
+}
+],
+[
+"body.appearance",
+{
+"body": "Forested slopes",
+"color": "#656a4d",
+"metallic": 0,
+"roughness": 0.8,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.0,
+"subsurfaceColor": "#656a4d",
+"pattern": null
+}
+],
+[
+"body.material",
+{
+"body": "Forested slopes",
+"name": "PLA Matte, Dark Green",
+"density": 1310
+}
+],
+[
+"body.appearance",
+{
+"body": "Bald summit",
+"color": "#d4d1c3",
+"metallic": 0,
+"roughness": 0.8,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.0,
+"subsurfaceColor": "#d4d1c3",
+"pattern": null
+}
+],
+[
+"body.material",
+{
+"body": "Bald summit",
+"name": "PLA Matte, Bone White",
+"density": 1310
+}
+],
+[
+"material.preset",
+{
+"body": "Kilometre pins",
+"preset": "steel",
+"color": "#c8a24a",
+"metallic": 1,
+"roughness": 0.3
+}
+],
+[
+"body.material",
+{
+"body": "Kilometre pins",
+"name": "Brass CW508L",
+"density": 8470
+}
+],
+[
+"body.appearance",
+{
+"body": "Summit tower",
+"color": "#f2f2ef",
+"metallic": 0,
+"roughness": 0.5,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.0,
+"subsurfaceColor": "#f2f2ef",
+"pattern": null
+}
+],
+[
+"face.appearance",
+{
+"body": "Summit tower",
+"faces": [
+"F55:copy(0)/F54:side(e14)",
+"F55:copy(0)/F54:side(e16)",
+"F55:copy(0)/F54:side(e18)"
+],
+"color": "#c21d24",
+"metallic": 0,
+"roughness": 0.5
+}
+],
+[
+"body.material",
+{
+"body": "Summit tower",
+"name": "Resin, painted",
+"density": 1150
+}
+],
+[
+"body.appearance",
+{
+"body": "Layer 1 slab",
+"color": "#efefeb",
+"metallic": 0,
+"roughness": 0.45,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.15,
+"subsurfaceColor": "#efefeb",
+"pattern": null
+}
+],
+[
+"body.material",
+{
+"body": "Layer 1 slab",
+"name": "Cast acrylic, white",
+"density": 1190
+}
+],
+[
+"body.appearance",
+{
+"body": "Layer 2 slab",
+"color": "#cfcfca",
+"metallic": 0,
+"roughness": 0.45,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.15,
+"subsurfaceColor": "#cfcfca",
+"pattern": null
+}
+],
+[
+"body.material",
+{
+"body": "Layer 2 slab",
+"name": "Cast acrylic, pale grey",
+"density": 1190
+}
+],
+[
+"body.appearance",
+{
+"body": "Layer 3 slab",
+"color": "#efefeb",
+"metallic": 0,
+"roughness": 0.45,
+"anisotropy": 0,
+"clearcoat": 0,
+"clearcoatRoughness": 0,
+"transmission": 0,
+"subsurface": 0.15,
+"subsurfaceColor": "#efefeb",
+"pattern": null
+}
+],
+[
+"body.material",
+{
+"body": "Layer 3 slab",
+"name": "Cast acrylic, white",
+"density": 1190
+}
+],
+[
+"material.preset",
+{
+"body": "Walnut base",
+"preset": "walnut",
+"pattern": {
+"scale": 5
+}
+}
+],
+[
+"assert.add",
+{
+"name": "Terrain volume from the data's mean height",
+"measure": "volume",
+"of": "Terrain",
+"eq": "relief_width * relief_depth * data_mean_elevation * vertical_scale",
+"tol": "0.001 * relief_width * relief_depth * data_mean_elevation * vertical_scale"
+}
+],
+[
+"assert.add",
+{
+"name": "Summit at the data's height",
+"measure": "boxMax",
+"of": "Summit probe",
+"axis": "z",
+"min": "(summit_elevation - 2 m) * vertical_scale",
+"max": "(summit_elevation + 2 m) * vertical_scale"
+}
+],
+[
+"assert.add",
+{
+"name": "Start of the climb at the road's height",
+"measure": "boxMax",
+"of": "Start probe",
+"axis": "z",
+"min": "(climb_start_altitude - srtm_accuracy) * vertical_scale",
+"max": "(climb_start_altitude + srtm_accuracy) * vertical_scale"
+}
+],
+[
+"assert.add",
+{
+"name": "Sixteen kilometre pins",
+"measure": "count",
+"of": {
+"kind": "face",
+"where": {
+"in": "Kilometre pins",
+"surface": "cylinder"
+}
+},
+"eq": "16",
+"when": "product == 1"
+}
+],
+[
+"assert.add",
+{
+"name": "A hole for every pin, through both colours",
+"measure": "count",
+"of": {
+"kind": "face",
+"where": [
+{
+"any": [
+{
+"in": "Forested slopes"
+},
+{
+"in": "Bald summit"
+}
+]
+},
+{
+"hole": true
+}
+]
+},
+"eq": "16 + 6",
+"when": "product == 1"
+}
+],
+[
+"assert.add",
+{
+"name": "One layer per contour",
+"measure": "count",
+"of": {
+"kind": "body",
+"where": {
+"name": "Contour layer*"
+}
+},
+"eq": "contour_layer_count",
+"when": "product == 2"
+}
+],
+[
+"document.info",
+{
+"title": "Mont Ventoux relief",
+"description": "Mont Ventoux and the climb from B\u00e9doin of the Tour de France Femmes 2026, stage 7, at 1:70 000: a relief 3D-printed in two colours, forest and bare limestone, with brass kilometre pins and the summit tower on a walnut base, or a stack of laser-cut contour layers. Elevation from SRTM, the road and the tower from IGN BD TOPO.",
+"author": "3DCraft examples",
+"licence": "MIT",
+"tags": [
+"topography",
+"relief",
+"map",
+"Mont Ventoux",
+"cycling",
+"art"
+]
+}
+],
+[
+"document.check",
+{}
+]
+]
