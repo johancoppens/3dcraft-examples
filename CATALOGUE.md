@@ -1,4 +1,4 @@
-# Catalogue: the 21 examples
+# Catalogue: the 26 examples
 
 The brief for every example: what the real thing is, what it must show of 3DCraft, its line of the gallery's
 palette, its public parameters, what it must prove, and its risks. The order is the intended progression
@@ -279,6 +279,101 @@ techniques or its palette line only with the coordinator.
   GLO-30 (float COG, harder to decode). Route: OpenStreetMap (ODbL, "© OpenStreetMap contributors", a
   produced work) or IGN BD TOPO (Licence Ouverte 2.0). Starting points: `plan/probes/q21-*.json` (local).
 
+## Complex, second round (2026-11-07)
+
+Five more, at the developer's request: a welded construction, a tab-and-slot object that goes together
+without screws, glue or welds, a layered cardboard figure, and two processes the first 21 do not touch
+(injection moulding, pressed laminate). Each starts with its own feasibility steps: where a risk below
+turns out to block the honest version, the builder stops and reports instead of building a weaker one.
+
+### 22. Flat-pack bookcase · `flat-pack-bookcase` · CNC, furniture
+- **Real thing:** an original open bookcase, about 800 wide, 1100 high and 300 mm deep, cut on a CNC router
+  from one 2500 × 1250 mm sheet of 18 mm birch plywood and put together by hand without screws, glue or
+  tools: each shelf ends in through tenons that pass the sides and are locked by tapered wedges (tusk
+  tenons), and a back rail or cross brace (a halving joint or tusk tenons) stops racking. A sheet's real
+  thickness differs from its nominal one (cite the plywood standard's tolerance), so the mortises follow
+  the measured thickness plus a fit clearance.
+- **Shows:** each part one sketch with its mortises as holes, dogbone (or T-bone) reliefs of the cutter's
+  radius in every inside corner; formulas from the sheet thickness, the cutter and the shelf count;
+  `cut.list` (every part a plate) and `cut.export` (DXF for the router); `document.interference` and
+  `measure.clearance` across the joints.
+- **Look:** oiled birch plywood, its ply edges visible.
+- **Parameters:** width, shelf count, measured sheet thickness (and the cutter diameter, if it earns its place).
+- **Proves:** every mortise is the sheet thickness plus the clearance; inside corners clear the cutter; the
+  wedge's mortise starts inside the side, so the wedge draws the shelf tight; a shelf's sag under a stated
+  book load in closed form, within a cited limit; every part fits on the sheet (each part's size, the
+  total area); no two parts overlap.
+- **Risks:** many mortises against the load budget: holes in the parts' sketches, not cuts afterwards.
+
+### 23. Snap-fit enclosure · `snap-fit-enclosure` · injection moulding, electronics
+- **Real thing:** an original two-part enclosure for a circuit board of about 100 × 70 mm, injection-moulded
+  in ABS (or PC/ABS), 2 mm walls, draft on every moulded wall, base and lid closed by cantilever snap hooks
+  (no screws), a lip and groove at the parting line, the board located on posts and held by the lid's ribs,
+  a USB-C opening at the parting line. Every undercut demoulds without a slide (a window through the wall
+  under each hook) or is named as needing one.
+- **Shows:** a rounded block `feature.shell`ed open, `feature.draft` on the walls, the parting line, snap
+  hooks and their windows, ribs and posts; `measure.draft` per half in its own pull, `measure.thickness`,
+  `document.interference` (lid, base and board); the board as a simple FR-4 body with its connector.
+- **Look:** matt white ABS base, translucent smoke-grey lid showing the board.
+- **Parameters:** board length and width, inside height, wall thickness.
+- **Proves:** draft ≥ the cited minimum on every moulded wall in its pull; the wall thickness; ribs ≤ the
+  cited fraction of the wall (sink marks); the snap hook's strain (rectangular cantilever:
+  ε = 1.5 · y · h / l²) within the material's permissible strain from a cited design guide; the board's
+  clearance; no overlap between the parts.
+- **Risks:** draft proofs (F-067, F-102): where `measure.draft` cannot prove a face, say so and check the
+  angle as built another way.
+
+### 24. Welded tube truss · `welded-truss` · steel construction, welding
+- **Real thing:** an original Warren truss (diagonals, no verticals) of circular hollow sections in S355
+  (EN 10219-2 or EN 10210-2 sizes), span about 6 m, depth about a tenth of it, gap K-joints to
+  EN 1993-1-8 §7, end plates at the supports. Each diagonal's ends are saddle-cut (coped) to the chord and
+  fillet-welded all round (MAG, ISO 4063 process 135), with a throat that makes the weld full strength.
+- **Shows:** chords and diagonals as tubes, the diagonals' ends coped by subtracting the chord; the
+  diagonals by `feature.pattern`; the welds as beads round each joint (a fillet on the joined edge or a
+  swept bead); a coping template per diagonal end, the coped tube end laid flat (`feature.unfold`) and
+  exported 1:1 to wrap round the tube; formulas from span, depth and panel count; a bar list as outputs.
+- **Look:** red-oxide primer.
+- **Parameters:** span, depth, panel count, chord size (from a table).
+- **Proves:** the joint validity ranges of EN 1993-1-8 (gap ≥ t1 + t2, eccentricity, angle ≥ 30°, the
+  diameter and d/t ratios); the weld throat against its rule; the steel mass in closed form from the bar
+  lengths; the weld volume as an output.
+- **Risks:** fillets on tube intersections and booleans of coped tubes (an earlier showcase met a refused
+  truss-joint boolean): find out first; many joints against the load budget.
+
+### 25. Layered cardboard rhino · `layered-cardboard-rhino` · laser cutting, art
+- **Real thing:** an original stylised standing rhinoceros about 300 mm long, built from layers of
+  cardboard laser-cut to its sections, stacked side by side (parallel to its plane of symmetry), glued, and
+  aligned on two wooden dowels through every layer; each layer engraved with its number.
+- **Shows:** the animal as one freeform body (revolves, lofts, sweeps; half of it mirrored), cut into flat,
+  straight-walled layers of the board's thickness as a laser cuts them; the layers as plates (`cut.list`)
+  and their DXF with cut and engrave apart (`cut.export`); the dowel holes proven through
+  (`measure.through`); `measure.symmetry` of the figure.
+- **Look:** white-faced board with kraft-brown cut edges, or a natural grey board if faces and edges cannot
+  be told apart.
+- **Parameters:** length, board (choice from a table of real boards and their thicknesses).
+- **Proves:** every layer is one flat plate of the board's thickness; the layer count; both dowel holes go
+  through every layer with material round them; the boards' total area; the figure stands (its centre of
+  mass over its feet).
+- **Risks:** a straight-walled layer from a section is a known gap (F-139: a face cannot be extruded or
+  become a profile): find an honest, general way first, or report; tens of freeform slices against the load
+  budget.
+
+### 26. Skateboard deck and press mould · `skateboard-deck` · laminating, CNC
+- **Real thing:** an original street deck, about 8.0 × 31.75 in with a wheelbase of about 14.25 in, of seven
+  1/16 in plies of hard maple laid up as the trade does (cite the layup), glued and pressed in a two-part
+  mould milled from MDF, with concave, nose and tail kicks, rounded rails and the standard truck bolt
+  pattern. The document is in inches (`document.setUnit`).
+- **Shows:** the deck's surface from surfaces (`feature.surface.coons` or `feature.surface.network`,
+  `feature.surface.trim` by the outline), the plies by `feature.thicken` (one body per ply, the grain per
+  ply), the truck holes, the mould halves from the stack's faces; `measure.developability` (how far the
+  veneer has to stretch); `document.interference` (the mould closed on the stack).
+- **Look:** natural maple with one dyed ultramarine core ply showing on the rails; MDF mould.
+- **Parameters:** width, wheelbase, concave depth, kick angle.
+- **Proves:** the stack is seven plies thick; the closed mould leaves exactly the stack's gap; the wheelbase
+  and the bolt pattern; the kick angle and the concave depth; the deck's mass from maple's density.
+- **Risks:** thickening trimmed freeform surfaces and rounding their rails; seven plies and two mould halves
+  against the load budget: find out first.
+
 ## Palette
 
 | # | Example | Line |
@@ -304,6 +399,11 @@ techniques or its palette line only with the coordinator.
 | 19 | RC yacht hull | white, carbon and lead |
 | 20 | Moka pot | aluminium and black |
 | 21 | Mont Ventoux relief | marble and walnut |
+| 22 | Flat-pack bookcase | oiled birch plywood, ply edges |
+| 23 | Snap-fit enclosure | white ABS and smoke-grey translucent |
+| 24 | Welded tube truss | red-oxide primer |
+| 25 | Layered cardboard rhino | white-faced board, kraft edges |
+| 26 | Skateboard deck | maple, ultramarine ply, MDF |
 
 ## Coverage
 

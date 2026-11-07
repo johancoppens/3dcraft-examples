@@ -1,9 +1,9 @@
 # AGENTS.md: guide for AI agents working on the 3DCraft examples
 
-This repository holds **21 example models** for [3DCraft](https://github.com/johancoppens/3dcraft), the
+This repository holds **26 example models** for [3DCraft](https://github.com/johancoppens/3dcraft), the
 parametric CAD modeller built for AI. Together they show what 3DCraft can do, from simple to difficult to
 fairly complex, across machine building, sheet metal, 3D printing, laser and CNC work, woodworking,
-packaging, jewellery, architecture, naval design, product design and art. They also feed the start screen
+packaging, jewellery, architecture, naval design, product design, welding, injection moulding and art. They also feed the start screen
 of the 3DCraft release and its website, so each one must be **real, makeable, beautiful and light**.
 
 Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each example must be), then the example you work on.
@@ -125,7 +125,7 @@ Name the process; prove with assertions what can be proven:
 - Fillets and chamfers wherever the real object has them (the developer asks this explicitly): no blocky,
   untouched edges.
 - Materials from `material.preset`, tuned with `body.appearance` (colour, roughness). Keep to your
-  example's line of the palette in `CATALOGUE.md`, so the 21 look different side by side.
+  example's line of the palette in `CATALOGUE.md`, so the 26 look different side by side.
 - The preview frames the object well (§5). Look at it at full size, and from two more angles before you
   hand in.
 
