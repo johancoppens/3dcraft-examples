@@ -1,0 +1,11 @@
+[
+ ["sketch.create", {"name": "Tread outline", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Tread outline", "start": [100, 0], "segments": [
+    {"line": [800, 0]},
+    {"arc": ["800 mm * cos(30 deg)", "800 mm * sin(30 deg)"], "center": [0, 0]},
+    {"line": ["100 mm * cos(30 deg)", "100 mm * sin(30 deg)"]},
+    {"arc": "start", "center": [0, 0], "clockwise": true}]}],
+ ["feature.extrude", {"sketch": "Tread outline", "distance": "40 mm", "name": "Tread blank"}],
+ ["feature.fillet", {"edges": [["Tread blank:side(e3)", "Tread blank:side(e6)"]], "radius": "25 mm", "name": "Rounded corner"}],
+ ["feature.fillet", {"edges": [["Tread blank:endCap(e3,e6,e8,e10)", "Tread blank:side(e3)"]], "radius": "3 mm", "chain": true, "name": "Round-over"}]
+]

@@ -1,0 +1,8 @@
+[
+ ["sketch.create", {"name": "Collar ring", "plane": "xy"}],
+ ["sketch.circle", {"sketch": "Collar ring", "center": ["0 mm", "0 mm"], "radius": "70 mm"}],
+ ["sketch.circle", {"sketch": "Collar ring", "center": ["0 mm", "0 mm"], "radius": "57.65 mm"}],
+ ["feature.extrude", {"sketch": "Collar ring", "distance": "100 mm", "name": "Collar"}],
+ ["feature.pattern", {"source": "Collar", "count": 14, "step": [0, 0, "186.67 mm"], "name": "Collars"}],
+ ["file.export", {"path": "collars-plan.svg", "view": "top"}]
+]

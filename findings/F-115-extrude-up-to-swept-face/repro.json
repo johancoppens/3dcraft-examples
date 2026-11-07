@@ -1,0 +1,9 @@
+[
+ ["datum.helix", {"axis": "z", "start": ["770 mm", 0, "1000 mm"], "pitch": "2240 mm", "height": "1000 mm", "name": "Rail helix"}],
+ ["sketch.create", {"name": "Rail section", "plane": "zx"}],
+ ["sketch.circle", {"sketch": "Rail section", "center": ["1000 mm", "770 mm"], "radius": "21.2 mm"}],
+ ["feature.sweep", {"sketch": "Rail section", "path": "Rail helix", "name": "Rail"}],
+ ["sketch.create", {"name": "Baluster plan", "plane": "xy"}],
+ ["sketch.circle", {"sketch": "Baluster plan", "center": ["770 mm * cos(20 deg)", "770 mm * sin(20 deg)"], "radius": "8 mm"}],
+ ["feature.extrude", {"sketch": "Baluster plan", "upTo": "Rail:side(e2)", "name": "Baluster"}]
+]

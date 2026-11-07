@@ -1,0 +1,10 @@
+[
+ ["sketch.create", {"name": "Landing outline", "plane": "xy", "offset": "2660 mm"}],
+ ["sketch.path", {"sketch": "Landing outline", "start": ["73 mm * cos(292.5 deg)", "73 mm * sin(292.5 deg)"], "segments": [
+    {"line": ["1000 mm * cos(292.5 deg)", "1000 mm * sin(292.5 deg)"]},
+    {"arc": ["1000 mm * cos(382.5 deg)", "1000 mm * sin(382.5 deg)"], "center": ["0 mm", "-1.4227055108008771e-11 mm"]},
+    {"line": ["73 mm * cos(382.5 deg)", "73 mm * sin(382.5 deg)"]},
+    {"arc": "start", "center": ["0 mm", "-1.0378693720148723e-12 mm"], "clockwise": true}]}],
+ ["feature.extrude", {"sketch": "Landing outline", "distance": "40 mm", "name": "Landing blank"}],
+ ["feature.fillet", {"edges": [["Landing blank:endCap(e3,e6,e8,e10)", "Landing blank:side(e3)"], ["Landing blank:endCap(e3,e6,e8,e10)", "Landing blank:side(e6)"], ["Landing blank:endCap(e3,e6,e8,e10)", "Landing blank:side(e8)"], ["Landing blank:endCap(e3,e6,e8,e10)", "Landing blank:side(e10)"], ["Landing blank:startCap(e3,e6,e8,e10)", "Landing blank:side(e3)"], ["Landing blank:startCap(e3,e6,e8,e10)", "Landing blank:side(e6)"], ["Landing blank:startCap(e3,e6,e8,e10)", "Landing blank:side(e8)"], ["Landing blank:startCap(e3,e6,e8,e10)", "Landing blank:side(e10)"]], "radius": "3 mm", "name": "Round-over"}]
+]

@@ -121,6 +121,13 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-109](#f-109) | Bug | A seat cut across a filleted prong head is refused as "zero thickness" at tolerance 1e-6 mm and built at 1e-7 mm | solitaire-ring (prompt test) | tolerance 1e-7 mm |
 | [F-110](#f-110) | Agent friction | `feature.boolean` takes one target and one tool, so subtracting four bodies takes four chained features | hydraulic-cylinder | steps |
 | [F-111](#f-111) | Missing capability | `measure.clearance` reports a cosmetically threaded stud in its cosmetically threaded hole as an overlap | hydraulic-cylinder | no interference check of screwed parts |
+| [F-112](#f-112) | Agent friction | An arc centre given as plain numbers in a sketch of expressions is free and moves silently on a parameter change | spiral-staircase | tread 7 mm² too large; revolved instead |
+| [F-113](#f-113) | Bug | After a parameter change an arc centre left 1.4e-11 mm off makes a 3 mm round-over "at the edge of tolerance"; a fresh build passes | spiral-staircase | treads and landing revolved |
+| [F-114](#f-114) | Bug | A chained round-over through a plan corner rounded into an arc is refused | spiral-staircase | tread corners square |
+| [F-115](#f-115) | Missing capability | `feature.extrude` `upTo` refuses a rational freeform (swept) face | spiral-staircase | balusters cut by a tangent plane |
+| [F-116](#f-116) | Performance | Joining a helical swept rail to 42 balusters takes 7.5 s | spiral-staircase | balusters stop 0.5 mm under the rail |
+| [F-117](#f-117) | Performance, proof weakness | `boxMax` of a helical swept tube takes 63 s (250 s CPU) and is not proven; distances to it are loose | spiral-staircase | rail's clearances not asserted |
+| [F-118](#f-118) | Bug | A top view of 14 stacked rings is refused ("too many overlapping triangles"); projected views draw hidden bodies | spiral-staircase | no plan or elevation drawing |
 
 ## F-001
 
@@ -819,7 +826,9 @@ grown by r. **Should:** a `toolReach` measure, or offsets of offsets. Reproducer
 
 **Agent friction.** A chamfer's `chain` stops at sharp corners, and there is no option for every edge of a
 face, so breaking the edges of a plate's outline takes 22 edge pairs per plate. **Should:** `edges` given as
-a face (all its boundary edges) or a named set. Reproducer:
+a face (all its boundary edges) or a named set. The same on the spiral staircase: the end cap of a tube swept
+along a helix meets side pieces numbered by the helix's half turns, so a rounded rail end cannot be named to
+survive a parameter change. Reproducer:
 [`findings/F-088-chamfer-whole-outline/repro.json`](findings/F-088-chamfer-whole-outline/repro.json).
 
 ## F-089
@@ -999,3 +1008,56 @@ clevis, and the tie rods in their tapped holes. A screwed assembly cannot be che
 listing the threaded pairs as exceptions. **Should:** a thread fit (a cosmetic external thread in a cosmetic
 internal thread of the same size and pitch) counted as a fit, not an overlap, or an `except` list of such
 pairs.
+
+## F-112
+
+**Agent friction.** In a sketch path whose points are expressions, an arc centre given as plain numbers
+(`[0, 0]`) is only a starting guess: it keeps two degrees of freedom, and after a parameter change the solver
+moves it (0.94 mm at a stair of Ø 2000 mm) without a warning, so the spiral staircase's tread came out 7 mm²
+too large. Given as `["0 mm", "0 mm"]` it is held. **Should:** a warning when a re-solve moves a point the
+script gave as a number, or plain numbers held like expressions in a sketch that has any. Reproducer:
+[`findings/F-112-free-arc-centre/repro.json`](findings/F-112-free-arc-centre/repro.json).
+
+## F-113
+
+**Bug.** With the arc centre held at `["0 mm", "0 mm"]`, a parameter change leaves it 1.4e-11 mm off, and a
+3 mm round-over of the landing is then refused ("a point too close to a face boundary to tell inside from
+outside (at the edge of tolerance)"), where a fresh build at the same values passes. A re-solve should land
+where a fresh solve does, and 1.4e-11 mm should not decide a fillet. Reproducer:
+[`findings/F-113-fillet-near-exact-centre/repro.json`](findings/F-113-fillet-near-exact-centre/repro.json).
+
+## F-114
+
+**Bug.** A chained round-over along a tread's edge, through a plan corner rounded into an arc, is refused ("the
+boolean that cuts this fillet refused it: … at the edge of tolerance"). Reproducer:
+[`findings/F-114-round-over-arc-corner/repro.json`](findings/F-114-round-over-arc-corner/repro.json).
+
+## F-115
+
+**Missing capability.** `feature.extrude` with `upTo` refuses a rational freeform face ("extrude up to a face
+does not support this: a rational freeform face as the end of an extrusion"), such as a handrail swept along a
+helix: the spiral staircase's balusters cannot run up to the rail. **Should:** `upTo` on any face. Reproducer:
+[`findings/F-115-extrude-up-to-swept-face/repro.json`](findings/F-115-extrude-up-to-swept-face/repro.json).
+
+## F-116
+
+**Performance.** Joining the spiral staircase's handrail (a tube swept along a helix) to its 42 balusters
+takes 7.5 s (8.9 s CPU), on its own over the complex tier's load budget. The balusters stay a body of their
+own, 0.5 mm under the rail. Reproducer:
+[`findings/F-116-union-helical-rail/repro.json`](findings/F-116-union-helical-rail/repro.json).
+
+## F-117
+
+**Performance and proof weakness.** `boxMax` of a tube swept along a helix (the staircase's handrail) takes
+63 s (250 s of CPU) and is not proven (found 792.75 mm where the true value is 791.2 mm); its distance to
+the column costs 2 s at every load and is "not proven closely enough to be a value", and its distance to the
+balusters (0.45 mm) is proven only above 0 mm. The reproducer takes about a minute. Reproducer:
+[`findings/F-117-box-of-helical-tube/repro.json`](findings/F-117-box-of-helical-tube/repro.json).
+
+## F-118
+
+**Bug.** `file.export` of a top view of 14 stacked collars (rings on a column) is refused: "the view has too many
+overlapping triangles to decide what is hidden; use a coarser `tolerance` or a simpler view". Projected views
+also draw hidden bodies (the staircase's headroom gauges) and take no `bodies` to leave them out, so the
+staircase ships no plan or elevation drawing. Reproducer:
+[`findings/F-118-plan-view-stacked-rings/repro.json`](findings/F-118-plan-view-stacked-rings/repro.json).

@@ -1,0 +1,13 @@
+[
+ ["variable.set", {"name": "outer_radius", "expr": "800 mm"}],
+ ["variable.set", {"name": "span", "expr": "33.5 deg"}],
+ ["sketch.create", {"name": "Tread outline", "plane": "xy"}],
+ ["sketch.path", {"sketch": "Tread outline", "start": ["73 mm", "0 mm"], "segments": [
+    {"line": ["outer_radius", "0 mm"]},
+    {"arc": ["outer_radius * cos(span)", "outer_radius * sin(span)"], "center": [0, 0]},
+    {"line": ["73 mm * cos(span)", "73 mm * sin(span)"]},
+    {"arc": "start", "center": [0, 0], "clockwise": true}]}],
+ ["variable.set", {"name": "outer_radius", "expr": "1000 mm"}],
+ ["variable.set", {"name": "span", "expr": "25.3 deg"}],
+ ["sketch.inspect", {"sketch": "Tread outline"}]
+]

@@ -1,0 +1,8 @@
+[
+ ["datum.helix", {"axis": "z", "start": ["770 mm", 0, "1000 mm"], "pitch": "2240 mm", "height": "2613.333 mm", "name": "Rail helix"}],
+ ["datum.plane", {"through": [["770 mm", 0, "1000 mm"], ["870 mm", 0, "1000 mm"], ["770 mm", "100 mm * sin(atan(2240 / (2 * pi * 770)))", "1000 mm - 100 mm * cos(atan(2240 / (2 * pi * 770)))"]], "name": "Rail start plane"}],
+ ["sketch.create", {"name": "Rail section", "plane": "Rail start plane"}],
+ ["sketch.circle", {"sketch": "Rail section", "center": [0, 0], "radius": "21.2 mm"}],
+ ["feature.sweep", {"sketch": "Rail section", "path": "Rail helix", "name": "Rail"}],
+ ["assert.add", {"name": "Rail reaches x = 791.2 mm at its start", "measure": "boxMax", "of": "Rail", "axis": "x", "eq": "791.2 mm", "tol": "0.01 mm"}]
+]

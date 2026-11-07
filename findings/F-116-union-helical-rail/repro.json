@@ -1,0 +1,10 @@
+[
+ ["datum.helix", {"axis": "z", "start": ["770 mm", 0, "1000 mm"], "pitch": "2240 mm", "height": "2613.333 mm", "name": "Rail helix"}],
+ ["datum.plane", {"through": [["770 mm", 0, "1000 mm"], ["870 mm", 0, "1000 mm"], ["770 mm", "100 mm * sin(atan(2240 / (2 * pi * 770)))", "1000 mm - 100 mm * cos(atan(2240 / (2 * pi * 770)))"]], "name": "Rail start plane"}],
+ ["sketch.create", {"name": "Rail section", "plane": "Rail start plane"}],
+ ["sketch.circle", {"sketch": "Rail section", "center": [0, 0], "radius": "21.2 mm"}],
+ ["feature.sweep", {"sketch": "Rail section", "path": "Rail helix", "name": "Rail"}],
+ ["feature.cylinder", {"radius": "8 mm", "height": "1000 mm + 2240 mm / 72", "position": ["770 mm * cos(5 deg)", "770 mm * sin(5 deg)", 0], "name": "Baluster"}],
+ ["feature.pattern", {"source": "Baluster", "count": 42, "angle": "10 deg", "step": "2240 mm / 36", "name": "Balusters"}],
+ ["feature.boolean", {"op": "union", "target": "Rail", "tool": "Balusters", "name": "Railing"}]
+]
