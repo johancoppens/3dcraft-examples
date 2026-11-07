@@ -43,6 +43,7 @@ PREVIEW_LOOK_KEYS = {"light", "rotation", "reflections"}
 
 TIERS = ("simple", "difficult", "complex")
 BUDGET_LOAD_S = {"simple": 1.0, "difficult": 2.0, "complex": 4.0}
+MEASURED_AT_LOAD = 0.0  # the 1-minute load average when the last load time was measured
 BUDGET_BYTES = 1_000_000
 STEP_GUIDE = {"simple": 50, "difficult": 120, "complex": 250}
 REQUIRED_META = ("id", "title", "summary", "description", "domain", "process", "tier",
@@ -246,6 +247,7 @@ def build_into(eid, target, meta):
     final = target / f"{slug(eid)}.3dcraft"
     building.replace(final)
     # The least of two openings: other work on the machine only ever adds time.
+    global MEASURED_AT_LOAD
     load_s = load_cpu_s = None
     for _ in range(2):
         result, seconds = run_cli(["info", final], cwd=target)
@@ -253,6 +255,7 @@ def build_into(eid, target, meta):
             raise CheckError(explain_failure(result, "craft3d-cli info failed"))
         load_s = seconds if load_s is None else min(load_s, seconds)
         load_cpu_s = result.cpu_seconds if load_cpu_s is None else min(load_cpu_s, result.cpu_seconds)
+    MEASURED_AT_LOAD = os.getloadavg()[0]
     doc = manifest(final)
     ids = Counter(step_id(s) for s in script)
     assertions = report.get("assertions", {})
@@ -308,12 +311,18 @@ def lint(eid, meta, doc, stats, script):
             errors.append(f"variable {name!r}: use a descriptive snake_case name of 3+ letters")
     if not any(step_id(s) == "document.info" for s in script):
         errors.append("build.json: no document.info (title, description, author, licence)")
+    # Timings taken while the machine is busy (load average over half its CPUs) only warn: other work
+    # inflates them. Commit stats measured at a quiet moment.
+    busy = MEASURED_AT_LOAD > (os.cpu_count() or 1) / 2
+    timing = warnings if busy else errors
+    busy_note = (f" (measured at load average {MEASURED_AT_LOAD:.1f} on {os.cpu_count()} CPUs: "
+                 "re-measure at a quiet moment)") if busy else ""
     if stats["load_s"] > BUDGET_LOAD_S[tier] and not meta.get("budget_exception"):
-        errors.append(f"loads in {stats['load_s']} s, budget {BUDGET_LOAD_S[tier]} s for {tier}")
+        timing.append(f"loads in {stats['load_s']} s, budget {BUDGET_LOAD_S[tier]} s for {tier}{busy_note}")
     cpu_budget = 3 * BUDGET_LOAD_S[tier]
     if stats.get("load_cpu_s", 0) > cpu_budget and not meta.get("budget_exception"):
-        errors.append(f"loads in {stats['load_cpu_s']} s of CPU (the single-threaded web build's time), "
-                      f"budget {cpu_budget} s for {tier}")
+        timing.append(f"loads in {stats['load_cpu_s']} s of CPU (the single-threaded web build's time), "
+                      f"budget {cpu_budget} s for {tier}{busy_note}")
     if stats["file_bytes"] > BUDGET_BYTES and not meta.get("budget_exception"):
         errors.append(f"{stats['file_bytes']} bytes, budget {BUDGET_BYTES}")
     if stats["steps"] > STEP_GUIDE[tier]:

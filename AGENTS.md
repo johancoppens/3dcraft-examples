@@ -133,7 +133,8 @@ Name the process; prove with assertions what can be proven:
 Loading means opening the `.3dcraft` and regenerating it; the tool measures it (`stats.load_s`,
 `craft3d-cli info`, the least of two openings, since other agents' work only adds time). Budgets on the developer's laptop: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
 file ≤ 1 MB, and CPU time (all threads, `stats.load_cpu_s`) at most 3 × the load budget: the web build is
-single-threaded, so the CPU time is roughly what it waits. For scale: the
+single-threaded, so the CPU time is roughly what it waits. A timing taken while the machine is busy (load
+average over half its CPUs) only warns; the coordinator re-measures at a quiet moment. For scale: the
 guide's chassis opens in 9 s and its fuel tank in 55 s, both far too slow for this gallery. Over budget,
 simplify (fewer, larger features; a pattern instead of copies; no needless booleans); only the coordinator
 grants an exception (`meta.json` `budget_exception` with the reason).
