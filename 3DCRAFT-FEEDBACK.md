@@ -155,6 +155,7 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-143](#f-143) | Missing capability | No non-uniform scale of a body (a stretch along one axis about a plane) | ventoux-relief (review) | exaggeration in 1073 live points |
 | [F-144](#f-144) | Missing capability (cosmetic) | Procedural marble draws smooth closed vein loops, granite blotches; no fine speckle | ventoux-relief (review) | marble dropped |
 | [F-145](#f-145) | Performance | `document.inspect` of the relief's laser product takes 10 s (45 s CPU) against 4.4 s for the same regeneration by `param.set` | ventoux-relief (review) | slow inspection |
+| [F-146](#f-146) | Agent friction (minor) | `assert.edit` resets the fields left out; a draft assertion's `direction` takes no expression | moka-pot (prompt test) | assertions rewritten whole |
 
 ## F-001
 
@@ -1334,3 +1335,10 @@ speckle (as "marble" or "granite" PLA looks). The relief dropped the marble.
 **Performance.** `document.inspect` of the Mont Ventoux relief in its laser-cut product takes 10 s wall and 45 s
 of CPU, against 4.4 s and 6.3 s for the same regeneration through `param.set`. Reproduce: in
 `examples/21-ventoux-relief`, `param.set` the product to the layers, then `document.inspect`.
+
+## F-146
+
+**Agent friction (minor).** `assert.edit` resets every field it is not given, so changing one bound means
+repeating `measure`, `of` and `faces`; an edit should change only what it names. A `draft` assertion's
+`direction` must be plain numbers or an axis ("`direction` must be x, y, z, -x, -y, -z or [x, y, z]"), so a
+direction that follows a parameter (a handle's lean) cannot be written.

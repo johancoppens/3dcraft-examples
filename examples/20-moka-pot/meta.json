@@ -1,0 +1,92 @@
+{
+  "id": "moka-pot",
+  "title": "Moka pot",
+  "summary": "sand-cored castings, capacities from physics",
+  "description": "An original twelve-sided stovetop espresso maker in cast aluminium for 3, 4 or 6 cups, sized by its physics: the safety valve sits where the water for the cups ends, the funnel holds the coffee for that water, the lid opens on a working hinge, and the pot stands on a 10° slope full or empty.",
+  "domain": "Product design",
+  "process": "Die casting with sand cores, turning, pressing, moulding",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Ten coupled bodies, closed-form physics, measured sand cores, centre-of-mass stability, a hinge swing check and kernel limits worked around; no freeform surfacing."
+  },
+  "standards": [
+    "EN 13248:2002",
+    "ISO 261:1998",
+    "ISO 68-1",
+    "EN 601",
+    "EN 602",
+    "EN 60335-1 clause 20.1 (by analogy)",
+    "EN 12983-1:2023 (by analogy)"
+  ],
+  "materials": [
+    "Cast aluminium to EN 601, satin (boiler, collector, lid)",
+    "Pressed aluminium sheet to EN 602 (funnel, filter plate)",
+    "Food-grade silicone rubber (gasket)",
+    "Brass CW614N (safety valve)",
+    "Stainless steel (hinge pin)",
+    "Black phenolic moulding compound (handle, knob)"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        330,
+        -380,
+        170
+      ],
+      "target": [
+        -12,
+        0,
+        70
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 21
+    },
+    "look": {
+      "rotation": 180
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/moka-pot.step",
+      "bodies": [
+        "Boiler",
+        "Safety valve",
+        "Funnel",
+        "Gasket",
+        "Filter plate",
+        "Collector",
+        "Lid",
+        "Hinge pin",
+        "Knob",
+        "Handle"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: water 150.000 mL, basket 45.43 mL (dose 45.45), collector 165.0 mL, 217 and 91 holes, funnel end 3.0 mm up, fill line 33.94 mm, all as this example's; lid turns 90° clear; 25 checks pass at 3/4/6 cups and 0°/30°; 580 g against 585 g; about 310 steps."
+  },
+  "stats": {
+    "steps": 281,
+    "variables": 106,
+    "parameters": 2,
+    "features": 89,
+    "assertions": 17,
+    "warnings": 0,
+    "build_s": 2.11,
+    "load_s": 2.11,
+    "load_cpu_s": 4.57,
+    "file_bytes": 248515
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
