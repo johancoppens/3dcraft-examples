@@ -1056,7 +1056,11 @@ script gave as a number, or plain numbers held like expressions in a sketch that
 **Bug.** With the arc centre held at `["0 mm", "0 mm"]`, a parameter change leaves it 1.4e-11 mm off, and a
 3 mm round-over of the landing is then refused ("a point too close to a face boundary to tell inside from
 outside (at the edge of tolerance)"), where a fresh build at the same values passes. A re-solve should land
-where a fresh solve does, and 1.4e-11 mm should not decide a fillet. Reproducer:
+where a fresh solve does, and 1.4e-11 mm should not decide a fillet. The staircase's prompt tester met the same kind of
+refusal for a revolved landing that ends at exactly 180° (3200 mm × Ø 1400 mm: "the largest radius that fits
+there is below 0.53309 mm" for a 3 mm round-over), and joining a 3 mm plug into the end of a tube swept
+along a helix was refused ("an imprinted curve that does not fit the edges it should coincide with", at the
+edge of tolerance) until the plug was made 0.1 mm larger; no reproducers kept. Reproducer:
 [`findings/F-113-fillet-near-exact-centre/repro.json`](findings/F-113-fillet-near-exact-centre/repro.json).
 
 ## F-114

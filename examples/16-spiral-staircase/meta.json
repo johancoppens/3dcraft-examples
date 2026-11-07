@@ -1,0 +1,90 @@
+{
+  "id": "spiral-staircase",
+  "title": "Spiral staircase",
+  "summary": "helix sweep, screw pattern, stair rule",
+  "description": "A steel spiral staircase with oak treads, Ø 1600 mm and 2800 mm floor to floor, on a Ø 114.3 mm column, with a helical handrail and a landing, checked against DIN 18065.",
+  "domain": "Architecture, steel construction",
+  "process": "Steel fabrication (cut, bore, laser cut, weld, bend the handrail, powder coat), CNC-routed oak treads, assembly on site",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "One helical sweep with tangent datum planes and four screw patterns on top of 74 coupled formulas that derive the stair from DIN 18065 and the 100 mm sphere rule; headroom proven across bodies with gauge solids; five kernel limits worked around."
+  },
+  "standards": [
+    "DIN 18065:2020-08",
+    "EN 10220:2002"
+  ],
+  "materials": [
+    "Steel S235, powder coated anthracite grey (RAL 7016)",
+    "European oak, oiled"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        848,
+        4811,
+        7542
+      ],
+      "target": [
+        0,
+        0,
+        1720
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 28
+    },
+    "look": {
+      "rotation": 270,
+      "light": [
+        80,
+        89
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/spiral-staircase.step",
+      "bodies": [
+        "Column",
+        "Handrail",
+        "Handrail end plugs",
+        "Treads",
+        "Tread carriers",
+        "Balusters",
+        "Landing",
+        "Landing frame",
+        "Landing guard"
+      ]
+    },
+    {
+      "path": "exports/spiral-staircase-bracket.dxf",
+      "sketch": "Bracket profile"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: 15 risers of 186.667 mm, 14 treads at 30°, 60° landing, walking line 487.5 mm, going 255.24 mm, step measure 628.58 mm, usable width 653.3 mm, 4 balusters per tread 84.72 mm apart, column 10.88 kg/m, carriers 128.5 kg, all as this example's; checks pass at five range points, no interference; two edge-of-tolerance refusals worked round (rail plug union; landing round-over at exactly 180°, F-113); about 311 steps."
+  },
+  "stats": {
+    "steps": 249,
+    "variables": 94,
+    "parameters": 2,
+    "features": 93,
+    "assertions": 16,
+    "warnings": 0,
+    "build_s": 2.27,
+    "load_s": 2.27,
+    "load_cpu_s": 7.99,
+    "file_bytes": 184932
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
