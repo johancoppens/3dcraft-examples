@@ -1,0 +1,77 @@
+{
+  "id": "flat-pack-bookcase",
+  "title": "Flat-pack bookcase",
+  "summary": "CNC plywood, tusk tenons, cut list",
+  "description": "An open bookcase of 18 mm birch plywood, CNC-routed from one 2500 x 1250 mm sheet and put together without screws, glue or tools: shelves and back rails pass through the sides in tusk tenons locked by tapered wedges.",
+  "domain": "CNC, furniture",
+  "process": "CNC routing of plywood sheet, hand assembly with wedged through tenons, oil finish",
+  "tier": "complex",
+  "difficulty": {
+    "score": 7,
+    "rationale": "28 plate bodies from four hand-built paths with dogbones and T-bones, about 60 coupled formulas, conditional parts, checks across bodies (interference, clearance, cut list, nesting) and expert joinery; no freeform."
+  },
+  "standards": [
+    "EN 315 (plywood thickness tolerances: 17.1 to 18.7 mm for 18 mm sanded, after the Handbook of Finnish Plywood, Table 2-3)",
+    "EN 314-2 class 3 (phenolic bond)",
+    "EN 635 face grades (S/BB)",
+    "Handbook of Finnish Plywood (2002), Tables 3-1 and 3-2 (density, bending modulus)",
+    "Sagulator (woodbin.com): book load and shelf-sag target, span/600"
+  ],
+  "materials": [
+    "Birch plywood, 18 mm nominal (17.6 mm measured), 13 plies, EN 314-2 class 3, S/BB, oiled"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        -1500,
+        -2050,
+        1250
+      ],
+      "target": [
+        0,
+        150,
+        545
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 30
+    },
+    "look": {
+      "rotation": 315
+    }
+  },
+  "exports": [
+    {
+      "command": "cut.export",
+      "path": "exports/flat-pack-bookcase-sheet.dxf",
+      "copies": true,
+      "width": "2500 mm",
+      "gap": "12 mm"
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: the four parts' volumes equal this example's to the mm³, 20.18 kg, 200 reliefs, 18.0 mm mortises, wedges bearing as here, no overlaps, sag 1.164 mm against 1.191 mm; builds at 3 and 5 shelves and the sheet, cutter and width limits. Found that cut.export's row layout overflows the sheet at five shelves (F-162). About 411 steps."
+  },
+  "stats": {
+    "steps": 182,
+    "variables": 63,
+    "parameters": 4,
+    "features": 37,
+    "assertions": 26,
+    "warnings": 0,
+    "build_s": 0.44,
+    "load_s": 0.44,
+    "load_cpu_s": 1.32,
+    "file_bytes": 238478
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}

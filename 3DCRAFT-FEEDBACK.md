@@ -169,6 +169,11 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-157](#f-157) | Bug | `document.interference` cannot decide stacked bodies whose faces are coaxial cylinders and tori from concentric sweeps | skateboard-deck (review) | closed mould proven by distances instead |
 | [F-158](#f-158) | Missing capability | Chamfers along the rims of swept freeform faces are refused where a neighbouring face changes | skateboard-deck (prompt test) | the tester cut the rims with swept strips |
 | [F-159](#f-159) | Missing capability (minor) | A sweep that makes a spindle torus gives a freeform face, not a torus | skateboard-deck (prompt test) | README says freeform |
+| [F-160](#f-160) | Missing capability | `cut.list` takes a `feature.pattern` of separate plates for one body that is not a plate; `document.interference` cannot check the copies | flat-pack-bookcase | 29 transform and mirror steps instead of patterns |
+| [F-161](#f-161) | Missing capability | No way to keep a helper body out of `cut.list` and `document.interference` | flat-pack-bookcase | router reach counted, not proven |
+| [F-162](#f-162) | Missing capability | `cut.export`'s layout knows only a row length: no sheet height, margin, grain or flute direction, part order | flat-pack-bookcase (review, prompt test), layered-cardboard-rhino (review) | nesting proven by hand formulas |
+| [F-163](#f-163) | Bug (rendering) | On a plain background the ground draws streaks lighter than the background under a foot in close-ups | flat-pack-bookcase (review) | none in the preview |
+| [F-164](#f-164) | Missing capability (minor) | A contact along a line is reported as an edge of area 0; no measure gives a contact's length | flat-pack-bookcase (review) | wedge bearing asserted by a face's area |
 
 ## F-001
 
@@ -533,6 +538,7 @@ sharpness, so the presets read as their woods out of the box.
 **Missing capability (minor).** A pattern's `origin` and `axis` are plain numbers, so the pith cannot follow
 a parameter (a bowl's height or diameter): set for the default size, it drifts off at the ends of the range.
 **Should:** expressions, as body colours already take.
+A pattern's `scale` is a plain number too, so the bookcase's ply lines cannot follow its sheet-thickness parameter.
 
 ## F-042
 
@@ -860,6 +866,7 @@ tenons) show long grain instead of end grain. **Should:** a grain frame that fol
 pattern instance that made the faces. The prompt test of the stool found a partial way: `face.appearance` on a
 selection can give the faces of one lump their own pattern frame.
 Nor can grain follow a bent body: the skateboard deck's plies show the solid texture's growth rings as nested U-shaped contours on every kick, where real veneer runs straight on round the bend; the example takes the pith far to the side so the grain reads straight.
+A `feature.transform` copy keeps its source's texture frame where it was in the model: the bookcase's rail wedges, turned 90 degrees from the shelf wedges, would show their plies across their thickness, so they get an appearance of their own.
 
 ## F-084
 
@@ -881,6 +888,7 @@ A coping template (the welded truss) needs its crown and flank lines (the quarte
 round a carbon plate's outline or holes makes it "not a plate". Every CNC-cut plate has its edges broken.
 **Should:** a plate is a plate whatever its edge treatment; the cut outline is the plate's largest section.
 Reproducer: [`findings/F-086-cut-list-edge-break/repro.json`](findings/F-086-cut-list-edge-break/repro.json).
+The flat-pack bookcase is affected too: its plywood parts keep the router's sharp arrises in the model, and the README gives the roundover the shop runs.
 
 ## F-087
 
@@ -1416,3 +1424,23 @@ direction that follows a parameter (a handle's lean) cannot be written.
 ## F-159
 
 **Missing capability (minor).** A 16.25 in arc swept round a 3 in bend (the skateboard deck's concave through its kicks) is a spindle torus (minor radius larger than the major one); 3DCraft keeps the sweep's flats as exact cylinders but the bends as freeform faces. Their curvature matches the torus's closed form, but measures, offsets and booleans lose the analytic surface. **Should:** the torus type for spindle tori too, where the face used is one sheet of it.
+
+## F-160
+
+**Missing capability.** The copies a `feature.pattern` makes of a plate (the bookcase's shelves and wedges) are one body of several lumps; `cut.list` lists it as not a plate (its top "is not one flat face") and `document.interference` cannot check the copies against each other. **Should:** a cut list and an interference check per lump (each lump of a patterned plate is a part), or a pattern that makes bodies. **Workaround in the example:** every shelf and wedge is its own feature, 16 `feature.transform` and 13 `feature.mirror` steps. Reproducer: [`findings/F-160-cut-list-of-pattern/repro.json`](findings/F-160-cut-list-of-pattern/repro.json)
+
+## F-161
+
+**Missing capability.** A hidden body is still listed by `cut.list` and checked by `document.interference`, and their `bodies` lists refuse a feature switched off by its `when` and take no query, so a model whose parts depend on a parameter cannot keep a helper body (a measuring copy, the drone frame's cutter-grown body of F-087) out of them. **Should:** an exclusion that follows the document (hidden bodies left out, or a named set of the parts). **Impact:** the bookcase counts its reliefs and compares their radius with the cutter's, which does not prove that no other sharp inside corner exists. Reproducer: [`findings/F-161-helper-bodies-in-cut-list/repro.json`](findings/F-161-helper-bodies-in-cut-list/repro.json)
+
+## F-162
+
+**Missing capability.** `cut.export` with `layout: sheet` lays parts left to right in rows of at most `width`; it has no sheet height or edge margin, so it cannot refuse a layout that overflows the sheet (the bookcase's row layout fits a 2500 x 1250 sheet at four shelves and is 1300.8 mm high at five, which its prompt tester found), it ignores the order of `bodies`, and it always lays a part with its length along x, so a grain direction (plywood's face grain along the sheet's 2500 mm) or a corrugated board's flute direction cannot be kept. **Should:** a sheet size and margin that the layout must fit (refused with the part that does not), and a direction per part. The bookcase proves its nesting with formulas.
+
+## F-163
+
+**Bug (rendering).** In close-up `view.render`s of the bookcase's feet on the plain background, the ground draws streaks lighter than the background under a foot; they go with `ground: false` and stay with reflections, bloom or contact shadows off. They do not show in the example's preview. Reproduce: in `examples/22-flat-pack-bookcase`, render a close-up of a foot at 640 x 480 in the gallery look.
+
+## F-164
+
+**Missing capability (minor).** `document.interference` reports the bookcase's wedge resting on its tenon as a touching contact of area 0 along an edge, and no measure gives how long such a line contact is, so a bearing length cannot be asserted. **Workaround in the example:** the area of the mortise's far wall, which the wedge bears on, is asserted instead.

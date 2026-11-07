@@ -1,0 +1,14 @@
+[
+ ["variable.set", {"name": "shelf_count", "expr": "2"}],
+ ["sketch.create", {"name": "Plate outline", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Plate outline", "from": [0, 0], "to": ["400 mm", "250 mm"]}],
+ ["sketch.rect", {"sketch": "Plate outline", "from": ["100 mm", "100 mm"], "to": ["130 mm", "118 mm"]}],
+ ["feature.extrude", {"sketch": "Plate outline", "distance": "18 mm", "name": "Plate"}],
+ ["feature.transform", {"source": "Plate", "translate": [0, 0, "300 mm"], "keep": true, "name": "Plate 2", "when": "shelf_count >= 3"}],
+ ["feature.offsetProfile", {"sketch": "Plate outline", "distance": "3 mm", "name": "Router path"}],
+ ["feature.extrude", {"sketch": "Router path", "distance": "18 mm", "name": "Router reach (helper)"}],
+ ["feature.visible", {"feature": ["Router reach (helper)"], "visible": false}],
+ ["cut.list", {"format": "csv"}],
+ ["document.interference", {"details": false}],
+ ["cut.list", {"format": "csv", "bodies": ["Plate", "Plate 2"]}]
+]

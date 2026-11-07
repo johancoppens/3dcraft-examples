@@ -1,0 +1,8 @@
+[
+ ["sketch.create", {"name": "Shelf outline", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Shelf outline", "from": [0, 0], "to": ["400 mm", "250 mm"]}],
+ ["sketch.rect", {"sketch": "Shelf outline", "from": ["100 mm", "100 mm"], "to": ["130 mm", "118 mm"]}],
+ ["feature.extrude", {"sketch": "Shelf outline", "distance": "18 mm", "name": "Shelf"}],
+ ["feature.pattern", {"source": "Shelf", "count": 3, "step": [0, 0, "300 mm"], "name": "Three shelves"}],
+ ["cut.list", {"format": "csv"}]
+]
