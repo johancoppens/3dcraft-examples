@@ -174,6 +174,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-162](#f-162) | Missing capability | `cut.export`'s layout knows only a row length: no sheet height, margin, grain or flute direction, part order | flat-pack-bookcase (review, prompt test), layered-cardboard-rhino (review) | nesting proven by hand formulas |
 | [F-163](#f-163) | Bug (rendering) | On a plain background the ground draws streaks lighter than the background under a foot in close-ups | flat-pack-bookcase (review) | none in the preview |
 | [F-164](#f-164) | Missing capability (minor) | A contact along a line is reported as an edge of area 0; no measure gives a contact's length | flat-pack-bookcase (review) | wedge bearing asserted by a face's area |
+| [F-165](#f-165) | Bug | A round along the rim of a box with rounded corners is refused once its radius reaches half the corners' radius | snap-fit-enclosure | edge round kept under half the plan corner |
+| [F-166](#f-166) | Missing capability | No undercut check along a pull direction: a region shadowed by other material passes every draft check | snap-fit-enclosure (review) | hidden columns and overlap assertions stand in for it (about 27 steps) |
+| [F-167](#f-167) | Missing capability (minor) | No polycarbonate or clear-plastic material preset | snap-fit-enclosure (review) | lid is the ABS preset with transmission and a material of its own |
+| [F-168](#f-168) | Agent friction (minor) | `view.render` with an orthographic camera reports `projection: perspective` and `view: iso` in its result | snap-fit-enclosure (review) | none |
 
 ## F-001
 
@@ -192,6 +196,7 @@ the boolean; `name` names the boolean, and the extrusion keeps an automatic name
 then shows names that say nothing; renaming each costs an extra `feature.rename` step. Seen in
 `docs/examples/bracket.json` (`Extrude1`, `Extrude2`). **Should:** a param to name the extrusion too (for
 example `toolName`), or derive its name from the boolean's (`Drilled (tool)`).
+The faces such a cut makes are named after the hidden tool too (`Extrude1:side(...)`), not after the sketch or the named feature (snap-fit enclosure).
 
 ## F-003
 
@@ -375,6 +380,7 @@ without its corner chambers):
 it finds 7.000 mm but proves `atLeast` 0, and takes 5.6 s (50 s on a shelled bowl): reproducer
 [`findings/F-020-thickness-proof-on-profile/spline-wall-repro.json`](findings/F-020-thickness-proof-on-profile/spline-wall-repro.json).
 On the skateboard deck's plies, a `thickness` assertion reads about 4e-6 in at the rail walls (prompt test); distances between a ply's own concentric faces prove it instead.
+On a 1.5 degree drafted, shelled tray (the snap-fit enclosure) `measure.thickness` finds 0.00004 mm at the rim and proves 0, where the undrafted tray proves 2.0; measured from the outer faces alone it finds 2 mm and still proves 0. Reproducer: [`findings/F-020-thickness-drafted-rim/repro.json`](findings/F-020-thickness-drafted-rim/repro.json).
 
 ## F-021
 
@@ -743,6 +749,7 @@ a ball piece. Reproducers: [`findings/F-066-rod-end-round/`](findings/F-066-rod-
 the angles in radians while the bound is written in degrees. Reproducer:
 [`findings/F-067-draft-proof/repro.json`](findings/F-067-draft-proof/repro.json).
 Likewise a `curvature` assertion built on `measure.developability`'s sampled grid (33 x 33 points) reports passed, not notProven (skateboard deck).
+The snap-fit enclosure's draft assertions pass the same way on the cones of drafted corners, which are only sampled, and on the corner pieces of rounds over cones (found 1.5 degrees, proven -61 to -92), all four mould-half sets reporting `proven: false` without a warning.
 
 ## F-068
 
@@ -1444,3 +1451,19 @@ direction that follows a parameter (a handle's lean) cannot be written.
 ## F-164
 
 **Missing capability (minor).** `document.interference` reports the bookcase's wedge resting on its tenon as a touching contact of area 0 along an edge, and no measure gives how long such a line contact is, so a bearing length cannot be asserted. **Workaround in the example:** the area of the mortise's far wall, which the wedge bears on, is asserted instead.
+
+## F-165
+
+**Bug.** On a box whose vertical corners are rounded R, a `feature.fillet` along the top rim is refused once its radius reaches R/2, where the corner's blend would be a horn or spindle torus; the common R6 corner with an R3 edge round cannot be built. A moulded or machined box carries exactly these rounds. **Workaround in the example:** the edge round (one wall plus 1 mm) stays under half the plan corner at every wall in the range. Reproducer: [`findings/F-165-round-over-rounded-corner/repro.json`](findings/F-165-round-over-rounded-corner/repro.json)
+
+## F-166
+
+**Missing capability.** `measure.draft` judges each face's normal against the pull, so a region closed to both tool halves between correctly drafted faces passes: the enclosure's first design had 0.23 mm of each snap hook's catch trapped under the base floor (a die-lock) with every draft assertion passing; the reviewer found it with `measure.ray`. **Should:** a measure (and assertion) of the faces or volume of a body that are shadowed along a direction, so an undercut is found as directly as a wrong draft. **Workaround in the example:** hidden columns rise from each retaining face along its tool's pull and an overlap assertion proves them clear; a further distance assertion proves the core steel behind each latch leg at least 1 mm.
+
+## F-167
+
+**Missing capability (minor).** The material presets have no polycarbonate or other clear plastic: the enclosure's smoke-grey translucent lid is the `abs` preset with transmission added in `body.appearance` and its density set by `body.material`.
+
+## F-168
+
+**Agent friction (minor).** A `view.render` given an orthographic `camera` draws an orthographic picture but its result still says `"projection":"perspective","view":"iso"`, so an agent checking what it rendered is misled.

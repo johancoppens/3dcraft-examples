@@ -1,0 +1,80 @@
+{
+  "id": "snap-fit-enclosure",
+  "title": "Snap-fit enclosure",
+  "summary": "shell, draft, U-latches, straight-pull tools",
+  "description": "An injection-moulded enclosure for a 100 x 70 mm circuit board: a matt white ABS base and a translucent smoke-grey polycarbonate lid, closed by four external U-shaped snap latches, both parts moulded in straight-pull tools without slides.",
+  "domain": "Injection moulding",
+  "process": "Injection moulding, two straight-pull tools without slides",
+  "tier": "complex",
+  "difficulty": {
+    "score": 8,
+    "rationale": "Two drafted shells, straight-pull U-latches with a stepped parting line and their own tooling proofs, about 110 coupled formulas, closed-form sections, and kernel and measure limits to work around."
+  },
+  "standards": [
+    "USB Type-C Cable and Connector Specification, Release 2.5 (USB-IF, 2026)",
+    "IEC 60529 (IP code)"
+  ],
+  "materials": [
+    "ABS, matt white (base)",
+    "Polycarbonate, translucent smoke grey (lid)",
+    "FR-4 circuit board with a USB-C receptacle"
+  ],
+  "units": "mm",
+  "preview": {
+    "camera": {
+      "eye": [
+        150,
+        -215,
+        125
+      ],
+      "target": [
+        3,
+        0,
+        8
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "fovY": 21
+    },
+    "look": {
+      "rotation": 270,
+      "light": [
+        200,
+        75
+      ]
+    }
+  },
+  "exports": [
+    {
+      "path": "exports/snap-fit-enclosure.step",
+      "bodies": [
+        "Base",
+        "Lid"
+      ]
+    }
+  ],
+  "prompt_test": {
+    "date": "2026-11-07",
+    "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
+    "result": "Passed: walls 2.000 mm, latch strain 1.428 %, forces 1.685 / 2.553 N, crush 0.160 mm, drafts 1.5 / 1 / ½° as this example's; masses within 0.4 %; tooling columns clear, core steel over 1 mm; 20 assertions pass at six parameter corners. About 325 steps."
+  },
+  "stats": {
+    "steps": 290,
+    "variables": 111,
+    "parameters": 4,
+    "features": 104,
+    "assertions": 25,
+    "warnings": 0,
+    "build_s": 0.97,
+    "load_s": 0.97,
+    "load_cpu_s": 1.77,
+    "file_bytes": 206520
+  },
+  "craft3d": {
+    "commit": "f4b0813cc124",
+    "format_version": 69
+  }
+}
