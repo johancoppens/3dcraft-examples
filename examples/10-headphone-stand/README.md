@@ -105,9 +105,9 @@ height. The hook stays halfway up the column.
 - **Prints upright without supports.** `measure.draft` against +z on every face of the stand except the
   bed face and the pocket's roof, which bridges over the steel: nothing below −45°. The least is the
   first-layer chamfer at −45.0°. The flare and the saddle's round-over reach −38.9° and the hook −40.0°.
-  The least is exact on planes and bounded on the hook's cylinder and torus. On the lofted and filleted
-  faces, and on the chamfer's cone, it is sampled, not proven (`measure.draft` says `proven: false`).
-  The assertion passes without saying so (*Platform notes*).
+  The least is exact on planes and bounded on the hook's cylinder and torus. On the lofted faces it is
+  sampled, and on the base's round-over the bound lies far below what is found (−102.8° for 0°), so the check
+  is *not proven* ([F-067](../../3DCRAFT-FEEDBACK.md#f-067), [F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
 - **Pocket floor at least 1.2 mm.** `measure.thickness` from the pocket's floor: 2.4 mm, exact between
   parallel faces.
 - **Pocket roof at least 1.2 mm.** `measure.distance` from the pocket's roof to the base's top: 5.4 mm
@@ -130,7 +130,7 @@ height. The hook stays halfway up the column.
 - **Weight clears its pocket.** The disc, lying on the pocket's floor, keeps at least the smaller of
   the two clearances from the pocket's wall and roof: 0.2 mm, the gap over it.
 
-`craft3d-cli check-range` passes all nine at 13 points (the defaults, the four corners and eight random
+`craft3d-cli check-range` passes eight and finds the print check holding (not proven, above) at 13 points (the defaults, the four corners and eight random
 points), and at 45 points with 40 random ones. It does not try every combination of the two parameters.
 
 ## Files
@@ -174,10 +174,8 @@ four-segment sweep, mass and stability outputs, and three kernel limits worked a
   half the rod's radius up. The refusal for a radius between half and the whole says that exactly the
   rod's radius gives a piece of a ball, but that radius is then refused as too large. The tip is a sphere
   joined to the rod instead ([F-066](../../3DCRAFT-FEEDBACK.md#f-066)).
-- **Draft proof.** On spline faces and cones `measure.draft` samples and says `proven: false`, but an
-  assertion on it passes with no *notProven* warning. Assertion messages also give angles in radians
-  (`draft: -0.785398163 rad`) where the document and the bounds use degrees
-  ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)).
+- **Draft proof.** On spline faces `measure.draft` samples, so an assertion over them is not proven
+  ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)); on rounds the bound it proves is loose ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
 - **Wall thickness.** `measure.thickness` of the whole stand finds the 2.4 mm floor, proves `atLeast` 0
   and takes 8.6 s ([F-020](../../3DCRAFT-FEEDBACK.md#f-020)). From the pocket's roof alone it takes
   about 1 s, as its rays run up through the column to the saddle. So the floor's thickness and the

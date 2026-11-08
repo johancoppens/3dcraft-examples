@@ -167,19 +167,21 @@ the weights the makers publish.
 - **Keyway width to DIN 6885-1.** The distance between the keyway's walls is the key width, to 0.001 mm.
 - **Spokes from the size table.** There are as many spokes as DIN 950 gives the size.
 - **Hub drafted toward the drag.** `measure.draft` along −z: the hub's cone has at least 1° (it has 2°).
-  The cone is measured by samples (not proven, F-067).
+  The cone's draft is proven exactly.
 - **Spokes release upward above their parting line, and downward below it.** `measure.draft` along +z
   over the upper faces of the first spoke's straight runs, and along −z over its lower faces: each is at
-  least 0° (to 0.001°; it is exactly 0° on the parting line itself), proven. The other spokes are its
+  least 0° (to 0.001°; it is exactly 0° on the parting line itself). Both are *not proven*: since 3DCraft
+  `45233bdc` the bound on these faces lies 0.67° to 0.71° below what is found (it was widened to hold along
+  curved edges), and with exactly 0° at the parting line no slack is left ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)). The other spokes are its
   copies turned about the axis, which leaves the draft as it is. The bend between the runs is left out:
   its faces measure 0° too, but the proven bound on them is far looser
   ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
 - **Weight within 15 % of the makers' catalogue.** The casting's mass lies within 15 % of the weight in
   the table (1.920 kg at 200 mm): 1.990 kg.
 
-`craft3d-cli check-range` proves all ten at 24 points: the defaults, the four corners, every other
+`craft3d-cli check-range` passes eight and finds the two spoke checks holding (not proven, as above) at 24 points: the defaults, the four corners, every other
 choice of each parameter (each bore moved into its diameter's range) and eight random points. Every
-diameter was also built here with its first and its last bore, all ten checks passing each time.
+diameter was also built here with its first and its last bore, all ten checks holding each time.
 The share of each spoke face whose draft is under 1° is the narrow band along the parting line; the
 checks do not measure it.
 
@@ -224,8 +226,6 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/13-cast-handwheel/build
   spokes join, and the lug's fillet then runs out on the spot face; it does so only with the seat at
   least 0.5 root-fillet radii wider than the lug and the fillet at most half the root radius (larger
   ones are refused where the fillet ends on the spot face, at the small sizes first).
-- **Draft assertions.** A `draft` assertion on a cone passes on sampled faces without a warning, and
-  reports radians ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)).
 - **Preview.** Drawn with `reflections: false`: the screen-space reflections smear a patch onto the
   handle's grip ([F-013](../../3DCRAFT-FEEDBACK.md#f-013)); at `look.rotation` 90 and with the rim's
   colour cooled, the polished rim reads as steel under the Workshop light

@@ -118,7 +118,10 @@ On one piece, the one that is cut and formed:
 
 - **Transition is developable** and **Zero Gaussian curvature**: `measure.developability` of the middle
   surface finds it developable, the largest |K| sampled 1.1e-26 mm⁻². **Plated sheet is the same
-  developable**: so is the inside surface the plate grows from.
+  developable**: so is the inside surface the plate grows from. All three are *not proven*:
+  `measure.developability` samples a freeform face and does not bound it between the samples ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)).
+  The surface is developable by how it is made (`feature.developable` builds it from rulings along which
+  the tangent plane does not turn), and the flat pattern keeps its area (the next check).
 - **Flat pattern keeps the area**: the pattern's area equals the middle surface's, 58 832.868 mm² within
   0.01 mm².
 - **Flat triangles and flaps in closed form**: the two half triangles and the two flaps have the area
@@ -155,7 +158,7 @@ edge is bevelled to the end triangle's lean for that (the corner leans more stee
 but an overlap check across the coincident
 fold line is refused ("an imprinted curve that does not fit the edges") and costs 12 s of CPU.
 
-`craft3d-cli check-range` proves the sixteen at 33 points: the defaults, all sixteen corners of the
+`craft3d-cli check-range` passes thirteen and finds the three developability checks holding (not proven, above) at 33 points: the defaults, all sixteen corners of the
 ranges, eight choices and eight random points (a side below the round size's smallest is raised to it);
 not at every combination.
 

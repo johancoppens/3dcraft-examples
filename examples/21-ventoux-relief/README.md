@@ -203,4 +203,4 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
   the tolerance wide ([F-122](../../3DCRAFT-FEEDBACK.md#f-122)), so the checks bound the measures instead of reading them. Each
   `measure.section` of the terrain costs about 1.2 s of CPU ([F-076](../../3DCRAFT-FEEDBACK.md#f-076)), so the contours are not measured.
 - **Splines through expressions.** `live: true` takes expressions as through-points, which this example uses
-  for the exaggeration; the error for an expression without it does not say so ([F-011](../../3DCRAFT-FEEDBACK.md#f-011)).
+  for the exaggeration.

@@ -239,8 +239,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/16-spiral-staircase/bui
 
 - **Round-overs on sketched arcs after a parameter change.** A sketch arc drawn about a centre given as
   `[0, 0]` in a path of expressions is not held (2 degrees of freedom): after a parameter change the
-  solver moves the centre (0.94 mm at Ø 2000 mm), so the tread came out 7 mm² too large
-  ([F-112](../../3DCRAFT-FEEDBACK.md#f-112)).
+  solver moves the centre (0.94 mm at Ø 2000 mm), so the tread came out 7 mm² too large; 3DCraft now warns
+  when a re-solve moves a point given as a plain number ([F-112](../../3DCRAFT-FEEDBACK.md#f-112)).
   Held with `["0 mm", "0 mm"]`, the solver still leaves it 1.4e-11 mm off, and a 3 mm round-over of the
   landing is then refused "at the edge of tolerance", where a fresh build passes
   ([F-113](../../3DCRAFT-FEEDBACK.md#f-113)).

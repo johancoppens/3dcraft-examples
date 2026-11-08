@@ -77,8 +77,8 @@ log/ plan/              local only (gitignored): dev log, plans
     split it with planes (`volumeBelow`) or outputs (`variable.measure`) for closed-form checks.
   - Units in `tol` are expressions: `0.01 mm^3` means (0.01 mm)³; write the plain number `0.01` (the
     document's unit).
-  - `body.appearance` replaces the whole appearance (F-005): give every field, or set them all in
-    `material.preset`.
+  - `body.appearance` changes only the fields it is given (since 3DCraft `45233bdc`, F-005); `material.preset`
+    sets them all.
   - Coatings (black oxide, paint, powder coat, anodising) render best as what they are, a dielectric layer
     (`metallic` 0); a dark metallic body reflects dark and loses its form under ACES.
   - Every measure on a complex body runs at every regeneration (the screw: 1 s of its 4.6 s). Measure what

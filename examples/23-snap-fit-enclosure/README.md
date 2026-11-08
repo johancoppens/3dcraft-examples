@@ -182,14 +182,13 @@ at 2 mm so that the tubes keep at least 0.48 mm at their ends (at a 24 mm inside
   with the base, chips or receptacle; they touch where they should (lid on the ledge, bars under the lugs,
   board on the posts, chips and receptacle on the board).
 
-`craft3d-cli check-range` proves all 25 at 25 points: the defaults, all sixteen corners of the four
+`craft3d-cli check-range` passes 21 and finds the four draft checks holding (not proven, below) at 25 points: the defaults, all sixteen corners of the four
 ranges and eight random points.
 
 **What the draft checks do and do not prove.** `measure.draft` is exact on the flat faces, which are most
-of each half. It samples the cones (the drafted corners, the post and pin cones, the post cores, the
-hold-down tubes and the lip chamfer's corner pieces), so all four sets report `proven: false` and the
-assertions pass without a warning ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)). On the rounds the bounds it
-proves are far below what it finds ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)):
+of each half, and bounds the cones (the drafted corners, the post and pin cones, the post cores, the
+hold-down tubes and the lip chamfer's corner pieces). On the rounds the bounds it proves are far below what
+it finds ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)), so all four draft checks are reported *not proven*:
 
 | Set | Least found | Lowest proven bound | Where |
 |---|---|---|---|
@@ -225,8 +224,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/23-snap-fit-enclosure/b
 - **No undercut check along a pull.** The draft of each face can be measured, but nothing checks that a
   face is not shadowed by other material along the pull ([F-166](../../3DCRAFT-FEEDBACK.md#f-166)); the hidden
   columns stand in for it.
-- **Draft proofs.** The draft assertions pass on sampled cones and on rounds with weak proven bounds,
-  without a warning ([F-067](../../3DCRAFT-FEEDBACK.md#f-067), [F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
+- **Draft proofs.** The bound `measure.draft` proves on rounds is far below what it finds, so the four draft
+  checks are not proven ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
 - **Wall thickness.** `measure.thickness` of a drafted, shelled tray finds 0.00004 mm at its rim and proves
   0 ([F-020](../../3DCRAFT-FEEDBACK.md#f-020)).
 - **Edge rounds over rounded corners.** A round along the rim of a box with rounded corners is refused once

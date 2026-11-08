@@ -214,7 +214,7 @@ def build_into(eid, target, meta):
     if not report.get("ok"):
         building.unlink(missing_ok=True)
         raise CheckError("document.check is not ok:\n" + json.dumps(
-            {k: report.get(k) for k in ("problems", "assertions")}, indent=1)[:3000])
+            {k: report.get(k) for k in ("problems", "assertionSummary")}, indent=1)[:3000])
     exports = meta.get("exports", [])
     if exports:
         # Exports at the defaults share one run; an export with "values" (public parameters, as param.set
@@ -258,7 +258,8 @@ def build_into(eid, target, meta):
     MEASURED_AT_LOAD = os.getloadavg()[0]
     doc = manifest(final)
     ids = Counter(step_id(s) for s in script)
-    assertions = report.get("assertions", {})
+    # document.check reports its assertions under assertionSummary (since 3DCraft 45233bdc, F-151).
+    assertions = report.get("assertionSummary") or {}
     return {
         "steps": len(script),
         "variables": ids["variable.set"],

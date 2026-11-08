@@ -187,5 +187,3 @@ limits to navigate.
 - **The closed box is a hidden copy.** An assertion is measured at the current parameter values only, so
   proving the closed box while the document shows it half open takes a second, hidden fold at the closed
   angles ([F-059](../../3DCRAFT-FEEDBACK.md#f-059)).
-- **Cap names.** A thick panel's `startCap` is its far face and its `endCap` the face on the sketch, the
-  other way round from an extrusion ([F-060](../../3DCRAFT-FEEDBACK.md#f-060)).

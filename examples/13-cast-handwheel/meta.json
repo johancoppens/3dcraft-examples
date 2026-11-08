@@ -45,14 +45,14 @@
     "parameters": 2,
     "features": 25,
     "assertions": 10,
-    "warnings": 0,
+    "warnings": 2,
     "build_s": 0.94,
     "load_s": 0.94,
     "load_cpu_s": 4.67,
     "file_bytes": 122353
   },
   "craft3d": {
-    "commit": "f4b0813cc124",
+    "commit": "45233bdc84c4",
     "format_version": 69
   }
 }

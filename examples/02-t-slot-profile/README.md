@@ -136,8 +136,6 @@ the 135° fillet spandrels.
 - **Wall thickness.** `measure.thickness` finds the 1.3 mm wall of the corner chambers exactly, but proves
   only 0 mm of it, so an assertion on the thinnest wall stays not proven. The model checks the wall that matters for the thread with a face distance
   instead ([F-020](../../3DCRAFT-FEEDBACK.md#f-020)).
-- **An area written with a unit.** `variable.set` takes `332 mm^2` silently as (332 mm)², where
-  `assert.add` refuses the same text and says why; the model writes `332 * (1 mm)^2` ([F-021](../../3DCRAFT-FEEDBACK.md#f-021)).
 - **Corner rounds.** A sketch has no corner round that follows the variables, so the die corners are
   rounded by a `feature.fillet` of the extruded edges, not in the cross section
   ([F-023](../../3DCRAFT-FEEDBACK.md#f-023)).

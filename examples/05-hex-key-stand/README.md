@@ -91,14 +91,16 @@ heights of the steps and the labels; the stand proves its walls, its overhangs a
   floors), at least 1.4 mm proven (the side walls are thicker, 2.85 mm or more at the defaults).
 - **No overhang below 45 degrees.** `measure.draft` along +z on every face of the stand but the bottom: the
   least is −45°, the first-layer chamfer. The labels stand on the steps, so their undersides are not
-  overhangs.
+  overhangs. The check is *not proven*: on the four vertical corner rounds, which the chamfer trims,
+  `measure.draft` finds 0° but bounds them only at −47.1°, and the chamfer sits exactly at the limit, so no
+  slack is left for that bound ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
 - **Socket section in closed form.** The stand cut halfway up its lowest step must be the footprint, less
   its four rounded corners, less the nine hexagons: 144 × 32 − (4 − π) 4² − (√3/2) Σ (s + 2 c)²
   = 4344.408 mm². It proves each socket's size and clearance.
 - **Top step seats the 10 mm key.** The stand's top is `floor_thickness + insertion_share * l1` of the
   10 mm key: 44.7 mm.
 
-`craft3d-cli check-range` proves all five at the defaults, the corners of the three ranges and eight
+`craft3d-cli check-range` passes four and finds the overhang check holding (not proven, as above) at the defaults, the corners of the three ranges and eight
 random points.
 
 ## Files

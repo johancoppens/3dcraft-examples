@@ -163,8 +163,8 @@ stands on a 10° slope empty and brewed, that the lid opens to 90° on its hinge
   - the boiler's facets toward the die drawn up: 7°;
   - the collector's facets and rounds and the handle lug's sides toward the die drawn down: the least is
     1.5°, at the lug;
-  - the chamber's facets, its rounds and the column toward the core drawn up: the least is 1.5°, at the column
-    (sampled on its cone, Platform notes);
+  - the chamber's facets, its rounds and the column toward the core drawn up: the least is 1.5°, at the column;
+    *not proven*, because the bound on the chamber's rounds is −61.9° (Platform notes);
   - the lid's band and facets toward the die drawn up: the least is 1.5°, at the band.
 - **Lid opens to 90°.** The lid turned 90° about the pin overlaps neither the collector nor the handle. By
   hand, at 30°, 45°, 60° and 90° it keeps 0.5 mm from the collector and 4.6 mm or more from the handle, and
@@ -180,7 +180,7 @@ stands on a 10° slope empty and brewed, that the lid opens to 90° on its hinge
   pairs (boiler and collector, boiler and valve), because cosmetic threads overlap their bores by design
   (Platform notes); the valve and the collector are the clearance check above.
 
-`craft3d-cli check-range` proves all seventeen at 15 points: the defaults, the four corners, the other two
+`craft3d-cli check-range` passes sixteen and finds the chamber's draft check holding (not proven, as above) at 15 points: the defaults, the four corners, the other two
 sizes and eight random points.
 
 ## Files
@@ -208,8 +208,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/20-moka-pot/build.json 
 - **Draft on rounded corners.** `measure.draft` finds the draft on the balls where three rounds meet at a
   drafted corner but proves far less (−6.0° for 1.5°), so a draft assertion over a whole cast body with its
   rounds stays unproven; the drafts are asserted on the planes, where they are exact
-  ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)). The column's draft is measured on a cone, which is sampled
-  ([F-067](../../3DCRAFT-FEEDBACK.md#f-067)).
+  ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)). The chamber's check includes its rounds, so it is reported not proven (found 1.5°, bound
+  −61.9°); the column's cone itself is proven exactly.
 - **Rounded rims.** Subtracting a core from a drafted twelve-sided blank whose rim was rounded with a chained
   fillet takes about 1.4 s instead of a few hundredths, so the collector's rim and skirt are left sharp
   ([F-132](../../3DCRAFT-FEEDBACK.md#f-132)).
@@ -220,6 +220,7 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/20-moka-pot/build.json 
 - **The handle's end.** Its round takes the section's corner radius: a radius between half of it and all of
   it is refused ([F-066](../../3DCRAFT-FEEDBACK.md#f-066)).
 - **The valve boss's draft.** A datum plane made from the facet's name lies on the facet as it was before
-  the draft, so the boss is drafted about its own base face instead ([F-133](../../3DCRAFT-FEEDBACK.md#f-133)).
+  the draft, so the boss is drafted about its own base face instead; 3DCraft now warns and names the
+  drafted face ([F-133](../../3DCRAFT-FEEDBACK.md#f-133)).
 - **Names.** The funnel's perforation and the collector's bore are cut in the same step (`cut`), so their
   tools keep the automatic names `Extrude1` and `Revolve1` ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
