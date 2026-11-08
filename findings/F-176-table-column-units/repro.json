@@ -1,0 +1,3 @@
+[
+ ["table.set", {"name": "ipe", "columns": ["profile", {"name": "Iy", "unit": "mm^4"}], "rows": [["IPE 180", 13170000]]}]
+]

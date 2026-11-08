@@ -183,6 +183,10 @@ All entries are against 3DCraft `f4b0813c` unless they say otherwise.
 | [F-171](#f-171) | Missing capability | `face.appearance` refuses faces of a feature switched off by `when`, and takes no `when` or expression itself | layered-cardboard-rhino | length range ends at the default |
 | [F-172](#f-172) | Performance | `measure.symmetry` of two flat plates takes 7 to 14 s; of a 30-layer stack it runs out of 3 GB | layered-cardboard-rhino (builder, review) | symmetry by construction, not measured |
 | [F-173](#f-173) | Missing capability | `feature.thicken` refuses a sheet: "offsetting, shelling or thickening a sheet is not built yet" | layered-cardboard-rhino (prompt test) | feature.plate used instead |
+| [F-174](#f-174) | Missing capability | No table lookup of the first row where a condition holds (the smallest standard size that suffices) | probe for steel-beam-sizing (not built) | a sum of comparisons over the rows |
+| [F-175](#f-175) | Missing capability | A variable or output cannot be a text: a table key such as "IPE 220" cannot be shown as a result | probe for steel-beam-sizing (not built) | result shown as a row number or a size |
+| [F-176](#f-176) | Missing capability (minor) | A table column's unit can only be a base unit: no mm^4, cm^3, mm^2 or kg/m | probe for steel-beam-sizing (not built) | catalogue properties as plain numbers |
+| [F-177](#f-177) | Bug | An output named like the table column it looks up is refused as a cycle (`h` = `ipe[pick].h`: "h → h") | probe for steel-beam-sizing (not built) | output renamed |
 
 ## F-001
 
@@ -393,6 +397,7 @@ On a 1.5 degree drafted, shelled tray (the snap-fit enclosure) `measure.thicknes
 while `assert.add` refuses the same text and explains it ("means (332 mm)^2 in expressions; write
 `332 * (1 mm)^2`"). **Should:** `variable.set` refuses or warns the same way. Reproducer:
 [`findings/F-021-area-literal-in-variable/repro.json`](findings/F-021-area-literal-in-variable/repro.json).
+Again with a fourth power: `26740000 mm^4` (a second moment of area) is taken as (26740000 mm)^4 = 5.1e29 mm^4 without a word, which made a section choice pick the largest row (probe for steel-beam sizing).
 
 ## F-022
 
@@ -1497,3 +1502,19 @@ The rhino's prompt tester met it again in its own model at 230 mm: "the rim coul
 ## F-173
 
 **Missing capability.** `feature.thicken` of a flat sheet (a `feature.fill` intersected with a solid: a section to give a board's thickness) is refused: "the body is a sheet: offsetting, shelling or thickening a sheet is not built yet". The layered rhino's prompt tester met it; `feature.plate` with `side: mid` does it, as the example does (F-139). Thickening a sheet is the first thing a user reaches for.
+
+## F-174
+
+**Missing capability.** A model that picks a standard size (the smallest steel section whose second moment of area reaches what the deflection needs, the smallest bolt that carries a load, the next bearing up) has to find the first row of a table where a condition holds. Formulas can only name a row by its number or key, so the row number is written as `1 + (t[1].col < need) + (t[2].col < need) + ...`, one term per row: it grows with the table, breaks silently when a row is inserted, and is only right when the column rises down the table. **Should:** a lookup of the first (or last) row whose cells meet a condition, with a clear unknown when no row does ("no IPE is stiff enough: take two side by side or an HEB"). Reproducer (the workaround): [`findings/F-174-table-first-row-where/repro.json`](findings/F-174-table-first-row-where/repro.json)
+
+## F-175
+
+**Missing capability.** An output of a table's key column (`ipe[pick].profile`) is unknown: "column `profile` of table `ipe` holds a text there, not a number". A model that chooses a standard part can say which row it chose only as a number (the row, or a dimension such as the height), not as the name a person orders it by ("IPE 220", "M8 x 30", "6205-2RS"). **Should:** outputs (and variables) that hold a text, at least a table's key, shown in forms and `output.list` like any result. Reproducer: [`findings/F-175-table-text-output/repro.json`](findings/F-175-table-text-output/repro.json)
+
+## F-176
+
+**Missing capability (minor).** `table.set` refuses `mm^4` as a column's unit ("is not a unit; use one of um, mm, cm, m, in, ft, deg, rad, g, kg, s, N, kN, Pa, kPa, MPa, GPa, J"), although outputs take products, powers and quotients (`N/mm²`, `kg/m^3`). A catalogue of sections (area, second moment of area, section modulus, mass per metre) therefore holds plain numbers, and every formula that uses them multiplies the unit back in by hand. **Should:** the units outputs take, for columns too. Reproducer: [`findings/F-176-table-column-units/repro.json`](findings/F-176-table-column-units/repro.json)
+
+## F-177
+
+**Bug.** `variable.output` with name `h` and expression `ipe[pick].h` is refused: "`h` would depend on itself (h → h): the outputs may use each other only without a cycle". The column name after the dot is taken for a reference to the output; a variable of the same name and expression is accepted. Reproducer: [`findings/F-177-output-named-as-column/repro.json`](findings/F-177-output-named-as-column/repro.json)

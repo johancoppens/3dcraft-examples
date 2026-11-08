@@ -1,0 +1,7 @@
+[
+ ["table.set", {"name": "ipe", "columns": ["profile", {"name": "h", "unit": "mm"}, "Iy_cm4"],
+                "rows": [["IPE 180", 180, 1317], ["IPE 200", 200, 1943], ["IPE 220", 220, 2772], ["IPE 240", 240, 3892]]}],
+ ["variable.set", {"name": "Ireq_cm4", "expr": "2674"}],
+ ["variable.set", {"name": "pick", "expr": "1 + (ipe[1].Iy_cm4 < Ireq_cm4) + (ipe[2].Iy_cm4 < Ireq_cm4) + (ipe[3].Iy_cm4 < Ireq_cm4)"}],
+ ["variable.set", {"name": "h", "expr": "ipe[pick].h"}]
+]

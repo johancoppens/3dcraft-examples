@@ -1,0 +1,5 @@
+[
+ ["table.set", {"name": "ipe", "columns": ["profile", {"name": "h", "unit": "mm"}], "rows": [["IPE 180", 180], ["IPE 200", 200]]}],
+ ["variable.set", {"name": "pick", "expr": "2"}],
+ ["variable.output", {"name": "h", "expr": "ipe[pick].h"}]
+]
