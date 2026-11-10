@@ -23,7 +23,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each example must be),
   repository is English: files, names inside the models, commit messages.
 - **3DCraft is pinned.** Every example is built and checked with one 3DCraft commit, recorded in
   [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli`.
-  `tools/examples.py` refuses any other build. Only the coordinator moves the pin, after rebuilding and
+  `tools/examples.py` refuses any other build, except the release named there ([README.md](README.md#rebuild-and-check)). Only the coordinator moves the pin, after rebuilding and
   checking every example.
 - **Do not change 3DCraft from here.** What 3DCraft gets wrong or lacks is *collected* in
   [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) (§7); the developer takes it to 3DCraft in one go.
@@ -213,8 +213,9 @@ model.
 }
 ```
 
-`summary` is the start-screen card's line (a few words, like "sheet metal, bends"). `stats` and `craft3d`
-are written by the tool.
+`summary` is the start-screen card's line (a few words, like "sheet metal, bends"). `standards` lists the
+standards and references the model is sized to: a standard where one applies, otherwise the paper, catalogue or
+product the page cites. `stats` and `craft3d` are written by the tool.
 
 **`prompt.md`**: the chat a person could paste, turn by turn, into an AI connected to 3DCraft over MCP to
 build the same model. Only the person's turns, in a designer's words (intent, sizes, standards, finish); no
