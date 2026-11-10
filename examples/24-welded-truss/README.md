@@ -252,3 +252,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/24-welded-truss/build.j
 - **Names.** Each body is named after its last feature ([F-042](../../3DCRAFT-FEEDBACK.md#f-042)); the
   measured gaps find their faces by feature ids, as face queries do not take feature names
   ([F-134](../../3DCRAFT-FEEDBACK.md#f-134)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

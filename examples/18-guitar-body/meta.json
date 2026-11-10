@@ -17,6 +17,7 @@
   "materials": [
     "Red alder, 450 kg/m³, candy-apple red over a metallic base, clear coat"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

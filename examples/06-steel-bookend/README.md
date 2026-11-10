@@ -139,3 +139,8 @@ as formulas, and a closed-form area with a Bézier integral and the bend's proce
   ([F-043](../../3DCRAFT-FEEDBACK.md#f-043)). From [150, 60] the shadow is long and narrow, keeps the
   window's light patch in it, and shows only two faint steps at its far tip; higher lights that remove
   them hide the window's shadow behind the upright.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

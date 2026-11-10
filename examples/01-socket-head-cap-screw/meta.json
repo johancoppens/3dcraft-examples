@@ -19,6 +19,7 @@
   "materials": [
     "Alloy steel, property class 12.9, black oxide"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

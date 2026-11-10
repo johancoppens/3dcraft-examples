@@ -20,6 +20,7 @@
     "Hot-dip galvanised steel sheet, Z275",
     "EPDM rubber (seal)"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

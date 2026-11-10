@@ -228,3 +228,8 @@ volume solved with a cube root, and the gemology and setting knowledge behind th
   3 s at every load (the load goes from 0.8 s to 2.8 s with `overlap` and to 3.8 s with `clearance`); the
   checks use `distance` to the gallery's and the shank's faces instead, which costs too little to measure
   against the noise ([F-098](../../3DCRAFT-FEEDBACK.md#f-098)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

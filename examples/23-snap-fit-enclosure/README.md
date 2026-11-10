@@ -240,3 +240,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/23-snap-fit-enclosure/b
 - **Base and lid as two bodies.** The halves are built as two shells rather than one shelled box cut at the
   parting line and split with `body.split`: a cut that separates two lumps needs a gap all the way round,
   while the lid must sit on the base's ledge.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

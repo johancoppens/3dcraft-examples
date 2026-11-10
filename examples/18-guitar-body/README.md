@@ -202,3 +202,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/18-guitar-body/build.js
   [F-093](../../3DCRAFT-FEEDBACK.md#f-093)): the depths are measured to the top face instead.
 - **Names.** The seven extrusions made by `extrude` with `cut` keep automatic names
   ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

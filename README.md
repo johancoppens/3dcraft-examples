@@ -84,5 +84,12 @@ Read [`AGENTS.md`](AGENTS.md). Things 3DCraft could do better, found while build
 
 ## Licence
 
-MIT, see [`LICENSE`](LICENSE). Third-party data used by an example is listed in
-[`ATTRIBUTION.md`](ATTRIBUTION.md).
+Everything in this repository is under the MIT licence ([`LICENSE`](LICENSE)): the models and their exports,
+the pages and previews, `CATALOGUE.md`, `AGENTS.md`, the feedback, the reproducers under `findings/` and the
+tool. Every model page says so, and every `meta.json` carries it as `licence`. When you reuse an example, keep
+the copyright notice and credit it as:
+
+> "Socket head cap screw" by Johan Coppens, from the 3DCraft examples (MIT)
+
+with the example's title. Third-party data, and the font embedded in two of the models, keep their own
+licences: see [`ATTRIBUTION.md`](ATTRIBUTION.md).

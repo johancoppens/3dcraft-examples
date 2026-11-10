@@ -27,6 +27,7 @@
     "Plate S355J2 (EN 10025-2)",
     "Red-oxide shop primer"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

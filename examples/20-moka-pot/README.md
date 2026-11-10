@@ -224,3 +224,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/20-moka-pot/build.json 
   drafted face ([F-133](../../3DCRAFT-FEEDBACK.md#f-133)).
 - **Names.** The funnel's perforation and the collector's bore are cut in the same step (`cut`), so their
   tools keep the automatic names `Extrude1` and `Revolve1` ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

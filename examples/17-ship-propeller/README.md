@@ -190,3 +190,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/17-ship-propeller/build
 - **Names.** The blade's two side faces share one name ([F-064](../../3DCRAFT-FEEDBACK.md#f-064)); the
   keyway's cutting extrusion keeps the automatic name `Extrude1`
   ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

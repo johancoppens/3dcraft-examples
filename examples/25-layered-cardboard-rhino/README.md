@@ -195,3 +195,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/25-layered-cardboard-rh
   keep the cutting planes away from the configurations the boolean refuses; `feature.plate` also refuses
   some outlines where two curves meet at a smooth join (`the edge across a corner could not be traced`, [F-169](../../3DCRAFT-FEEDBACK.md#f-169)),
   which the final geometry avoids at every length and board.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

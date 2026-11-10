@@ -20,6 +20,7 @@
     "Steel, black oxide (clamps and screws)",
     "Hardened steel, ground (test pin)"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

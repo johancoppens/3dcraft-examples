@@ -242,3 +242,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/22-flat-pack-bookcase/b
 - **Ply lines at one thickness.** A pattern's `scale` is a plain number, not an expression (as its origin
   and axis are, [F-041](../../3DCRAFT-FEEDBACK.md#f-041)), so the glue lines are drawn every 2.708 mm, two
   plies of the default 17.6 mm sheet, and do not divide the edge evenly at other thicknesses.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

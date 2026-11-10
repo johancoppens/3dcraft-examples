@@ -204,3 +204,8 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
   `measure.section` of the terrain costs about 1.2 s of CPU ([F-076](../../3DCRAFT-FEEDBACK.md#f-076)), so the contours are not measured.
 - **Splines through expressions.** `live: true` takes expressions as through-points, which this example uses
   for the exaggeration.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

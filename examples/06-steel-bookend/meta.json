@@ -18,6 +18,7 @@
   "materials": [
     "Cold-rolled steel DC01, 2 mm, powder coated RAL 6004 blue green"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

@@ -16,6 +16,7 @@
   "materials": [
     "PLA, orange (stand) and black (labels)"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

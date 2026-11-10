@@ -28,6 +28,7 @@
     "Polyurethane and NBR seals",
     "Bronze-filled PTFE guide and wear rings"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "view": "iso",

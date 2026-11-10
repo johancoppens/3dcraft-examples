@@ -146,3 +146,8 @@ between several bodies.
   draws stair-stepped bands across the treads ([F-043](../../3DCRAFT-FEEDBACK.md#f-043)).
 - **Two objects in the 3MF.** The stand and the labels are two build items, not two parts of one object,
   hence the Assemble step in the slicer ([F-045](../../3DCRAFT-FEEDBACK.md#f-045)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

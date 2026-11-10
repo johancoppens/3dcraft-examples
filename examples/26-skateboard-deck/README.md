@@ -223,3 +223,8 @@ craft3d-cli run --new '{"units":"in"}' --script examples/26-skateboard-deck/buil
   it is drawn straight along (or across) the deck ([F-083](../../3DCRAFT-FEEDBACK.md#f-083)).
 - **Interference.** `document.interference` answers "unknown" for the layers' and the mould's contacts on
   the concentric sweeps ([F-157](../../3DCRAFT-FEEDBACK.md#f-157)); the closed mould is proven by `measure.distance`, not by interference.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

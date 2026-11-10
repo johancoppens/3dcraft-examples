@@ -151,3 +151,8 @@ Bézier's volume of revolution) that take real maths.
 - **Distance.** `measure.distance` between the faces of a parallel wall finds 7.000 mm but proves only
   6.23 to 6.78 mm, so an assertion of the wall to a micrometre stays unproven. Reproducer:
   [F-030](../../3DCRAFT-FEEDBACK.md#f-030).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

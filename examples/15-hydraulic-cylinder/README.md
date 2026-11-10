@@ -222,3 +222,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/15-hydraulic-cylinder/b
   ([F-042](../../3DCRAFT-FEEDBACK.md#f-042)).
 - **Chrome.** The rod's brown streaks come from the Workshop environment
   ([F-054](../../3DCRAFT-FEEDBACK.md#f-054)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

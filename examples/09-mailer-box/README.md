@@ -187,3 +187,8 @@ limits to navigate.
 - **The closed box is a hidden copy.** An assertion is measured at the current parameter values only, so
   proving the closed box while the document shows it half open takes a second, hidden fold at the closed
   angles ([F-059](../../3DCRAFT-FEEDBACK.md#f-059)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

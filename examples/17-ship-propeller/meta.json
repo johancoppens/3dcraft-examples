@@ -19,6 +19,7 @@
   "materials": [
     "Nickel-aluminium bronze CuAl10Fe5Ni5-C (EN 1982, CC333G), polished"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

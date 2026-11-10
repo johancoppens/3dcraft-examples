@@ -232,3 +232,8 @@ two-part stability test from a standard.
   with two extra quadrant blocks and two `intersect`s.
 - **Units.** Gravity is written `9.80665 N / (1 kg)`, since `9.81 m/s^2` is refused
   ([F-079](../../3DCRAFT-FEEDBACK.md#f-079)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

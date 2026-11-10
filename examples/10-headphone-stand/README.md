@@ -195,3 +195,8 @@ four-segment sweep, mass and stability outputs, and three kernel limits worked a
   the base's top, and from [200, 80] a jagged line across the column's root fillet
   ([F-043](../../3DCRAFT-FEEDBACK.md#f-043)). Unturned, the bright environment washed out the saddle's
   far rim.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

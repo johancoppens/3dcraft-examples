@@ -233,3 +233,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/13-cast-handwheel/build
 - **Names.** The tools of the two cuts keep their automatic names `Revolve1` and `Extrude1`
   ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)); the casting is named after its last feature, the keyway cut
   *Handwheel* ([F-042](../../3DCRAFT-FEEDBACK.md#f-042)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

@@ -19,6 +19,7 @@
     "Polycarbonate, translucent smoke grey (lid)",
     "FR-4 circuit board with a USB-C receptacle"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

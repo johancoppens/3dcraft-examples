@@ -169,3 +169,8 @@ careful face names; no freeform.
   ([F-037](../../3DCRAFT-FEEDBACK.md#f-037)).
 - **Names.** The three engravings' extrusions keep their automatic names `Extrude1` to `Extrude3`
   ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

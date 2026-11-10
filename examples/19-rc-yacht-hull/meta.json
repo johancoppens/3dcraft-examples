@@ -21,6 +21,7 @@
     "Lead",
     "Elastomer"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

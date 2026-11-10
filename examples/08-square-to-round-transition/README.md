@@ -224,3 +224,8 @@ unfold, quadrature and Steiner proofs, and five kernel limits worked around.
   (#bfc7cf, roughness 0.6) a light grey. The light behind keeps the ground's shadow free of steps.
 - **Names.** The extrusions that cut and join the straight, the collar and the frame keep their automatic
   names (`Extrude1` to `Extrude5`, [F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

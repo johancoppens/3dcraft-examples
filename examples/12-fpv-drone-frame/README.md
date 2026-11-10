@@ -266,3 +266,8 @@ centrifugal-stress check; kernel limits navigated.
   one draws stepped shadow bands on the ground ([F-043](../../3DCRAFT-FEEDBACK.md#f-043)), and with
   `reflections: false` because the screen-space reflections smear jagged patches onto the camera plates
   ([F-013](../../3DCRAFT-FEEDBACK.md#f-013)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

@@ -14,6 +14,7 @@
   "materials": [
     "Black walnut (Juglans nigra), kiln dried, oiled"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "zoom": 1.25,

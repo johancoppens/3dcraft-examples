@@ -138,3 +138,8 @@ hexagon; the modelled thread stays within the kernel's limits.
   onto the thread ([F-013](../../3DCRAFT-FEEDBACK.md#f-013)).
 - **Names.** The cone that shapes the punch keeps the automatic name `Revolve1`
   ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

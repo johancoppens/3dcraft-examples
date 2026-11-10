@@ -214,3 +214,8 @@ lighter to load than the default. It opens in 2.7 s (8.2 s of CPU) and the file 
   reads gold. The carbon's solid texture is set with `wrap: false`: wrapped round the fin's axis it draws a
   bright streak across it. Its clear coat is turned down to 0.2: at 0.5 the rudder mirrors the warm light
   and reads brown beside the black fin.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

@@ -188,7 +188,7 @@ the renderer's screen-space reflections smear a surface, F-013, said in the READ
 (the 3DCraft techniques, command ids in backticks); *The real thing* (standards, process, material, how to
 make it: print settings, cut and bend order, finish); *Parameters* (the public ones and their ranges);
 *Checks* (the assertions in words); *Files*; *Rebuild*; *Difficulty* (the reviewer's score out of 10 and one
-line why); *Platform notes* (links to `3DCRAFT-FEEDBACK.md` entries, if any). Every claim must be true of the
+line why); *Platform notes* (links to `3DCRAFT-FEEDBACK.md` entries, if any); *Licence*. Every claim must be true of the
 model.
 
 **`meta.json`**:
@@ -205,6 +205,7 @@ model.
   "difficulty": {"score": null, "rationale": ""},
   "standards": ["ISO 4762:2004"],
   "materials": ["Steel, property class 12.9, black oxide"],
+  "licence": "MIT",
   "units": "mm",
   "preview": {"zoom": 1.1, "look": {"light": [200, 70]}},
   "exports": [{"path": "exports/socket-head-cap-screw.step"}],

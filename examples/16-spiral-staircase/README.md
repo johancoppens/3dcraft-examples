@@ -268,3 +268,8 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/16-spiral-staircase/bui
   a parameter change (as [F-088](../../3DCRAFT-FEEDBACK.md#f-088): no "every edge of a face"): the ends
   are plugged flat.
 - The twelve extrusions made by `cut` and `join` keep automatic names ([F-002](../../3DCRAFT-FEEDBACK.md#f-002)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

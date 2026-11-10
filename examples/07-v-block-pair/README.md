@@ -164,3 +164,8 @@ naming.
   `Clamp screws`), since a body takes its last feature's name ([F-042](../../3DCRAFT-FEEDBACK.md#f-042)).
 - **Drawings.** The SVG views are outlines to scale, without dimensions, centre lines or a title block
   ([F-053](../../3DCRAFT-FEEDBACK.md#f-053)).
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

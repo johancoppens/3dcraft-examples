@@ -18,6 +18,7 @@
     "Steel S235, powder coated anthracite grey (RAL 7016)",
     "European oak, oiled"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {

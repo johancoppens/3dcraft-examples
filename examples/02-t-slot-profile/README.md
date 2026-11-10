@@ -142,3 +142,8 @@ the 135° fillet spandrels.
 - **The body's name.** A body takes the name of the last feature that made it, here the countersinks
   (`Countersunk thread entries`), and there is no command that names a body; a step named after the part
   would have to be an extra feature.
+
+## Licence
+
+[MIT](../../LICENSE), like everything in this repository; credit line in the
+[README](../../README.md#licence).

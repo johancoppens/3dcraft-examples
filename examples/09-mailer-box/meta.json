@@ -16,6 +16,7 @@
   "materials": [
     "Corrugated board, single wall, E flute (1.6 mm), kraft liners, 340 g/m²"
   ],
+  "licence": "MIT",
   "units": "mm",
   "preview": {
     "camera": {
