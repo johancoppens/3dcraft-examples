@@ -65,10 +65,10 @@
     "features": 35,
     "assertions": 10,
     "warnings": 0,
-    "build_s": 2.91,
-    "load_s": 2.91,
-    "load_cpu_s": 9.2,
-    "file_bytes": 258217
+    "build_s": 2.93,
+    "load_s": 2.9,
+    "load_cpu_s": 9.1,
+    "file_bytes": 258227
   },
   "craft3d": {
     "commit": "b99d70cfe19e",

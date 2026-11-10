@@ -2196,7 +2196,8 @@
    "feature": [
     "Hub",
     "One blade",
-    "Expanded blade outline"
+    "Expanded blade outline",
+    "Expanded outline"
    ],
    "visible": false
   }

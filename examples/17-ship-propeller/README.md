@@ -29,7 +29,8 @@ ratio and the series member (B4-40, B4-55, B4-70) are parameters.
   the taper (`feature.extrude` with `cut`), joined to the blades with `feature.boolean`.
 - **Helpers for cheap, exact checks.** The union keeps the hub as a body of its own (`keepTool`), a
   `feature.transform` keeps a copy of one blade, and the expanded blade outline is drawn from the table as
-  on a propeller drawing; all three are hidden (`feature.visible`). Cutting them costs a fraction of
+  on a propeller drawing; all three are hidden (`feature.visible`), and so is the outline's sketch, which
+  lies below the propeller and would otherwise widen the view it opens in. Cutting them costs a fraction of
   cutting the whole propeller.
 - **Material, outputs and checks.** `material.preset` and `body.material` (nickel-aluminium bronze, its
   density a variable); `variable.measure` and `variable.output` for the mass and the expanded area ratio;
