@@ -90,8 +90,9 @@ length, the port spacing, the rod's buckling safety and the rod clevis's rating.
   (area ratio 1.96, the classic 2 : 1 cylinder) is what a designer would pick here.
 - **Ports.** G 3/8 to ISO 228-1 (19 threads per inch, minor diameter 14.950 mm) in ISO 1179-1 ports on
   top of head and cap: a Ø 25 spot face, the mouth countersunk to Ø 16.9 and the tapping drill 15.5 deep
-  (from Table 1 of ISO 1179-1:2013 as reproduced on a public page: d3 16.7 to 16.9, spot face at least 23
-  or 24.5, tapping drill at least 15.5 deep; not checked against the standard itself). In the cap a Ø 9
+  (dimensions according to ISO 1179-1:2013, read from a secondary source this page does not name and not
+  checked against the standard itself: d3 16.7 to 16.9, spot face at least 23 or 24.5, tapping drill at
+  least 15.5 deep). In the cap a Ø 9
   passage leads on into the pocket; in the head the tapping drill breaks straight into the Ø 34 gallery, so
   the drilling's point and passage fall in the gallery's space. The thread itself is not drawn
   ([platform notes](#platform-notes)).

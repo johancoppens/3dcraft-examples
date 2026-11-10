@@ -52,8 +52,8 @@ forms.
 - **Sections and steel.** Cold-formed circular hollow sections to EN 10219-2 in S355J2H (EN 10219-1:
   yield strength 355 MPa up to 16 mm, tensile strength at least 470 MPa from 3 mm); plates S355J2 to
   EN 10025-2. Both chords have the same section; the diagonals are about half the chord's diameter.
-  Diameters, walls and masses per metre as tabulated for BS EN 10219-2:2006
-  ([roymech](https://roymech.org/Useful_Tables/Sections/Cir_Sect.html)):
+  Diameters, walls and masses per metre according to BS EN 10219-2:2006, read in
+  [roymech](https://roymech.org/Useful_Tables/Sections/Cir_Sect.html)'s table:
 
   | Section pair | Chords | kg/m | Diagonals | kg/m |
   |---|---|---|---|---|

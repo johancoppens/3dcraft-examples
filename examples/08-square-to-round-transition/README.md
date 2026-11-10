@@ -40,10 +40,10 @@ round one.
 
 - **Sizes.** EN 1505 sizes rectangular ducts and fittings by their inside dimensions a × b (as Lindab's
   rectangular system states, "a and b are the internal duct or fitting dimensions"), in the series 100,
-  150, 200, 250, 300, 400, 500, 600, 800, 1000 and 1200 mm (Alnor's system description, Table 3, to
-  EN 1505:2001). EN 1506 sizes round ducts by their nominal diameter d. The spigot slides into the spiral
-  duct, so its outside diameter lies below d: per DIN EN 1506 as tabled by airleben (*Toleranzen nach
-  DIN EN 1506*, 2024). The spigot's length e is the one the same sheet gives for the spigots of its
+  150, 200, 250, 300, 400, 500, 600, 800, 1000 and 1200 mm (according to EN 1505:2001, read in Alnor's
+  system description). EN 1506 sizes round ducts by their nominal diameter d. The spigot slides into the spiral
+  duct, so its outside diameter lies below d: according to DIN EN 1506, read in airleben's *Toleranzen nach
+  DIN EN 1506* (2024). The spigot's length e is the one the same sheet gives for the spigots of its
   add-on pieces (*Anbaustücke*).
 
   | Round size d | 125 | 160 | 200 | 250 | 315 |

@@ -35,7 +35,7 @@ heights of the steps and the labels; the stand proves its walls, its overhangs a
 
 ## The real thing
 
-- **Standard.** ISO 2936:2014, hexagon socket screw keys, the normal series. The table holds the nominal
+- **Standard.** Dimensions according to ISO 2936:2014, hexagon socket screw keys, the normal series. The model's table holds the nominal
   width across flats s (the key's largest; a key is never over it) and the length of the long arm l1:
 
   | s | 1.5 | 2 | 2.5 | 3 | 4 | 5 | 6 | 8 | 10 |
@@ -105,7 +105,8 @@ random points.
 
 ## Files
 
-- `hex-key-stand.3dcraft`: the model (opens in 0.41 s).
+- `hex-key-stand.3dcraft`: the model (opens in 0.41 s). It carries the font of its labels, Noto Sans Regular,
+  under the SIL Open Font License 1.1: [`NotoSans-OFL.txt`](NotoSans-OFL.txt).
 - `build.json`: the 75 steps that build it.
 - `exports/hex-key-stand.3mf`: the stand and its labels, in their colours and in the print orientation.
 
@@ -150,4 +151,4 @@ between several bodies.
 ## Licence
 
 [MIT](../../LICENSE), like everything in this repository; credit line in the
-[README](../../README.md#licence).
+[README](../../README.md#licence). The embedded font keeps its own licence (*Files*).

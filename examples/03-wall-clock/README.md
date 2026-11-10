@@ -128,7 +128,8 @@ parameters, the other numerals and eight random points.
 
 ## Files
 
-- `wall-clock.3dcraft`: the model.
+- `wall-clock.3dcraft`: the model. It carries the font of its numerals, Noto Sans Regular, under the SIL
+  Open Font License 1.1: [`NotoSans-OFL.txt`](NotoSans-OFL.txt).
 - `build.json`: the 149 steps that build it.
 - `exports/wall-clock-dial-cut.dxf`: the dial's cut lines, the outline and the shaft hole.
 - `exports/wall-clock-engrave-ticks.svg`, `exports/wall-clock-engrave-roman.svg`,
@@ -173,4 +174,4 @@ careful face names; no freeform.
 ## Licence
 
 [MIT](../../LICENSE), like everything in this repository; credit line in the
-[README](../../README.md#licence).
+[README](../../README.md#licence). The embedded font keeps its own licence (*Files*).

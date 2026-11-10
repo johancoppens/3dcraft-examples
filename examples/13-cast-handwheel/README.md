@@ -50,8 +50,8 @@ the weights the makers publish.
 ## The real thing
 
 - **Standard and sizes.** DIN 950 (*Handräder, gekröpft*, edition 2018-02) is the cranked spoked
-  handwheel: the hub stands behind the rim and the spokes climb from one to the other. Its dimensions are
-  taken from the Elesa+Ganter datasheet *DIN 950 Handwheels, Cast Iron / Aluminum* (2/2026,
+  handwheel: the hub stands behind the rim and the spokes climb from one to the other. Its dimensions,
+  according to DIN 950, are read from the Elesa+Ganter datasheet *DIN 950 Handwheels, Cast Iron / Aluminum* (2/2026,
   [PDF](https://elesa-ganter.be/technicaldatasheet/DIN%20950.pdf/en)), with the wheel diameter d1,
   the rim width b, the hub diameter d3 (an approximate, cast size), the hub length l1, the overall depth
   l2, the radius r of the handle's axis and the number of spokes. Blohm's B0328 sheet *Handräder DIN 950 aus

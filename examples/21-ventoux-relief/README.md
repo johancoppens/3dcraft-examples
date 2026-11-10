@@ -175,7 +175,7 @@ and `data/SOURCES.md` with that day's date, from whatever the services serve the
 ## Data and licences
 
 Elevation: SRTM data courtesy of the U.S. Geological Survey, through the Mapzen terrain tiles (the
-attribution the tiles ask for is in `data/SOURCES.md`). Road and tower: IGN – BD TOPO®, Géoplateforme,
+attribution the tiles ask for is in `data/SOURCES.md`). Road, its kilometres and the tower: IGN – BD TOPO®, Géoplateforme,
 Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
 
 ## Difficulty
@@ -210,4 +210,4 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
 ## Licence
 
 [MIT](../../LICENSE), like everything in this repository; credit line in the
-[README](../../README.md#licence).
+[README](../../README.md#licence). The data under `data/` keeps its own licences (*Data and licences*).

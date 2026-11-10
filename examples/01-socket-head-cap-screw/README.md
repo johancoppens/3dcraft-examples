@@ -31,7 +31,7 @@ points across the standard's range.
 
 ## The real thing
 
-- **Standard.** ISO 4762:2004 (formerly DIN 912), Table 1, plain head. Per size the table holds the thread
+- **Standard.** Dimensions according to ISO 4762:2004 (formerly DIN 912), plain head. Per size the model's table holds the thread
   diameter d, the coarse pitch P (ISO 261), head diameter dk and height k, the socket width's band s min to
   s max, the minimum key engagement t, the thread length b, the minimum underhead radius r, the bearing
   face's minimum diameter dw, the longest length threaded to the head, and the size's first and last length.
