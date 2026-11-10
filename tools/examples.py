@@ -258,7 +258,7 @@ def build_into(eid, target, meta):
     MEASURED_AT_LOAD = os.getloadavg()[0]
     doc = manifest(final)
     ids = Counter(step_id(s) for s in script)
-    # document.check reports its assertions under assertionSummary (since 3DCraft 45233bdc, F-151).
+    # document.check reports its assertions under assertionSummary (since 3DCraft 150f0015, F-151).
     assertions = report.get("assertionSummary") or {}
     return {
         "steps": len(script),

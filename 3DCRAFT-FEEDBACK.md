@@ -6,35 +6,35 @@ a valid request refused; with a reproducer in `findings/`), **Missing capability
 and anyone), **Performance** (with numbers), **Agent friction** (what made building through commands slow or
 error-prone). See `AGENTS.md` §7.
 
-All entries are against 3DCraft `f4b0813c` unless they say otherwise.
+All entries are against 3DCraft `cc90d757` unless they say otherwise.
 
-**Status (2026-11-08):** 3DCraft `45233bdc` fixed F-003, F-005, F-011, F-018, F-021, F-032, F-060, F-067 (for
+**Status (2026-11-08):** 3DCraft `150f0015` fixed F-003, F-005, F-011, F-018, F-021, F-032, F-060, F-067 (for
 assertions), F-081, F-131, F-146 (in part), F-151, F-168 and F-177; F-112 and F-133 are warnings now; F-048 was not
-reproduced. Each entry ends with its status; the examples are built and checked on `45233bdc`.
+reproduced. Each entry ends with its status; the examples are built and checked on `150f0015`.
 
 | Id | Kind | Title | Found in | Impact |
 |---|---|---|---|---|
 | [F-001](#f-001) | Performance | The guide's fuel tank takes 55 s to open, the chassis 9 s | calibrating the load budget | start screen |
 | [F-002](#f-002) | Agent friction | An extrude with `cut`, `join` or `intersect` cannot name its extrusion | calibrating the name check | history names |
-| [F-003](#f-003) | Agent friction | **Fixed in 45233bdc:** `craft3d-cli --version` does not print the commit | setting up the pin | tooling |
+| [F-003](#f-003) | Agent friction | **Fixed in 150f0015:** `craft3d-cli --version` does not print the commit | setting up the pin | tooling |
 | [F-004](#f-004) | Performance | A modelled thread takes 3.5 s to regenerate, measures on it 1 s more; 27 s of CPU | socket-head-cap-screw | load budget exceeded (4.8 s wall, 27 s CPU) |
-| [F-005](#f-005) | Agent friction | **Fixed in 45233bdc:** `body.appearance` replaces the whole appearance; fields left out are dropped | socket-head-cap-screw | finish lost silently |
+| [F-005](#f-005) | Agent friction | **Fixed in 150f0015:** `body.appearance` replaces the whole appearance; fields left out are dropped | socket-head-cap-screw | finish lost silently |
 | [F-006](#f-006) | Bug | A modelled thread on a tip chamfered 0.75 P deep is refused for M3 to M6 | socket-head-cap-screw | workaround used |
 | [F-007](#f-007) | Missing capability | Loft sections cannot lie on a cylinder | probe for ship-propeller | planar approximation |
 | [F-008](#f-008) | Bug | Fillets at propeller blade roots fail above 1 mm, and at 1 mm on blunt sections | probe for ship-propeller | root fillet ≤ 1 mm |
 | [F-009](#f-009) | Bug (suspected) | Shelling a lofted hull with a small bow section: "what fits is below 0.0571 mm" | probe for rc-yacht-hull | larger bow section |
 | [F-010](#f-010) | Performance | Curves from formulas fit about 400 control points at the default tolerance: 40 s for six sections | probe for ship-propeller | tolerance 0.001 mm |
-| [F-011](#f-011) | Agent friction (was filed as a missing capability) | **Fixed in 45233bdc:** Expressions in `sketch.spline` `through` points are refused with an error that does not mention `live: true`, which takes them | probe for ventoux-relief | numbers baked in |
+| [F-011](#f-011) | Agent friction (was filed as a missing capability) | **Fixed in 150f0015:** Expressions in `sketch.spline` `through` points are refused with an error that does not mention `live: true`, which takes them | probe for ventoux-relief | numbers baked in |
 | [F-012](#f-012) | Missing capability | No surface through a grid of points | probe for ventoux-relief | loft of row splines |
 | [F-013](#f-013) | Bug | Screen-space reflections smear a patch onto a threaded shank in the CPU renderer | socket-head-cap-screw | reflections off in the preview |
 | [F-014](#f-014) | Missing capability | A thread has no fit allowance, so a mating pair touches and cannot be shown clear | probe for moka-pot | one thread cosmetic |
 | [F-015](#f-015) | Missing capability | A folded panel cannot have a slit, and thick panels do not fold to 180° | probe for mailer-box | none in the end: rolled ends as two 90° creases, slots as holes |
 | [F-016](#f-016) | Agent friction | A number parameter cannot take a series of values (a step counts from 0 when `min` is a formula) | socket-head-cap-screw | a choice from a table, rows limited by `min`/`max` |
 | [F-017](#f-017) | Missing capability (minor) | No precious-metal presets; a preset recoloured keeps its base metal's density | probe for solitaire-ring | `body.material` |
-| [F-018](#f-018) | Agent friction | **Fixed in 45233bdc:** `document.inspect` on a freshly opened file reports assertions as pending; `info` and `assert.list` wait | socket-head-cap-screw | none |
+| [F-018](#f-018) | Agent friction | **Fixed in 150f0015:** `document.inspect` on a freshly opened file reports assertions as pending; `info` and `assert.list` wait | socket-head-cap-screw | none |
 | [F-019](#f-019) | Missing capability | Measures and assertions are recomputed at every regeneration; no way to compute them on demand | socket-head-cap-screw | none |
 | [F-020](#f-020) | Bug | `measure.thickness` finds a wall but proves far less (0.235 of 1.7 mm; 0 of 7 mm on a bowl), slowly | t-slot-profile, turned-bowl | wall check not asserted |
-| [F-021](#f-021) | Agent friction | **Fixed in 45233bdc:** `variable.set` takes `332 mm^2` as (332 mm)² silently; `assert.add` refuses it | t-slot-profile | none |
+| [F-021](#f-021) | Agent friction | **Fixed in 150f0015:** `variable.set` takes `332 mm^2` as (332 mm)² silently; `assert.add` refuses it | t-slot-profile | none |
 | [F-022](#f-022) | Agent friction | Assertion bounds cannot be written in an output's unit (`0.8 kg/m`) | t-slot-profile | output not asserted |
 | [F-023](#f-023) | Missing capability | No sketch corner round (fillet) that follows the variables | t-slot-profile | sharp cavity corners |
 | [F-024](#f-024) | Bug | `volumeBelow` at a plane that holds pocket floors is refused | wall-clock | plane moved |
@@ -45,7 +45,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-029](#f-029) | Missing capability | `feature.offsetProfile` refuses splines | turned-bowl | offset written as a formula curve |
 | [F-030](#f-030) | Bug (proof weakness) | `measure.distance` across a parallel wall finds 7.000 mm but proves only 6.23 mm | turned-bowl | wall proven by Steiner's formula |
 | [F-031](#f-031) | Bug | `view.render` with `section` and the studio look draws flat grey | t-slot-profile (review) | no section pictures |
-| [F-032](#f-032) | Bug (minor) | **Fixed in 45233bdc:** `feature.thread` reports the M8 tap drill as 6.75 mm; ISO 2306 gives 6.8 mm | t-slot-profile (review) | none |
+| [F-032](#f-032) | Bug (minor) | **Fixed in 150f0015:** `feature.thread` reports the M8 tap drill as 6.75 mm; ISO 2306 gives 6.8 mm | t-slot-profile (review) | none |
 | [F-033](#f-033) | Bug | Chamfering or rounding all edges of a pocket's mouth (or a step's riser) is refused | hex-key-stand | sharp socket mouths |
 | [F-034](#f-034) | Performance | Booleans with text are slow: about 24 ms per glyph joined, 1 s to intersect text with a stepped block | hex-key-stand | labels a separate body |
 | [F-035](#f-035) | Agent friction | A text cannot show a table's text column (`{hex_keys[1].size}`) | hex-key-stand | numbers formatted instead |
@@ -61,7 +61,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-045](#f-045) | Missing capability | No 3MF export of several bodies as parts of one object (multi-colour prints) | hex-key-stand (review) | two build items |
 | [F-046](#f-046) | Bug | The CPU studio look's ambient occlusion draws blotchy patches in narrow cavities | t-slot-profile (review) | faint, left as it is |
 | [F-047](#f-047) | Missing capability | No measure of what an open vessel holds up to its rim | turned-bowl | capacity in closed form |
-| [F-048](#f-048) | Bug | **Not reproduced (45233bdc):** A face colour set on a feature is lost when a later feature is switched off (`when`) | wall-clock (prompt test) | colour on a final feature |
+| [F-048](#f-048) | Bug | **Not reproduced (150f0015):** A face colour set on a feature is lost when a later feature is switched off (`when`) | wall-clock (prompt test) | colour on a final feature |
 | [F-049](#f-049) | Missing capability (minor) | No distance measure projected onto a plane (clearance seen from the front) | wall-clock (prompt test) | hidden helper body |
 | [F-050](#f-050) | Bug (proof weakness) | `flatExtent` is not proven when the flat pattern holds a spline, even a hole inside it | steel-bookend | blank length proven through the area |
 | [F-051](#f-051) | Agent friction (minor) | A flat pattern's DXF splits each straight edge into collinear lines at the bend zone | steel-bookend (review) | none |
@@ -73,14 +73,14 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-057](#f-057) | Agent friction | An output is refused as unknown when its proof bounds lie 1e-6 apart | v-block-pair (prompt test) | distance used instead |
 | [F-058](#f-058) | Missing capability (cosmetic) | Thick fold panels leave every folded corner open: a notch the board deep, light through the crease | mailer-box | visible notches |
 | [F-059](#f-059) | Missing capability | An assertion is measured only at the current parameter values | mailer-box | hidden closed copy |
-| [F-060](#f-060) | Agent friction | **Fixed in 45233bdc:** On a thick fold panel `startCap` is the far face and `endCap` the face on the sketch, the opposite of an extrusion | mailer-box | none |
+| [F-060](#f-060) | Agent friction | **Fixed in 150f0015:** On a thick fold panel `startCap` is the far face and `endCap` the face on the sketch, the opposite of an extrusion | mailer-box | none |
 | [F-061](#f-061) | Missing capability | A fold's boundary takes straight lines only: rounded ears become chords, cut as facets | mailer-box (review) | chorded ears |
 | [F-062](#f-062) | Bug | The CPU studio look shows a flat face's triangulation diagonal as a dark line | mailer-box (review) | none |
 | [F-063](#f-063) | Agent friction | A fold's DXF names its layers `boundary` and `valley`; die makers and plotters expect CUT and CREASE | mailer-box (review) | none |
 | [F-064](#f-064) | Bug | A loft through closed splines gives two side faces the same name | headphone-stand | none |
 | [F-065](#f-065) | Bug | A fillet at the foot of a lofted column on a plane is refused from 12 to 14 mm | headphone-stand | 10 mm root fillet |
 | [F-066](#f-066) | Bug | Rounding a rod's end to a full ball is refused, and the error points at the refused radius | headphone-stand | ball as its own body |
-| [F-067](#f-067) | Bug (proof weakness) | **Fixed for assertions in 45233bdc:** A draft assertion passes on sampled faces (`proven: false`) without a warning, and reports radians | headphone-stand | none |
+| [F-067](#f-067) | Bug (proof weakness) | **Fixed for assertions in 150f0015:** A draft assertion passes on sampled faces (`proven: false`) without a warning, and reports radians | headphone-stand | none |
 | [F-068](#f-068) | Missing capability | No assertion that a body is in one piece (`shells` counts voids too) | headphone-stand | count of cut faces |
 | [F-069](#f-069) | Bug | `feature.developable` refuses a straight side facing one point of a curve (the square-to-round) | square-to-round-transition | corners and fills sewn |
 | [F-070](#f-070) | Bug | `feature.plate` refuses a developable fan (a cone running into a point): "freeform face has a pole" | square-to-round-transition | corners rounded 10 mm |
@@ -94,7 +94,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-078](#f-078) | Missing capability (minor) | `boxMax` and `extent` take bodies, not faces | splayed-stool | section 0.001 mm above the floor |
 | [F-079](#f-079) | Agent friction (minor) | `9.81 m/s^2` is refused ("s is the unit second only right after a number") | splayed-stool | `9.80665 N / (1 kg)` |
 | [F-080](#f-080) | Performance (file size) | 3MF exports are stored (uncompressed) ZIPs with 17 significant digits per coordinate | headphone-stand (review) | the examples' tool deflates them |
-| [F-081](#f-081) | Agent friction | **Fixed in 45233bdc:** Mesh-export quality is relative to the model's size (0.33 mm on a 270 mm part at `normal`); no print preset | headphone-stand (review) | explicit `tolerance` |
+| [F-081](#f-081) | Agent friction | **Fixed in 150f0015:** Mesh-export quality is relative to the model's size (0.33 mm on a 270 mm part at `normal`); no print preset | headphone-stand (review) | explicit `tolerance` |
 | [F-082](#f-082) | Missing capability (minor) | Section caps in `view.render` draw every body in one colour | headphone-stand (review) | none |
 | [F-083](#f-083) | Missing capability | A wood pattern has one frame (axis, pith) per body: pattern copies cannot each have their grain | splayed-stool (review) | legs split into bodies |
 | [F-084](#f-084) | Agent friction (minor) | Where `material.preset` puts a wood's pith (from the body's box) is not reported | splayed-stool (review) | trial renders |
@@ -125,7 +125,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-109](#f-109) | Bug | A seat cut across a filleted prong head is refused as "zero thickness" at tolerance 1e-6 mm and built at 1e-7 mm | solitaire-ring (prompt test) | tolerance 1e-7 mm |
 | [F-110](#f-110) | Agent friction | `feature.boolean` takes one target and one tool, so subtracting four bodies takes four chained features | hydraulic-cylinder | steps |
 | [F-111](#f-111) | Missing capability | `measure.clearance` reports a cosmetically threaded stud in its cosmetically threaded hole as an overlap | hydraulic-cylinder | no interference check of screwed parts |
-| [F-112](#f-112) | Agent friction | **Warning since 45233bdc:** An arc centre given as plain numbers in a sketch of expressions is free and moves silently on a parameter change | spiral-staircase | tread 7 mm² too large; revolved instead |
+| [F-112](#f-112) | Agent friction | **Warning since 150f0015:** An arc centre given as plain numbers in a sketch of expressions is free and moves silently on a parameter change | spiral-staircase | tread 7 mm² too large; revolved instead |
 | [F-113](#f-113) | Bug | After a parameter change an arc centre left 1.4e-11 mm off makes a 3 mm round-over "at the edge of tolerance"; a fresh build passes | spiral-staircase | treads and landing revolved |
 | [F-114](#f-114) | Bug | A chained round-over through a plan corner rounded into an arc is refused | spiral-staircase | tread corners square |
 | [F-115](#f-115) | Missing capability | `feature.extrude` `upTo` refuses a rational freeform (swept) face | spiral-staircase | balusters cut by a tangent plane |
@@ -144,9 +144,9 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-128](#f-128) | Performance | `measure.floating` with wholly submerged appendages takes 2.7 s against 0.6 s for the hull alone | rc-yacht-hull | envelope floated under net weight |
 | [F-129](#f-129) | Performance | A 3 mm fillet on a small part joined to a hull makes `levelFor` and floating 2 to 3 times slower | rc-yacht-hull | bumper unrounded in the envelope |
 | [F-130](#f-130) | Bug, performance | `document.interference` cannot check `feature.plate`'s own joints on a lofted hull ("unknown … at the edge of tolerance"), in 31 s | rc-yacht-hull (review) | laminate joints unchecked |
-| [F-131](#f-131) | Agent friction (minor) | **Fixed in 45233bdc:** The error for a non-integer exponent of `^` does not point to `pow(x, y)` | guitar-body (prompt test) | `exp(x * ln(2))` written instead |
+| [F-131](#f-131) | Agent friction (minor) | **Fixed in 150f0015:** The error for a non-integer exponent of `^` does not point to `pow(x, y)` | guitar-body (prompt test) | `exp(x * ln(2))` written instead |
 | [F-132](#f-132) | Performance | Subtracting a core from a drafted blank whose rim has a chained round takes 1.4 s against 0.08 s without it | moka-pot | collector's rim left sharp |
-| [F-133](#f-133) | Bug | **Warning since 45233bdc:** `datum.plane` from a face name finds the face before a later draft, while `feature.fillet` follows the same name to the drafted body | moka-pot | boss drafted about its own base |
+| [F-133](#f-133) | Bug | **Warning since 150f0015:** `datum.plane` from a face name finds the face before a later draft, while `feature.fillet` follows the same name to the drafted body | moka-pot | boss drafted about its own base |
 | [F-134](#f-134) | Agent friction | Feature names work in face names in params but not in query globs; `mL` works but is not in the unit table | moka-pot | references renumber on every inserted step |
 | [F-135](#f-135) | Bug | `feature.surface.trim` along z of an 8-point loop over a lofted terrain does not converge, flipping with the data's 4th decimal | ventoux-relief | no road drawn |
 | [F-136](#f-136) | Performance | A road band intersected with a lofted terrain adds 4.8 s and 56 s of CPU to the load | ventoux-relief | no road drawn |
@@ -159,12 +159,12 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-143](#f-143) | Missing capability | No non-uniform scale of a body (a stretch along one axis about a plane) | ventoux-relief (review) | exaggeration in 1073 live points |
 | [F-144](#f-144) | Missing capability (cosmetic) | Procedural marble draws smooth closed vein loops, granite blotches; no fine speckle | ventoux-relief (review) | marble dropped |
 | [F-145](#f-145) | Performance | `document.inspect` of the relief's laser product takes 10 s (45 s CPU) against 4.4 s for the same regeneration by `param.set` | ventoux-relief (review) | slow inspection |
-| [F-146](#f-146) | Agent friction (minor) | **Partly fixed in 45233bdc:** `assert.edit` resets the fields left out; a draft assertion's `direction` takes no expression | moka-pot (prompt test) | assertions rewritten whole |
+| [F-146](#f-146) | Agent friction (minor) | **Partly fixed in 150f0015:** `assert.edit` resets the fields left out; a draft assertion's `direction` takes no expression | moka-pot (prompt test) | assertions rewritten whole |
 | [F-147](#f-147) | Bug | A 2 mm round on the rim of a disc of radius 92 mm or more is refused at tolerance 0.001 mm | welded-truss | cap plates revolved with their rounds |
 | [F-148](#f-148) | Performance (file size) | A chamfer round a tube-to-tube saddle exports as 20 147 STEP entities (2.0 MB); 12 pattern copies cost 18 s of CPU | welded-truss | STEP of the members without welds |
 | [F-149](#f-149) | Bug | A weld bead made against a coped tube cannot be joined to it or checked against it ("at the edge of tolerance") | welded-truss (builder, prompt test) | welds as bodies of their own; one overlap check refused |
 | [F-150](#f-150) | Missing capability | A flat pattern from `feature.unfold` cannot be aligned with an axis; it lies along its first edge | welded-truss (review) | coping template exported at 44 degrees |
-| [F-151](#f-151) | Agent friction (minor) | **Fixed in 45233bdc:** `param.set` returns `assertions` as a summary object, `assert.list` as a list under the same key | welded-truss (review) | none |
+| [F-151](#f-151) | Agent friction (minor) | **Fixed in 150f0015:** `param.set` returns `assertions` as a summary object, `assert.list` as a list under the same key | welded-truss (review) | none |
 | [F-152](#f-152) | Performance | A boolean on a body whose rail is rounded by a chained fillet costs 2 to 12 s, even when it cuts nothing | skateboard-deck | five ply bodies instead of seven (13.8 s to open) |
 | [F-153](#f-153) | Bug | A straight spline whose control points are unevenly spaced is refused as crossing itself or having a cusp | skateboard-deck | evenly spaced points |
 | [F-154](#f-154) | Performance | Plating the back skin of a plate takes 1.9 s against 0.14 s for the first plate | skateboard-deck | plies as sweeps, not offsets of offsets |
@@ -181,7 +181,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-165](#f-165) | Bug | A round along the rim of a box with rounded corners is refused once its radius reaches half the corners' radius | snap-fit-enclosure | edge round kept under half the plan corner |
 | [F-166](#f-166) | Missing capability | No undercut check along a pull direction: a region shadowed by other material passes every draft check | snap-fit-enclosure (review) | hidden columns and overlap assertions stand in for it (about 27 steps) |
 | [F-167](#f-167) | Missing capability (minor) | No polycarbonate or clear-plastic material preset | snap-fit-enclosure (review) | lid is the ABS preset with transmission and a material of its own |
-| [F-168](#f-168) | Agent friction (minor) | **Fixed in 45233bdc:** `view.render` with an orthographic camera reports `projection: perspective` and `view: iso` in its result | snap-fit-enclosure (review) | none |
+| [F-168](#f-168) | Agent friction (minor) | **Fixed in 150f0015:** `view.render` with an orthographic camera reports `projection: perspective` and `view: iso` in its result | snap-fit-enclosure (review) | none |
 | [F-169](#f-169) | Bug | `feature.plate` refuses a section face whose outline has a smooth join: "the edge across a corner could not be traced" | layered-cardboard-rhino | tolerance 0.005 mm and cutting planes kept off seams |
 | [F-170](#f-170) | Missing capability | `cut.export` refuses a kerf on spline outlines, and no command offsets a spline outline | layered-cardboard-rhino | no kerf compensation; marks not inset |
 | [F-171](#f-171) | Missing capability | `face.appearance` refuses faces of a feature switched off by `when`, and takes no `when` or expression itself | layered-cardboard-rhino | length range ends at the default |
@@ -190,7 +190,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 | [F-174](#f-174) | Missing capability | No table lookup of the first row where a condition holds (the smallest standard size that suffices) | probe for steel-beam-sizing (not built) | a sum of comparisons over the rows |
 | [F-175](#f-175) | Missing capability | A variable or output cannot be a text: a table key such as "IPE 220" cannot be shown as a result | probe for steel-beam-sizing (not built) | result shown as a row number or a size |
 | [F-176](#f-176) | Missing capability (minor) | A table column's unit can only be a base unit: no mm^4, cm^3, mm^2 or kg/m | probe for steel-beam-sizing (not built) | catalogue properties as plain numbers |
-| [F-177](#f-177) | Bug | **Fixed in 45233bdc:** An output named like the table column it looks up is refused as a cycle (`h` = `ipe[pick].h`: "h → h") | probe for steel-beam-sizing (not built) | output renamed |
+| [F-177](#f-177) | Bug | **Fixed in 150f0015:** An output named like the table column it looks up is refused as a cycle (`h` = `ipe[pick].h`: "h → h") | probe for steel-beam-sizing (not built) | output renamed |
 
 ## F-001
 
@@ -216,9 +216,9 @@ The faces such a cut makes are named after the hidden tool too (`Extrude1:side(.
 **Agent friction.** `craft3d-cli --version` prints `craft3d-cli 0.1.0`; the commit is built into the binary
 (for bug reports) but not printed, so a script cannot check which build it runs without searching the
 binary's bytes (what `tools/examples.py` does). **Should:** `--version` prints the commit and the file format
-version, e.g. `craft3d-cli 0.1.0 (f4b0813c, format 69)`.
+version, e.g. `craft3d-cli 0.1.0 (cc90d757, format 69)`.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08).
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08).
 
 ## F-004
 
@@ -242,7 +242,7 @@ threads, so the single-threaded web build would wait about that long.
 **Should:** fields not given are kept (as `material.preset` overrides do), or the summary says plainly
 that the call replaces everything.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): fields left out are kept.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): fields left out are kept.
 
 ## F-006
 
@@ -312,7 +312,7 @@ exaggeration, but the error does not point to it, so the probe and two builders 
 the error names `live: true`. Also seen: an expression is capped at 4096 bytes, which a section written as
 formulas of a table (the ship propeller) runs into, and closed control-point splines refuse expressions.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08).
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08).
 
 ## F-012
 
@@ -378,7 +378,7 @@ reads an incomplete state, and a time taken around it is not the full load. **Sh
 `run` waits for pending measures before it prints, or `document.inspect` takes `"wait": true` as `param.set`
 does.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): `document.inspect` waits, `info` waits.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): `document.inspect` waits, `info` waits.
 
 ## F-019
 
@@ -411,7 +411,7 @@ while `assert.add` refuses the same text and explains it ("means (332 mm)^2 in e
 [`findings/F-021-area-literal-in-variable/repro.json`](findings/F-021-area-literal-in-variable/repro.json).
 Again with a fourth power: `26740000 mm^4` (a second moment of area) is taken as (26740000 mm)^4 = 5.1e29 mm^4 without a word, which made a section choice pick the largest row (probe for steel-beam sizing).
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): `variable.set`, `variable.output`, `param.set` and `variable.publish` refuse a number followed by a unit to a power, as `assert.add` does.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): `variable.set`, `variable.output`, `param.set` and `variable.publish` refuse a number followed by a unit to a power, as `assert.add` does.
 
 ## F-022
 
@@ -499,7 +499,7 @@ Reproduce: the T-slot profile, the gallery look, the same camera with and withou
 **Bug (minor).** `feature.thread` reports the tap drill of M8 as 6.75 mm (d − P); ISO 2306 (and every tap
 drill table) gives 6.8 mm for M8, as for most sizes it rounds d − P up to a drill that exists.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): ISO 2306 drills for M4.5, M8, M9 and M12.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): ISO 2306 drills for M4.5, M8, M9 and M12.
 
 ## F-033
 
@@ -624,7 +624,7 @@ drawn instead, when a feature after it is inactive (`when` false): the clock's e
 when the other numeral style's cut was switched off. The prompt test of the clock worked round it by adding a
 final always-active feature (a zero transform) and colouring the faces there, once per numeral style.
 
-**Status: not reproduced** by the 3DCraft session in three minimal variants (`45233bdc`); open, it needs the wall clock's own case.
+**Status: not reproduced** by the 3DCraft session in three minimal variants (`150f0015`); open, it needs the wall clock's own case.
 
 ## F-049
 
@@ -732,7 +732,7 @@ the opposite of an extrusion's, and the documentation does not say so: the maile
 assertions measured 203.2 mm instead of the inside 200 mm. Reproducer:
 [`findings/F-060-panel-cap-sides/repro.json`](findings/F-060-panel-cap-sides/repro.json).
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): `startCap` is the face on the sketch, as for an extrusion; the mailer box swapped its cap names.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): `startCap` is the face on the sketch, as for an extrusion; the mailer box swapped its cap names.
 
 ## F-061
 
@@ -781,7 +781,7 @@ the angles in radians while the bound is written in degrees. Reproducer:
 Likewise a `curvature` assertion built on `measure.developability`'s sampled grid (33 x 33 points) reports passed, not notProven (skateboard deck).
 The snap-fit enclosure's draft assertions pass the same way on the cones of drafted corners, which are only sampled, and on the corner pieces of rounds over cones (found 1.5 degrees, proven -61 to -92), all four mould-half sets reporting `proven: false` without a warning.
 
-**Status: fixed for assertions** in 3DCraft `45233bdc` (2026-11-08): a sampled measure decides an assertion only on the side its samples prove, otherwise it is not proven, and the text gives degrees; cone drafts are now proven exactly. Still open: an assertion on an *output* built from a sampled measure can still pass, and the draft bound on tori stays loose (F-102). Six examples now report not-proven draft or curvature checks, explained in their READMEs.
+**Status: fixed for assertions** in 3DCraft `150f0015` (2026-11-08): a sampled measure decides an assertion only on the side its samples prove, otherwise it is not proven, and the text gives degrees; cone drafts are now proven exactly. Still open: an assertion on an *output* built from a sampled measure can still pass, and the draft bound on tori stays loose (F-102). Six examples now report not-proven draft or curvature checks, explained in their READMEs.
 
 ## F-068
 
@@ -890,7 +890,7 @@ the bodies' area, 0.33 mm at 10° on the 270 mm headphone stand, coarser than a 
 show across a printed curve. **Should:** for print formats (3MF, STL) an absolute tolerance in millimetres, or
 a `print` preset finer than a layer, as the default.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): STL and 3MF at `normal` are held to at most 0.1 mm, `fine` a quarter of it.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): STL and 3MF at `normal` are held to at most 0.1 mm, `fine` a quarter of it.
 
 ## F-082
 
@@ -1057,7 +1057,7 @@ See also F-067.
 The moka pot shows it on a drafted prism's rounded corners: `measure.draft` finds 1.5° on the balls where three
 rounds meet but proves only −6.0°, so a draft assertion over a whole cast body with its rounds is not proven:
 [`fillet-corners.json`](findings/F-102-draft-bound-on-swept-torus/fillet-corners.json).
-**On 3DCraft `45233bdc`**, which widened the bound to hold along curved edges, the bound leaves six examples' draft checks not proven that passed before (they passed partly because sampled faces did not count, F-067): the hex key stand's four vertical rounds at its ends, trimmed by the 45 degree first-layer chamfer, are bounded at -47.1 degrees where the least found is 0; the headphone stand's base round-over at -102.8 for 0; the handwheel's oval spoke sides at -0.67 to -0.71 for 0 (exactly 0 on the parting line, so any slack fails); the moka pot's chamber rounds at -61.9 for 1.5 and the enclosure's rounds at -61.3 to -92.4 for 0.5 to 1.5. A plain vertical cylinder is still bounded at 0. Reproduce: `document.check` in `examples/05-hex-key-stand`, `10`, `13`, `20` or `23`.
+**On 3DCraft `150f0015`**, which widened the bound to hold along curved edges, the bound leaves six examples' draft checks not proven that passed before (they passed partly because sampled faces did not count, F-067): the hex key stand's four vertical rounds at its ends, trimmed by the 45 degree first-layer chamfer, are bounded at -47.1 degrees where the least found is 0; the headphone stand's base round-over at -102.8 for 0; the handwheel's oval spoke sides at -0.67 to -0.71 for 0 (exactly 0 on the parting line, so any slack fails); the moka pot's chamber rounds at -61.9 for 1.5 and the enclosure's rounds at -61.3 to -92.4 for 0.5 to 1.5. A plain vertical cylinder is still bounded at 0. Reproduce: `document.check` in `examples/05-hex-key-stand`, `10`, `13`, `20` or `23`.
 
 ## F-103
 
@@ -1144,7 +1144,7 @@ too large. Given as `["0 mm", "0 mm"]` it is held. **Should:** a warning when a 
 script gave as a number, or plain numbers held like expressions in a sketch that has any. Reproducer:
 [`findings/F-112-free-arc-centre/repro.json`](findings/F-112-free-arc-centre/repro.json).
 
-**Status: a warning** since 3DCraft `45233bdc` (2026-11-08), when a re-solve moves a point the script gave as a plain number.
+**Status: a warning** since 3DCraft `150f0015` (2026-11-08), when a re-solve moves a point the script gave as a plain number.
 
 ## F-113
 
@@ -1307,7 +1307,7 @@ literal without a unit, as in `x ^ 2` or `x ^ -1`". `pow(x, y)` takes any expone
 but the error does not, so the guitar's prompt tester wrote `exp(x * ln(2))`. **Should:** the error names
 `pow(x, y)`.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08).
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08).
 
 ## F-132
 
@@ -1325,7 +1325,7 @@ to the drafted face; only the drafted name (`F2:copy(0)/F1:face(5)`) gives the d
 mean one face: the latest, as the fillet reads it, or a refusal that names the drafted face. Reproducer:
 [`findings/F-133-datum-from-earlier-face/repro.json`](findings/F-133-datum-from-earlier-face/repro.json).
 
-**Status: a warning** since 3DCraft `45233bdc` (2026-11-08), naming the newest face when a later feature left it in another plane; following the name in full is the developer's call after R1.
+**Status: a warning** since 3DCraft `150f0015` (2026-11-08), naming the newest face when a later feature left it in another plane; following the name in full is the developer's call after R1.
 
 ## F-134
 
@@ -1425,7 +1425,7 @@ repeating `measure`, `of` and `faces`; an edit should change only what it names.
 `direction` must be plain numbers or an axis ("`direction` must be x, y, z, -x, -y, -z or [x, y, z]"), so a
 direction that follows a parameter (a handle's lean) cannot be written.
 
-**Status: partly fixed** in 3DCraft `45233bdc` (2026-11-08): `assert.edit` keeps the fields left out; a draft assertion's `direction` still takes no expression.
+**Status: partly fixed** in 3DCraft `150f0015` (2026-11-08): `assert.edit` keeps the fields left out; a draft assertion's `direction` still takes no expression.
 
 ## F-147
 
@@ -1447,7 +1447,7 @@ direction that follows a parameter (a handle's lean) cannot be written.
 
 **Agent friction.** The result of `param.set` carries `assertions` as a summary object (counts), while `assert.list` returns `assertions` as a list of the assertions; a script that reads both by the same key breaks. **Should:** one shape for one key (for example `assertionSummary` in `param.set`).
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08): edits and `document.check` return `assertionSummary`.
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08): edits and `document.check` return `assertionSummary`.
 
 ## F-152
 
@@ -1517,7 +1517,7 @@ direction that follows a parameter (a handle's lean) cannot be written.
 
 **Agent friction (minor).** A `view.render` given an orthographic `camera` draws an orthographic picture but its result still says `"projection":"perspective","view":"iso"`, so an agent checking what it rendered is misled.
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08).
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08).
 
 ## F-169
 
@@ -1556,4 +1556,4 @@ The rhino's prompt tester met it again in its own model at 230 mm: "the rim coul
 
 **Bug.** `variable.output` with name `h` and expression `ipe[pick].h` is refused: "`h` would depend on itself (h → h): the outputs may use each other only without a cycle". The column name after the dot is taken for a reference to the output; a variable of the same name and expression is accepted. Reproducer: [`findings/F-177-output-named-as-column/repro.json`](findings/F-177-output-named-as-column/repro.json)
 
-**Status: fixed** in 3DCraft `45233bdc` (2026-11-08).
+**Status: fixed** in 3DCraft `150f0015` (2026-11-08).

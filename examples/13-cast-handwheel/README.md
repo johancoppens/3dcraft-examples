@@ -171,7 +171,7 @@ the weights the makers publish.
 - **Spokes release upward above their parting line, and downward below it.** `measure.draft` along +z
   over the upper faces of the first spoke's straight runs, and along −z over its lower faces: each is at
   least 0° (to 0.001°; it is exactly 0° on the parting line itself). Both are *not proven*: since 3DCraft
-  `45233bdc` the bound on these faces lies 0.67° to 0.71° below what is found (it was widened to hold along
+  `150f0015` the bound on these faces lies 0.67° to 0.71° below what is found (it was widened to hold along
   curved edges), and with exactly 0° at the parting line no slack is left ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)). The other spokes are its
   copies turned about the axis, which leaves the draft as it is. The bend between the runs is left out:
   its faces measure 0° too, but the proven bound on them is far looser
