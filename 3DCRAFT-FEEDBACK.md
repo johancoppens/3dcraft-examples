@@ -1,5 +1,15 @@
 # Feedback for 3DCraft
 
+> **About this file.** While these examples were built, everything 3DCraft got wrong or could not
+> yet do was written down here rather than worked around in silence: bugs, each with a minimal
+> reproducer under `findings/`, missing capabilities, performance with numbers, and friction for
+> an agent that drives 3DCraft through its commands. It is a dated record against the 3DCraft
+> commits named below, not a list of known issues of the current release. Entries fixed since say
+> so in their status line, "R1" is the milestone that became 3DCraft 0.1.0, and "3DCraft's
+> session" is the agent session that works on 3DCraft itself. To see whether an entry still holds
+> in your version, run its reproducer with
+> `craft3d-cli run --new '{"units":"mm"}' --script findings/<id>/repro.json`.
+
 What building these examples showed 3DCraft gets wrong or lacks, collected for the developer to take to
 3DCraft in one go (nothing is fixed from here; 3DCraft's own session fixes and reports back). Kinds: **Bug** (wrong result, crash,
 a valid request refused; with a reproducer in `findings/`), **Missing capability** (phrased for any shape
@@ -10,7 +20,11 @@ All entries are against 3DCraft `cc90d757` unless they say otherwise.
 
 **Status (2026-11-08):** 3DCraft `150f0015` fixed F-003, F-005, F-011, F-018, F-021, F-032, F-060, F-067 (for
 assertions), F-081, F-131, F-146 (in part), F-151, F-168 and F-177; F-112 and F-133 are warnings now; F-048 was not
-reproduced. Each entry ends with its status; the examples are built and checked on `150f0015`.
+reproduced. Each entry ends with its status.
+
+**Status (2026-11-10):** the examples are built and checked on 3DCraft `dc449d5a`, the commit in
+`tools/pin.json`. It changes only the window over `150f0015` (the camera while a motion plays): every
+example rebuilt byte for byte with every assertion and range as before, and no entry changed status.
 
 | Id | Kind | Title | Found in | Impact |
 |---|---|---|---|---|

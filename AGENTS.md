@@ -1,5 +1,14 @@
 # AGENTS.md: guide for AI agents working on the 3DCraft examples
 
+> **About this file.** This is the working brief that the AI agents followed while they built and
+> reviewed these examples in November 2026. It is published as it was used, so you can see how
+> each model was made and checked. It is addressed to those agents: "the developer" is 3DCraft's
+> author, "the coordinator" is the agent session that briefed the others and made every commit,
+> and §8 names the AI models and effort levels that did the work. The memory caps and the timings
+> "on a reference machine" describe that workshop, and `log/` and `plan/` were local notes that are
+> not in this repository. To open, change or rebuild an example you need only [README.md](README.md);
+> the bar in §4 is also the bar a contribution is held to.
+
 This repository holds **26 example models** for [3DCraft](https://github.com/johancoppens/3dcraft), the
 parametric CAD modeller built for AI. Together they show what 3DCraft can do, from simple to difficult to
 fairly complex, across machine building, sheet metal, 3D printing, laser and CNC work, woodworking,
@@ -16,10 +25,12 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each example must be),
   [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli`.
   `tools/examples.py` refuses any other build. Only the coordinator moves the pin, after rebuilding and
   checking every example.
-- **Do not change 3DCraft from here.** R1 is frozen. What 3DCraft gets wrong or lacks is *collected* in
+- **Do not change 3DCraft from here.** What 3DCraft gets wrong or lacks is *collected* in
   [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) (§7); the developer takes it to 3DCraft in one go.
 - **No Jigs, no assemblies.** No `.3dcraftjig` packages and no `assembly.*`, `instance.*`, `mate.*`,
-  `joint.*`, `coupling.*` or motion commands: they get repositories of their own later. A document may hold
+  `joint.*`, `coupling.*` or motion commands: they have repositories of their own,
+  [3dcraft-jigs](https://github.com/johancoppens/3dcraft-jigs) and
+  [3dcraft-assemblies-examples](https://github.com/johancoppens/3dcraft-assemblies-examples). A document may hold
   several bodies, and it publishes 2 to 4 public parameters (§4.5).
 - **Original designs.** Generic types (a cap screw, a moka pot, a solid-body guitar) are fine; a brand's
   specific design, logo or name is not. Text uses 3DCraft's bundled fonts; never commit font files.
@@ -235,7 +246,7 @@ numbers them and edits `3DCRAFT-FEEDBACK.md`.
 | **Feasibility probe** | Opus 5.5, medium | Answers "can 3DCraft do X at the pin" with a minimal script, before a risky example is built. |
 | **Builder** | Opus 5.5; high (simple), xhigh (difficult, complex) | Owns `examples/<id>/` only. Writes `build.json`, `meta.json`, `README.md`, `prompt.md`; builds, renders, checks itself against §4 and looks at the pictures before handing in; writes reproducers in `findings/`. Never commits. |
 | **Reviewer** | Opus 5.5; high, xhigh for complex | Fresh, and reads the files, not the builder's report. Plays the trade's professional (toolmaker, sheet-metal shop, print farm, cabinetmaker, luthier, naval architect, jeweller, industrial designer). Rebuilds, renders two more views, checks §4 point by point, gives the difficulty score. |
-| **Prompt tester** | Sonnet 5.5, medium (once Opus 5.5 if Sonnet fails, to tell a weak prompt from a weak model) | Fresh, gets only `prompt.md` and a 3DCraft MCP session; builds; the coordinator compares the result with the *Acceptance*. |
+| **Prompt tester** | Sonnet 5.5, medium (once Opus 5.5 if Sonnet fails, to tell a weak prompt from a weak model) | Fresh, gets only `prompt.md` and `craft3d-cli`; builds; the coordinator compares the result with the *Acceptance*. |
 
 **Review verdict**: `PASS` or `REVISE`, with findings marked **MUST** (wrong, unmakeable, ugly, over budget,
 untrue README), **SHOULD** or **NIT**, each with its evidence (a measure, a picture, a clause of a
