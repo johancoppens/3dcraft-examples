@@ -118,7 +118,7 @@ the weights the makers publish.
   painted machine green; the turned, machined and polished faces are left bright. The rim's colour is drawn a little cool (#b9c3cf) so that it reads as
   steel and not brass under the Workshop light ([F-054](../../3DCRAFT-FEEDBACK.md#f-054)).
 - **Proportions not in the table.** DIN 950's table gives the outer sizes only. The rest is drawn to the
-  datasheet's drawing and checked against the makers' weights: the rim is round in section, b across; the
+  datasheet's drawing and checked against Elesa+Ganter's weights: the rim is round in section, b across; the
   spoke is an oval 0.5 b thick and 0.65 × π d3 / n wide (25.9 × 11 mm at 200 mm), with edge arcs of 0.35
   times its thickness; it leaves the hub level, its top 1.2 root-fillet radii under the hub's front
   chamfer, bends up over a radius of 0.4 times its run and climbs straight at the angle that takes its
@@ -129,7 +129,8 @@ the weights the makers publish.
   diameter (25.01 mm measured at 200 mm).
 - **Weight.** The casting weighs 1.990 kg at 200 mm with the 20 mm bore; the handle 198.3 g. The model's
   handles run 2 to 7 % over DIN 98's weights (53.1, 103.2, 198.3 and 411.9 g against 51, 101, 191 and
-  385 g). Against the catalogue weight of each size with its smallest keyed bore, the casting runs from
+  385 g). Against Elesa+Ganter's catalogue weight of each size with its smallest keyed bore and no handle (the
+  datasheet's rows `DIN 950-GG-<d1>-K<bore>-A`), the casting runs from
   10 % light (315 mm; 9 to 10 % at 100, 140 and 400 mm) to 4 % heavy (200 mm):
 
   | d1 | 80 | 100 | 125 | 140 | 160 | 200 | 250 | 315 | 400 | 500 |
@@ -176,8 +177,8 @@ the weights the makers publish.
   copies turned about the axis, which leaves the draft as it is. The bend between the runs is left out:
   its faces measure 0° too, but the proven bound on them is far looser
   ([F-102](../../3DCRAFT-FEEDBACK.md#f-102)).
-- **Weight within 15 % of the makers' catalogue.** The casting's mass lies within 15 % of the weight in
-  the table (1.920 kg at 200 mm): 1.990 kg.
+- **Weight within 15 % of the makers' catalogue.** The casting's mass lies within 15 % of Elesa+Ganter's
+  catalogue weight in the table (1.920 kg at 200 mm): 1.990 kg.
 
 `craft3d-cli check-range` passes eight and finds the two spoke checks holding (not proven, as above) at 24 points: the defaults, the four corners, every other
 choice of each parameter (each bore moved into its diameter's range) and eight random points. Every
