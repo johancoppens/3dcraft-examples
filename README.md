@@ -16,9 +16,11 @@ Each example lives in its own numbered folder under [`examples/`](examples/), fr
 
 ## Gallery
 
-From simple to complex, each with the difficulty an independent reviewer scored out of 10. Every example
-was checked by a reviewer of its trade and rebuilt from its `prompt.md` alone by a second AI model. The
-briefs they were built from are in [`CATALOGUE.md`](CATALOGUE.md).
+From simple to complex, each with the difficulty its reviewer scored out of 10. The reviewer was an AI agent
+in the role of a professional of the example's trade (a toolmaker, a sheet-metal shop, a luthier, a naval
+architect, ...), working apart from the agent that built the model; every example passed that review and was
+rebuilt from its `prompt.md` alone by a second AI model. [`AGENTS.md`](AGENTS.md) §8 names the models and
+effort levels, and the briefs the examples were built from are in [`CATALOGUE.md`](CATALOGUE.md).
 
 <!-- gallery:start -->
 | | Example | Domain | Difficulty |
