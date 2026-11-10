@@ -231,6 +231,9 @@ tools/examples.py build spiral-staircase
 craft3d-cli run --new '{"units":"mm"}' --script examples/16-spiral-staircase/build.json --out stair.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): one helical sweep with tangent datum planes and four screw patterns on top of 74 coupled formulas that derive the stair from DIN 18065 and the 100 mm sphere rule; headroom proven across bodies with gauge solids; five kernel limits worked around.

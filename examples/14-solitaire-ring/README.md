@@ -193,6 +193,9 @@ tools/examples.py build solitaire-ring
 craft3d-cli run --new '{"units":"mm"}' --script examples/14-solitaire-ring/build.json --out solitaire-ring.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **6 / 10** (the reviewer): datum planes through formula points, a pattern and a mirror of the facet cutters,

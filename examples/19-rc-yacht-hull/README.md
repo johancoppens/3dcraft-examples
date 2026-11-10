@@ -185,6 +185,9 @@ craft3d-cli run --new '{"units":"mm"}' --script examples/19-rc-yacht-hull/build.
 The model is built at a tolerance of 0.02 mm (`document.setTolerance`), fine for a 1 m hull and its moulds and
 lighter to load than the default. It opens in 2.7 s (8.2 s of CPU) and the file is 146 KB.
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): a lofted hull from a table of offsets with a faired bumper section, plated with joints, NACA sections from formulas, and a mass and hydrostatics budget coupled across seven bodies with class-rule knowledge.

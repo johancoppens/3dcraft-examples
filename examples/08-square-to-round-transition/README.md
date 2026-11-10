@@ -178,6 +178,9 @@ tools/examples.py build square-to-round-transition
 craft3d-cli run --new '{"units":"mm"}' --script examples/08-square-to-round-transition/build.json --out transition.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): a developable sheet and a ruled loft proven to be the same surface, a flapped

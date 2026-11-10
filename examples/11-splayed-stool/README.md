@@ -206,6 +206,9 @@ tools/examples.py build splayed-stool
 craft3d-cli run --new '{"units":"mm"}' --script examples/11-splayed-stool/build.json --out stool.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **6 / 10** (the reviewer): datum planes at compound angles from formulas, booleans between several bodies

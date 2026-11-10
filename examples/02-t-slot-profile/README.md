@@ -125,6 +125,9 @@ tools/examples.py build t-slot-profile
 craft3d-cli run --new '{"units":"mm"}' --script examples/02-t-slot-profile/build.json --out t-slot-profile.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **4 / 10** (the reviewer): one closed sketch held by formulas and repeated by a symmetric pattern, one extrusion,

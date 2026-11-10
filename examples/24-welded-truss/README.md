@@ -221,6 +221,9 @@ tools/examples.py build welded-truss
 craft3d-cli run --new '{"units":"mm"}' --script examples/24-welded-truss/build.json --out welded-truss.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): simple cylinders, but the diagonals' angle solved in closed form from coupled formulas, weld beads made by a chamfer on a union, a coped tube unfolded to a 1:1 template, EN 1993-1-8 checks across several bodies, and three kernel limits worked around.

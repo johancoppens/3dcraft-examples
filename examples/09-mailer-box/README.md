@@ -168,6 +168,9 @@ tools/examples.py build mailer-box
 craft3d-cli run --new '{"units":"mm"}' --script examples/09-mailer-box/build.json --out mailer-box.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): eighteen thick-panel creases driven by a table-staged choreography of coupled

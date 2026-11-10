@@ -220,6 +220,9 @@ tools/examples.py build fpv-drone-frame
 craft3d-cli run --new '{"units":"mm"}' --script examples/12-fpv-drone-frame/build.json --out frame.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): lofted freeform props through table-driven sections on formula datum planes,

@@ -201,6 +201,9 @@ tools/examples.py build cast-handwheel
 craft3d-cli run --new '{"units":"mm"}' --script examples/13-cast-handwheel/build.json --out handwheel.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **6 / 10** (the reviewer): two standard tables drive it through dependent choice ranges; a swept oval along a tangent-solved crank, a pattern, chain fillets with careful edge names, a conditional feature, a lug and seat ordered around kernel cost, closed-form and draft proofs; planar paths, no freeform surfacing.

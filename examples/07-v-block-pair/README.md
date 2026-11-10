@@ -133,6 +133,9 @@ tools/examples.py build v-block-pair
 craft3d-cli run --new '{"units":"mm"}' --script examples/07-v-block-pair/build.json --out v-blocks.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **5 / 10** (the reviewer): a 40-segment constrained profile with arcs, 80 chamfered edges, a revolved drill

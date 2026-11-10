@@ -199,6 +199,9 @@ tools/examples.py build moka-pot
 craft3d-cli run --new '{"units":"mm"}' --script examples/20-moka-pot/build.json --out moka-pot.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): ten coupled bodies, closed-form physics, measured sand cores, centre-of-mass stability, a hinge swing check and kernel limits worked around; no freeform surfacing.

@@ -201,6 +201,9 @@ tools/examples.py build hydraulic-cylinder
 craft3d-cli run --new '{"units":"mm"}' --script examples/15-hydraulic-cylinder/build.json --out cylinder.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): fourteen bodies coupled through 96 variables, a conditional cutaway through revolves, booleans and formula-count patterns, an oil solid giving closed-form chamber volumes, buckling checks and ISO 6020-2/8133 knowledge; no freeform, so not 9.

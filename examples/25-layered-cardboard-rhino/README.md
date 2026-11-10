@@ -164,6 +164,9 @@ tools/examples.py build layered-cardboard-rhino
 craft3d-cli run --new '{"units":"mm"}' --script examples/25-layered-cardboard-rhino/build.json --out rhino.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): a table-driven lines plan built as live-spline lofts plus a swept tail, 30 conditional and mirrored plate bodies, marks from a shifted boolean and their mirror, tolerance limits handled with clearance formulas, and process proofs across bodies.

@@ -154,6 +154,9 @@ tools/examples.py build ship-propeller
 craft3d-cli run --new '{"units":"mm"}' --script examples/17-ship-propeller/build.json --out propeller.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): eleven lofted sections whose points are formulas over a published series' table, planes turned to the pitch angle, many coupled formulas and several kernel limits worked round; one loft and one pattern, no G2 surfacing.

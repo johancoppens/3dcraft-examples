@@ -146,6 +146,9 @@ tools/examples.py build wall-clock
 craft3d-cli run --new '{"units":"mm"}' --script examples/03-wall-clock/build.json --out wall-clock.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **4 / 10** (the reviewer): patterns round a centre, text on a curve, a choice parameter switching conditional

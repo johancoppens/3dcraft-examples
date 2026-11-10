@@ -176,6 +176,9 @@ tools/examples.py build guitar-body
 craft3d-cli run --new '{"units":"mm"}' --script examples/18-guitar-body/build.json --out guitar-body.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): a freeform spline outline, a Gordon network of 24 B-spline curves with knot formulas from tables, and pockets and angled drills tied to the scale length, built around kernel limits F-120 to F-122.

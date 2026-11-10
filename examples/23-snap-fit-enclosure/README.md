@@ -215,6 +215,9 @@ tools/examples.py build snap-fit-enclosure
 craft3d-cli run --new '{"units":"mm"}' --script examples/23-snap-fit-enclosure/build.json --out enclosure.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **8 / 10** (the reviewer): two drafted shells, straight-pull U-latches with a stepped parting line and their own tooling proofs, about 110 coupled formulas, closed-form sections, and kernel and measure limits to work around.

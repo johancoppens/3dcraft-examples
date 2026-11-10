@@ -148,6 +148,9 @@ tools/examples.py build headphone-stand
 craft3d-cli run --new '{"units":"mm"}' --script examples/10-headphone-stand/build.json --out stand.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **6 / 10** (the reviewer): a ten-section loft driven by coupled formulas, a cut and fillets on lofted faces, a

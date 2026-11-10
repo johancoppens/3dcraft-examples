@@ -213,6 +213,9 @@ tools/examples.py build flat-pack-bookcase
 craft3d-cli run --new '{"units":"mm"}' --script examples/22-flat-pack-bookcase/build.json --out bookcase.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): 28 plate bodies from four hand-built paths with dogbones and T-bones, about 60 coupled formulas, conditional parts, checks across bodies (interference, clearance, cut list, nesting) and expert joinery; no freeform.

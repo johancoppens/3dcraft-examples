@@ -118,6 +118,9 @@ tools/examples.py build hex-key-stand
 craft3d-cli run --new '{"units":"mm"}' --script examples/05-hex-key-stand/build.json --out stand.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **4 / 10** (the reviewer): one table drives every formula, nine hexagons and nine labels come from it, and a

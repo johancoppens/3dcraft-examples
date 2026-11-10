@@ -122,6 +122,9 @@ tools/examples.py build steel-bookend
 craft3d-cli run --new '{"units":"mm"}' --script examples/06-steel-bookend/build.json --out bookend.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **3 / 10** (the reviewer): one sheet-metal feature with one bend and an outlined flange, Bézier control points

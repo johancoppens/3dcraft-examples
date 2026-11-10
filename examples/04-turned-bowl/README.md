@@ -126,6 +126,9 @@ tools/examples.py build turned-bowl
 craft3d-cli run --new '{"units":"mm"}' --script examples/04-turned-bowl/build.json --out bowl.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **4 / 10** (the reviewer): one spline held by tangency constraints and revolved, its inside the exact offset

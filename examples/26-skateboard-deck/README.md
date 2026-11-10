@@ -183,6 +183,9 @@ tools/examples.py build skateboard-deck
 craft3d-cli run --new '{"units":"in"}' --script examples/26-skateboard-deck/build.json --out deck.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **7 / 10** (the reviewer): concentric arc sweeps along a line-and-arc path on a perpendicular datum plane, five laminated bodies cut with keepTool booleans, rail rounds at the kernel's limit, two mould halves from offset sweeps, and closed-form checks of a torus curvature, a section integral and the milling radius, on real deck-making knowledge.

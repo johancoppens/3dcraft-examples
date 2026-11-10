@@ -120,6 +120,9 @@ tools/examples.py build socket-head-cap-screw
 craft3d-cli run --new '{"units":"mm"}' --script examples/01-socket-head-cap-screw/build.json --out screw.3dcraft
 ```
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Difficulty
 
 **4 / 10** (the reviewer): the socket is a punch built from a prism intersected with a cone and then

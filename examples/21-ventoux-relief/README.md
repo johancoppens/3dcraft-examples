@@ -172,6 +172,9 @@ tools/examples.py build ventoux-relief
 `make.py fetch` is not needed to rebuild: it downloads the sources again (about 15 MB) and rewrites `data/`,
 and `data/SOURCES.md` with that day's date, from whatever the services serve then.
 
+The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
+in the README.
+
 ## Data and licences
 
 Elevation: SRTM data courtesy of the U.S. Geological Survey, through the Mapzen terrain tiles (the
