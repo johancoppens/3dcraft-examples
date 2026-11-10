@@ -13,9 +13,9 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each example must be),
 - **Language.** The developer writes in Dutch: answer in Dutch. Everything that lands in this
   repository is English: files, names inside the models, commit messages.
 - **3DCraft is pinned.** Every example is built and checked with one 3DCraft commit, recorded in
-  [`tools/pin.json`](tools/pin.json) (`f4b0813c`, file format 69): the installed `craft3d-cli`
-  (`~/.local/bin/craft3d-cli`). `tools/examples.py` refuses any other build. Only the coordinator moves the
-  pin, after rebuilding and checking every example.
+  [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli` (`~/.local/bin/craft3d-cli`).
+  `tools/examples.py` refuses any other build. Only the coordinator moves the pin, after rebuilding and
+  checking every example.
 - **Do not change 3DCraft from here.** R1 is frozen. What 3DCraft gets wrong or lacks is *collected* in
   [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md) (§7); the developer takes it to 3DCraft in one go.
 - **No Jigs, no assemblies.** No `.3dcraftjig` packages and no `assembly.*`, `instance.*`, `mate.*`,
