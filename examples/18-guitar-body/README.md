@@ -186,7 +186,7 @@ in the README.
 ## Platform notes
 
 - **Tolerance.** The document's tolerance is set to 0.01 mm (`document.setTolerance`), far below what
-  wood holds or a router cuts: the model opens in 2.26 s (7.48 s of CPU); in a trial at 1e-4 mm it took
+  wood holds or a router cuts: the model opens in 2.23 s (7.50 s of CPU); in a trial at 1e-4 mm it took
   3.67 s and 13.5 s of CPU, over the gallery's budget.
 - **Jack check.** The flange check measures the bore's height above the flat back and takes the
   roundovers' radii and the rim height from the design: a `distance` from the bore to the two roundover

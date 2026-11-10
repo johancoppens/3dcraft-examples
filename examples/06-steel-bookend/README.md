@@ -110,7 +110,7 @@ through its area, not on its own (*Platform notes*).
 
 ## Files
 
-- `steel-bookend.3dcraft`: the model (opens in 0.06 s).
+- `steel-bookend.3dcraft`: the model (opens in 0.07 s).
 - `build.json`: the 49 steps that build it.
 - `exports/steel-bookend.dxf`: the flat pattern for the laser, outline and bend line on their own layers.
 

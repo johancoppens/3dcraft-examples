@@ -146,7 +146,7 @@ and checked.
 
 ## Files
 
-- `layered-cardboard-rhino.3dcraft`: the model. It opens in 3.38 s with 8.3 s of CPU and is 384 KB (`meta.json`, `stats`).
+- `layered-cardboard-rhino.3dcraft`: the model. It opens in 3.32 s with 7.9 s of CPU and is 384 KB (`meta.json`, `stats`).
 - `build.json`: the 201 steps that build it.
 - `exports/layers/rhino-left-01-cut.dxf` to `-15-cut.dxf`: each left layer's outline, seen from its
   marked face, with the model's origin; `rhino-right-01-cut.dxf` to `-15-cut.dxf` the same for the right

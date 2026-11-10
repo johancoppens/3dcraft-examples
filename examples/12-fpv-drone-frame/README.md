@@ -200,8 +200,8 @@ a bigger root and a slower motor. So the range is the 5-inch class, 5 to 5.3 inc
   shafts.
 
 `craft3d-cli check-range` passes all 18 checks at 13 points: the defaults, the four corners of the range
-and eight random points. The model opens in 2.29 s with 7.43 s of CPU time (the better of two runs, on a
-machine busy with other work), within the complex tier's 4 s and 12 s; it has 240 steps.
+and eight random points. The model opens in 2.27 s with 7.37 s of CPU time (the better of two runs),
+within the complex tier's 4 s and 12 s; it has 240 steps.
 
 ## Files
 
