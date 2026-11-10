@@ -150,9 +150,9 @@ Outputs: **Board per box** 0.161 m² and **Board mass** 54.84 g (the blank's are
 
 `craft3d-cli check-range mailer-box.3dcraft --samples 2000 --seed 7` passed all 2017 points (the defaults,
 all 16 corners of the four ranges, 2000 random points): at each, both folds were built and the 12
-assertions held. Between those points the folding sequence is not proven; while building this example,
-every Fold from 0 to 1 in steps of 0.005 was built at the defaults, and in steps of 0.01 at 22 sizes across
-the ranges, without a collision.
+assertions held. Between those points the folding sequence is not proven. An unpublished check made
+while building this example (its script is not in this repository) built every Fold from 0 to 1 in steps
+of 0.005 at the defaults, and in steps of 0.01 at 22 sizes across the ranges, without a collision.
 
 ## Files
 

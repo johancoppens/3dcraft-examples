@@ -89,7 +89,7 @@ size, from 5 to 5.3 inch.
 - **Props.** Tri-blade 5.1 × 4.3 × 3 ("5143") props in polycarbonate, sized after the HQProp BMS
   5.1x4.3x3: 5.1 in diameter, 4.3 in pitch, three blades, a 13 mm hub 6.8 mm high on a 5 mm shaft,
   4.3 g ([Rotorama](https://www.rotorama.com/vrtule/hqprop-bms-racing-5-1x4-3x3)). The diameter is the
-  *Prop size* parameter; the pitch stays 4.3 in. Makers publish no planform, so the blade is our own: six
+  *Prop size* parameter; the pitch stays 4.3 in. Makers publish no planform, so the blade is this example's own: six
   sections, the first inside the hub, the second at the rim of the motor's bell, the others at 0.45, 0.75,
   0.95 and 1.0 of the radius:
 

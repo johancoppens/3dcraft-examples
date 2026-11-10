@@ -98,7 +98,7 @@ upright.
   1800 mm, Ø 11.0 mm): a 40 × 20 × 2 mm acetal plate with a Ø 16 mm tube 10 mm tall, bored 11.4 mm for the mast's
   heel, at 350 mm from the bow. On its plate, forward of the tube and on the centre plane, the deck limit mark of
   D.1.5: a black dot 6 mm across (the rule asks at least 5 mm). Over the fin box, at station 4, a round hatch
-  cover 60 mm across and 1.5 mm thick; the class does not size hatches, and I found no maker's size to cite, so
+  cover 60 mm across and 1.5 mm thick; the class does not size hatches, and no maker's size was found to cite, so
   it is a design choice large enough to reach the fin bolt. Their few grams are in the 400 g of fittings, so
   they change no number below.
 - **Making it.** The hull's outside (the STEP export) is milled as a plug, and a female mould is taken off it in
