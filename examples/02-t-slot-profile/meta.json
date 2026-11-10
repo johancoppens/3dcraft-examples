@@ -68,7 +68,8 @@
     "file_bytes": 68996
   },
   "craft3d": {
-    "commit": "843981c20577",
+    "commit": "b99d70cfe19e",
+    "version": "0.1.0",
     "format_version": 69
   }
 }

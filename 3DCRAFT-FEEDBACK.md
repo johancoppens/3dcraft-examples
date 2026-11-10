@@ -22,9 +22,11 @@ All entries are against 3DCraft `cc90d757` unless they say otherwise.
 assertions), F-081, F-131, F-146 (in part), F-151, F-168 and F-177; F-112 and F-133 are warnings now; F-048 was not
 reproduced. Each entry ends with its status.
 
-**Status (2026-11-10):** the examples are built and checked on 3DCraft `dc449d5a`, the commit in
-`tools/pin.json`. It changes only the window over `150f0015` (the camera while a motion plays): every
-example rebuilt byte for byte with every assertion and range as before, and no entry changed status.
+**Status (2026-11-10):** the examples are built and checked on 3DCraft `b99d70cf`, the commit in
+`tools/pin.json`, whose engine and command line are those of 3DCraft 0.1.0: every example rebuilt byte for
+byte, its exports too, with every assertion and range as before (the same twelve assertions not proven).
+Which entries the commits since `150f0015` fixed is not recorded here: an entry's reproducer shows whether it
+still holds.
 
 | Id | Kind | Title | Found in | Impact |
 |---|---|---|---|---|

@@ -78,11 +78,12 @@
     "warnings": 0,
     "build_s": 2.7,
     "load_s": 2.7,
-    "load_cpu_s": 8.16,
+    "load_cpu_s": 8.08,
     "file_bytes": 146182
   },
   "craft3d": {
-    "commit": "843981c20577",
+    "commit": "b99d70cfe19e",
+    "version": "0.1.0",
     "format_version": 69
   }
 }
