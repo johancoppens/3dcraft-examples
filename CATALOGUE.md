@@ -1,5 +1,9 @@
 # Catalogue: the 26 examples
 
+> **About this file.** The briefs the AI agents built the examples from, as written in November 2026: "the
+> coordinator" is the agent session that briefed them, a *Probe* a feasibility test run before a risky example was
+> built, an F-number an entry in [`3DCRAFT-FEEDBACK.md`](3DCRAFT-FEEDBACK.md).
+
 The brief for every example: what the real thing is, what it must show of 3DCraft, its line of the gallery's
 palette, its public parameters, what it must prove, and its risks. The order is the intended progression
 (simple → difficult → complex); the final order in `README.md` follows the reviewers' scores. Sizes named here
