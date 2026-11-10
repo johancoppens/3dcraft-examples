@@ -230,16 +230,16 @@ centrifugal-stress check; kernel limits navigated.
 
 - **Cut list.** `cut.list` and `cut.export` refuse a plate whose edges are broken: a 0.3 mm chamfer round
   a hole makes it "a countersink or a chamfered hole, not square to the plate". So the DXF files come from
-  the sketches, one file per part, without the cut list's counts and sheet layout. Proposed finding, with a
+  the sketches, one file per part, without the cut list's counts and sheet layout. Feedback entry, with a
   reproducer: [F-086](../../3DCRAFT-FEEDBACK.md#f-086).
 - **Router reach.** 3DCraft has no measure of whether a round tool can cut a profile (its smallest inside
   radius and narrowest gap), and an offset cannot be offset again (which would give the uncut material
-  directly). The Steiner check is the workaround; it costs five steps per part, 20 in all. Proposed
-  finding: [F-087](../../3DCRAFT-FEEDBACK.md#f-087).
+  directly). The Steiner check is the workaround; it costs five steps per part, 20 in all. Feedback
+  entry: [F-087](../../3DCRAFT-FEEDBACK.md#f-087).
 - **Edge breaks.** A chamfer's `chain` follows an outline only as far as it runs smoothly, so every edge
   break needs one pair of faces for each smooth run of each loop, on each face: 22 pairs for the top plate
   (11 loops), 18 for a camera plate, whose outline breaks into eight runs at the sharp corners of its
-  tabs. Proposed finding:
+  tabs. Feedback entry:
   [F-088](../../3DCRAFT-FEEDBACK.md#f-088).
 - **Joined props.** Joining each prop's blades to its hub with `feature.boolean` costs 0.4 s of
   regeneration and 0.5 s more to measure the trimmed freeform faces, about a third of the load time; it
@@ -252,7 +252,7 @@ centrifugal-stress check; kernel limits navigated.
   (0.7 s). Same reproducer.
 - **A measure's direction is numbers only.** `sectionExtent`'s `axis` refuses expressions ("axis must be x, y,
   z, -x, -y, -z or [x, y, z]"), so a direction cannot follow a parameter; the blade-angle check turns a
-  copy of the blade instead. Proposed finding:
+  copy of the blade instead. Feedback entry:
   [F-094](../../3DCRAFT-FEEDBACK.md#f-094).
 - **Steps.** 240: the frame itself takes 130, the router check 20, the props with their sections, tables,
   swept cylinders, nuts and checks 67, and the motor and camera stand-ins 23.

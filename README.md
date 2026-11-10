@@ -1,6 +1,6 @@
 # 3DCraft examples
 
-Twenty-one models built in [3DCraft](https://github.com/johancoppens/3dcraft), the open-source parametric
+Twenty-six models built in [3DCraft](https://github.com/johancoppens/3dcraft), the open-source parametric
 CAD modeller built for AI, from simple to fairly complex: machine parts, sheet metal, 3D prints, laser and
 CNC work, furniture, packaging, jewellery, architecture, boats and art. Every one is real (sized to the
 standards of its trade), makeable (its process checks are part of the model), parametric (a few public

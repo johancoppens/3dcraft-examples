@@ -108,7 +108,7 @@ techniques or its palette line only with the coordinator.
   double walls (F-015): single side walls with dust flaps and a tuck-in lid. Fold in stages (walls, then
   lid): one angle for all creases makes the flaps pass through the walls. `file.export` with `fold` writes
   the DXF with layers `boundary`, `valley`, `mountain`, `cut`. `fold.check` says nothing useful here (no
-  interior vertices). 0.02 s. Starting point: `plan/probes/q9-mailer-staged.json` (local).
+  interior vertices). 0.02 s.
 
 ### 10. Headphone stand · `headphone-stand` · 3D printing, product design
 - **Real thing:** a one-piece stand printed in PETG upright without supports: a weighted round base, a slim
@@ -165,8 +165,7 @@ techniques or its palette line only with the coordinator.
   edge of tolerance). Band: revolve with an inner arc; prongs: sweep of a circle along a two-line path,
   transformed and patterned × 4, joined. Gold: `steel` preset recoloured (#e0b04a, metallic 1, roughness
   0.15) plus `body.material` for 18 ct gold's density; diamond: `glass` with ior 2.42, transmission 1 and a
-  white absorption (the default is greenish) plus `body.material` 3510 kg/m³ (F-017). Starting points:
-  `plan/probes/q14-*.json` (local).
+  white absorption (the default is greenish) plus `body.material` 3510 kg/m³ (F-017).
 
 ## Complex
 
@@ -204,8 +203,7 @@ techniques or its palette line only with the coordinator.
   pitch angle) lofted, `feature.pattern` × 4, joined to a hub of about 0.2 R that contains the root section
   wholly; set `document.setTolerance` linear 0.001 mm (F-010: 40 s at 1e-6, 11.6 s at 1e-3); root fillets
   only up to about 1 mm (F-008); sections cannot lie on cylinders (F-007): say "expanded sections placed
-  tangent to the cylinder". Still over the load budget: fewer, simpler sections. Starting point:
-  `plan/probes/q17-propeller-tol.json` (local).
+  tangent to the cylinder". Still over the load budget: fewer, simpler sections.
 
 ### 18. Electric guitar body · `guitar-body` · lutherie, CNC
 - **Real thing:** an original double-cutaway solid body, 45 mm thick, carved top, bolt-on neck pocket,
@@ -220,8 +218,7 @@ techniques or its palette line only with the coordinator.
 - **Probe (2026-11-06):** works, 1.3 s: a periodic `sketch.spline` outline (17 points) extruded 45 mm; the
   top a 5 × 5 `feature.surface.network`, applied with `feature.boolean` `op: intersect`; pockets as
   rounded rectangles (`sketch.path`, r 6.35) on datum planes at their floor heights, extruded with `cut`.
-  A crown of 10 mm hardly shows in an iso view: plan a lower camera. Starting point:
-  `plan/probes/q18-guitar.json` (local).
+  A crown of 10 mm hardly shows in an iso view: plan a lower camera.
 
 ### 19. RC yacht hull · `rc-yacht-hull` · naval design
 - **Real thing:** a radio-sailing yacht to the International One Metre class rules (hull length ≤ 1000 mm,
@@ -238,7 +235,7 @@ techniques or its palette line only with the coordinator.
   `measure.floating` and `measure.below` need (a shelled body counts only its material); shell 1.5 mm with
   the deck open; NACA 0009 fin as two `sketch.curve` halves; bulb revolved; levelFor and floating take well
   under a second. Give the bow a section of at least 30 × 20 mm (F-009). Loads in 10.5 s at tolerance
-  0.001 mm: over budget, simplify. Starting point: `plan/probes/q19-yacht-b.json` (local).
+  0.001 mm: over budget, simplify.
 
 ### 20. Moka pot · `moka-pot` · product design, casting
 - **Real thing:** an original three-cup stovetop espresso maker in cast aluminium: boiler with safety valve,
@@ -252,8 +249,7 @@ techniques or its palette line only with the coordinator.
 - **Probe (2026-11-06):** the boiler and collector revolve and shell (shell before thread); a modelled
   M68 × 2 thread works but costs about 3 s per threaded body, and a mating pair touches on its flanks and
   cannot be shown clear (F-014). Model the boiler's external thread, keep the collector's internal thread
-  cosmetic, and prove "no overlap" for the other pairs only. Starting point: `plan/probes/q20-*.json`
-  (local).
+  cosmetic, and prove "no overlap" for the other pairs only.
 
 ### 21. Mont Ventoux relief · `ventoux-relief` · topography, art
 - **Real thing:** a relief of Mont Ventoux (1910 m) with the final climb of the 2026 Tour de France Femmes'
@@ -277,7 +273,7 @@ techniques or its palette line only with the coordinator.
   `https://s3.amazonaws.com/elevation-tiles-prod/skadi/N44/N44E005.hgt.gz` (int16 hgt, gzip + struct in
   the standard library; attribution per github.com/tilezen/joerd docs/attribution.md), or Copernicus DEM
   GLO-30 (float COG, harder to decode). Route: OpenStreetMap (ODbL, "© OpenStreetMap contributors", a
-  produced work) or IGN BD TOPO (Licence Ouverte 2.0). Starting points: `plan/probes/q21-*.json` (local).
+  produced work) or IGN BD TOPO (Licence Ouverte 2.0).
 
 ## Complex, second round (2026-11-07)
 

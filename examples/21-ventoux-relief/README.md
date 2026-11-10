@@ -30,7 +30,7 @@ done by 3DCraft.
 - **A landmark fitted to the ground.** The summit tower is a `feature.revolve` of one polyline about its
   own axis line; `feature.boolean` `subtract` of the terrain (`keepTool`) shapes its foot to the summit;
   `face.appearance` paints every other band of the mast red.
-- **Two products from one terrain.** A choice parameter and `when` on 44 steps; in the laser-cut
+- **Two products from one terrain.** A choice parameter and `when` on 47 steps (44 features, 3 assertions); in the laser-cut
   product `vertical_scale` is `if(product == 2, sheet_thickness / contour_interval, ...)`, so the 3 mm
   sheet sets the exaggeration. Slabs (`feature.block`, copied by `feature.transform` from a white and a
   grey one) intersected with the terrain make one body per contour layer, and `file.export` with `face`
@@ -165,10 +165,12 @@ box, each product and eight random points; it does not try every value.
 ## Rebuild
 
 ```sh
-python3 examples/21-ventoux-relief/make.py fetch   # once: the data (about 15 MB of downloads)
-python3 examples/21-ventoux-relief/make.py         # build.json, offline
+python3 examples/21-ventoux-relief/make.py         # build.json from the committed data/, offline
 tools/examples.py build ventoux-relief
 ```
+
+`make.py fetch` is not needed to rebuild: it downloads the sources again (about 15 MB) and rewrites `data/`,
+and `data/SOURCES.md` with that day's date, from whatever the services serve then.
 
 ## Data and licences
 
