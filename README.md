@@ -53,13 +53,29 @@ briefs they were built from are in [`CATALOGUE.md`](CATALOGUE.md).
 
 ## Rebuild and check
 
-You need `craft3d-cli` from 3DCraft (the commit in [`tools/pin.json`](tools/pin.json)) and Python 3.
+The committed `<id>.3dcraft` files and `exports/` are the finished models: open them in 3DCraft, in the app or
+with `craft3d-cli`, without rebuilding anything. A `build.json` runs in any 3DCraft and builds the model into a
+document of your own:
 
 ```sh
-tools/examples.py build socket-head-cap-screw     # build.json -> .3dcraft and exports
-tools/examples.py check                           # rebuild every example and check it
 craft3d-cli run --new '{"units":"mm"}' --script examples/01-socket-head-cap-screw/build.json --out screw.3dcraft
 ```
+
+The tool that made and checked them, `tools/examples.py` (Python 3, standard library only, on Linux or macOS),
+needs the exact 3DCraft build this repository is pinned to, the commit in [`tools/pin.json`](tools/pin.json),
+and refuses any other: it compares what it rebuilds byte for byte with the committed files, which only that
+build reproduces. When the repository is released the pin is the 3DCraft 0.1.0 release itself, so the
+`craft3d-cli` that its installer puts on your `PATH` runs it (or name the binary in `CRAFT3D_CLI`).
+
+```sh
+tools/examples.py build socket-head-cap-screw          # build.json -> .3dcraft and exports; rewrites meta.json
+tools/examples.py check --quick socket-head-cap-screw  # rebuild in a scratch folder and compare
+tools/examples.py check socket-head-cap-screw          # the same, plus check-range over the public parameters
+```
+
+`build` rewrites the `stats` (timings measured on your machine) and `craft3d` fields of the example's
+`meta.json`. Give `check` an id: without one it rebuilds and checks all 26 examples, which takes hours. Where
+`systemd-run` exists, every run is capped in memory.
 
 ## For contributors and agents
 
