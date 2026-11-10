@@ -195,7 +195,7 @@ reproduced. Each entry ends with its status; the examples are built and checked 
 ## F-001
 
 **Performance.** `docs/examples/tank.json`, built and saved, takes **54.3 s** to open
-(`craft3d-cli info tank.3dcraft`, release build on the developer's laptop, 850 MB peak); without its
+(`craft3d-cli info tank.3dcraft`, release build on a reference machine, 850 MB peak); without its
 assertions still 54.9 s, so the geometry itself costs it, not the checks. The chassis takes 9.0 s, the
 bracket 0.04 s. Both the tank and the chassis are on the start screen, where a click builds them.
 **Should:** an example on the start screen opens in a few seconds; or the start screen opens a saved

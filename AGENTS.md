@@ -13,7 +13,7 @@ Read this file, then [`CATALOGUE.md`](CATALOGUE.md) (what each example must be),
 - **Language.** The developer writes in Dutch: answer in Dutch. Everything that lands in this
   repository is English: files, names inside the models, commit messages.
 - **3DCraft is pinned.** Every example is built and checked with one 3DCraft commit, recorded in
-  [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli` (`~/.local/bin/craft3d-cli`).
+  [`tools/pin.json`](tools/pin.json): the installed `craft3d-cli`.
   `tools/examples.py` refuses any other build. Only the coordinator moves the pin, after rebuilding and
   checking every example.
 - **Do not change 3DCraft from here.** R1 is frozen. What 3DCraft gets wrong or lacks is *collected* in
@@ -52,11 +52,12 @@ log/ plan/              local only (gitignored): dev log, plans
 - **Build headless.** Edit `build.json`, then `tools/examples.py build <id>`: it runs the script, refuses to
   save when `document.check` is not ok, writes the exports, measures, and lints names and budgets. To look
   around: `craft3d-cli run examples/NN-<id>/<id>.3dcraft --cmd document.inspect`. To learn a command:
-  `craft3d-cli commands --filter <id>`. The user guide (`~/code/3dcraft/docs/guide/`) and the guide's
-  examples (`~/code/3dcraft/docs/examples/*.json`) show the idioms; read them, never edit them.
+  `craft3d-cli commands --filter <id>`. The [user guide](https://3dcraft.dev/guide/) and the guide's
+  examples ([`docs/examples/*.json`](https://github.com/johancoppens/3dcraft/tree/main/docs/examples) in
+  3DCraft's repository) show the idioms; read them, never edit them.
 - **Never use the session's 3DCraft MCP tools** (`mcp__craft3d__*`): they drive the developer's own window.
   Work through `craft3d-cli`; its commands are the same ones MCP runs.
-- **Memory and time.** The developer's laptop has crashed on runaway processes. `tools/examples.py` caps every
+- **Memory and time.** Runaway processes have crashed the reference machine. `tools/examples.py` caps every
   run; by hand, always `systemd-run --user --scope -q -p MemoryMax=3G -p MemorySwapMax=0 timeout 900
   craft3d-cli …`. Exit 137 means the cap was hit: that is a finding, never a reason to raise the cap. When several agents
   work at once, the coordinator sets a shared slice (`systemctl --user set-property --runtime examples.slice
@@ -131,7 +132,7 @@ Name the process; prove with assertions what can be proven:
 
 ### 4.4 Light
 Loading means opening the `.3dcraft` and regenerating it; the tool measures it (`stats.load_s`,
-`craft3d-cli info`, the least of two openings, since other agents' work only adds time). Budgets on the developer's laptop: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
+`craft3d-cli info`, the least of two openings, since other agents' work only adds time). Budgets on a reference machine: **simple ≤ 1 s, difficult ≤ 2 s, complex ≤ 4 s**,
 file ≤ 1 MB, and CPU time (all threads, `stats.load_cpu_s`) at most 3 × the load budget: the web build is
 single-threaded, so the CPU time is roughly what it waits. A timing taken while the machine is busy (load
 average over half its CPUs) only warns; the coordinator re-measures at a quiet moment. For scale: the
