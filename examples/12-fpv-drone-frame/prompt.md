@@ -98,7 +98,21 @@ At the defaults (5.1-inch props, 5 mm arms) the result must have:
 
 ## Tested
 
-Not yet with these turns. The turns of 2026-11-07 ended the blade in its sixth section at the full radius, a
+2026-11-19, Claude Sonnet 5.5 through `craft3d-cli` 0.2.0 (c7cab24f), given only the eight turns above:
+passed. Every turn built; `document.check` is ok with 46 bodies, 58 of its 61 checks passing and 3 inactive by
+its own design (one blade-angle check per prop size), and `check-range --deep` passed at the 4 corners, the
+default and 6 random points. Against the Acceptance: wheelbase 225.6236 mm and the motor centre holes of
+opposite arms 218.62 mm apart wall to wall; four standoffs 25 mm long; frame mass 104.711 g; least clearance
+of the swept cylinders 3.717 mm, at the top plate; the stack holes on 30.5 mm; the motor slots' ends 8.0 and
+9.5 mm from the motor's centre; the camera touching both cage plates and no overlaps among 25 parts; props of
+4.12 g each, their blades ending in a point on the radius; a root stress of 47.80 MPa; the Ø 2 mm bit proven
+on the four distinct outlines and their DXFs written. The standoffs' length and the holes' distance were
+measured on its document afterwards. It found the words open on a few points (that the bolt circles are
+diameters, which way the slots at 45° point, the frame's vertical stack, what the thickness ratio is of, the
+angle of a section without an exact chord line); its results meet the Acceptance where these points
+bear on it, so the turns are unchanged.
+
+Earlier: the turns of 2026-11-07 ended the blade in its sixth section at the full radius, a
 small flat end, and were tested then:
 
 2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the eight turns of that version:

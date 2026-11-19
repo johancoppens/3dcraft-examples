@@ -71,9 +71,9 @@
     }
   ],
   "prompt_test": {
-    "date": null,
-    "model": null,
-    "result": null
+    "date": "2026-11-19",
+    "model": "Claude Sonnet 5.5, through craft3d-cli 0.2.0 (c7cab24f)",
+    "result": "Passed: check ok, 58 of 61 checks passing and 3 inactive by its design, check-range --deep at 11 points; wheelbase 225.6236 mm, motor holes 218.62 mm apart, standoffs 25 mm, frame 104.711 g, clearance 3.717 mm, stack holes 30.5 mm, slots 8.0 and 9.5 mm from the motor's centre, no overlaps, props 4.12 g with pointed tips, root stress 47.80 MPa, router bit proven on four outlines."
   },
   "renewed": {
     "version": "0.2.0",
