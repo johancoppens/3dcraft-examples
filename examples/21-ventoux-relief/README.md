@@ -198,9 +198,10 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
   of a 37 × 29 grid (350 m), and a live spline's point costs about 670 bytes in the file, so the 1 MB
   budget held that grid and no finer ([F-138](../../3DCRAFT-FEEDBACK.md#f-138)); the file was 888 KB.
   A height read from a table costs about 20 bytes: at 51 × 40 nodes (250 m) the file is 152 KB. What
-  bounds the grid now is the time to open it: on the same build the 350 m grid opens in 2.3 s (5.9 s of
-  CPU), the 250 m grid in 3.4 s (9.9 s), and a grid every 87.5 m (145 × 113 nodes) in 14 s (55 s of
-  CPU), far over the 4 s a complex example may take.
+  bounds the grid now is the time to open it. Opened one after the other on the same build and the same
+  busy machine, the 37 lofted splines took 3.2 s (8.4 s of CPU), a 350 m grid 2.3 s (5.9 s) and this
+  250 m grid 3.7 s (10.1 s); a grid every 87.5 m (145 × 113 nodes) takes 14 s (55 s of CPU), far over
+  the 4 s a complex example may take.
 - **Contour interval 250 m.** A slab whose face passes within the tolerance of a saddle of the terrain is
   refused ([F-137](../../3DCRAFT-FEEDBACK.md#f-137)); on the lofted terrain of 3DCraft 0.1 a 250 m interval
   met it, so the range stops at 200 m. The terrain sheet of this version builds a 250 m interval at its
