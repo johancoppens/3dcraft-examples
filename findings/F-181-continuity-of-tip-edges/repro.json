@@ -1,0 +1,12 @@
+[
+ ["sketch.create", {"name": "Aft section", "plane": "yz", "offset": "40 mm"}],
+ ["sketch.spline", {"sketch": "Aft section", "degree": 2, "control": [["10 mm", "20 mm"], ["0 mm", "22 mm"], ["-10 mm", "20 mm"]]}],
+ ["sketch.spline", {"sketch": "Aft section", "control": ["e1", ["11 mm", "0 mm"], ["0 mm", "-12 mm"], ["-11 mm", "0 mm"], "e3"]}],
+ ["sketch.create", {"name": "Fore section", "plane": "yz", "offset": "10 mm"}],
+ ["sketch.spline", {"sketch": "Fore section", "degree": 2, "control": [["8 mm", "20 mm"], ["0 mm", "21.6 mm"], ["-8 mm", "20 mm"]]}],
+ ["sketch.spline", {"sketch": "Fore section", "control": ["e1", ["9 mm", "0 mm"], ["0 mm", "-10 mm"], ["-9 mm", "0 mm"], "e3"]}],
+ ["feature.loft", {"sections": ["Fore section", "Aft section"], "name": "Hull loft"}],
+ ["feature.tip", {"face": "Hull loft:startCap(e4,e8)", "length": "10 mm", "at": ["10 mm", "0 mm", "15 mm"], "name": "Nose"}],
+ ["measure.continuity", {"edge": "F4:between[F4:copy(0)/F3:side(e4,e4),F4:tip(0)/F3:side(e4,e4)]"}],
+ ["measure.continuity", {"edge": "F4:between[F4:tip(0)/F3:side(e4,e4),F4:tip(0)/F3:side(e8,e8)|F4:copy(0)/F3:side(e4,e4),F4:copy(0)/F3:side(e8,e8)](1)"}]
+]

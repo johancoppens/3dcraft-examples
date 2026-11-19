@@ -18,9 +18,12 @@ upright.
   cell of the table. `feature.loft` passes through the seven stations.
 - **A bow that ends in a rounded point.** `feature.tip` closes the loft's flat face at station 1 with faces that
   run on from the hull's sides and deck without a crease and meet in one point 10 mm further forward, the
-  bumper's length: the closed *Hull envelope*. Its point is given (`at`) 5 mm below the sheer at station 1, so
-  the deck runs on almost level to the nose and the forefoot sweeps up to it, as on a yacht's stem; left to
-  itself the point would stand at the middle of the section, a bullet's nose halfway up the bow.
+  bumper's length: the closed *Hull envelope*. Its point is given (`at`) half a millimetre below the sheer at
+  station 1, so the deck runs on level into the nose; left to itself the point would stand at the middle of the
+  section, a bullet's nose halfway up the bow, and placed lower under the deck the deck's continuation dives to
+  reach it, a notch under the deck's edge (5 mm below the sheer: 53° down 1 mm from the point). Its `fullness`
+  is 0.7 (`bow_tip_fullness`), fuller than the default quarter ellipse (0.414), so the stem stays plumb far
+  down before the forefoot sweeps up to the point, as on a modern yacht's bow.
 - **One form, cut in two.** `feature.block` and `feature.boolean` (intersect, `keepTool`) cut the envelope at
   station 1 into the *Hull form* aft of it and the *Bow bumper*, the rounded nose forward of it.
 - **A laminate, not a solid.** `feature.plate` lays 0.6 mm of laminate behind the hull form's surface
@@ -64,7 +67,8 @@ upright.
     carbon);
   - D.2.2(c): the forward 10 mm of the hull is made of elastomer; D.2.2(d): the rudder is aft of the keel. The
     class's answers to questions (IOM ICA, *IOM Q&A*, Hull, on the bow bumper, after Interpretation 2004-IOM-3)
-    say how the 10 mm are measured: parallel to the hull's horizontal axis, so everything forward of a vertical
+    say how the 10 mm are measured, on the basis of the Equipment Rules of Sailing's H.3.1 and H.3.4 (the
+    2017–2020 edition the answer cites): parallel to the hull's horizontal axis, so everything forward of a vertical
     plane 10 mm aft of the hull's foremost point is elastomer, and a bumper that thins out to nothing before it
     reaches the waterline is legal;
   - E.3.1: no appendage material denser than lead, 11340 kg/m³;
@@ -83,15 +87,22 @@ upright.
 - **The hull** is an original design, not a copy of a class boat: 1000 mm long, the sheer falling from 75 mm
   above the design waterline at the bow to 43 mm at the transom, round-bilged sections, the deck cambered by
   6 % of its half-breadth and painted grey-blue. The bow ends in a rounded nose of black elastomer, its point
-  70 mm above the design waterline. At 4 kg its waterline lies 0.50 mm above the design waterline; there it is
-  989.1 mm long and 157.8 mm wide, the hull 54.6 mm deep, the transom just clear of the water.
+  74.5 mm above the design waterline, just under the deck's crown. At 4 kg its waterline lies 0.50 mm above the
+  design waterline; there it is 992.2 mm long and 157.8 mm wide, the hull 54.6 mm deep, the transom just clear
+  of the water.
+- **What the rounded nose costs.** A rounded nose shortens the waterline, which IOM designers push towards
+  the 1000 mm limit. With the flat-nosed bumper of the earlier version the waterline was 994.2 mm long and the
+  bumper 10 mm long there. With the tip at its default fullness (0.414) it is 989.0 mm, the bumper 4.6 mm at
+  the waterline; at 0.55, 990.5 mm (6.1 mm); at 0.7, this model's, 992.2 mm (7.9 mm); at 0.85, 993.8 mm
+  (9.4 mm), but the nose then reads as a flat face with rounded rims and the model opens 0.9 s slower. So the
+  model gives up 2.0 mm of waterline for a nose without a flat.
 - **The keel.** Its depth (the bulb's underside below the design waterline) is 415 mm, a draft of 415.5 mm at
   the 4 kg waterline. The fin's leading edge is 443 mm from the bow, placed so that the yacht floats level; the
   bulb's thickest station sits under the middle of the fin's foot. The fin's 90 mm chord is at station 4's keel,
   54 mm below the design waterline; its root section, inside the hull, carries the taper on to 92.5 mm.
 - **Masses** (glass/epoxy laminate with gelcoat 1800 kg/m³, by the rule of mixtures for E-glass about 2550 and
   epoxy about 1150 kg/m³ at 45 % fibre; solid carbon/epoxy 1600 kg/m³; lead 11340 kg/m³; elastomer
-  1150 kg/m³): hull, deck, transom and bumper 438.1 g together, fin 168.8 g, bulb 2300.0 g, rudder 65.5 g. The
+  1150 kg/m³): hull, deck, transom and bumper 441.3 g together, fin 168.8 g, bulb 2300.0 g, rudder 65.5 g. The
   keel weighs 2468.8 g, the rudder with its 8 g stock 73.5 g, within the class's 75 g; a cored blade, as many
   are, is lighter. A glass hull with gelcoat weighs about 320 g on the IOM class forum; this one's hull skin is
   281 g.
@@ -99,7 +110,7 @@ upright.
   its centre of gravity taken 550 mm above the design waterline at the mast, 350 mm from the bow; radio gear and
   fittings, 400 g on the hull floor 420 mm from the bow (the winch, two servos and battery of one boat on the
   forum weigh 172 g; the rest is the fin box, rudder tube, servo tray, deck fittings and hatch); the rudder
-  stock, 8 g. A corrector weight of 319.6 g on the fin box makes up the 4000 g. These are estimates; they move
+  stock, 8 g. A corrector weight of 316.4 g on the fin box makes up the 4000 g. These are estimates; they move
   the centre of gravity, so the trim and GM below depend on them.
 - **Deck fittings.** A mast step for the A rig's 11.0 mm round mast (Sails etc, *IOM rig plan* RP-IOM: mast
   1800 mm, Ø 11.0 mm): a 40 × 20 × 2 mm acetal plate with a Ø 16 mm tube 10 mm tall, bored 11.4 mm for the mast's
@@ -147,23 +158,25 @@ The total stays 4000 g: a heavier bulb leaves less corrector weight. At 2100 g a
 - **Draft within IOM C.4.1.** The bulb's lowest point lies between 370 and 420 mm below the 4 kg waterline.
 - **Hull depth within IOM C.4.1.** The hull's lowest point is at most 60 mm below that waterline (54.6 mm).
 - **Weighs the class minimum with its corrector (C.4.2).** The modelled parts and the allowances leave a
-  corrector weight of at least 0 g (319.6 g at the defaults).
+  corrector weight of at least 0 g (316.4 g at the defaults).
 - **Keel mass within IOM C.6.4.** Fin and bulb weigh 2200 to 2500 g (2468.8 g).
 - **Rudder mass within IOM C.6.4.** Blade and stock weigh at most 75 g (73.5 g).
 - **Fin within the keel width of IOM E.4.1.** The fin is at most 20 mm wide anywhere (6.3 mm at its root).
 - **Bulb within the lowest band of IOM E.4.1.** The bulb is at most 60 mm tall, so above the keel's lowest
   60 mm there is only fin.
-- **Bumper is the forward 10 mm (IOM D.2.2).** The elastomer bumper reaches 10 mm along the hull's axis, from
-  the hull's foremost point (the nose's point) to the plane of station 1, where hull and deck begin: measured
-  as the class measures it, everything forward of a plane 10 mm aft of the foremost point is elastomer.
+- **Bumper is the forward 10 mm (IOM D.2.2).** The elastomer bumper's length along the hull's axis, from the
+  hull's foremost point (the nose's point) to the plane of station 1, where hull and deck begin, is 10 mm
+  (9.96 mm found on its mesh, at most 10 mm proven). It is so by construction, the tip being `bumper_length`
+  long and the bumper cut at station 1, and the check holds the construction to the rule as the class
+  measures it: everything forward of a plane 10 mm aft of the foremost point is elastomer.
 - **Bulb mass from the density of lead.** The revolved bulb, weighed by the kernel with lead's density, weighs
   the *Bulb mass* within 0.01 g: the closed form of the NACA body of revolution (∫f² = 0.0055077) holds
   (2300.0007 g).
 - **Fin section to NACA 0007.** Halfway down the fin, its section's area equals 10·t·c²·∫f with the chord there,
   83.76 mm, and ∫f = 0.0685083: 336.43 mm², measured 336.45 mm².
 - **Floats level.** Floating free, the yacht trims less than `trim_max`, a quarter of a degree, 4.4 mm over the
-  hull's length (−0.010° at the defaults).
-- **Stable upright.** GM = KB + I/V − KG is positive: KB −43.89 mm, I/V 45.37 mm, KG −200.32 mm, GM 201.8 mm.
+  hull's length (0.0005° at the defaults).
+- **Stable upright.** GM = KB + I/V − KG is positive: KB −43.89 mm, I/V 45.36 mm, KG −200.26 mm, GM 201.7 mm.
 
 How the waterline and the trim are found: the fin, bulb and rudder lie wholly below the water, so their buoyancy
 is a fixed force at their centroid. The 4 kg waterline is the level at which the envelope holds 4000 cm³ less
@@ -177,7 +190,7 @@ and eight random points.
 ## Files
 
 - `rc-yacht-hull.3dcraft`: the model.
-- `build.json`: the 217 steps that build it.
+- `build.json`: the 218 steps that build it.
 - `exports/rc-yacht-hull.step`: the hull, deck, transom, bumper, fin, bulb and rudder, for the plug, the fin and
   rudder moulds and the bulb's casting pattern (the deck fittings are bought or made apart).
 
@@ -218,6 +231,10 @@ in the README.
   ([F-129](../../3DCRAFT-FEEDBACK.md#f-129)). With `feature.tip` the nose is one rounded point, the envelope
   floats with it, and the model opens faster than the published one did on the same 3DCraft (2.8 s against
   3.1 s, 6.1 s of CPU against 6.8 s).
+- **The nose's smoothness is shown, not checked.** `measure.continuity` proves the tip's faces tangent to the
+  hull's deck and sides where they join (G1), but refuses the edges the tip carries on to its point, the
+  sheer's continuation that fades out there ("the edge does not run along a parameter line of either face"),
+  so no assertion holds the nose's continuity ([F-181](../../3DCRAFT-FEEDBACK.md#f-181)).
 - **A plane under a spline body's bottom is refused.** `measure.below` and `measure.levelFor` refuse a plane that
   passes between a spline body's lowest point and its control net ("nothing ... was found below the plane, yet it
   may reach ... below it"); the bumper alone could not be floated ([F-127](../../3DCRAFT-FEEDBACK.md#f-127)).

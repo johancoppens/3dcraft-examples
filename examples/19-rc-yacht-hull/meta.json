@@ -71,16 +71,16 @@
     "result": null
   },
   "stats": {
-    "steps": 217,
-    "variables": 71,
+    "steps": 218,
+    "variables": 72,
     "parameters": 2,
     "features": 38,
     "assertions": 13,
     "warnings": 0,
     "build_s": 2.8,
-    "load_s": 2.76,
-    "load_cpu_s": 6.06,
-    "file_bytes": 137116
+    "load_s": 2.78,
+    "load_cpu_s": 6.11,
+    "file_bytes": 137274
   },
   "craft3d": {
     "commit": "0c8fc79a844d",

@@ -30,9 +30,9 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    | 1000 | 55 | 43 | 58 | 18 | 46 | 2 | 0.5 |
 
    Loft the seven into one closed, hidden envelope, and close its bow in a rounded nose that runs on from the
-   hull's sides and deck without a crease to a single point 10 mm forward of station 1, at x = 0, standing 5 mm
-   below station 1's sheer on the centre line, so the deck runs on almost level and the forefoot sweeps up to
-   it. Cut the envelope at x = 10 mm: aft of the cut is the hull's form, forward of it the bumper, in black
+   hull's sides and deck without a crease to a single point 10 mm forward of station 1, at x = 0, standing
+   0.5 mm below station 1's sheer on the centre line, so the deck runs on level into it, and fuller than a
+   quarter ellipse (a fullness of 0.7), so the stem stays plumb far down before the forefoot sweeps up to it. Cut the envelope at x = 10 mm: aft of the cut is the hull's form, forward of it the bumper, in black
    elastomer (1150 kg/m³). Make the
    hull, the deck and the transom 0.6 mm of glass/epoxy laminate (1800 kg/m³) laid behind the hull form's surface,
    three plates: the deck set inside the hull's sheer, the transom inside hull and deck, hull and deck ending on
@@ -77,13 +77,13 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
 At the defaults (bulb 2300 g, keel depth 415 mm) the result must have:
 
 - a bulb 265.8 mm long and 2300.0 g; a fin of 168.8 g and a rudder of 65.5 g within 1 %; hull, deck, transom and
-  bumper together 438.1 g within 2 %; a keel of 2468.8 g and a corrector weight of 320 g within 10 g;
+  bumper together 441.3 g within 2 %; a keel of 2468.8 g and a corrector weight of 316 g within 10 g;
 - a hull 1000 mm long from the nose's point to the transom, and a bumper 10 mm long from that point;
 - the waterline at 4 kg within 0.3 mm of 0.50 mm above the design waterline: a draft of 415.5 mm, a hull depth of
-  54.6 mm, both within 0.3 mm; a waterline length of 989 mm within 5 mm (the transom sits just clear of the water
+  54.6 mm, both within 0.3 mm; a waterline length of 992 mm within 5 mm (the transom sits just clear of the water
   and the forefoot sweeps up to the nose, so the length moves with the waterline) and a waterline beam of 157.8 mm
   within 1 mm;
-- a GM of 201.8 mm within 2 % and a trim within ±0.25°;
+- a GM of 201.7 mm within 2 % and a trim within ±0.25°;
 - every check passing, and the same at 2100 g with 375 mm and at 2320 g with 418 mm.
 
 ## Tested
