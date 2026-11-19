@@ -82,8 +82,8 @@ At stroke 200, extension 50, cutaway on, the result must have:
 2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the six turns above:
 passed, with one gap. Its cylinder has the same oil volumes (125.810 and 64.235 cm³, both against the closed
 form), pin-to-pin length (510 mm), forces (20.106 and 10.254 kN), buckling safety (6.73; 4.3 by Euler at
-stroke 320) and port spacing (258.05 mm between the tapping holes' walls, so 273 mm between their
-axes) as this example, its seven checks pass at all eight corners of
+stroke 320) and port spacing (258.05 mm between the tapping holes' walls; added on 2026-11-19, not measured
+by the tester: 273 mm between their axes) as this example, its seven checks pass at all eight corners of
 stroke, extension and cutaway, and its piston, rod and head have this example's volumes to 0.01 %. Its moving
 mass, 1.951 kg, counted the rod clevis's pin, which this example leaves to the load (1.89 kg): turn 6 now
 names the parts. It drew every seal, ring, tie rod and nut as a body of its own (26 bodies) and selected the
