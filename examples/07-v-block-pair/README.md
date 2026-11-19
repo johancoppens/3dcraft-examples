@@ -25,9 +25,12 @@ flanks of both blocks and enters neither.
   assertion and kept by the document as the design changes.
 - **Contact as a proof.** The pin is placed by the closed form; `measure.distance` to each bounded flank
   face and `overlap` prove that it touches all four flanks without entering a block (below).
+- **An angle as a check.** `angleBetween`, the angle between two flat faces that `measure.between` gives,
+  holds each V's two flanks at the V's 90° (`v_angle`).
 - **References by feature name.** Faces are named after the features that made them
   (`Two blocks:copy(0)/Block blank:startCap`), and the checks find faces with `madeBy`, so they hold
-  whatever feature ids the history gives. The edge ids of the profiles (`side(e33)`, `side(e42)` …) come
+  whatever feature ids the history gives. The two angle checks name their flanks the same way
+  (`V-block pair:copy(0)/Block blank:side(e33)`): `angleBetween` takes a face by its name, not a query. The edge ids of the profiles (`side(e33)`, `side(e42)` …) come
   from their sketches and are pinned there: redraw a profile and read them again.
 - **Drawings.** `file.export` writes the end, side and top views as SVG to scale, hidden lines dashed in the
   end and side views, and the exact geometry as STEP.
@@ -94,6 +97,9 @@ flanks of both blocks and enters neither.
   (c = 0.5). It is 1114.79246 mm², exact to 0.000001 mm².
 - **Pin centre r√2 above the apex.** The pin's centre of mass lies `top_apex_z + d/√2` up: 36.6421356 mm
   at Ø 20 mm (26.7426407 mm at Ø 6, 43.7132034 mm at Ø 30). The height over the pin is 46.6421356 mm.
+- **Large V and small V at their included angle.** The two flanks of each V meet at 90° (`v_angle`), the
+  angle between the half-planes of their faces, measured on the exact geometry to within the angular
+  tolerance.
 - **Pin on both flanks of both blocks.** Four checks: the distance from the pin to each top flank of each
   block is at most 0.000001 mm (8.2 × 10⁻⁹ mm found). The flanks are bounded faces that stop at the relief
   groove and at the mouth chamfer, so the pin touches the ground flank itself. With the next check this
@@ -114,13 +120,13 @@ flanks of both blocks and enters neither.
   (at least 2.05 mm proven), at the countersink's rim beside the end chamfer of the top relief groove (the
   bore itself is 3.5 mm from the groove).
 
-`craft3d-cli check-range` proves all fourteen at 13 points: the defaults, the four corners of the two
+`craft3d-cli check-range` proves all sixteen at 13 points: the defaults, the four corners of the two
 ranges (Ø 6 and Ø 30 with 40 and 100 mm blocks) and eight random points.
 
 ## Files
 
 - `v-block-pair.3dcraft`: the model (opens in 0.3 to 0.4 s).
-- `build.json`: the 116 steps that build it.
+- `build.json`: the 119 steps that build it.
 - `exports/v-block-pair.step`: the exact geometry of all seven parts, for machining.
 - `exports/v-block-pair-end.svg`, `-side.svg`, `-top.svg`: the end, side and top views, 1:1, lines
   0.25 mm; hidden lines dashed in the end and side views.
