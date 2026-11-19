@@ -1,7 +1,7 @@
 {
-  "commit": "b99d70cfe19ece1b584d9553445f2d287b110ea2",
-  "release": "0.1.0",
-  "format_version": 69,
-  "date": "2026-11-10",
-  "note": "The 3DCraft commit every example is built and checked with, and the release whose build the tools accept as well when it reports this file format (README.md, Rebuild and check). Moved only after every example is rebuilt and checked at the new commit."
+  "commit": "0c8fc79a844d9369cd4473ba8f90cba6139e8ccd",
+  "release": null,
+  "format_version": 77,
+  "date": "2026-11-19",
+  "note": "PROVISIONAL, on the branch rebuild-0.2.0 only: 3DCraft main at 0c8fc79a (file format 77, the coming 0.2.0), with which the five examples changed on this branch were rebuilt and checked one by one. The other 21 are not rebuilt at it, so their committed files are still those of b99d70cf (format 69) and their check is expected to report them stale. The final pin is a later commit of 3DCraft's main, after every example is rebuilt and checked there; then release names 0.2.0. Moved only after every example is rebuilt and checked at the new commit."
 }
