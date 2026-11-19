@@ -1,6 +1,6 @@
 # Sources of the data in this folder
 
-Written by `make.py fetch` on 2026-11-07. `make.py` builds `build.json` from these files alone.
+Written by `make.py fetch` from the data as downloaded on 2026-11-07. `make.py` builds `build.json` from these files alone.
 
 ## elevation.csv: the terrain
 
@@ -24,12 +24,12 @@ Written by `make.py fetch` on 2026-11-07. `make.py` builds `build.json` from the
   > (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey.
 
   For this tile: SRTM data courtesy of the U.S. Geological Survey.
-- **What was done:** the tile was resampled at 37 x 29 nodes 350 m apart in Lambert-93 (EPSG:2154), the
+- **What was done:** the tile was resampled at 51 x 40 nodes 250 m apart in Lambert-93 (EPSG:2154), the
   grid placed so that one node falls on the tile's highest cell, the summit (1910 m). Each node is the
-  tile smoothed by a Gaussian of sigma 87.5 m (a quarter of the node spacing; bilinear samples every
+  tile smoothed by a Gaussian of sigma 62.5 m (a quarter of the node spacing; bilinear samples every
   30 m out to 2.5 sigma), so that ravines narrower than the grid do not alias into bumps. The summit node
   alone keeps the tile's highest cell (peak preservation), since smoothing would lower the narrow summit
-  cone by some 36 m. Heights rounded to whole metres.
+  cone by some 25 m. Heights rounded to whole metres.
 - **Accuracy:** SRTM's absolute height error is 6.2 m over Eurasia at 90 % (Rodríguez, Morris and Belz,
   "A Global Assessment of the SRTM Performance", Photogrammetric Engineering & Remote Sensing 72(3),
   2006, pp. 249-260); the mission asked for 16 m.

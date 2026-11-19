@@ -1,4 +1,4 @@
-# The climb's kilometres, measured along route.csv with its rise from the climb's start, written by make.py fetch on 2026-11-07.
+# The climb's kilometres, measured along route.csv with its rise from the climb's start, written by make.py fetch from the downloads of 2026-11-07.
 # Points interpolated between IGN BD TOPO's points (Lambert-93, altitudes in m NGF-IGN69).
 # forest_edge,885464.66,6341942.06,1419.1  (Chalet Reynard, 6.2 km before the top)
 # km,e,n,altitude

@@ -30,11 +30,11 @@ RAW = DATA / "raw"
 SKADI_URL = "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N44/N44E005.hgt.gz"
 WFS_URL = "https://data.geopf.fr/wfs/ows"
 
-# The model's grid: nodes every 350 m in Lambert-93, 37 x 29 nodes (12.6 x 9.8 km), placed so that the
-# node (18, 21) falls on the elevation model's highest cell, the summit of Mont Ventoux.
-GRID_SPACING = 350.0
-GRID_COLUMNS, GRID_ROWS = 37, 29
-SUMMIT_NODE = (18, 21)
+# The model's grid: nodes every 250 m in Lambert-93, 51 x 40 nodes (12.5 x 9.75 km), placed so that the
+# node (25, 29) falls on the elevation model's highest cell, the summit of Mont Ventoux.
+GRID_SPACING = 250.0
+GRID_COLUMNS, GRID_ROWS = 51, 40
+SUMMIT_NODE = (25, 29)
 SMOOTHING = GRID_SPACING / 4  # a Gaussian's sigma, against aliasing: the nodes are 12 cells apart
 CLIMB_LENGTH = 15700.0  # the race's figure for the climb (letourfemmes.fr), measured back from the top
 FOREST_EDGE_FROM_TOP = 6200.0  # Chalet Reynard, "-6.2 km", where the road quits the forest (stage report)
@@ -188,7 +188,6 @@ def chain_road(sections, start, end):
 
 def fetch():
     RAW.mkdir(parents=True, exist_ok=True)
-    today = datetime.date.today().isoformat()
 
     # Elevation: the SRTM tile, its highest cell near the summit, and the grid aligned on it.
     srtm = Srtm(gzip.decompress(download(SKADI_URL, RAW / "N44E005.hgt.gz")), 44, 5)
@@ -198,8 +197,8 @@ def fetch():
     n0 = sn - SUMMIT_NODE[1] * GRID_SPACING
     grid = [[srtm.smoothed(e0 + i * GRID_SPACING, n0 + j * GRID_SPACING, SMOOTHING) for j in range(GRID_ROWS)]
             for i in range(GRID_COLUMNS)]
-    # Peak preservation: the summit node keeps the tile's highest cell, which smoothing would lower by
-    # some 36 m (the summit cone is narrower than the grid).
+    # Peak preservation: the summit node keeps the tile's highest cell, which smoothing would lower (the
+    # summit cone is narrower than the grid).
     smoothed_summit = grid[SUMMIT_NODE[0]][SUMMIT_NODE[1]]
     grid[SUMMIT_NODE[0]][SUMMIT_NODE[1]] = summit_h
 
@@ -232,17 +231,20 @@ def fetch():
     masts = wfs("BDTOPO_V3:construction_ponctuelle", f"nature='Antenne' AND {near}", RAW / "antennas.json")
     mast = max(masts["features"], key=lambda f: f["properties"]["hauteur"] or 0)
     tp = tower["properties"]
+    # The date the data was extracted from the services: that of the downloads, which data/raw/ keeps, so
+    # that writing data/ again from them (another grid, say) does not claim a newer extraction.
+    today = datetime.date.fromtimestamp(min(path.stat().st_mtime for path in RAW.iterdir())).isoformat()
 
     DATA.mkdir(exist_ok=True)
     with open(DATA / "elevation.csv", "w") as out:
-        out.write("# Mont Ventoux elevation grid for ventoux-relief, written by make.py fetch on "
+        out.write("# Mont Ventoux elevation grid for ventoux-relief, written by make.py fetch from the downloads of "
                   f"{today}.\n")
         out.write("# Source: Mapzen terrain tiles, skadi N44E005 (SRTMGL1, 1 arc-second), heights in m above "
                   "the EGM96 geoid.\n")
-        out.write("# Nodes: Lambert-93 (EPSG:2154), every 350 m; one line per column, west to east; its values "
-                  "south to north.\n")
+        out.write(f"# Nodes: Lambert-93 (EPSG:2154), every {GRID_SPACING:g} m; one line per column, west to east; "
+                  "its values south to north.\n")
         out.write(f"# Each node is the tile smoothed by a Gaussian of sigma {SMOOTHING:g} m (against aliasing), except "
-                  f"node (18, 21) on the tile's highest cell: {summit_h} m (smoothed {smoothed_summit:.0f} m).\n")
+                  f"node ({SUMMIT_NODE[0]}, {SUMMIT_NODE[1]}) on the tile's highest cell: {summit_h} m (smoothed {smoothed_summit:.0f} m).\n")
         out.write(f"# spacing_m,{GRID_SPACING:.0f}\n# columns,{GRID_COLUMNS}\n# rows,{GRID_ROWS}\n")
         out.write(f"# origin_e,{e0:.2f}\n# origin_n,{n0:.2f}\n")
         out.write(f"# summit_node,{SUMMIT_NODE[0]},{SUMMIT_NODE[1]}\n# summit_m,{summit_h}\n")
@@ -250,7 +252,7 @@ def fetch():
             out.write(",".join(f"{h:.0f}" for h in column) + "\n")
     with open(DATA / "route.csv", "w") as out:
         out.write("# The climb of Mont Ventoux from Bedoin (D974), the last 15.7 km to the road's highest point, "
-                  f"written by make.py fetch on {today}.\n")
+                  f"written by make.py fetch from the downloads of {today}.\n")
         out.write("# Source: IGN BD TOPO, troncon_de_route cpx_numero D974, Lambert-93 (EPSG:2154), altitudes "
                   "in m (NGF-IGN69).\n")
         out.write("# e,n,altitude\n")
@@ -269,7 +271,7 @@ def fetch():
     edge = at_distance(along_climb[-1] - FOREST_EDGE_FROM_TOP)
     with open(DATA / "kilometres.csv", "w") as out:
         out.write("# The climb's kilometres, measured along route.csv with its rise from the climb's start, written by "
-                  f"make.py fetch on {today}.\n")
+                  f"make.py fetch from the downloads of {today}.\n")
         out.write("# Points interpolated between IGN BD TOPO's points (Lambert-93, altitudes in m NGF-IGN69).\n")
         out.write(f"# forest_edge,{edge[0]:.2f},{edge[1]:.2f},{edge[2]:.1f}  (Chalet Reynard, 6.2 km before the top)\n")
         out.write("# km,e,n,altitude\n")
@@ -277,7 +279,7 @@ def fetch():
             p = at_distance(km * 1000.0)
             out.write(f"{km},{p[0]:.2f},{p[1]:.2f},{p[2]:.1f}\n")
     with open(DATA / "tower.csv", "w") as out:
-        out.write("# The summit tower of Mont Ventoux and its antenna, written by make.py fetch on "
+        out.write("# The summit tower of Mont Ventoux and its antenna, written by make.py fetch from the downloads of "
                   f"{today}.\n")
         out.write("# Source: IGN BD TOPO, batiment (nature 'Tour, donjon') and construction_ponctuelle "
                   "(nature 'Antenne'), Lambert-93.\n")
@@ -288,7 +290,8 @@ def fetch():
     sources = SOURCES.format(
         today=today, skadi=SKADI_URL, road_dates=f"{road_dates[0]} and {road_dates[-1]}",
         road_count=len(used), road_precision=" or ".join(f"{v:g} m" for v in road_precision), tower_id=tp["cleabs"], tower_date=(tp["date_modification"] or "")[:10],
-        mast_id=mast["properties"]["cleabs"])
+        mast_id=mast["properties"]["cleabs"], columns=GRID_COLUMNS, rows=GRID_ROWS, spacing=f"{GRID_SPACING:g}",
+        sigma=f"{SMOOTHING:g}", summit=summit_h, drop=f"{summit_h - smoothed_summit:.0f}")
     (DATA / "SOURCES.md").write_text(sources)
     print(f"summit cell {summit_h} m at {summit_lon:.6f} E {summit_lat:.6f} N; climb {len(climb)} points, "
           f"{first[2]:.1f} m to {climb[-1][2]:.1f} m; tower {tp['hauteur']} m", file=sys.stderr)
@@ -296,7 +299,7 @@ def fetch():
 
 SOURCES = """# Sources of the data in this folder
 
-Written by `make.py fetch` on {today}. `make.py` builds `build.json` from these files alone.
+Written by `make.py fetch` from the data as downloaded on {today}. `make.py` builds `build.json` from these files alone.
 
 ## elevation.csv: the terrain
 
@@ -320,12 +323,12 @@ Written by `make.py fetch` on {today}. `make.py` builds `build.json` from these 
   > (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey.
 
   For this tile: SRTM data courtesy of the U.S. Geological Survey.
-- **What was done:** the tile was resampled at 37 x 29 nodes 350 m apart in Lambert-93 (EPSG:2154), the
-  grid placed so that one node falls on the tile's highest cell, the summit (1910 m). Each node is the
-  tile smoothed by a Gaussian of sigma 87.5 m (a quarter of the node spacing; bilinear samples every
+- **What was done:** the tile was resampled at {columns} x {rows} nodes {spacing} m apart in Lambert-93 (EPSG:2154), the
+  grid placed so that one node falls on the tile's highest cell, the summit ({summit} m). Each node is the
+  tile smoothed by a Gaussian of sigma {sigma} m (a quarter of the node spacing; bilinear samples every
   30 m out to 2.5 sigma), so that ravines narrower than the grid do not alias into bumps. The summit node
   alone keeps the tile's highest cell (peak preservation), since smoothing would lower the narrow summit
-  cone by some 36 m. Heights rounded to whole metres.
+  cone by some {drop} m. Heights rounded to whole metres.
 - **Accuracy:** SRTM's absolute height error is 6.2 m over Eurasia at 90 % (Rodríguez, Morris and Belz,
   "A Global Assessment of the SRTM Performance", Photogrammetric Engineering & Remote Sensing 72(3),
   2006, pp. 249-260); the mission asked for 16 m.
@@ -471,16 +474,13 @@ def build():
     add(["variable.set", {"name": "stack_base_level", "expr": f"floor({lowest} m / contour_interval) * contour_interval"}])
     add(["variable.set", {"name": "contour_layer_count", "expr": "floor((summit_elevation - stack_base_level) / contour_interval) + 1"}])
 
-    # ---- the terrain: one live spline per column of the grid, closed down to sea level, lofted
-    names = []
-    for i in range(ni):
-        name = f"Terrain column {i + 1}"
-        names.append(name)
-        z = lambda j: f"{grid[i][j]} m * vertical_scale"
-        feature(["sketch.create", {"name": name, "plane": "yz", "offset": f"{i} * node_pitch"}])
-        add(["sketch.polyline", {"sketch": name, "points": [["0 mm", z(0)], ["0 mm", "0 mm"], ["relief_depth", "0 mm"], ["relief_depth", z(nj - 1)]]}])
-        add(["sketch.spline", {"sketch": name, "live": True, "through": ["e1"] + [[f"{j} * node_pitch", z(j)] for j in range(1, nj - 1)] + ["e4"]}])
-    terrain = feature(["feature.loft", {"sections": names, "name": "Terrain"}])
+    # ---- the terrain: the heights as a table (a row per grid row, south to north; a column per grid column,
+    # west to east), one sheet through every node of it, and the block from sea level cut by the sheet
+    add(["table.set", {"name": "elevation", "columns": ["row"] + [{"name": f"c{i + 1:02d}", "unit": "m"} for i in range(ni)],
+                       "rows": [[j + 1] + [grid[i][j] for i in range(ni)] for j in range(nj)]}])
+    feature(["feature.surface.grid", {"table": "elevation", "step": ["node_pitch", "node_pitch"], "factor": "vertical_scale", "name": "Terrain surface"}])
+    block = feature(["feature.block", {"size": ["relief_width", "relief_depth", "blank_height"], "position": ["0 mm", "0 mm", "0 mm"], "name": "Terrain blank"}])
+    terrain = feature(["feature.boolean", {"op": "intersect", "target": "Terrain blank", "tool": "Terrain surface", "name": "Terrain"}])
 
     # ---- the climb: brass pins at km 0 to 15 in blind holes, standing on the holes' floors
     feature(["sketch.create", {"name": "Kilometre marks", "plane": "xy", "offset": "hole_floor"}])
@@ -498,10 +498,10 @@ def build():
     feature(["feature.extrude", {"sketch": "Hole outlines", "distance": "blank_height", "cut": "Summit blank", "name": "Summit blank drilled", "when": relief}])
     feature(["feature.boolean", {"op": "intersect", "target": "Forest blank drilled", "tool": "Terrain", "keepTool": True, "name": "Forest drilled", "when": relief}])
     feature(["feature.boolean", {"op": "intersect", "target": "Summit blank drilled", "tool": "Terrain", "keepTool": True, "name": "Bald summit", "when": relief}])
-    # the faces from the terrain (the boolean's tool) are named copy(1)/...
-    side = lambda e: f"{ids['Forest drilled']}:copy(1)/{terrain}:side(" + ",".join([e] * ni) + ")"
-    caps = [f"{ids['Forest drilled']}:copy(1)/{terrain}:{cap}(e5,e6,e7,e{nj + 6})" for cap in ("startCap", "endCap")]
-    feature(["feature.chamfer", {"edges": [[side("e6"), side("e5")], [side("e6"), side("e7")]] + [[side("e6"), c] for c in caps], "distance": "bottom_edge_break", "name": "Forested slopes", "when": relief}])
+    # the faces from the terrain (the boolean's tool) are named copy(1)/..., the terrain's bottom and sides
+    # are its blank's: face(0) at sea level, face(2) and face(3) west and east, face(4) and face(5) south and north
+    side = lambda k: f"{ids['Forest drilled']}:copy(1)/{terrain}:copy(0)/{block}:face({k})"
+    feature(["feature.chamfer", {"edges": [[side(0), side(k)] for k in (4, 5, 2, 3)], "distance": "bottom_edge_break", "name": "Forested slopes", "when": relief}])
 
     # ---- the summit tower, a landmark at ten times the map's scale, its foot fitted to the terrain
     tx, ty = plan(tower["centre_e"], tower["centre_n"])

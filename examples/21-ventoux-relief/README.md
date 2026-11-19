@@ -13,10 +13,11 @@ done by 3DCraft.
 
 ## What it shows
 
-- **A terrain from a grid of heights.** One `sketch.spline` per column of the 37 × 29 grid, with
-  `live: true`: its through-points are expressions (`1910 m * vertical_scale` at the summit), fitted
-  again at every regeneration, so the exaggeration is a parameter. Each column is closed down to sea
-  level by a `sketch.polyline`, and `feature.loft` of the 37 columns is the solid at once: no boolean.
+- **A terrain through a grid of heights.** `table.set` holds the 51 × 40 heights in metres, a table row
+  per row of the grid; `feature.surface.grid` lays one sheet through every node, each height times
+  `vertical_scale` (its `factor`), so the exaggeration is a parameter and the sheet follows it. Between
+  the nodes the sheet is the bicubic spline of the heights, the textbook interpolant of a regular grid.
+  A `feature.block` from sea level up, cut by the sheet (`feature.boolean` `intersect`), is the solid.
 - **Data in the model's own frame.** Positions are metres from the grid's origin in Lambert-93 divided by
   `map_scale`; heights are metres times `vertical_scale`. `make.py` writes numbers only.
 - **Pins placed by the terrain.** `sketch.circle` at each kilometre in one sketch, `feature.extrude`, a
@@ -54,13 +55,13 @@ done by 3DCraft.
   the relief with the summit, 1910 m.
 - **Data.** Elevation: SRTM, 1 arc-second, from the Mapzen terrain tile N44E005; road and tower: IGN BD
   TOPO (sources, dates and licences in [`data/SOURCES.md`](data/SOURCES.md)). The grid has nodes every
-  350 m in Lambert-93 (EPSG:2154), 12.6 × 9.8 km, one node on SRTM's highest cell. Each node is the
-  elevation smoothed by a Gaussian of σ = 87.5 m, so that ravines narrower than the grid do not alias
-  into bumps; the summit node alone keeps SRTM's 1910 m (smoothed it would be 1874 m). SRTM's heights are
+  250 m in Lambert-93 (EPSG:2154), 12.5 × 9.75 km, one node on SRTM's highest cell. Each node is the
+  elevation smoothed by a Gaussian of σ = 62.5 m, so that ravines narrower than the grid do not alias
+  into bumps; the summit node alone keeps SRTM's 1910 m (smoothed it would be 1885 m). SRTM's heights are
   good to 6.2 m over Eurasia at 90 % (Rodríguez, Morris and Belz, *A Global Assessment of the SRTM
   Performance*, PE&RS 72(3), 2006); the mission asked for 16 m, which is what the start's check allows.
   `make.py fetch` also writes the climb's kilometres (`data/kilometres.csv`).
-- **Scales.** 1:70 000 in plan (a node every 5 mm: the relief is 180 × 140 mm) and, printed, 2.1 times
+- **Scales.** 1:70 000 in plan (a node every 3.57 mm: the relief is 178.6 × 139.3 mm) and, printed, 2.1 times
   that vertically: the summit stands 57.3 mm above the relief's underside, which is sea level.
 - **The printed relief.** Printed flat on its underside, 0.2 mm layers, from `exports/ventoux-relief.3mf`
   (meshed within 0.2 mm), in Bambu Lab PLA Matte: Dark Green up to the forest's edge and
@@ -72,7 +73,7 @@ done by 3DCraft.
   its own: assemble them into one object with two parts before slicing, and give each part its filament.
   The forest's edge is Chalet Reynard, 6.2 km before the top, "which
   marks the moment on which the Mont Ventoux road quits the forest and enters a moon-like, fully exposed
-  landscape" (the stage report): IGN's road is at 1419.1 m there. Solid it would weigh 995 g of green
+  landscape" (the stage report): IGN's road is at 1419.1 m there. Solid it would weigh 985 g of green
   and 21 g of white; three walls and a sparse infill take a fraction of that. The bottom edge is
   chamfered 1 mm against the first layer's squash. The sixteen holes are blind, printed vertically down
   to a 3 mm floor, 0.1 mm wider all round than the pins: Ø 1.7 mm for 1.5 mm brass rod (CW508L), Ø 2.7 mm
@@ -84,13 +85,13 @@ done by 3DCraft.
   model it is Ø 2.05 mm and 11.7 mm tall with a Ø 0.6 mm mast, too fine for the FDM print: it is printed
   on its own in resin (`exports/ventoux-tower.3mf`), painted white with three red bands and glued on the
   summit, its foot shaped to the ground.
-- **The walnut base.** 210 × 170 × 22 mm, the grain along its 210 mm length, a 15 mm border round the
+- **The walnut base.** 208.6 × 169.3 × 22 mm, the grain along its 208.6 mm length, a 15 mm border round the
   relief, corners rounded 8 mm, the top edge rounded over 3 mm with a router, the bottom edge broken
   1 mm; oiled. The relief is glued on.
 - **The laser-cut layers** (*Product*: Laser-cut layers). One 3 mm sheet per contour interval from sea
   level, so the sheet sets the exaggeration: 2.1× at 100 m, 1.4× at 150 m, 1.05× at 200 m. At 100 m
   there are 17 outlines and 20 sheets: layer 1 is the whole map, sea level to 400 m, four sheets (the
-  lowest ground is at 338 m); layers 2 to 17 start at 400 m to 1900 m, the last a cap under the summit
+  lowest ground is at 345 m); layers 2 to 17 start at 400 m to 1900 m, the last a cap under the summit
   tower. Cut from 3 mm cast acrylic, white and pale grey in turn, from `exports/layers/ventoux-layer-01.dxf`
   to `-17.dxf`. Each file is one layer's underside in the map's frame, seen from below (its y runs south).
   The outlines are the parts' edges: offset them by half the kerf, about 0.08 mm for the 0.15 mm kerf of
@@ -102,22 +103,22 @@ done by 3DCraft.
   flat sheet, the stack steps at every contour (see the platform notes).
 - **Laser pieces to leave out.** The rule: leave out every island narrower than the 3 mm sheet and do
   not cut holes narrower than it; keep the rest. Measured on the DXFs at the defaults of each interval
-  (width × length of the piece):
+  (width × length of the piece: the narrowest rectangle that holds it); no layer has a hole:
 
-  | Interval | Leave out | Do not cut | Keep (fragile) |
-  |---|---|---|---|
-  | 100 m | layer 5 (700 m): a 1.5 × 6.6 mm sliver on the map's north edge and a 1.7 × 2.8 mm island (a knoll of 689 m that the spline lifts over 700 m); layer 9 (1100 m): 1.4 × 2.3 mm; layer 15 (1700 m): 2.5 × 5.0 mm; layer 17 (1900 m): the 2.2 × 2.7 mm summit cap, glue the tower on layer 16 | layer 10 (1200 m): hole 1.3 × 2.4 mm | layer 5: 3.1 × 4.1 mm (a knoll of 698 m, lifted likewise); layer 16: 3.4 × 5.5 mm |
-  | 150 m | layer 6 (1050 m): slivers 0.8 × 12.8 and 0.1 × 3.1 mm | layer 7 (1200 m): hole 1.3 × 2.4 mm | layer 11: 3.4 × 5.6 mm |
-  | 200 m | | layer 6 (1200 m): hole 1.3 × 2.4 mm | layer 9: 3.4 × 5.7 mm |
+  | Interval | Leave out | Keep (fragile) |
+  |---|---|---|
+  | 100 m | layer 4 (600 m): a 0.35 × 3.4 mm sliver on the map's north edge; layer 5 (700 m): a 2.6 × 10.9 mm sliver on the north edge; layer 9 (1100 m): a 0.06 × 1.2 mm sliver on the north edge; layer 17 (1900 m): the 1.8 × 2.4 mm summit cap, glue the tower on layer 16 | layer 5: 3.8 × 4.6 mm |
+  | 150 m | layer 3 (600 m): the 0.35 × 3.4 mm sliver; layer 4 (750 m): 0.7 × 1.9 mm in the north-east corner and a 1.3 × 1.7 mm island; layer 6 (1050 m): a 1.8 × 32.5 mm sliver on the north edge | layer 8: 3.9 × 8.0 mm on the east edge |
+  | 200 m | layer 3 (600 m): the 0.35 × 3.4 mm sliver | |
 
   Narrow notches in an outline are cut as drawn; the kerf rounds them.
 - **Simplified, or left out.**
   - The road is marked by its kilometre pins, not drawn between them (see the platform notes).
   - Kilometres are measured along IGN's road with its rise, from the climb's start; they are not the
     D974's own kilometre stones, which count from Bédoin.
-  - The grid holds what 350 m apart can: valleys and ridges narrower than about 700 m are rounded. Below
-    the summit ridge the relief runs under the road: the km 15 pin's top stands 56.12 mm high, ground at
-    1804 m where IGN's road is at 1831 m.
+  - The grid holds what 250 m apart can: valleys and ridges narrower than about 500 m are rounded. Below
+    the summit ridge the relief runs under the road: the km 15 pin's top stands 56.08 mm high, ground at
+    1803 m where IGN's road is at 1831 m.
   - The forest's edge is drawn level at Chalet Reynard's height; on the mountain it climbs and falls
     with exposure.
   - No lettering on the base (a text costs a font of 332 KB in the file, F-037).
@@ -133,14 +134,14 @@ done by 3DCraft.
 ## Checks
 
 - **Terrain volume from the data's mean height.** The terrain from sea level up must hold the map's area
-  times the data's mean height (1026.9 m by the trapezoidal rule over the grid), times the vertical
+  times the data's mean height (1030.6 m by the trapezoidal rule over the grid), times the vertical
   scale, within 0.1 %, the room between straight lines and a cubic surface through the same nodes:
-  776 585.5 mm³ against 776 336.4 mm³ at the defaults, a mean height of 1027.2 m.
+  769 142.4 mm³ against 769 006.4 mm³ at the defaults, a mean height of 1030.8 m.
 - **Summit at the data's height.** A probe at the summit node reaches 1910 m within 2 m: its top is
-  57.302 mm, 1910.1 m.
+  57.306 mm, 1910.2 m.
 - **Start of the climb at the road's height.** A probe at the climb's start reaches IGN's 544.4 m
-  within SRTM's 16 m: its top is 16.221 mm, 540.7 m. With the summit, the climb on the relief is
-  1369 m against 1366 m from IGN's start to the summit.
+  within SRTM's 16 m: its top is 16.322 mm, 544.1 m. With the summit, the climb on the relief is
+  1366 m, as from IGN's start to the summit.
 - **Sixteen kilometre pins** (km 0 to 15) and **a hole for every pin, through both colours**: 16 holes
   in the forested slopes and, for km 10 to 15 above the forest's edge, 6 more through the bald summit.
 - **One layer per contour** (laser-cut layers): as many contour layers as the interval gives up to the
@@ -151,9 +152,9 @@ box, each product and eight random points; it does not try every value.
 
 ## Files
 
-- `ventoux-relief.3dcraft`: the model. It opens in 2.83 s (10.63 s of CPU) and is 888 KB
+- `ventoux-relief.3dcraft`: the model. It opens in 3.44 s (9.92 s of CPU) and is 152 KB
   (`meta.json`, `stats`).
-- `build.json`: the 250 steps that build it, written by `make.py`.
+- `build.json`: the 142 steps that build it, written by `make.py`.
 - `make.py`: `make.py fetch` downloads the data and writes `data/`; `make.py` writes `build.json` from
   `data/` alone.
 - `data/elevation.csv`, `data/route.csv`, `data/kilometres.csv`, `data/tower.csv`: the extract;
@@ -169,8 +170,9 @@ python3 examples/21-ventoux-relief/make.py         # build.json from the committ
 tools/examples.py build ventoux-relief
 ```
 
-`make.py fetch` is not needed to rebuild: it downloads the sources again (about 15 MB) and rewrites `data/`,
-and `data/SOURCES.md` with that day's date, from whatever the services serve then.
+`make.py fetch` is not needed to rebuild: it downloads the sources again (about 15 MB) into `data/raw/` and
+rewrites `data/` from whatever the services serve then, with the date of the downloads in `data/SOURCES.md`;
+with the downloads already in `data/raw/` it reuses them and keeps their date.
 
 The tool needs the 3DCraft build this repository is pinned to: see [Rebuild and check](../../README.md#rebuild-and-check)
 in the README.
@@ -183,7 +185,7 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
 
 ## Difficulty
 
-**8 / 10** (the reviewer): data-driven lofted terrain from live splines, GIS preparation outside 3DCraft, 44 conditional features for two products, booleans across several bodies, and kernel limits worked around (F-135 to F-140).
+**8 / 10** (the reviewer): a data-driven terrain sheet through a grid of heights, GIS preparation outside 3DCraft, 44 conditional features for two products, booleans across several bodies, and kernel limits worked around (F-135 to F-140).
 
 ## Platform notes
 
@@ -191,11 +193,18 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
   56 s of CPU at load; projecting its outline onto the terrain (`feature.surface.trim`) is cheap but is
   refused at some exaggerations, and `feature.plate` refuses the projected patch. The road is marked by
   its kilometre pins instead ([F-136](../../3DCRAFT-FEEDBACK.md#f-136), [F-135](../../3DCRAFT-FEEDBACK.md#f-135), [F-140](../../3DCRAFT-FEEDBACK.md#f-140)).
-- **The grid's size.** A live spline point costs about 670 bytes in the `.3dcraft` file, so the 1 MB
-  budget holds 37 × 29 nodes (350 m) and no finer ([F-138](../../3DCRAFT-FEEDBACK.md#f-138)).
-- **Contour interval 250 m** is refused at some exaggerations: a slab whose face passes within the
-  tolerance of a saddle of the terrain ([F-137](../../3DCRAFT-FEEDBACK.md#f-137)). The range stops at
-  200 m.
+- **The grid's size.** Up to 3DCraft 0.1 there was no surface through a grid of points
+  ([F-012](../../3DCRAFT-FEEDBACK.md#f-012)): the terrain was a loft of 37 live splines, one per column
+  of a 37 × 29 grid (350 m), and a live spline's point costs about 670 bytes in the file, so the 1 MB
+  budget held that grid and no finer ([F-138](../../3DCRAFT-FEEDBACK.md#f-138)); the file was 888 KB.
+  A height read from a table costs about 20 bytes: at 51 × 40 nodes (250 m) the file is 152 KB. What
+  bounds the grid now is the time to open it: on the same build the 350 m grid opens in 2.3 s (5.9 s of
+  CPU), the 250 m grid in 3.4 s (9.9 s), and a grid every 87.5 m (145 × 113 nodes) in 14 s (55 s of
+  CPU), far over the 4 s a complex example may take.
+- **Contour interval 250 m.** A slab whose face passes within the tolerance of a saddle of the terrain is
+  refused ([F-137](../../3DCRAFT-FEEDBACK.md#f-137)); on the lofted terrain of 3DCraft 0.1 a 250 m interval
+  met it, so the range stops at 200 m. The terrain sheet of this version builds a 250 m interval at its
+  defaults, but the range has not been checked that far.
 - **The layers as flat sheets.** A contour's region is there (a flat face), but it cannot become a sketch
   or be extruded, so the stack is shown as slices of the smooth terrain ([F-139](../../3DCRAFT-FEEDBACK.md#f-139)).
 - **Laser pieces by hand.** The layer DXFs cannot leave out pieces below a size nor carry the next layer's
@@ -207,8 +216,6 @@ Licence Ouverte / Open Licence 2.0, extracted 2026-11-07.
 - **Measures on the terrain.** `boxMax` of the terrain or a pin is never a value: its proof is 21 times
   the tolerance wide ([F-122](../../3DCRAFT-FEEDBACK.md#f-122)), so the checks bound the measures instead of reading them. Each
   `measure.section` of the terrain costs about 1.2 s of CPU ([F-076](../../3DCRAFT-FEEDBACK.md#f-076)), so the contours are not measured.
-- **Splines through expressions.** `live: true` takes expressions as through-points, which this example uses
-  for the exaggeration.
 
 ## Licence
 
