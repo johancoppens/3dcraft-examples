@@ -19,7 +19,8 @@ upright.
 - **A bow that ends in a rounded point.** `feature.tip` closes the loft's flat face at station 1 with faces that
   run on from the hull's sides and deck without a crease and meet in one point 10 mm further forward, the
   bumper's length: the closed *Hull envelope*. Its point is given (`at`) half a millimetre below the sheer at
-  station 1, so the deck runs on level into the nose; left to itself the point would stand at the middle of the
+  station 1, so the deck carries on into the nose, its top rising 0.45 mm above station 1's crown before it
+  rounds down into the point; left to itself the point would stand at the middle of the
   section, a bullet's nose halfway up the bow, and placed lower under the deck the deck's continuation dives to
   reach it, a notch under the deck's edge (5 mm below the sheer: 53° down 1 mm from the point). Its `fullness`
   is 0.7 (`bow_tip_fullness`), fuller than the default quarter ellipse (0.414), so the stem stays plumb far
@@ -94,7 +95,7 @@ upright.
   the 1000 mm limit. With the flat-nosed bumper of the earlier version the waterline was 994.2 mm long and the
   bumper 10 mm long there. With the tip at its default fullness (0.414) it is 989.0 mm, the bumper 4.6 mm at
   the waterline; at 0.55, 990.5 mm (6.1 mm); at 0.7, this model's, 992.2 mm (7.9 mm); at 0.85, 993.8 mm
-  (9.4 mm), but the nose then reads as a flat face with rounded rims and the model opens 0.9 s slower. So the
+  (9.4 mm), but the nose then reads as a flat face with rounded rims and the model opens 0.76 s slower. So the
   model gives up 2.0 mm of waterline for a nose without a flat.
 - **The keel.** Its depth (the bulb's underside below the design waterline) is 415 mm, a draft of 415.5 mm at
   the 4 kg waterline. The fin's leading edge is 443 mm from the bow, placed so that the yacht floats level; the

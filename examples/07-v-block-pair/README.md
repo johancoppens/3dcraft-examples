@@ -32,8 +32,9 @@ flanks of both blocks and enters neither.
   (`Two blocks:copy(0)/Block blank:startCap`), and the checks find faces with `madeBy`, so they hold
   whatever feature ids the history gives. The two angle checks cannot: `angleBetween` takes a face by its
   name, not a query, and the document keeps that name by feature ids (`F13:copy(0)/F2:side(e33)`), even when
-  it is written by feature names, so a feature put in before them renames their faces
-  ([F-179](../../3DCRAFT-FEEDBACK.md#f-179)). The edge ids of the profiles (`side(e33)`, `side(e42)` …) come
+  it is written by feature names; a feature put in before them breaks that name, as it would break one
+  written in feature names. What survives such an insertion is a `madeBy` query, which `angleBetween`
+  cannot take ([F-179](../../3DCRAFT-FEEDBACK.md#f-179)). The edge ids of the profiles (`side(e33)`, `side(e42)` …) come
   from their sketches and are pinned there: redraw a profile and read them again.
 - **Drawings.** `file.export` writes the end, side and top views as SVG to scale, hidden lines dashed in the
   end and side views, and the exact geometry as STEP.

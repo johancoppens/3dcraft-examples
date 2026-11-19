@@ -31,7 +31,7 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
 
    Loft the seven into one closed, hidden envelope, and close its bow in a rounded nose that runs on from the
    hull's sides and deck without a crease to a single point 10 mm forward of station 1, at x = 0, standing
-   0.5 mm below station 1's sheer on the centre line, so the deck runs on level into it, and fuller than a
+   0.5 mm below station 1's sheer on the centre line, so the deck carries on into it without diving, and fuller than a
    quarter ellipse (a fullness of 0.7), so the stem stays plumb far down before the forefoot sweeps up to it. Cut the envelope at x = 10 mm: aft of the cut is the hull's form, forward of it the bumper, in black
    elastomer (1150 kg/m³). Make the
    hull, the deck and the transom 0.6 mm of glass/epoxy laminate (1800 kg/m³) laid behind the hull form's surface,

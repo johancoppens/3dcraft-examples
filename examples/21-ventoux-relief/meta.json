@@ -223,7 +223,7 @@
   },
   "renewed": {
     "version": "0.2.0",
-    "note": "one sheet through a finer grid of heights"
+    "note": "a finer terrain from a grid of heights"
   },
   "stats": {
     "steps": 142,
