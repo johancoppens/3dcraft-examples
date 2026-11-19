@@ -160,7 +160,7 @@ box, each product and eight random points; it does not try every value.
 
 ## Files
 
-- `ventoux-relief.3dcraft`: the model. It opens in 3.44 s (9.92 s of CPU) and is 152 KB
+- `ventoux-relief.3dcraft`: the model. It opens in 3.27 s (9.52 s of CPU) and is 152 KB
   (`meta.json`, `stats`).
 - `build.json`: the 142 steps that build it, written by `make.py`.
 - `make.py`: `make.py fetch` downloads the data and writes `data/`; `make.py` writes `build.json` from

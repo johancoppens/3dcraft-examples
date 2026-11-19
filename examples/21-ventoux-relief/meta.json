@@ -232,9 +232,9 @@
     "features": 62,
     "assertions": 6,
     "warnings": 0,
-    "build_s": 4.63,
-    "load_s": 3.95,
-    "load_cpu_s": 11.21,
+    "build_s": 3.27,
+    "load_s": 3.27,
+    "load_cpu_s": 9.52,
     "file_bytes": 152285
   },
   "craft3d": {

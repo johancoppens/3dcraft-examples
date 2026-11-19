@@ -88,9 +88,9 @@
     "features": 30,
     "assertions": 16,
     "warnings": 0,
-    "build_s": 0.33,
-    "load_s": 0.33,
-    "load_cpu_s": 0.53,
+    "build_s": 0.32,
+    "load_s": 0.31,
+    "load_cpu_s": 0.5,
     "file_bytes": 162693
   },
   "craft3d": {
