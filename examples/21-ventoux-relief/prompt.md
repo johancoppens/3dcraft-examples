@@ -27,7 +27,8 @@ in this example's `data/` folder; give the AI access to it.
    edge as a named variable, and draw both matte and not metallic. Chamfer the relief's bottom edge 1 mm
    for the first printed layer.
 
-4. Put the summit tower from `data/tower.csv` on top as a symbol at ten times the map's scale: a cylinder
+4. Put the summit tower from `data/tower.csv` on top as a symbol at ten times the map's scale, its height
+   too (not exaggerated), standing on its ground's height on the relief: a cylinder
    whose circle has the tower's footprint area (162.3 m²), 44.8 m tall standing on its ground at 1893.5 m,
    with a Ø 0.6 mm mast up to the antenna's top at 1975.5 m, in five bands. Fit its foot to the terrain,
    paint it white and every other band of the mast red, starting at the bottom. Set it all on a walnut
@@ -36,8 +37,9 @@ in this example's `data/` folder; give the AI access to it.
 
 5. Add a second product as a choice: a stack of laser-cut contour layers instead of the printed relief and
    its pins, one 3 mm sheet per contour interval, so that in this product the sheet sets the vertical
-   scale. The interval is a parameter, 100 to 200 m in steps of 50 m, default 100 m, counted from sea
-   level. Cut the terrain into one body per layer: the first from sea level up to one interval above the
+   scale and the exaggeration does not apply; the tower and the walnut base stay. The interval is a parameter, 100 to 200 m in steps of 50 m, default 100 m, counted from sea
+   level. Cut the terrain into one body per layer, each the slice of the terrain between its two levels
+   (not a flat sheet): the first from sea level up to one interval above the
    highest multiple of the interval below the lowest ground (345 m), then one slab per interval up to the
    one that holds the summit, white and pale grey acrylic in turn.
 
@@ -64,7 +66,18 @@ At the defaults (exaggeration 2.1, interval 100 m, printed relief) the result mu
 
 ## Tested
 
-Not yet with these turns. The turns of 2026-11-07 built the terrain from the grid of 2026-11-07, 37 × 29
+2026-11-19, Claude Sonnet 5.5 through `craft3d-cli` 0.2.0 (c7cab24f), given only the six turns and the four
+data files: passed. Every turn built with no refusal; `document.check` is ok at the defaults, at exaggeration
+1 and 3, and in the layered product at 100, 150 and 200 m (17, 11 and 9 layers). Against the Acceptance:
+relief 178.571 × 139.286 mm, summit 57.3 mm, terrain 769 142.45 mm³, the two bodies meeting at 42.573 mm, km 0
+at (48.58, 7.35) and km 15 at (95.74, 104.67) mm, the ground at km 0 16.31 mm, the tower Ø 2.054 mm with its
+roof 6.4 mm and its mast's top 11.71 mm above its ground at 56.805 mm, the base 208.57 × 169.29 × 22 mm, the
+first layer 12 mm. The tester found four things the words left open, which turns 4 and 5 now say: that the
+exaggeration does not apply in the layered product, that the layers are slices of the terrain and not flat
+sheets, that the tower's height is at its own ten-times scale, and that the tower and the base stay in the
+layered product.
+
+Earlier: the turns of 2026-11-07 built the terrain from the grid of 2026-11-07, 37 × 29
 heights 350 m apart, as one live spline per column lofted into a solid; they were tested then:
 
 2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the six turns of that version
