@@ -1,0 +1,13 @@
+[
+ ["document.setTolerance", {"linear": 0.02}],
+ ["sketch.create", {"name": "Root", "plane": "xy", "offset": "0 mm"}],
+ ["sketch.curve", {"sketch": "Root", "x": "80 mm * t^2", "y": "5 * 0.065 * 80 mm * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1]}],
+ ["sketch.curve", {"sketch": "Root", "x": "80 mm * t^2", "y": "-5 * 0.065 * 80 mm * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1], "start": "e1"}],
+ ["sketch.line", {"sketch": "Root", "from": "e2", "to": "e4"}],
+ ["sketch.create", {"name": "Tip", "plane": "xy", "offset": "-195 mm"}],
+ ["sketch.curve", {"sketch": "Tip", "x": "60 mm * t^2", "y": "5 * 0.065 * 60 mm * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1]}],
+ ["sketch.curve", {"sketch": "Tip", "x": "60 mm * t^2", "y": "-5 * 0.065 * 60 mm * (0.2969 * t - 0.1260 * t^2 - 0.3516 * t^4 + 0.2843 * t^6 - 0.1015 * t^8)", "t": [0, 1], "start": "e1"}],
+ ["sketch.line", {"sketch": "Tip", "from": "e2", "to": "e4"}],
+ ["feature.loft", {"sections": ["Root", "Tip"], "ruled": true, "name": "Blade"}],
+ ["feature.tip", {"face": "Blade:endCap(e3,e5,e6)", "length": "4 mm", "name": "Rounded tip"}]
+]

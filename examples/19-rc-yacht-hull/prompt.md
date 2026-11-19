@@ -29,10 +29,11 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    | 790 | 72 | 46 | 77 | 10 | 54 | −22 | −30 |
    | 1000 | 55 | 43 | 58 | 18 | 46 | 2 | 0.5 |
 
-   Add an eighth section at the bow for the bumper, at x = 0: each of station 1's numbers carried on along the
-   straight line from station 2 through station 1 (one eleventh of their difference beyond station 1). Loft all
-   eight into one closed, hidden envelope, and cut it at x = 10 mm: aft of the cut is the hull's form, forward of
-   it the bumper, in black elastomer (1150 kg/m³), its nose rounded 3 mm round the sides and bottom. Make the
+   Loft the seven into one closed, hidden envelope, and close its bow in a rounded nose that runs on from the
+   hull's sides and deck without a crease to a single point 10 mm forward of station 1, at x = 0, standing 5 mm
+   below station 1's sheer on the centre line, so the deck runs on almost level and the forefoot sweeps up to
+   it. Cut the envelope at x = 10 mm: aft of the cut is the hull's form, forward of it the bumper, in black
+   elastomer (1150 kg/m³). Make the
    hull, the deck and the transom 0.6 mm of glass/epoxy laminate (1800 kg/m³) laid behind the hull form's surface,
    three plates: the deck set inside the hull's sheer, the transom inside hull and deck, hull and deck ending on
    the plane x = 10 mm so no glass reaches into the bumper. Finish the hull in white gelcoat and paint the deck
@@ -65,7 +66,8 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    the waterplane's moment over the displacement less KG) and the trim the boat settles at floating free. Then
    add checks: hull length, draft and hull depth against C.4.1 at that waterline; a corrector weight of at least
    0 g; the keel's and the rudder's mass against C.6.4; the fin at most 20 mm wide and the bulb at most 60 mm
-   tall (E.4.1); the bumper 10 mm long at the waterline; the bulb's measured mass equal to the bulb mass within
+   tall (E.4.1); the bumper 10 mm long from the hull's foremost point, along the hull, as the class measures
+   D.2.2's forward 10 mm; the bulb's measured mass equal to the bulb mass within
    0.01 g; the fin's section halfway down equal to the NACA area for its chord there; a trim within a quarter of
    a degree; and a positive GM. Give the document a title and description, run a check of the whole document and
    show me a picture from high on the bow quarter, so the deck and the sheer show.
@@ -75,22 +77,26 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
 At the defaults (bulb 2300 g, keel depth 415 mm) the result must have:
 
 - a bulb 265.8 mm long and 2300.0 g; a fin of 168.8 g and a rudder of 65.5 g within 1 %; hull, deck, transom and
-  bumper together 443.0 g within 2 %; a keel of 2468.8 g and a corrector weight of 315 g within 10 g;
-- the waterline at 4 kg within 0.3 mm of 0.49 mm above the design waterline: a draft of 415.5 mm, a hull depth of
-  54.5 mm, both within 0.3 mm; a waterline length of 994 mm within 5 mm (the transom sits just clear of the water,
-  so the length moves with the waterline) and a waterline beam of 157.8 mm within 1 mm;
-- a GM of 201.7 mm within 2 % and a trim within ±0.25°;
+  bumper together 438.1 g within 2 %; a keel of 2468.8 g and a corrector weight of 320 g within 10 g;
+- a hull 1000 mm long from the nose's point to the transom, and a bumper 10 mm long from that point;
+- the waterline at 4 kg within 0.3 mm of 0.50 mm above the design waterline: a draft of 415.5 mm, a hull depth of
+  54.6 mm, both within 0.3 mm; a waterline length of 989 mm within 5 mm (the transom sits just clear of the water
+  and the forefoot sweeps up to the nose, so the length moves with the waterline) and a waterline beam of 157.8 mm
+  within 1 mm;
+- a GM of 201.8 mm within 2 % and a trim within ±0.25°;
 - every check passing, and the same at 2100 g with 375 mm and at 2320 g with 418 mm.
 
 ## Tested
 
-2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the five turns above:
+Not yet with these turns. The turns of 2026-11-07 built the bow as an eighth section 10 mm forward of station 1,
+its flat nose rounded 3 mm, and checked the bumper's length at the waterline; they were tested then:
+
+2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the five turns of that version:
 passed. Its yacht has the same bulb (2300.0007 g), waterline at 4 kg (0.50 mm above the design waterline),
 draft (415.5 mm), hull depth (54.50 mm), waterline length (994.4 mm) and beam (157.8 mm), GM (201.5 mm,
-`floatingGM` 201.48) and keel (2467.7 g) as this example, within the Acceptance; its corrector weight is
-306.4 g (its own fittings' masses) and its 14 checks pass. Its laminate of 426.6 g leaves out the bumper.
-It could not thicken the deck's cambered face by 8 mm for the mast step ("the freeform face has a pole …
+`floatingGM` 201.48) and keel (2467.7 g) as that version of this example, within its Acceptance; its corrector
+weight is 306.4 g (its own fittings' masses) and its 14 checks pass. Its laminate of 426.6 g leaves out the
+bumper. It could not thicken the deck's cambered face by 8 mm for the mast step ("the freeform face has a pole …
 where its normal and so its offset are not defined"; 7 mm works), so it typed the deck's height there from a
 `measure.ray`, and `document.interference` of hull and bumper came back unknown
 ([F-130](../../3DCRAFT-FEEDBACK.md#f-130)). About 250 steps.
-
