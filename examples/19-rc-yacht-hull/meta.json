@@ -70,6 +70,10 @@
     "model": null,
     "result": null
   },
+  "renewed": {
+    "version": "0.2.0",
+    "note": "the bow ends in a rounded nose"
+  },
   "stats": {
     "steps": 218,
     "variables": 72,

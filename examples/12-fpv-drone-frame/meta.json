@@ -75,6 +75,10 @@
     "model": null,
     "result": null
   },
+  "renewed": {
+    "version": "0.2.0",
+    "note": "rounded blade tips"
+  },
   "stats": {
     "steps": 242,
     "variables": 86,

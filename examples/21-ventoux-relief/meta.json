@@ -221,6 +221,10 @@
     "model": null,
     "result": null
   },
+  "renewed": {
+    "version": "0.2.0",
+    "note": "one sheet through a finer grid of heights"
+  },
   "stats": {
     "steps": 142,
     "variables": 35,

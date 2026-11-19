@@ -77,6 +77,10 @@
     "model": "Claude Sonnet 5.5, medium effort, through craft3d-cli",
     "result": "Passed: document.check ok with its own 21 assertions, also at pin 6, 25, 30 mm and length 40, 70, 100 mm; section 1114.7925 mm2, pin centre 36.642 mm and the blocks' 0.7778 kg equal to this example's; pin on all four flanks, screws and hooks bearing, end-hole wall 2.3 mm; 93 steps, about 45 CLI calls. It threaded the crossbar 9 mm (F-056) and threaded the mirrored block separately (F-052)."
   },
+  "renewed": {
+    "version": "0.2.0",
+    "note": "both Vs' angles checked directly"
+  },
   "stats": {
     "steps": 119,
     "variables": 58,

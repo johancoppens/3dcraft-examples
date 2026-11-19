@@ -52,6 +52,7 @@ log/ plan/              local only (gitignored): dev log, plans
 |---|---|---|
 | `build.json` | **The source**: a JSON list of `[command, params]` steps run in a new document, ending with `document.check`. The same format as 3DCraft's own `docs/examples`, so the start screen can run it as is: no file paths, no `file.*` steps in it. | hand |
 | `meta.json` | title, card summary, domain, tier, difficulty, standards, materials, preview framing, exports | hand; `stats` and `craft3d` written by the tool |
+| `meta.json` `renewed` | `{"version", "note"}`: the release whose features the model was rebuilt to use, and what is new in it in a few words for the card (lower case, no full stop, no command names) | hand; set when a model is rebuilt to use a release's features, cleared never; the web site's gallery shows it |
 | `README.md`, `prompt.md` | the example's page and its AI rebuild chat (§6) | hand |
 | `<id>.3dcraft` | the document built from `build.json`, opens directly | `tools/examples.py build` |
 | `exports/` | only what the process needs: 3MF for printing, DXF or SVG for laser, plasma, CNC and flat patterns, STEP for machining; listed in `meta.json` `exports` (`file.export` params, plus `values` to export at other public parameter values) | `tools/examples.py build` |
