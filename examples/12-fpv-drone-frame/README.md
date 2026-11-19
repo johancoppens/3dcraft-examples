@@ -28,7 +28,9 @@ size, from 5 to 5.3 inch.
   through three points: at its radius, square to the blade and turned to its pitch angle, atan(P / 2πr)
   capped at the root. On it the airfoil is a closed live `sketch.spline` through eight points in the plane's
   own axes, held by formulas from two tables (`table.set`): `blade_sections` gives each section's radius,
-  chord and thickness, `blade_airfoil` the airfoil's points. The blade is patterned three times and joined
+  chord and thickness, `blade_airfoil` the airfoil's points. The last section stands half a millimetre inside
+  the prop's radius, and `feature.tip` closes the blade beyond it in one rounded point at the radius, placed
+  on the line the sections are stacked on (`at`). The blade is patterned three times and joined
   (`feature.boolean`) to a hub with the motor shaft's bore, and an M5 nut (`sketch.polyline` hexagon, extruded) sits on top.
 - **Prop clearance.** The cylinders the props sweep are bodies of their own, hidden (`feature.visible`);
   `measure.clearance` measures them against every part, and cuts prove the blades stay inside them.
@@ -90,23 +92,23 @@ size, from 5 to 5.3 inch.
   5.1x4.3x3: 5.1 in diameter, 4.3 in pitch, three blades, a 13 mm hub 6.8 mm high on a 5 mm shaft,
   4.3 g ([Rotorama](https://www.rotorama.com/vrtule/hqprop-bms-racing-5-1x4-3x3)). The diameter is the
   *Prop size* parameter; the pitch stays 4.3 in. Makers publish no planform, so the blade is this example's own: six
-  sections, the first inside the hub, the second at the rim of the motor's bell, the others at 0.45, 0.75,
-  0.95 and 1.0 of the radius:
+  sections, the first inside the hub, the second at the rim of the motor's bell, the others at 0.45, 0.75
+  and 0.95 of the radius and 0.5 mm inside it, and a rounded tip from there to the radius:
 
-  | Radius | 5 mm | 14 mm | 29.15 mm | 48.58 mm | 61.53 mm | 64.77 mm |
+  | Radius | 5 mm | 14 mm | 29.15 mm | 48.58 mm | 61.53 mm | 64.27 mm |
   |---|---|---|---|---|---|---|
   | Chord | 8.50 | 9.00 | 15.87 | 14.57 | 9.72 | 3.24 |
   | Thickness | 3.00 | 2.50 | 2.06 | 1.38 | 0.97 | 0.49 |
-  | Pitch angle | 38° | 38° | 30.81° | 19.69° | 15.78° | 15.02° |
+  | Pitch angle | 38° | 38° | 30.81° | 19.69° | 15.78° | 15.13° |
 
   The root is 8.5 to 9 mm wide and 2.5 to 3 mm thick, as on real props, and its pitch is washed out to
   38° (the helix would ask 73.95° and 51.15° there): a 9 × 3 mm root takes 6.57 of the hub's 6.8 mm height at
   38°; at 40° it would take 6.75 mm, too little room to keep it clear of the motor's bell. Outboard the angle is the helix's, atan(P / 2πr). The section is a
   flat-bottomed airfoil with a round nose and a thin trailing edge, its thickness ratio 0.35 and 0.28 at the
-  root, 0.13 at 0.45 R, 0.095 at 0.75 R and 0.10 at 0.95 R (0.15 on the last, 3 mm wide section that closes
-  the rounded tip). In polycarbonate at 1.2 g/cm³ (Makrolon 2405: 1.20 g/cm³, yield 65.0 MPa,
+  root, 0.13 at 0.45 R, 0.095 at 0.75 R and 0.10 at 0.95 R (0.15 on the last, 3.24 mm wide section, which
+  the tip closes in a point at the radius). In polycarbonate at 1.2 g/cm³ (Makrolon 2405: 1.20 g/cm³, yield 65.0 MPa,
   [datasheet](https://quickparts.com/wp-content/uploads/2024/05/Makrolon-2405PC.pdf)) each prop, hub and
-  blades in one piece, weighs 4.13 g (16.51 g for the four), 4 % less than the real 4.3 g. The props turn "props out": the front-left and rear-right
+  blades in one piece, weighs 4.12 g (16.49 g for the four), 4 % less than the real 4.3 g. The props turn "props out": the front-left and rear-right
   counter-clockwise seen from above, the front-right and rear-left clockwise, each blade's leading edge
   facing its rotation and raised, so that all four push air down. Each is held by an M5 nyloc nut, DIN 985:
   8 mm across flats, 5.0 mm thick
@@ -166,8 +168,8 @@ a bigger root and a slower motor. So the range is the 5-inch class, 5 to 5.3 inc
   the camera and its lens is 3.72 mm, at the corners of the top plate; the camera plates are 6.98 mm away.
   At 5-inch props it is 3.31 mm, at 5.3-inch 4.54 mm.
 - **Props sweep the designated diameter.** A cut through the front-left prop along its blade's axis reaches
-  from the blade's root section, 5 mm from the shaft, to the tip at the radius: 64.77 − 5 = 59.77 mm. (The corners
-  of the 3 mm-wide tip lie about 0.02 mm beyond the radius.)
+  from the far side of the hub, 6.5 mm from the shaft's axis, to the point of the blade's tip at the radius:
+  64.77 + 6.5 = 71.27 mm, to 0.001 mm.
 - **Blades stay inside their swept cylinders.** Horizontal cuts at the cylinders' top and bottom find no
   blade of the front-left prop (area 0; the others are its mirror images); since every blade starts
   inside the hub, none can reach above or below them.
@@ -180,13 +182,13 @@ a bigger root and a slower motor. So the range is the 5-inch class, 5 to 5.3 inc
   the blade's angle there to within half a degree, with 0.009 mm to spare.
 - **Blade root holds the centrifugal load at the motor's no-load speed.** The stand-in motor's class, a
   2306 of 1750 KV (as the FlyFishRC Flash 2306 1750KV above) on a full 6S battery (25.2 V), turns at most 1750 × 25.2 = 44 100 rpm unloaded, a bound
-  no loaded prop reaches. There a blade of 1.094 g, its centre of mass 31.83 mm from the axis, pulls on its
-  root, cut where it leaves the hub (15.47 mm² at 6.5 mm), with 48.0 MPa, below polycarbonate's 65 MPa
+  no loaded prop reaches. There a blade of 1.092 g, its centre of mass 31.85 mm from the axis, pulls on its
+  root, cut where it leaves the hub (15.45 mm² at 6.5 mm), with 48.0 MPa, below polycarbonate's 65 MPa
   yield; 55.7 MPa at 5.3 inch. The bending from the thrust adds to it and is not computed.
 - **Wheelbase from the prop size.** The motor centre holes of the front-left and rear-right arms are
   √2 (D + 30 mm) − 7 mm = 218.62 mm apart (wall to wall): the wheelbase is 225.62 mm.
-- **Flight-controller holes on 30.5 mm centres.** The walls of two neighbouring stack holes in the bottom
-  plate are 30.5 − 3.2 = 27.3 mm apart.
+- **Flight-controller holes on 30.5 mm centres.** The axes of two neighbouring stack holes in the bottom
+  plate are 30.5 mm apart (`between`, `centerDistance`).
 - **Motor slots reach the 16 mm and 19 mm bolt circles.** The inner ends of opposite slots are
   16 − 3.2 = 12.8 mm apart, so their inner arcs are centred on the 16 mm circle; the nearest points of
   their outer arcs are 19 mm apart, so those arcs are centred on the 19 mm circle (the outer walls reach
@@ -200,13 +202,13 @@ a bigger root and a slower motor. So the range is the 5-inch class, 5 to 5.3 inc
   shafts.
 
 `craft3d-cli check-range` passes all 18 checks at 13 points: the defaults, the four corners of the range
-and eight random points. The model opens in 2.27 s with 7.37 s of CPU time (the better of two runs),
-within the complex tier's 4 s and 12 s; it has 240 steps.
+and eight random points. The model opens in 2.57 s with 7.48 s of CPU time (the better of two runs),
+within the complex tier's 4 s and 12 s; it has 242 steps.
 
 ## Files
 
 - `fpv-drone-frame.3dcraft`: the model.
-- `build.json`: the 240 steps that build it.
+- `build.json`: the 242 steps that build it.
 - `exports/fpv-drone-frame-arm.dxf` (cut 4 from 5 mm sheet), `exports/fpv-drone-frame-bottom-plate.dxf`,
   `exports/fpv-drone-frame-top-plate.dxf` (1 each from 2 mm sheet) and
   `exports/fpv-drone-frame-camera-plate.dxf` (cut 2 from 2 mm sheet): the outlines at true size, in each
@@ -226,11 +228,15 @@ in the README.
 ## Difficulty
 
 **7 / 10** (the reviewer): lofted freeform props through table-driven sections on formula datum planes,
-with washout; Steiner router proofs over four parts; a 45° datum layout; clearances between many bodies and a
+with washout and rounded tips; Steiner router proofs over four parts; a 45° datum layout; clearances between many bodies and a
 centrifugal-stress check; kernel limits navigated.
 
 ## Platform notes
 
+- **The blade's tip.** Up to 3DCraft 0.1 a loft could not end in a point, so the blade ended in its sixth
+  section at the full radius, a flat end 3.24 × 0.49 mm. `feature.tip` now closes it beyond that section in one
+  rounded point. Its `at` puts the point on the stacking line: left out, the point stands over the middle of
+  the end's area, which on this airfoil lies off that line.
 - **Cut list.** `cut.list` and `cut.export` refuse a plate whose edges are broken: a 0.3 mm chamfer round
   a hole makes it "a countersink or a chamfered hole, not square to the plate". So the DXF files come from
   the sketches, one file per part, without the cut list's counts and sheet layout. Feedback entry, with a
@@ -257,8 +263,8 @@ centrifugal-stress check; kernel limits navigated.
   z, -x, -y, -z or [x, y, z]"), so a direction cannot follow a parameter; the blade-angle check turns a
   copy of the blade instead. Feedback entry:
   [F-094](../../3DCRAFT-FEEDBACK.md#f-094).
-- **Steps.** 240: the frame itself takes 130, the router check 20, the props with their sections, tables,
-  swept cylinders, nuts and checks 67, and the motor and camera stand-ins 23.
+- **Steps.** 242: the frame itself takes 130, the router check 20, the props with their sections, tables,
+  tip, swept cylinders, nuts and checks 69, and the motor and camera stand-ins 23.
 - **No electrical units.** 3DCraft has no volt, rpm or minute units, so the motor's 1750 KV is written
   `1750 / (60 s)` (revolutions per second per volt) and the battery's 25.2 V as a plain number; the stress
   formula checks its time dimension but not the volts.

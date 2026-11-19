@@ -1,0 +1,14 @@
+[
+ ["variable.set", {"name": "hole_spacing", "expr": "30.5 mm"}],
+ ["sketch.create", {"name": "Plate outline", "plane": "xy"}],
+ ["sketch.rect", {"sketch": "Plate outline", "from": [-25, -25], "to": [25, 25]}],
+ ["sketch.circle", {"sketch": "Plate outline", "center": ["-hole_spacing / 2", 0], "radius": "1.6 mm"}],
+ ["sketch.circle", {"sketch": "Plate outline", "center": ["hole_spacing / 2", 0], "radius": "1.6 mm"}],
+ ["feature.extrude", {"sketch": "Plate outline", "distance": "2 mm", "name": "Plate blank"}],
+ ["feature.chamfer", {"edges": [["Plate blank:side(e5)", "Plate blank:startCap"]], "distance": "0.3 mm", "name": "Plate"}],
+ ["assert.add", {"name": "distance with a query: passes", "measure": "distance", "from": {"kind": "face", "where": {"in": "Plate", "name": "*side(e10)"}}, "to": {"kind": "face", "where": {"in": "Plate", "name": "*side(e12)"}}, "eq": "hole_spacing - 3.2 mm"}],
+ ["assert.add", {"name": "between with the same query: error", "measure": "between", "from": {"kind": "face", "where": {"in": "Plate", "name": "*side(e10)"}}, "to": {"kind": "face", "where": {"in": "Plate", "name": "*side(e12)"}}, "relation": "centerDistance", "eq": "hole_spacing"}],
+ ["assert.add", {"name": "between with feature names: passes", "measure": "between", "from": {"kind": "face", "name": "Plate:copy(0)/Plate blank:side(e10)", "feature": "Plate"}, "to": {"kind": "face", "name": "Plate:copy(0)/Plate blank:side(e12)", "feature": "Plate"}, "relation": "centerDistance", "eq": "hole_spacing"}],
+ ["assert.list", {}],
+ ["measure.between", {"from": {"kind": "face", "name": "Plate:copy(0)/Plate blank:side(e10)", "feature": "Plate"}, "to": {"kind": "face", "name": "Plate:copy(0)/Plate blank:side(e12)", "feature": "Plate"}}]
+]

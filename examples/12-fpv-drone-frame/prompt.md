@@ -51,8 +51,9 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    polycarbonate hub Ø 13 × 6.8 mm with a 5 mm bore on each motor, three blades, and an M5 nyloc nut on
    top (DIN 985: 8 mm across flats, 5 mm thick). Loft one blade through six sections square to its
    radius: at 5 mm and 14 mm from the shaft, chords 8.5 and 9 mm, thicknesses 3 and 2.5 mm; then at 0.45,
-   0.75, 0.95 and 1.0 of the prop's radius, chords 0.245, 0.225, 0.15 and 0.05 of the radius, thickness
-   ratios 0.13, 0.095, 0.10 and 0.15. Every section is the same flat-bottomed airfoil, a smooth closed curve
+   0.75 and 0.95 of the prop's radius and 0.5 mm inside it, chords 0.245, 0.225, 0.15 and 0.05 of the
+   radius, thickness ratios 0.13, 0.095, 0.10 and 0.15, and close the blade beyond the last section in a
+   rounded tip whose point is at the radius, on the line the sections are stacked on. Every section is the same flat-bottomed airfoil, a smooth closed curve
    through eight points (u along the chord from the leading edge, v across the thickness from the bottom,
    both as fractions): (1, 0.12) at the trailing edge, (0.7, 0.5), (0.3, 1), (0.06, 0.7), (0, 0.3) at the
    leading edge, (0.08, 0), (0.45, 0) and (0.85, 0). Stack the sections on a line through mid-chord and
@@ -90,16 +91,19 @@ At the defaults (5.1-inch props, 5 mm arms) the result must have:
   outlines in DXF;
 - the camera touching both cage plates, and no overlaps;
 - four three-blade props of 129.54 mm, each one piece with its Ø 13 × 6.8 mm hub and 5 mm bore, under an
-  M5 nut, 4.13 g each within 5 %, roots 9 mm wide and 2.5 to 3 mm thick at 38°,
+  M5 nut, 4.12 g each within 5 %, blades ending in a rounded point at the radius, roots 9 mm wide and 2.5 to 3 mm thick at 38°,
   blades at 19.7° at 75 % of the radius, turning props-out;
 - a root stress of 48 MPa within 5 % at 44 100 rpm, below 65 MPa;
 - every check passing, and the same at 5 and 5.3 inch with 4 and 6 mm arms.
 
 ## Tested
 
-2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the eight turns above:
+Not yet with these turns. The turns of 2026-11-07 ended the blade in its sixth section at the full radius, a
+small flat end, and were tested then:
+
+2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the eight turns of that version:
 passed. Its quad checks itself with 32 assertions over its range and has the same wheelbase (225.62 mm),
-frame mass (104.71 g), props (4.13 g each), prop clearance (3.717 mm) and root stress (47.8 MPa) as this
-example; its router checks are exact. It read the camera plate's relief notch and the camera's pivot a little
+frame mass (104.71 g), props (4.13 g each), prop clearance (3.717 mm) and root stress (47.8 MPa) as that
+version of this example; its router checks are exact. It read the camera plate's relief notch and the camera's pivot a little
 differently: its first notch had a mouth narrower than the bit, which the Steiner check caught.
 
