@@ -49,7 +49,7 @@ length, the port spacing, the rod's buckling safety and the rod clevis's rating.
   takes its volume and `volumeBelow` at the piston seal's middle plane, which splits it into the two
   chambers.
 - **Outputs and checks.** `variable.measure` and `variable.output` for the oil, the forces, the pin-to-pin
-  length, the moving mass and the buckling safety; `assert.add` with `value`, `distance` and `count`
+  length, the moving mass and the buckling safety; `assert.add` with `value`, `between` and `count`
   (below).
 
 ## The real thing
@@ -175,8 +175,8 @@ length, the port spacing, the rod's buckling safety and the rod clevis's rating.
   diameter.
 - **Pin to pin, ISO 6020-2 XC and ISO 8133 CE.** The gap between the two clevises' pin holes, plus the pin
   diameter, equals XC + stroke + travel + CE: 410 mm retracted, 510 mm at the defaults, 610 mm extended.
-- **Ports PJ + stroke apart.** The distance between the two ports' tapping holes equals PJ + stroke less
-  their diameter: 258.05 mm at the defaults.
+- **Ports PJ + stroke apart.** The axes of the two ports' tapping holes lie PJ + stroke apart (`between`,
+  `centerDistance`): 273 mm at the defaults.
 - **Rod safe against buckling.** The safety against buckling at full extension (Euler and Johnson, as
   above) is at least 3.5: 6.73 at stroke 200, 4.31 at stroke 320, the longest stroke.
 - **Rod clevis rated for the push force.** The push force at 160 bar, 20.11 kN, is within the rod clevis's
