@@ -14,7 +14,7 @@ Each example lives in its own numbered folder under [`examples/`](examples/), fr
 - **`prompt.md`**: a conversation you can have with an AI connected to 3DCraft to build it yourself.
 - **`exports/`**: files for the workshop (STEP, 3MF, DXF, SVG) where they make sense.
 
-To open them, install 3DCraft 0.1.0 or later from [3dcraft.dev](https://3dcraft.dev/) (the installers are also on
+To open them, install 3DCraft 0.2.0 or later from [3dcraft.dev](https://3dcraft.dev/) (the installers are also on
 [its release page](https://github.com/johancoppens/3dcraft/releases)), or use no installer at all: the gallery at
 [3dcraft.dev/examples](https://3dcraft.dev/examples/#examples) opens every example in 3DCraft's
 [web version](https://3dcraft.dev/app/), in your browser, at `https://3dcraft.dev/app/?open=/examples/models/<id>.3dcraft`.
@@ -60,7 +60,7 @@ effort levels, and the briefs the examples were built from are in [`CATALOGUE.md
 
 ## Rebuild and check
 
-The committed `<id>.3dcraft` files and `exports/` are the finished models: open them in 3DCraft 0.1.0 or later, in
+The committed `<id>.3dcraft` files and `exports/` are the finished models: open them in 3DCraft 0.2.0 or later, in
 the window, in the browser or with `craft3d-cli`, without rebuilding anything. A `build.json` runs in any 3DCraft and
 builds the model into a document of your own:
 
@@ -76,20 +76,19 @@ that points at it. Instead of `PATH`, `CRAFT3D_CLI` may name the binary (or that
 
 **The tool.** `tools/examples.py` (Python 3, standard library only) made and checked every example. It runs on Linux
 and macOS, not on Windows. It needs the 3DCraft build this repository is pinned to, as `craft3d-cli --version`
-reports it: the commit in [`tools/pin.json`](tools/pin.json), or the release named there (0.1.0) with the file
-format named there (69), so the installed 3DCraft 0.1.0 runs it. It refuses any other build, because it compares
+reports it: the commit in [`tools/pin.json`](tools/pin.json), or the release named there (0.2.0) with the file
+format named there (77), so the installed 3DCraft 0.2.0 runs it. It refuses any other build, because it compares
 what it rebuilds byte for byte with the committed files and another build may write other bytes. `--version` names
-the version, the commit and the file format, and nothing in it tells the released 0.1.0 from a development build
+the version, the commit and the file format, and nothing in it tells the released 0.2.0 from a development build
 that still carries the same version number: the tool accepts both, and with a build that is not the pinned commit,
 `check` may report files as stale that differ only in their bytes.
-The release 0.1.0 was cut a few commits after the pinned one (the program bundles files built at the pin, and its
-guide's pictures follow), and those commits change nothing in the engine or the command line, so a real 0.1.0
-reports another commit and is accepted as the release.
+The pin is 3DCraft `c7cab24f`, the commit prepared as the release 0.2.0; a released 0.2.0 that reports another
+commit is accepted as the release. Files saved at format 77 do not open in 3DCraft 0.1.x.
 
-To rebuild and check one example with the installed 3DCraft 0.1.0:
+To rebuild and check one example with the installed 3DCraft 0.2.0:
 
 ```sh
-craft3d-cli --version                                  # craft3d-cli 0.1.0 (<commit>, format 69)
+craft3d-cli --version                                  # craft3d-cli 0.2.0 (<commit>, format 77)
 tools/examples.py check --quick socket-head-cap-screw  # rebuild in a scratch folder and compare
 tools/examples.py check socket-head-cap-screw          # the same, plus check-range over the public parameters
 tools/examples.py build socket-head-cap-screw          # build.json -> .3dcraft and exports; rewrites meta.json

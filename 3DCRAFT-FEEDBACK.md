@@ -28,6 +28,13 @@ byte, its exports too, with every assertion and range as before (the same twelve
 Which entries the commits since `150f0015` fixed is not recorded here: an entry's reproducer shows whether it
 still holds.
 
+**Status (2026-11-19):** the pin moves to 3DCraft `c7cab24f`, the release 0.2.0 (file format 77). Five examples
+are rebuilt to use its features: F-012 is answered by `feature.surface.grid` (ventoux-relief, one sheet through a
+51 × 40 table of heights), F-138 is answered for grids (a height read from a table costs about 20 bytes), and
+F-129's workaround is gone (the RC yacht's nose is a `feature.tip` inside the envelope that floats). F-137's
+reproducer still fails, though the relief's new terrain sheet builds a 250 m contour interval at its defaults.
+F-178 to F-181 are new.
+
 | Id | Kind | Title | Found in | Impact |
 |---|---|---|---|---|
 | [F-001](#f-001) | Performance | The guide's fuel tank takes 55 s to open, the chassis 9 s | calibrating the load budget | start screen |
@@ -207,6 +214,10 @@ still holds.
 | [F-175](#f-175) | Missing capability | A variable or output cannot be a text: a table key such as "IPE 220" cannot be shown as a result | probe for steel-beam-sizing (not built) | result shown as a row number or a size |
 | [F-176](#f-176) | Missing capability (minor) | A table column's unit can only be a base unit: no mm^4, cm^3, mm^2 or kg/m | probe for steel-beam-sizing (not built) | catalogue properties as plain numbers |
 | [F-177](#f-177) | Bug | **Fixed in 150f0015:** An output named like the table column it looks up is refused as a cycle (`h` = `ipe[pick].h`: "h → h") | probe for steel-beam-sizing (not built) | output renamed |
+| [F-178](#f-178) | Missing capability | `feature.tip` refuses an end with a flat side (a foil's blunt trailing edge) | rc-yacht-hull (rebuild 0.2.0) | rudder tip square |
+| [F-179](#f-179) | Agent friction | `between` and `angleBetween` take a face by its name, not a `where` query, and keep it by feature ids; `measure.between` refuses the feature-name form the assertion accepts | fpv-drone-frame, v-block-pair, hydraulic-cylinder (rebuild 0.2.0) | faces named; the checks break if a feature is put in before them |
+| [F-180](#f-180) | Agent friction | `feature.tip` refuses a length as too long without naming the longest that fits | ship-propeller (probe, rebuild 0.2.0) | tip not taken |
+| [F-181](#f-181) | Missing capability | `measure.continuity` refuses the edges a tip carries on to its point | rc-yacht-hull (review, rebuild 0.2.0) | nose's smoothness shown, not asserted |
 
 ## F-001
 
@@ -337,6 +348,8 @@ a B-spline surface's control points). A loft through one spline per row works we
 1.1 s), so this is about convenience and fidelity across the rows, not a blocker. The guitar body's carved top, a
 sheet from a grid of control points, took 24 curve sketches and 15 knot formulas to make an exact Gordon
 network (`feature.surface.network`).
+
+**Status: answered** in 3DCraft 0.2.0 by `feature.surface.grid`: the Mont Ventoux relief is one sheet through a 51 × 40 table of heights (2026-11-19).
 
 ## F-013
 
@@ -1308,6 +1321,8 @@ touching bumper and deck errors at the edge of tolerance (no reproducers). Repro
 `levelFor` and `measure.floating` of the envelope two to three times slower. Reproducer:
 [`findings/F-129-blend-slows-hydrostatics/repro.json`](findings/F-129-blend-slows-hydrostatics/repro.json).
 
+**Status:** the workaround is gone in rc-yacht-hull: since 0.2.0 the nose is a `feature.tip` inside the envelope that floats, and the model opens faster than before (2026-11-19). The cost of the fillet itself was not measured again.
+
 ## F-130
 
 **Bug and performance.** On the RC yacht, `document.interference` of its eight bodies takes 31 s (188 s of CPU)
@@ -1381,6 +1396,8 @@ The layered rhino met it where a cutting plane grazes a leg's cap edge or neighb
 in an uncompressed ZIP; see also F-080 for 3MF), so the relief's 1 MB budget holds a 37 × 29 grid and no
 finer. Reproducer:
 [`findings/F-138-live-spline-file-size/repro.json`](findings/F-138-live-spline-file-size/repro.json).
+
+**Status: answered for grids** in 3DCraft 0.2.0: a height read from a table costs about 20 bytes; the relief went from 888 KB at 37 × 29 points to 152 KB at 51 × 40 (2026-11-19).
 
 ## F-139
 
@@ -1573,3 +1590,41 @@ The rhino's prompt tester met it again in its own model at 230 mm: "the rim coul
 **Bug.** `variable.output` with name `h` and expression `ipe[pick].h` is refused: "`h` would depend on itself (h → h): the outputs may use each other only without a cycle". The column name after the dot is taken for a reference to the output; a variable of the same name and expression is accepted. Reproducer: [`findings/F-177-output-named-as-column/repro.json`](findings/F-177-output-named-as-column/repro.json)
 
 **Status: fixed** in 3DCraft `150f0015` (2026-11-08).
+
+## F-178
+
+**Missing capability.** `feature.tip` refuses an end one of whose neighbouring faces is a plane: "the face behind
+this edge is a plane: a tip over sides that are planes, cylinders, cones, spheres or tori is not built yet". A
+foil lofted from sections with a blunt trailing edge (the NACA four-digit form's 2.1 % edge, closed by a line) has a
+flat trailing-edge face, so its end cannot be rounded. Found on the RC yacht's rudder (rebuild for 0.2.0), whose tip
+stays square. The guide names the limit. Reproducer:
+[`findings/F-178-tip-over-flat-side/repro.json`](findings/F-178-tip-over-flat-side/repro.json).
+
+## F-179
+
+**Agent friction.** The assertions `between` and `angleBetween` take a face as an item `{kind, name, feature}`,
+not the `where` query that `distance`, `clearance` and the other measures take ("`from` is an item {kind, name,
+feature}, not `where`"). The assertion accepts the name written with feature names
+(`Plate:copy(0)/Plate blank:side(e10)`), but the command `measure.between` refuses that form ("the feature must
+be written F and a number"), and the document keeps the name by feature ids (`F3:copy(0)/F2:side(e10)`) either
+way, so a feature put in before the check breaks it, where a `madeBy` query would survive. Found in the drone
+frame, the V-block pair and the hydraulic cylinder (rebuild for 0.2.0), whose checks name their faces. Reproducer:
+[`findings/F-179-between-takes-no-query/repro.json`](findings/F-179-between-takes-no-query/repro.json).
+
+## F-180
+
+**Agent friction.** `feature.tip` refuses a tip too long for its sides with "the sides have closed in and turned
+inside out before it … give a shorter length", without the longest length that fits, which the guide says such a
+refusal names. On the ship propeller's blade, its tip section moved inboard and tipped back to the diameter, 1.8 and
+0.9 mm are refused and 0.2 mm builds (probe for the 0.2.0 rebuild; not taken). The reproducer is the example's
+own script up to the tip (96 steps); a two-section loft to the same end section builds:
+[`findings/F-180-tip-refusal-names-no-length/repro.json`](findings/F-180-tip-refusal-names-no-length/repro.json).
+
+## F-181
+
+**Missing capability.** `measure.continuity` proves a tip's faces tangent to the faces they continue (G1) but
+refuses the edges the tip carries on to its point, the edges the guide says fade out there: "the edge does not run
+along a parameter line of either face, so neither can be written along it as the measure's first face (owed: two
+faces both written across the edge)". Found by the review of the RC yacht hull (rebuild for 0.2.0), whose nose's
+smoothness is therefore shown, not asserted. Reproducer (10 steps; step 9 the join, G1; step 10 the continued
+edge, refused): [`findings/F-181-continuity-of-tip-edges/repro.json`](findings/F-181-continuity-of-tip-edges/repro.json).

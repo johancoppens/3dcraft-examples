@@ -84,7 +84,8 @@ techniques or its palette line only with the coordinator.
   projected views exported as SVG (a technical drawing).
 - **Look:** ground tool steel (bright, fine) with a black-oxide clamp.
 - **Parameters:** pin diameter, block length.
-- **Proves:** the pin's centre height in closed form (r·√2 above the V's apex), both flanks touching.
+- **Proves:** the pin's centre height in closed form (r·√2 above the V's apex), both flanks touching; both Vs
+  at 90° (`angleBetween`, since 0.2.0).
 
 ### 8. Square-to-round transition · `square-to-round-transition` · sheet metal, HVAC
 - **Real thing:** a 400 × 300 rectangular duct to a Ø 250 round duct (EN 1505 and EN 1506 sizes) over
@@ -140,7 +141,9 @@ techniques or its palette line only with the coordinator.
   `measure.clearance` between the props and everything else; DXF of the carbon parts for the router.
 - **Look:** carbon fibre with purple anodised standoffs.
 - **Parameters:** prop size, arm thickness.
-- **Proves:** prop clearance ≥ 3 mm; inside corners ≥ the router's tool radius.
+- **Proves:** prop clearance ≥ 3 mm; inside corners ≥ the router's tool radius; the stack holes 30.5 mm apart
+  between their axes (`between`, since 0.2.0).
+- **Rebuilt for 0.2.0:** rounded blade tips (`feature.tip`), the last section half a millimetre short of the radius.
 
 ### 13. Cast handwheel · `cast-handwheel` · casting, machine building
 - **Real thing:** a DIN 950 handwheel of Ø 200 mm in cast iron, curved spokes, a revolving handle, a bore
@@ -181,7 +184,8 @@ techniques or its palette line only with the coordinator.
   the oil volumes as outputs.
 - **Look:** gentian-blue paint, chrome rod, zinc-plated tie rods.
 - **Parameters:** stroke, extension (0 to 100 %).
-- **Proves:** the two chambers' volumes in closed form; pin-to-pin lengths retracted and extended.
+- **Proves:** the two chambers' volumes in closed form; pin-to-pin lengths retracted and extended; the ports
+  PJ + stroke apart between their axes (`between`, since 0.2.0).
 
 ### 16. Spiral staircase · `spiral-staircase` · architecture, steel construction
 - **Real thing:** a steel spiral staircase, floor to floor 2800 mm, Ø 1600 mm, 14 oak treads on a Ø 114.3 mm
@@ -240,6 +244,9 @@ techniques or its palette line only with the coordinator.
   the deck open; NACA 0009 fin as two `sketch.curve` halves; bulb revolved; levelFor and floating take well
   under a second. Give the bow a section of at least 30 × 20 mm (F-009). Loads in 10.5 s at tolerance
   0.001 mm: over budget, simplify.
+- **Rebuilt for 0.2.0:** the bow is closed by `feature.tip`, a rounded nose 10 mm forward of station 1, its point
+  just under the deck's crown, fullness 0.7; the bumper is checked as the IOM Q&A measures D.2.2(c), from the
+  foremost point.
 
 ### 20. Moka pot · `moka-pot` · product design, casting
 - **Real thing:** an original three-cup stovetop espresso maker in cast aluminium: boiler with safety valve,
@@ -261,7 +268,8 @@ techniques or its palette line only with the coordinator.
   vertical exaggeration stated, the summit's observatory tower; as a 3D-printable relief and as
   laser-cut contour layers.
 - **Shows:** the one example with Python (`make.py`): it reads public elevation data (SRTM, public domain, or
-  Copernicus DEM with its attribution) and fits a B-spline terrain; 3DCraft does the rest: the terrain
+  Copernicus DEM with its attribution) and writes it as a table of heights (since 0.2.0, one
+  `feature.surface.grid` sheet through it); 3DCraft does the rest: the terrain
   surface, the solid, the route on it, contour sections (`measure.section`) and a DXF per layer.
 - **Look:** marble relief on a walnut base.
 - **Parameters:** vertical exaggeration, contour interval.
@@ -285,6 +293,8 @@ Five more, at the developer's request: a welded construction, a tab-and-slot obj
 without screws, glue or welds, a layered cardboard figure, and two processes the first 21 do not touch
 (injection moulding, pressed laminate). Each starts with its own feasibility steps: where a risk below
 turns out to block the honest version, the builder stops and reports instead of building a weaker one.
+- **Rebuilt for 0.2.0:** a table of 51 × 40 heights every 250 m and one `feature.surface.grid` sheet replace the
+  37 live-spline columns and their loft (one `sketch.spline` per grid row is history; F-012, F-138).
 
 ### 22. Flat-pack bookcase · `flat-pack-bookcase` · CNC, furniture
 - **Real thing:** an original open bookcase, about 800 wide, 1100 high and 300 mm deep, cut on a CNC router
