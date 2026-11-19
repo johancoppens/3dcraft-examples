@@ -51,8 +51,8 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    polycarbonate hub Ø 13 × 6.8 mm with a 5 mm bore on each motor, three blades, and an M5 nyloc nut on
    top (DIN 985: 8 mm across flats, 5 mm thick). Loft one blade through six sections square to its
    radius: at 5 mm and 14 mm from the shaft, chords 8.5 and 9 mm, thicknesses 3 and 2.5 mm; then at 0.45,
-   0.75 and 0.95 of the prop's radius and 0.5 mm inside it, chords 0.245, 0.225, 0.15 and 0.05 of the
-   radius, thickness ratios 0.13, 0.095, 0.10 and 0.15, and close the blade beyond the last section in a
+   0.75 and 0.95 of the prop's radius and the last half a millimetre short of the radius, chords 0.245,
+   0.225, 0.15 and 0.05 of the radius, thickness ratios 0.13, 0.095, 0.10 and 0.15, and close the blade beyond the last section in a
    rounded tip whose point is at the radius, on the line the sections are stacked on. Every section is the same flat-bottomed airfoil, a smooth closed curve
    through eight points (u along the chord from the leading edge, v across the thickness from the bottom,
    both as fractions): (1, 0.12) at the trailing edge, (0.7, 0.5), (0.3, 1), (0.06, 0.7), (0, 0.3) at the

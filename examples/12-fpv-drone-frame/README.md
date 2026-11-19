@@ -92,8 +92,9 @@ size, from 5 to 5.3 inch.
   5.1x4.3x3: 5.1 in diameter, 4.3 in pitch, three blades, a 13 mm hub 6.8 mm high on a 5 mm shaft,
   4.3 g ([Rotorama](https://www.rotorama.com/vrtule/hqprop-bms-racing-5-1x4-3x3)). The diameter is the
   *Prop size* parameter; the pitch stays 4.3 in. Makers publish no planform, so the blade is this example's own: six
-  sections, the first inside the hub, the second at the rim of the motor's bell, the others at 0.45, 0.75
-  and 0.95 of the radius and 0.5 mm inside it, and a rounded tip from there to the radius:
+  sections, the first inside the hub, the second at the rim of the motor's bell, the next three at 0.45,
+  0.75 and 0.95 of the radius, the last half a millimetre short of the radius, and from there a rounded tip
+  to the radius:
 
   | Radius | 5 mm | 14 mm | 29.15 mm | 48.58 mm | 61.53 mm | 64.27 mm |
   |---|---|---|---|---|---|---|
