@@ -1,0 +1,5 @@
+[
+ ["variable.set", {"name": "plate_width", "expr": "40 mm"}],
+ ["variable.set", {"name": "plate_area", "expr": "plate_width * no_such_variable"}],
+ ["feature.block", {"size": ["plate_width", "20 mm", "2 mm"], "name": "Plate"}]
+]

@@ -218,6 +218,10 @@ F-178 to F-181 are new.
 | [F-179](#f-179) | Agent friction | `between` and `angleBetween` take a face by its name, not a `where` query, and keep it by feature ids; `measure.between` refuses the feature-name form the assertion accepts | fpv-drone-frame, v-block-pair, hydraulic-cylinder (rebuild 0.2.0) | faces named; the checks break if a feature is put in before them |
 | [F-180](#f-180) | Agent friction | `feature.tip` refuses a length as too long without naming the longest that fits | ship-propeller (probe, rebuild 0.2.0) | tip not taken |
 | [F-181](#f-181) | Missing capability | `measure.continuity` refuses the edges a tip carries on to its point | rc-yacht-hull (review, rebuild 0.2.0) | nose's smoothness shown, not asserted |
+| [F-182](#f-182) | Bug | A 1 mm fillet on the top rim of a plain cylinder (R 30, height 8) is refused at a document tolerance of 0.02 and 0.002 mm, built at 1e-6 mm | rc-yacht-hull (prompt test, 0.2.0) | none in the example |
+| [F-183](#f-183) | Agent friction | A failing `variable.set` in a script writes no error line on stdout, stops the run and writes no `--out` file, while it says the variable is set all the same | rc-yacht-hull (prompt test, 0.2.0) | none |
+| [F-184](#f-184) | Bug (suspected) | A circle drawn as two arcs on a trimmed face is refused: "a curve used twice in the loops" | rc-yacht-hull (prompt test, 0.2.0) | none in the example |
+| [F-185](#f-185) | Bug | A prop intersected with its own swept cylinder is refused: "the surfaces are tangent or nearly coincident over too large an area to intersect" | fpv-drone-frame (prompt test, 0.2.0) | none in the example (it checks the props by cuts) |
 
 ## F-001
 
@@ -737,6 +741,8 @@ The RC yacht's bulb, a revolved formula curve, gives no `boxMin` or `extent` out
 **Should:** an output takes the found value when its bounds lie within
 the document's tolerance (scaled to the model, as an assertion's `tol` does), and says how far it is proven.
 
+Seen again in the RC yacht's prompt test on 3DCraft 0.2.0 (2026-11-19): `variable.measure` of `extent` and of `boxMin` on spline bodies answers "unknown: not proven closely enough to be a value" (seen in a prompt test, not reduced).
+
 ## F-058
 
 **Missing capability (cosmetic).** `feature.fold` with thick panels leaves every folded corner open: a notch
@@ -1027,6 +1033,8 @@ planar cut.
 blade angle that follows the pitch formula cannot be measured along it; the drone measures a hidden copy
 turned back by the angle. **Should:** directions as expressions, as positions already take. Reproducer:
 [`findings/F-094-measure-axis-expression/repro.json`](findings/F-094-measure-axis-expression/repro.json).
+
+Seen again in the drone's prompt test on 3DCraft 0.2.0 (2026-11-19): `sectionExtent`'s `axis` takes plain numbers only.
 
 ## F-095
 
@@ -1415,6 +1423,8 @@ reaches past the faces' surfaces continued beyond their borders". Reproducer:
 [`findings/F-140-plate-of-trim/repro.json`](findings/F-140-plate-of-trim/repro.json).
 The skateboard deck's top, a network trimmed by the deck's outline, is refused the same way ("the joint reaches past the faces' surfaces"). Reproducer: [`findings/F-140-plate-of-trimmed-deck-top/repro.json`](findings/F-140-plate-of-trimmed-deck-top/repro.json).
 
+Seen again in the RC yacht's prompt test on 3DCraft 0.2.0 (2026-11-19): `feature.plate` of a trimmed sheet whose outline is a rounded rectangle or four arcs is refused, "the joint reaches past the faces' surfaces continued beyond their borders" and "the rims at the corner ... do not meet across the plate" (seen in a prompt test, not reduced).
+
 ## F-141
 
 **Bug (names).** When a boolean cuts one face into several pieces, every piece keeps the same persistent name:
@@ -1628,3 +1638,39 @@ along a parameter line of either face, so neither can be written along it as the
 faces both written across the edge)". Found by the review of the RC yacht hull (rebuild for 0.2.0), whose nose's
 smoothness is therefore shown, not asserted. Reproducer (10 steps; step 9 the join, G1; step 10 the continued
 edge, refused): [`findings/F-181-continuity-of-tip-edges/repro.json`](findings/F-181-continuity-of-tip-edges/repro.json).
+
+## F-182
+
+**Bug.** A 1 mm `feature.fillet` on the top rim of a plain `feature.cylinder` of radius 30 mm and height 8 mm is
+refused at a document tolerance of 0.02 mm and of 0.002 mm: "the boolean that cuts this fillet refused it:
+boolean does not support this: a piece of a face lies within tolerance of a face it is not coincident with (at
+the edge of tolerance) (face 0 of the first body)", at 0.002 mm adding "smaller radii tried fail the same way".
+At 1e-6 mm it builds. The same on 3DCraft 0.1.3 and 0.2.0 (c7cab24f). Met in the RC yacht's prompt test
+(2026-11-19) and reduced by the coordinator. Many examples work at 0.02 mm, so a round on the simplest of rims
+should build there. Reproducer (three steps; change the tolerance to compare):
+[`findings/F-182-fillet-on-cylinder-rim-at-coarse-tolerance/repro.json`](findings/F-182-fillet-on-cylinder-rim-at-coarse-tolerance/repro.json).
+
+## F-183
+
+**Agent friction.** A `variable.set` whose expression cannot be worked out stops a script run with exit code 1,
+but its only report is on stderr ("`plate_area` cannot be worked out: at byte 14: unknown variable
+`no_such_variable` (the variable is set all the same)"): the JSON stream on stdout has no line for the failed
+step, where a failed feature writes one with `"status": "failed"` and its error, and no `--out` file is written,
+although the message says the variable is set. An agent that reads stdout sees the run end after the last good
+step. **Should:** a JSON line for the failed step, and the message and the run agreeing on whether the document
+went on. Met in the RC yacht's prompt test (2026-11-19). Reproducer:
+[`findings/F-183-failed-variable-set-silent/repro.json`](findings/F-183-failed-variable-set-silent/repro.json)
+(run with `--out`).
+
+## F-184
+
+**Bug (suspected).** A circle drawn as two arcs as the outline of a trimmed face is refused: "a curve used twice
+in the loops". Met in the RC yacht's prompt test on 3DCraft 0.2.0 (2026-11-19); seen in a prompt test, not
+reduced.
+
+## F-185
+
+**Bug.** Intersecting a propeller with the cylinder it sweeps, of exactly its radius, is refused: "the surfaces
+are tangent or nearly coincident over too large an area to intersect". The blades' tips touch the cylinder's
+side, which is what the check wants to prove. Met in the FPV drone's prompt test on 3DCraft 0.2.0 (2026-11-19); the
+example checks its props by cuts. Seen in a prompt test, not reduced.
