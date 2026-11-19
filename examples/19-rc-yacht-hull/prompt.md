@@ -8,16 +8,18 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
 1. Let's design an International One Metre radio-sailing yacht to the IOM Class Rules 2026, in millimetres, at a
    modelling tolerance of 0.02 mm. Put x along the hull from the bow (0) to the transom (1000 mm), y across, z up
    with the design waterline at z = 0. Keep the class limits as variables: hull length at most 1000 mm, draft 370
-   to 420 mm and hull depth at most 60 mm with the boat floating in fresh water (1000 kg/m³), a boat weight of
+   to 420 mm (to the boat's lowest point) and hull depth at most 60 mm (to the hull's lowest point), both below
+   the waterline with the boat floating in fresh water (1000 kg/m³), a boat weight of
    4000 g, a keel of 2200 to 2500 g, a rudder with its stock of at most 75 g, a keel no wider than 20 mm above its
    lowest 60 mm, and an elastomer bumper as the forward 10 mm of the hull. Two public parameters: the bulb mass
    (default 2300 g, 2100 to 2320 g in steps of 10 g) and the keel depth, the depth of the bulb's underside below
    the design waterline (default 415 mm, 375 to 418 mm).
 
 2. Loft the hull through seven stations from a table. Each station is a section across the hull at x: a deck
-   from sheer to sheer cambered by 6 % of the sheer half-breadth (a parabola), and below it one cubic B-spline
-   given by its control points: the starboard sheer, a topside point, a bilge point, a keel point on the centre
-   line, then the bilge, topside and sheer points mirrored to port.
+   from sheer to sheer, a parabola whose crown on the centre line stands 6 % of the sheer half-breadth above the
+   sheer, and below it one cubic B-spline given by its control points: the starboard sheer (starboard is +y), a
+   topside point, a bilge point, a keel point on the centre line, then the bilge, topside and sheer points
+   mirrored to port.
 
    | x | sheer half-breadth | sheer height | topside half-breadth | topside height | bilge half-breadth | bilge height | keel height |
    |---|---|---|---|---|---|---|---|
@@ -31,24 +33,31 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
 
    Loft the seven into one closed, hidden envelope, and close its bow in a rounded nose that runs on from the
    hull's sides and deck without a crease to a single point 10 mm forward of station 1, at x = 0, standing
-   0.5 mm below station 1's sheer on the centre line, so the deck carries on into it without diving, and fuller than a
-   quarter ellipse (a fullness of 0.7), so the stem stays plumb far down before the forefoot sweeps up to it. Cut the envelope at x = 10 mm: aft of the cut is the hull's form, forward of it the bumper, in black
-   elastomer (1150 kg/m³). Make the
+   0.5 mm below the height of station 1's sheer on the centre line (about 1 mm under the deck's crown there), so
+   the deck carries on into it without diving, and fuller than a quarter ellipse (a fullness of 0.7), so the
+   stem stays plumb far down before the forefoot sweeps up to it. Cut the envelope at x = 10 mm: aft of the cut
+   is the hull's form, forward of it the bumper, in black elastomer (1150 kg/m³). Make the
    hull, the deck and the transom 0.6 mm of glass/epoxy laminate (1800 kg/m³) laid behind the hull form's surface,
    three plates: the deck set inside the hull's sheer, the transom inside hull and deck, hull and deck ending on
    the plane x = 10 mm so no glass reaches into the bumper. Finish the hull in white gelcoat and paint the deck
    grey-blue. On the deck, as separate small parts sitting on its camber and sheer: at x = 350 mm a white acetal
-   mast step, a 40 × 20 × 2 mm plate with rounded corners and a Ø 16 mm tube 10 mm tall bored 11.4 mm for an
-   11 mm mast, with the class's deck limit mark, a black dot 6 mm across, on its plate forward of the tube; and at
-   station 4 a black hatch cover 60 mm across and 1.5 mm thick, its top edge rounded 1 mm.
+   mast step, a 40 × 20 × 2 mm plate, its 40 mm fore and aft and its corners rounded 5 mm, and a Ø 16 mm tube
+   10 mm tall at its middle, bored 11.4 mm for an 11 mm mast, with the class's deck limit mark, a black dot 6 mm
+   across and 0.2 mm thick, on its plate forward of the tube; and at station 4 a black hatch cover 60 mm across
+   and 1.5 mm thick, its top edge rounded 1 mm. These fittings are not weighed: their grams are in the
+   fittings' allowance below.
 
-3. Now the keel. The bulb is lead (11340 kg/m³), a body of revolution with the NACA four-digit thickness form
-   of Abbott and von Doenhoff as its radius, 42 mm in diameter, its axis 21 mm above the keel depth. Make its
+3. Now the keel. Every foil and the bulb use the NACA four-digit thickness form of Abbott and von Doenhoff with
+   its standard coefficients, 0.2969, −0.1260, −0.3516, 0.2843 and −0.1015, which leave the trailing edge open,
+   2.1 % as thick as the section (not the closed-edge variant ending in −0.1036). The bulb is lead
+   (11340 kg/m³), a body of revolution with that form as its radius, 42 mm in diameter, its axis 21 mm above the keel depth. Make its
    length follow the bulb mass in closed form (its volume is 25π times the diameter squared times the length
    times the integral of the square of the thickness polynomial), so the public mass sets it. The fin is solid
    carbon/epoxy (1600 kg/m³, as a variable), NACA 0007, its leading edge straight up at x = 443 mm, 90 mm in
    chord at station 4's keel (54 mm below the design waterline) tapering straight to 75 mm at its foot, which
-   runs 3 mm into the top of the bulb; carry the taper up to a root section at z = 0. The bulb's thickest station
+   runs 3 mm into the top of the bulb; leave fin and bulb both whole where they overlap, neither cut by the
+   other, so that each part's mass is its whole shape's (the slot for the foot is cut in the casting later).
+   Carry the taper up to a root section at z = 0. The bulb's thickest station
    (30 % of its length) sits under the middle of the foot. Cut the fin's top off where it meets the hull's
    outside. The rudder is solid carbon too, the same thickness form at 6.5 %, 81 mm in chord at z = 0 with its
    leading edge at x = 880 mm, tapering to 60 mm at its tip at z = −195 mm, the tip's leading edge 10 mm
@@ -66,9 +75,9 @@ Each turn says what you want, the way you would tell a colleague; the AI picks t
    the waterplane's moment over the displacement less KG) and the trim the boat settles at floating free. Then
    add checks: hull length, draft and hull depth against C.4.1 at that waterline; a corrector weight of at least
    0 g; the keel's and the rudder's mass against C.6.4; the fin at most 20 mm wide and the bulb at most 60 mm
-   tall (E.4.1); the bumper 10 mm long from the hull's foremost point, along the hull, as the class measures
-   D.2.2's forward 10 mm; the bulb's measured mass equal to the bulb mass within
-   0.01 g; the fin's section halfway down equal to the NACA area for its chord there; a trim within a quarter of
+   tall (E.4.1); the bumper 10 mm long along x from the hull's foremost point, as the class measures D.2.2's
+   forward 10 mm; the bulb's measured mass equal to the bulb mass within 0.01 g; the fin's section halfway
+   between its root section at z = 0 and its foot equal to the NACA area for its chord there; a trim within a quarter of
    a degree; and a positive GM. Give the document a title and description, run a check of the whole document and
    show me a picture from high on the bow quarter, so the deck and the sheer show.
 
@@ -88,7 +97,23 @@ At the defaults (bulb 2300 g, keel depth 415 mm) the result must have:
 
 ## Tested
 
-Not yet with these turns. The turns of 2026-11-07 built the bow as an eighth section 10 mm forward of station 1,
+2026-11-19, Claude Sonnet 5.5 through `craft3d-cli` 0.2.0 (c7cab24f), given only the five turns of the version
+before this one: the model was built whole, but two measures fell outside the Acceptance, so the test did not
+pass. All five turns built and `document.check` was ok, with 14 checks passing, also at 2100 g with 380 mm.
+Inside the Acceptance: bulb 2300.0007 g, rudder 65.095 g, hull, deck, transom and bumper 441.48 g (bumper
+14.81 g), corrector 309.57 g, hull 999.96 mm, bumper 10 mm from the point, waterline 0.515 mm, draft 415.518
+mm, waterline length 992.385 mm, beam 157.784 mm, GM 201.467 mm, trim 0.0123°. Outside: the fin 166.665 g
+(1.26 % under 168.8 g) and the bulb 267.2 mm long (265.8 mm asked). The turns had not said which trailing-edge
+coefficient of the thickness form was meant, and the tester took the closed edge's −0.1036, which changes the
+bulb's integral and so its length, and it cut the fin by the bulb so that no volume was counted twice. Turn 3
+now gives the coefficients with the open edge's −0.1015 and says to leave fin and bulb whole. From the
+tester's other open points, turn 1 now says what draft and hull depth are measured to, turn 2 that the deck's
+crown stands 6 % of the half-breadth above the sheer, which side is starboard, where the nose's point stands
+against the crown, and the mast step's corners, its length's direction, the tube's place, the dot's thickness
+and that the fittings are not weighed, and turn 5 where the fin's mid-section is and that the bumper is
+measured along x. The new turns are not tested yet.
+
+Earlier: the turns of 2026-11-07 built the bow as an eighth section 10 mm forward of station 1,
 its flat nose rounded 3 mm, and checked the bumper's length at the waterline; they were tested then:
 
 2026-11-07, Claude Sonnet 5.5 (medium effort) through `craft3d-cli`, given only the five turns of that version:
