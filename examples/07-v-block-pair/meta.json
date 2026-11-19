@@ -84,10 +84,10 @@
     "features": 30,
     "assertions": 16,
     "warnings": 0,
-    "build_s": 0.33,
-    "load_s": 0.33,
+    "build_s": 0.32,
+    "load_s": 0.32,
     "load_cpu_s": 0.51,
-    "file_bytes": 162666
+    "file_bytes": 162693
   },
   "craft3d": {
     "commit": "0c8fc79a844d",
