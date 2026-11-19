@@ -66,9 +66,9 @@
     }
   ],
   "prompt_test": {
-    "date": null,
-    "model": null,
-    "result": null
+    "date": "2026-11-19",
+    "model": "Claude Sonnet 5.5, through craft3d-cli 0.2.0 (c7cab24f)",
+    "result": "Passed: 15 of 15 checks, also at 2100 g with 375 mm and at 2320 g with 418 mm; bulb 265.7985 mm and 2300.00068 g, fin 168.796 g, rudder 65.508 g, laminate and bumper 441.48 g, keel 2468.796 g, corrector 316.217 g, waterline +0.5016 mm, waterline 992.234 by 157.776 mm, GM 201.730 mm, trim 0.0000545 deg; hull length, bumper, draft and hull depth found by the checks (F-186), not as outputs."
   },
   "renewed": {
     "version": "0.2.0",

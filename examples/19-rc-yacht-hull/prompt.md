@@ -97,6 +97,25 @@ At the defaults (bulb 2300 g, keel depth 415 mm) the result must have:
 
 ## Tested
 
+2026-11-19, Claude Sonnet 5.5 through `craft3d-cli` 0.2.0 (c7cab24f), given only the five turns above: passed.
+All five turns built with no refusal of a command; `document.check` is ok with 15 bodies and 15 of 15 checks
+passing, also at 2100 g with 375 mm and at 2320 g with 418 mm. Against the Acceptance, as 3DCraft gave them: a
+bulb 265.7985 mm long and 2300.00068 g; fin 168.796 g; rudder 65.508 g; hull plate 281.335 g, deck plate
+140.632 g, transom plate 4.7035 g and bow bumper 14.8075 g, together 441.48 g; keel 2468.796 g; corrector
+316.217 g; waterline at 4 kg 0.5016 mm above the design waterline; waterline length 992.234 mm and beam
+157.776 mm; GM 201.730 mm (KB −43.891, BM 45.363, KG −200.258); trim 0.0000545°. Hull length, bumper length,
+draft and hull depth could not be outputs ("not proven closely enough to be a value",
+[F-186](../../3DCRAFT-FEEDBACK.md#f-186)); it asserted them with bounds, which pass: the hull 999.96 mm found,
+at most 1000; the bumper 9.96 mm found, at most 10; the draft about 415.5 mm; the hull depth about 54.64 mm.
+At 2100 g with 375 mm: keel 2247.85 g, corrector 537.2 g, waterline +0.761 mm, GM 166.7 mm, trim 0.060°; at
+2320 g with 418 mm: keel 2490.37 g, corrector 294.6 g, waterline +0.478 mm, GM 204.9 mm, trim −0.006°. It
+loosened its bumper check's tolerance from 0.02 to 0.05 mm after the warning that 0.02 mm was not finer than
+the document's tolerance. Left open in the words, and small: the bore's depth through the mast step, the
+step's flat top against the deck's slope, where on the plate the dot sits, and whether the fin's 3 mm into the
+bulb counts from the nominal or the computed radius; the turns are unchanged for them.
+
+Before it, the same day, with the turns of the version before these:
+
 2026-11-19, Claude Sonnet 5.5 through `craft3d-cli` 0.2.0 (c7cab24f), given only the five turns of the version
 before this one: the model was built whole, but two measures fell outside the Acceptance, so the test did not
 pass. All five turns built and `document.check` was ok, with 14 checks passing, also at 2100 g with 380 mm.
@@ -111,7 +130,8 @@ tester's other open points, turn 1 now says what draft and hull depth are measur
 crown stands 6 % of the half-breadth above the sheer, which side is starboard, where the nose's point stands
 against the crown, and the mast step's corners, its length's direction, the tube's place, the dot's thickness
 and that the fittings are not weighed, and turn 5 where the fin's mid-section is and that the bumper is
-measured along x. The new turns are not tested yet.
+measured along x. The turns above are the changed ones, tested in the run
+recorded first.
 
 Earlier: the turns of 2026-11-07 built the bow as an eighth section 10 mm forward of station 1,
 its flat nose rounded 3 mm, and checked the bumper's length at the waterline; they were tested then:

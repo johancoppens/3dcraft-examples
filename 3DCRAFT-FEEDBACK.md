@@ -222,6 +222,7 @@ F-178 to F-181 are new.
 | [F-183](#f-183) | Agent friction | A failing `variable.set` in a script writes no error line on stdout, stops the run and writes no `--out` file, while it says the variable is set all the same | rc-yacht-hull (prompt test, 0.2.0) | none |
 | [F-184](#f-184) | Bug (suspected) | A circle drawn as two arcs on a trimmed face is refused: "a curve used twice in the loops" | rc-yacht-hull (prompt test, 0.2.0) | none in the example |
 | [F-185](#f-185) | Bug | A prop intersected with its own swept cylinder is refused: "the surfaces are tangent or nearly coincident over too large an area to intersect" | fpv-drone-frame (prompt test, 0.2.0) | none in the example (it checks the props by cuts) |
+| [F-186](#f-186) | Agent friction | An output cannot be made of `boxMin`, `boxMax` or `extent` of a spline body whose proven bound is wider than the tolerance, while the same measure passes as an assertion with a bound | rc-yacht-hull (two prompt tests, 0.2.0) | measures asserted by bounds, not reported |
 
 ## F-001
 
@@ -1674,3 +1675,16 @@ reduced.
 are tangent or nearly coincident over too large an area to intersect". The blades' tips touch the cylinder's
 side, which is what the check wants to prove. Met in the FPV drone's prompt test on 3DCraft 0.2.0 (2026-11-19); the
 example checks its props by cuts. Seen in a prompt test, not reduced.
+
+## F-186
+
+**Agent friction.** `variable.measure` of `boxMin`, `boxMax` or `extent` of a body with spline faces is refused
+as unknown when the bound the measure proves is wider than the document's tolerance: "extent is not proven closely
+enough to be a value: found 999.96 mm (at most 1000 mm)", "boxMin is not proven closely enough to be a value: found
+-414.985929 mm (at least -415.014468 mm)". The same measure in an assertion with a `min` or `max` passes, so a
+hull's length, a draft or a hull depth can be checked but not reported as an output, and a script that wants the
+number has to read it from the assertion's message. Two prompt testers of the RC yacht hull met it on 3DCraft 0.2.0
+(2026-11-19), and the example itself reports the draft as the waterline plus the keel depth for the same reason
+(see also [F-057](#f-057), outputs refused when their proof bounds lie 1e-6 apart). **Should:** an output takes the
+found value and carries how far it is proven, as the assertion's message does. Seen in prompt tests, not reduced:
+the example's `Hull envelope` and `Bulb` show it.
