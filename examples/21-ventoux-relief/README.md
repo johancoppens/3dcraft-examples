@@ -55,11 +55,17 @@ done by 3DCraft.
   the relief with the summit, 1910 m.
 - **Data.** Elevation: SRTM, 1 arc-second, from the Mapzen terrain tile N44E005; road and tower: IGN BD
   TOPO (sources, dates and licences in [`data/SOURCES.md`](data/SOURCES.md)). The grid has nodes every
-  250 m in Lambert-93 (EPSG:2154), 12.5 × 9.75 km, one node on SRTM's highest cell. Each node is the
+  250 m in Lambert-93 (EPSG:2154), 51 × 40 of them over 12.5 × 9.75 km from its south-west node at
+  E 875 882.40, N 6 336 999.96, placed so that one node falls on SRTM's highest cell, the summit (node 25,
+  29). The grid of the earlier version, every 350 m, began 50 m further west and 100 m further south and
+  was 12.6 × 9.8 km; keeping the summit on a node at 250 m moved the window, which is why the relief is
+  178.6 × 139.3 mm and its base 208.6 × 169.3 mm rather than 180 × 140 and 210 × 170 mm. Each node is the
   elevation smoothed by a Gaussian of σ = 62.5 m, so that ravines narrower than the grid do not alias
   into bumps; the summit node alone keeps SRTM's 1910 m (smoothed it would be 1885 m). SRTM's heights are
   good to 6.2 m over Eurasia at 90 % (Rodríguez, Morris and Belz, *A Global Assessment of the SRTM
   Performance*, PE&RS 72(3), 2006); the mission asked for 16 m, which is what the start's check allows.
+  SRTM measures the surface its radar sees, which over forest is partly the canopy, so the forested slopes
+  can stand above the ground, and the road, by more than those 16 m.
   `make.py fetch` also writes the climb's kilometres (`data/kilometres.csv`).
 - **Scales.** 1:70 000 in plan (a node every 3.57 mm: the relief is 178.6 × 139.3 mm) and, printed, 2.1 times
   that vertically: the summit stands 57.3 mm above the relief's underside, which is sea level.
@@ -111,7 +117,9 @@ done by 3DCraft.
   | 150 m | layer 3 (600 m): the 0.35 × 3.4 mm sliver; layer 4 (750 m): 0.7 × 1.9 mm in the north-east corner and a 1.3 × 1.7 mm island; layer 6 (1050 m): a 1.8 × 32.5 mm sliver on the north edge | layer 8: 3.9 × 8.0 mm on the east edge |
   | 200 m | layer 3 (600 m): the 0.35 × 3.4 mm sliver | |
 
-  Narrow notches in an outline are cut as drawn; the kerf rounds them.
+  A piece narrower than the kerf (the 0.06 × 1.2 mm sliver) must be deleted from the DXF before cutting, not
+  only left out of the stack: the laser would cut it as one line. Narrow notches in an outline are cut as
+  drawn; the kerf rounds them.
 - **Simplified, or left out.**
   - The road is marked by its kilometre pins, not drawn between them (see the platform notes).
   - Kilometres are measured along IGN's road with its rise, from the climb's start; they are not the
